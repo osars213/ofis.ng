@@ -100,12 +100,12 @@ export const MobileBottomNav: React.FC = () => {
         type="button"
         onClick={() => setIsAiModalOpen(true)}
         className="flex flex-col items-center justify-center space-y-1 p-1 text-[#10B981] cursor-pointer transition-all active:scale-95"
-        title="OFIS Assistant"
+        title="Ofis Assistant"
       >
         <div className="w-7 h-7 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/20 border border-[#10B981]/40 flex items-center justify-center -mt-1 shadow-sm">
           <Sparkles className="w-3.5 h-3.5 text-[#10B981]" />
         </div>
-        <span className="text-[11px] font-semibold whitespace-nowrap">Assistant</span>
+        <span className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap">Ofis Assistant</span>
       </button>
 
       <button
