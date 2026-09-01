@@ -1,0 +1,10 @@
+{
+  "name": "Ofis.ng",
+  "description": "Ofis.ng - Work, Meet, Create, Record. Nigeria's physical workspace and creative studio marketplace with guaranteed 24/7 power, high-speed internet, and instant bookings.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
