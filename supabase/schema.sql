@@ -198,6 +198,24 @@ CREATE TABLE IF NOT EXISTS public.payments (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- 10. LEADS TABLE (Pre-launch & Opportunity Lead Capture)
+CREATE TABLE IF NOT EXISTS public.leads (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    company TEXT,
+    country TEXT,
+    interest TEXT NOT NULL,
+    message TEXT NOT NULL,
+    source TEXT NOT NULL DEFAULT 'prelaunch',
+    referrer TEXT,
+    landing_path TEXT,
+    utm_source TEXT,
+    utm_medium TEXT,
+    utm_campaign TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 -- ============================================================================
 -- ROW LEVEL SECURITY (RLS) POLICIES
 -- ============================================================================
@@ -211,6 +229,7 @@ ALTER TABLE public.favorites ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.space_access_credentials ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.payments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
 
 -- Profiles: Public read, owner update
 CREATE POLICY "Public profiles are viewable by everyone" ON public.profiles
@@ -255,6 +274,18 @@ CREATE POLICY "Users can view own notifications" ON public.notifications
     FOR SELECT USING (auth.uid() = user_id OR user_id IS NULL);
 CREATE POLICY "Insert notifications" ON public.notifications
     FOR INSERT WITH CHECK (true);
+
+-- Leads: Anyone can submit a lead; Admins can view leads
+CREATE POLICY "Anyone can insert leads" ON public.leads
+    FOR INSERT WITH CHECK (true);
+CREATE POLICY "Admins can view leads" ON public.leads
+    FOR SELECT USING (
+        EXISTS (
+            SELECT 1 FROM public.profiles 
+            WHERE public.profiles.id = auth.uid() 
+            AND public.profiles.role = 'admin'
+        )
+    );
 
 -- ============================================================================
 -- HELPER FUNCTIONS & TRIGGERS

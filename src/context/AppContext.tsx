@@ -175,6 +175,9 @@ interface AppContextType {
 
   isAiModalOpen: boolean;
   setIsAiModalOpen: (open: boolean) => void;
+  aiInitialQuery: string;
+  setAiInitialQuery: (query: string) => void;
+  openAiModalWithQuery: (query: string) => void;
 
   isSettingsOpen: boolean;
   setIsSettingsOpen: (open: boolean) => void;
@@ -648,6 +651,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   };
 
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+  const [aiInitialQuery, setAiInitialQuery] = useState('');
+
+  const openAiModalWithQuery = (query: string) => {
+    setAiInitialQuery(query);
+    setCurrentView('home');
+  };
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -1598,6 +1607,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setIsDownloadAppModalOpen,
         isAiModalOpen,
         setIsAiModalOpen,
+        aiInitialQuery,
+        setAiInitialQuery,
+        openAiModalWithQuery,
         isSettingsOpen,
         setIsSettingsOpen,
         isDrawerOpen,

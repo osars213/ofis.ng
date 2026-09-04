@@ -1,10 +1,10 @@
 import React from 'react';
 import { 
+  MessageSquare,
   Compass, 
   MapPin, 
   CalendarCheck, 
   Bookmark, 
-  Sparkles,
   Building2,
   Wallet,
   Activity
@@ -16,7 +16,6 @@ export const MobileBottomNav: React.FC = () => {
     currentView, 
     setCurrentView, 
     savedSpaceIds, 
-    setIsAiModalOpen,
     setIsDiagnosticsModalOpen,
     setIsHostPayoutModalOpen,
     currentUser,
@@ -71,6 +70,20 @@ export const MobileBottomNav: React.FC = () => {
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-[64px] bg-white/95 dark:bg-[#0B1220]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#1E293B] px-3 flex items-center justify-around transition-colors shadow-lg">
       <button
         type="button"
+        onClick={() => setCurrentView('home')}
+        className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
+          currentView === 'home' 
+            ? 'text-[#10B981] font-semibold scale-105' 
+            : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+        }`}
+        title="Chat"
+      >
+        <MessageSquare className="w-5 h-5" />
+        <span className="text-[11px] whitespace-nowrap">Chat</span>
+      </button>
+
+      <button
+        type="button"
         onClick={() => setCurrentView('explore')}
         className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
           currentView === 'explore' 
@@ -94,18 +107,6 @@ export const MobileBottomNav: React.FC = () => {
       >
         <MapPin className="w-5 h-5" />
         <span className="text-[11px] whitespace-nowrap">Around Me</span>
-      </button>
-
-      <button
-        type="button"
-        onClick={() => setIsAiModalOpen(true)}
-        className="flex flex-col items-center justify-center space-y-1 p-1 text-[#10B981] cursor-pointer transition-all active:scale-95"
-        title="Ofis Assistant"
-      >
-        <div className="w-7 h-7 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/20 border border-[#10B981]/40 flex items-center justify-center -mt-1 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#10B981]" />
-        </div>
-        <span className="text-[10px] sm:text-[11px] font-semibold whitespace-nowrap">Ofis Assistant</span>
       </button>
 
       <button

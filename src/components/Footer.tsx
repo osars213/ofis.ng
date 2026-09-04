@@ -376,19 +376,6 @@ export const Footer: React.FC = () => {
             >
               {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-400" />}
             </button>
-
-            {/* Ofis Assistant Quick Trigger */}
-            <button
-              type="button"
-              id="footer-ai-assistant-btn"
-              onClick={() => setIsAiModalOpen(true)}
-              className="p-2 rounded-xl bg-[#10B981]/15 hover:bg-[#10B981]/25 border border-[#10B981]/30 text-[#10B981] transition-colors cursor-pointer"
-              title="Open Ofis Assistant"
-              aria-label="Open Ofis Assistant"
-            >
-              <Sparkles className="w-4 h-4" />
-            </button>
-
           </div>
 
         </div>

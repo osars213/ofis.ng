@@ -2,86 +2,42 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   :root {
-    --color-bg-light: #F8FAFC;
+    --color-bg-light: #FAF9F6;
     --color-surface-light: #FFFFFF;
-    --color-surface-secondary-light: #F1F5F9;
-    --color-border-light: #E5E7EB;
-    --color-text-main-light: #111827;
-    --color-text-muted-light: #6B7280;
+    --color-surface-secondary-light: #F5F3EF;
+    --color-border-light: #E7E5E0;
+    --color-text-main-light: #1C1917;
+    --color-text-muted-light: #78716C;
 
-    --color-bg-dark: #0B1220;
-    --color-surface-dark: #172033;
-    --color-surface-secondary-dark: #101827;
-    --color-border-dark: #1E293B;
-    --color-text-main-dark: #F8FAFC;
-    --color-text-muted-dark: #94A3B8;
+    --color-bg-dark: #0C0B0A;
+    --color-surface-dark: #171615;
+    --color-surface-secondary-dark: #121110;
+    --color-border-dark: #292724;
+    --color-text-main-dark: #FAF8F5;
+    --color-text-muted-dark: #A8A29E;
 
     --color-primary-green: #10B981;
     --color-primary-green-hover: #059669;
-    --color-primary-green-light: #D1FAE5;
+    --color-primary-green-light: #34D399;
   }
 
   body {
-    background-color: #F8FAFC;
-    color: #111827;
+    background-color: #FAF9F6;
+    color: #1C1917;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
 
   html.dark body {
-    background-color: #0B1220;
-    color: #F8FAFC;
+    background-color: #0C0B0A;
+    color: #FAF8F5;
   }
-}
-
-/* Revolving Arc Architectural Metaphor Background Animations */
-@keyframes ofis-spin-slow {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-@keyframes ofis-spin-reverse {
-  from {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-}
-
-.ofis-hero-arc-outer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 9999px;
-  border: 1.5px solid transparent;
-  border-top-color: rgba(16, 185, 129, 0.25);
-  border-right-color: rgba(16, 185, 129, 0.1);
-  animation: ofis-spin-slow 32s linear infinite;
-}
-
-.ofis-hero-arc-inner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 9999px;
-  border: 1px dashed rgba(16, 185, 129, 0.18);
-  animation: ofis-spin-reverse 45s linear infinite;
-}
-
-.ofis-hero-arc-conic {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 9999px;
-  background: conic-gradient(from 180deg at 50% 50%, rgba(16, 185, 129, 0) 0deg, rgba(16, 185, 129, 0.08) 180deg, rgba(16, 185, 129, 0) 360deg);
-  animation: ofis-spin-slow 40s linear infinite;
 }
 
 /* Custom scrollbars */
@@ -90,70 +46,87 @@
   height: 6px;
 }
 
-/* OFIS Brand Logo Breathing & Subtle Glow Keyframes (Refined 35% reduction) */
-@keyframes ofis-breathe {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.15)) brightness(1);
-  }
-  50% {
-    transform: scale(1.03);
-    filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.35)) brightness(1.06);
-  }
-}
-
-@keyframes ofis-breathe-slow {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.1)) brightness(1);
-  }
-  50% {
-    transform: scale(1.02);
-    filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.28)) brightness(1.04);
-  }
-}
-
-@keyframes ofis-breathe-fast {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.2)) brightness(1);
-  }
-  50% {
-    transform: scale(1.04);
-    filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.45)) brightness(1.08);
-  }
-}
-
-@keyframes bounce-subtle {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-.animate-bounce-subtle {
-  animation: bounce-subtle 2.5s ease-in-out infinite;
-}
-
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
-}
-
-html.dark ::-webkit-scrollbar-track {
-  background: #111827;
+  background: #0C0B0A;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 3px;
-}
-
-html.dark ::-webkit-scrollbar-thumb {
-  background: #374151;
+  background: #292724;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #16A34A;
+  background: #3D3935;
+}
+
+/* Gentle pulse animation for status badges */
+@keyframes pulse-gentle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.88;
+    transform: scale(1.01);
+  }
+}
+
+.animate-pulse-gentle {
+  animation: pulse-gentle 4s ease-in-out infinite;
+}
+
+/* Subtle warm background particle animations */
+@keyframes float-particle-1 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(12px, -18px);
+  }
+}
+
+@keyframes float-particle-2 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-16px, 14px);
+  }
+}
+
+@keyframes float-particle-3 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 12px);
+  }
+}
+
+.animate-particle-1 {
+  animation: float-particle-1 14s ease-in-out infinite;
+}
+
+.animate-particle-2 {
+  animation: float-particle-2 18s ease-in-out infinite;
+}
+
+.animate-particle-3 {
+  animation: float-particle-3 16s ease-in-out infinite;
+}
+
+/* Simple fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
 }

@@ -198,18 +198,6 @@ export const Navbar: React.FC = () => {
               </span>
             )}
           </button>
-
-          {/* Ofis Assistant Trigger */}
-          <button
-            type="button"
-            id="nav-assistant-btn"
-            onClick={() => setIsAiModalOpen(true)}
-            className="px-3 py-2 rounded-xl text-xs font-semibold text-[#10B981] bg-[#D1FAE5] dark:bg-[#10B981]/10 hover:bg-[#A7F3D0] dark:hover:bg-[#10B981]/20 border border-[#10B981]/30 transition-all flex items-center space-x-1.5 cursor-pointer shadow-2xs"
-            title="Ofis Assistant"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Ofis Assistant</span>
-          </button>
         </nav>
 
         {/* Right Side: List Space CTA, Notifications, Avatar */}

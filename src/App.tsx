@@ -24,7 +24,6 @@ import { CheckoutModal } from './components/CheckoutModal';
 import { DigitalPassModal } from './components/DigitalPassModal';
 import { BookingDetailsModal } from './components/BookingDetailsModal';
 import { ListSpaceModal } from './components/ListSpaceModal';
-import { AiAssistantModal } from './components/AiAssistantModal';
 import { OfisAuthModal } from './components/OfisAuthModal';
 import { SettingsModal } from './components/SettingsModal';
 import { DirectionsModal } from './components/DirectionsModal';
@@ -136,7 +135,6 @@ export const App: React.FC = () => {
       <DiagnosticsModal />
       <AdminVerificationModal />
       <EmailVerificationModal />
-      <AiAssistantModal />
       <OfisAuthModal />
       <SettingsModal />
       <DirectionsModal />

@@ -33,6 +33,7 @@ import { useApp } from '../../context/AppContext';
 import { SpaceCategory, Space } from '../../types';
 import { WorkspaceCard } from '../WorkspaceCard';
 import { getSpacePricing } from '../../utils/pricing';
+import { OfisHeroAiSection } from '../home/OfisHeroAiSection';
 
 const PIDGIN_GREETINGS = [
   'Twale my great boss🙌🏼',
@@ -255,7 +256,6 @@ export const LandingPage: React.FC = () => {
     filters,
     executeSearchQuery,
     setIsListSpaceModalOpen,
-    setIsAiModalOpen,
     formatPrice
   } = useApp();
 
@@ -342,213 +342,9 @@ export const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1220] text-[#111827] dark:text-[#F8FAFC] transition-colors duration-150">
       
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION: BRANDING, PILLARS & HIGH-CONVERTING SEARCH BAR           */}
+      {/* 1. HERO SECTION: AI-FIRST ASK OFIS & QUICK INTENT TEMPLATES              */}
       {/* ========================================================================= */}
-      <section className="relative pt-12 sm:pt-20 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 border-b border-[#E5E7EB] dark:border-[#1E293B] overflow-hidden bg-gradient-to-b from-white via-[#F8FAFC] to-[#F1F5F9] dark:from-[#0B1220] dark:via-[#0F172A] dark:to-[#0B1220]">
-        
-        {/* Background Rotating Geometric Arcs */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] sm:w-[600px] sm:h-[600px] md:w-[800px] md:h-[800px] pointer-events-none -z-0 opacity-20 dark:opacity-30">
-          <div className="ofis-hero-arc-outer w-[340px] h-[340px] sm:w-[540px] sm:h-[540px] md:w-[720px] md:h-[720px]" />
-          <div className="ofis-hero-arc-inner w-[260px] h-[260px] sm:w-[420px] sm:h-[420px] md:w-[560px] md:h-[560px]" />
-          <div className="ofis-hero-arc-conic w-[300px] h-[300px] sm:w-[480px] sm:h-[480px] md:w-[640px] md:h-[640px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-80 sm:h-80 bg-[#10B981]/10 rounded-full blur-3xl" />
-        </div>
-
-        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
-          
-          {/* Hero Greeting Hierarchy: 1. Headline Greeting, 2. Sub-Headline, 3. Tag (WORK • CREATE • MEET • RECORD) */}
-          <div className="space-y-3 sm:space-y-4 max-w-3xl mx-auto">
-            <div className="flex items-center justify-center min-h-[44px] sm:min-h-[52px]">
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  key={`${currentLocale.code}-${localizedName}-${cycleStep}`}
-                  initial={{ opacity: 0, y: 4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#111827] dark:text-[#F8FAFC]"
-                >
-                  {greetingText}
-                </motion.h1>
-              </AnimatePresence>
-            </div>
-
-            <p className="text-base sm:text-xl font-medium text-[#6B7280] dark:text-[#94A3B8] max-w-2xl mx-auto">
-              What workspace do you need today?
-            </p>
-
-            {/* Secondary Navigation Pillars Tag */}
-            <div className="pt-1 text-xs sm:text-sm font-semibold tracking-widest text-[#94A3B8] dark:text-[#64748B] uppercase flex items-center justify-center flex-nowrap whitespace-nowrap gap-x-2 sm:gap-x-3 select-none">
-              <span>WORK</span>
-              <span className="text-[#10B981]">•</span>
-              <span>MEET</span>
-              <span className="text-[#10B981]">•</span>
-              <span>CREATE</span>
-              <span className="text-[#10B981]">•</span>
-              <span>RECORD</span>
-            </div>
-          </div>
-
-          {/* Pillars Switcher Tabs */}
-          <div className="flex items-center justify-center space-x-1.5 sm:space-x-2 p-1.5 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm max-w-md mx-auto">
-            {[
-              { id: 'all', label: 'All Spaces', icon: Layers },
-              { id: 'work', label: 'Work', icon: Laptop },
-              { id: 'meet', label: 'Meet', icon: Presentation },
-              { id: 'create', label: 'Create', icon: Camera },
-              { id: 'record', label: 'Record', icon: Mic },
-            ].map((pillar) => {
-              const Icon = pillar.icon;
-              const isActive = heroSearchPillar === pillar.id;
-
-              return (
-                <button
-                  key={pillar.id}
-                  type="button"
-                  onClick={() => setHeroSearchPillar(pillar.id as any)}
-                  className={`flex-1 flex items-center justify-center space-x-1.5 py-2 px-2 sm:px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                    isActive
-                      ? 'bg-[#10B981] text-white shadow-xs'
-                      : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span className="hidden min-[420px]:inline">{pillar.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Mega Desktop & Tablet Search Bar */}
-          <div className="p-3 sm:p-4 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-xl dark:shadow-2xl max-w-4xl mx-auto text-left">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] dark:divide-[#1E293B]">
-              
-              {/* Field 1: City / Location */}
-              <div className="px-2 pt-2 sm:pt-0 space-y-1">
-                <label htmlFor="hero-city-select" className="text-[10px] font-bold text-[#6B7280] dark:text-[#94A3B8] uppercase tracking-wider block">
-                  Location
-                </label>
-                <div className="flex items-center space-x-2">
-                  <MapPin className="w-4 h-4 text-[#10B981] shrink-0" />
-                  <select
-                    id="hero-city-select"
-                    value={heroSearchCity}
-                    onChange={(e) => setHeroSearchCity(e.target.value)}
-                    className="w-full bg-transparent text-sm font-semibold text-[#111827] dark:text-[#F8FAFC] focus:outline-none cursor-pointer py-1"
-                  >
-                    <option value="All Cities" className="bg-white dark:bg-[#172033]">All Cities in Nigeria</option>
-                    <option value="Lagos" className="bg-white dark:bg-[#172033]">Lagos (VI, Lekki, Ikeja)</option>
-                    <option value="Abuja" className="bg-white dark:bg-[#172033]">Abuja (Maitama, CBD)</option>
-                    <option value="Port Harcourt" className="bg-white dark:bg-[#172033]">Port Harcourt (Old GRA)</option>
-                    <option value="Ibadan" className="bg-white dark:bg-[#172033]">Ibadan (Bodija, Ring Rd)</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Field 2: Space Type */}
-              <div className="px-2 pt-2 sm:pt-0 space-y-1">
-                <label htmlFor="hero-category-select" className="text-[10px] font-bold text-[#6B7280] dark:text-[#94A3B8] uppercase tracking-wider block">
-                  Space Type
-                </label>
-                <div className="flex items-center space-x-2">
-                  <Building2 className="w-4 h-4 text-[#10B981] shrink-0" />
-                  <select
-                    id="hero-category-select"
-                    value={heroSearchCategory}
-                    onChange={(e) => setHeroSearchCategory(e.target.value)}
-                    className="w-full bg-transparent text-sm font-semibold text-[#111827] dark:text-[#F8FAFC] focus:outline-none cursor-pointer py-1"
-                  >
-                    <option value="all" className="bg-white dark:bg-[#172033]">Any Space Type</option>
-                    <option value="coworking" className="bg-white dark:bg-[#172033]">Coworking Hot Desk</option>
-                    <option value="meeting-room" className="bg-white dark:bg-[#172033]">Meeting Room</option>
-                    <option value="private-office" className="bg-white dark:bg-[#172033]">Private Office</option>
-                    <option value="studio" className="bg-white dark:bg-[#172033]">Podcast Studio</option>
-                    <option value="photography" className="bg-white dark:bg-[#172033]">Photography Suite</option>
-                    <option value="event-space" className="bg-white dark:bg-[#172033]">Event Space</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Field 3: Date & Time */}
-              <div className="px-2 pt-2 sm:pt-0 space-y-1">
-                <label htmlFor="hero-date-select" className="text-[10px] font-bold text-[#6B7280] dark:text-[#94A3B8] uppercase tracking-wider block">
-                  When
-                </label>
-                <div className="flex items-center space-x-2">
-                  <Calendar className="w-4 h-4 text-[#10B981] shrink-0" />
-                  <select
-                    id="hero-date-select"
-                    value={heroSearchDate}
-                    onChange={(e) => setHeroSearchDate(e.target.value)}
-                    className="w-full bg-transparent text-sm font-semibold text-[#111827] dark:text-[#F8FAFC] focus:outline-none cursor-pointer py-1"
-                  >
-                    <option value="Today" className="bg-white dark:bg-[#172033]">Today (Instant Pass)</option>
-                    <option value="Tomorrow" className="bg-white dark:bg-[#172033]">Tomorrow</option>
-                    <option value="This Week" className="bg-white dark:bg-[#172033]">This Week</option>
-                    <option value="This Weekend" className="bg-white dark:bg-[#172033]">This Weekend</option>
-                    <option value="Monthly Pass" className="bg-white dark:bg-[#172033]">Monthly Dedicated</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Field 4: Capacity & CTA */}
-              <div className="px-2 pt-2 sm:pt-0 flex items-center justify-between gap-3">
-                <div className="space-y-1 flex-1">
-                  <label htmlFor="hero-guests-select" className="text-[10px] font-bold text-[#6B7280] dark:text-[#94A3B8] uppercase tracking-wider block">
-                    Guests
-                  </label>
-                  <div className="flex items-center space-x-2">
-                    <Users className="w-4 h-4 text-[#10B981] shrink-0" />
-                    <select
-                      id="hero-guests-select"
-                      value={heroSearchGuests}
-                      onChange={(e) => setHeroSearchGuests(Number(e.target.value))}
-                      className="w-full bg-transparent text-sm font-semibold text-[#111827] dark:text-[#F8FAFC] focus:outline-none cursor-pointer py-1"
-                    >
-                      <option value={1} className="bg-white dark:bg-[#172033]">1 Person</option>
-                      <option value={2} className="bg-white dark:bg-[#172033]">2-4 People</option>
-                      <option value={6} className="bg-white dark:bg-[#172033]">5-10 Team</option>
-                      <option value={15} className="bg-white dark:bg-[#172033]">11-25 Group</option>
-                      <option value={50} className="bg-white dark:bg-[#172033]">25+ Large Event</option>
-                    </select>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  id="hero-search-submit-btn"
-                  onClick={handleExecuteHeroSearch}
-                  className="px-5 py-3.5 rounded-2xl bg-[#10B981] hover:bg-[#059669] text-white font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer shrink-0"
-                >
-                  <Search className="w-4 h-4 stroke-[3]" />
-                  <span>Search</span>
-                </button>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Quick Filter Neighborhood Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-2 text-xs">
-            <span className="text-[#6B7280] dark:text-[#94A3B8] font-semibold">Popular Searches:</span>
-            {['Victoria Island VI', 'Lekki Phase 1', 'Maitama Abuja', 'Ikeja GRA', 'Yaba Tech Hub', 'Old GRA Port Harcourt'].map((chip) => (
-              <button
-                key={chip}
-                type="button"
-                onClick={() => {
-                  if (chip.includes('Abuja')) handleCitySelect('Abuja');
-                  else if (chip.includes('Port Harcourt')) handleCitySelect('Port Harcourt');
-                  else handleCitySelect('Lagos');
-                }}
-                className="px-3 py-1 rounded-full bg-white/80 dark:bg-[#172033]/80 hover:bg-white dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E293B] text-[#4B5563] dark:text-[#94A3B8] hover:text-[#10B981] dark:hover:text-[#10B981] transition-all cursor-pointer shadow-2xs"
-              >
-                {chip}
-              </button>
-            ))}
-          </div>
-
-        </div>
-      </section>
+      <OfisHeroAiSection />
 
       {/* ========================================================================= */}
       {/* 2. INFRASTRUCTURE & TRUST METRICS BAR                                    */}
