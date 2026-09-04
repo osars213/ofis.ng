@@ -75,8 +75,15 @@ export const Footer: React.FC = () => {
           {/* Brand Col (5 cols on lg) */}
           <div className="lg:col-span-4 space-y-4">
             <div 
-              className="cursor-pointer inline-block" 
-              onClick={() => handleNavigate('home')}
+              className="cursor-pointer inline-block transition-transform hover:opacity-90" 
+              onClick={() => {
+                const url = new URL(window.location.href);
+                url.searchParams.delete('app');
+                window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              title="Return to Launch Page"
             >
               <OFISWordmark size="lg" />
             </div>
@@ -275,13 +282,12 @@ export const Footer: React.FC = () => {
                   </button>
                 </li>
                 <li>
-                  <button 
-                    type="button"
-                    onClick={() => handleNavigate('contact')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                  <a 
+                    href="mailto:hello@ofis.ng"
+                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left inline-block"
                   >
                     Contact Us
-                  </button>
+                  </a>
                 </li>
                 <li>
                   <button 

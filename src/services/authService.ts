@@ -27,7 +27,12 @@ const DEFAULT_USERS_STORE: StoredUserAccount[] = [
 
 export const authService = {
   getCurrentUser: (): UserProfile => {
-    return storage.get<UserProfile>(USER_KEY, INITIAL_USER);
+    const user = storage.get<UserProfile | null>(USER_KEY, null);
+    if (!user || user.id === INITIAL_USER.id || user.email === INITIAL_USER.email) {
+      storage.set(USER_KEY, GUEST_USER);
+      return GUEST_USER;
+    }
+    return user;
   },
 
   setCurrentUser: (user: UserProfile): void => {

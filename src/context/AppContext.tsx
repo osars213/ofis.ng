@@ -244,12 +244,6 @@ interface AppContextType {
   resolvedTheme: 'light' | 'dark';
   toggleTheme: () => void;
 
-  // Logo Concept Selection
-  selectedLogoConceptId: number;
-  setSelectedLogoConceptId: (id: number) => void;
-  isLogoGalleryOpen: boolean;
-  setIsLogoGalleryOpen: (open: boolean) => void;
-
   // Global Action State for Logo Breathing
   isAppPerformingAction: boolean;
   triggerAppAction: (durationMs?: number) => void;
@@ -390,13 +384,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   
   // Theme & Appearance
   const [theme, setThemeState] = useState<AppTheme>(() => storage.get<AppTheme>('theme_pref', 'dark'));
-  const [selectedLogoConceptId, setSelectedLogoConceptIdState] = useState<number>(() => storage.get<number>('ofis_selected_logo_concept', 1));
-  const [isLogoGalleryOpen, setIsLogoGalleryOpen] = useState<boolean>(false);
-
-  const setSelectedLogoConceptId = (id: number) => {
-    setSelectedLogoConceptIdState(id);
-    storage.set('ofis_selected_logo_concept', id);
-  };
   const [systemIsDark, setSystemIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined' && window.matchMedia) {
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1661,10 +1648,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setTheme,
         resolvedTheme,
         toggleTheme,
-        selectedLogoConceptId,
-        setSelectedLogoConceptId,
-        isLogoGalleryOpen,
-        setIsLogoGalleryOpen,
         isAppPerformingAction,
         triggerAppAction,
       }}

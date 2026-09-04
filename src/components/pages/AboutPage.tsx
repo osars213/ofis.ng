@@ -14,7 +14,6 @@ import {
   Heart
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
-import { OFISWordmark } from '../OFISWordmark';
 
 export const AboutPage: React.FC = () => {
   const { setCurrentView, setIsListSpaceModalOpen } = useApp();

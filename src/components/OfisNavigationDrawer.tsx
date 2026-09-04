@@ -29,7 +29,6 @@ export const OfisNavigationDrawer: React.FC = () => {
     setIsDownloadAppModalOpen,
     setIsListSpaceModalOpen,
     setIsSettingsOpen,
-    setIsLogoGalleryOpen,
     setCurrentView,
     theme,
   } = useApp();
@@ -79,7 +78,20 @@ export const OfisNavigationDrawer: React.FC = () => {
         
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-[#E5E7EB] dark:border-[#374151] flex items-center justify-between bg-[#F8FAFC] dark:bg-[#1F2937]">
-          <OFISWordmark size="md" />
+          <div 
+            className="cursor-pointer transition-transform hover:opacity-90"
+            onClick={() => {
+              setIsDrawerOpen(false);
+              const url = new URL(window.location.href);
+              url.searchParams.delete('app');
+              window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
+              window.dispatchEvent(new PopStateEvent('popstate'));
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            title="Return to Launch Page"
+          >
+            <OFISWordmark size="md" />
+          </div>
           <button
             type="button"
             id="drawer-close-btn"
@@ -118,32 +130,6 @@ export const OfisNavigationDrawer: React.FC = () => {
                 </div>
               </div>
               <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-            </button>
-
-            <button
-              type="button"
-              id="drawer-logos-btn"
-              onClick={() => {
-                setIsDrawerOpen(false);
-                setIsLogoGalleryOpen(true);
-              }}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-emerald-500/10 dark:hover:bg-emerald-500/20 text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer border border-emerald-500/30 bg-emerald-50/50 dark:bg-emerald-950/20 mt-1.5"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="p-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-400">
-                  <Palette className="w-4 h-4" />
-                </div>
-                <div className="text-left">
-                  <div className="font-bold text-emerald-700 dark:text-emerald-400 flex items-center space-x-1.5">
-                    <span>10 Logo Concepts</span>
-                    <span className="px-1.5 py-0.2 rounded text-[9px] bg-emerald-500 text-white font-mono">NEW</span>
-                  </div>
-                  <div className="text-[10px] text-[#6B7280] dark:text-[#9CA3AF] font-normal">
-                    Preview & switch handmade brand designs
-                  </div>
-                </div>
-              </div>
-              <ChevronRight className="w-4 h-4 text-emerald-500" />
             </button>
           </div>
 
@@ -199,18 +185,18 @@ export const OfisNavigationDrawer: React.FC = () => {
               Support & Inquiries
             </p>
 
-            <button
-              type="button"
+            <a
+              href="mailto:hello@ofis.ng"
               id="drawer-contact-support-btn"
-              onClick={() => handleOpenInfo('support')}
+              onClick={() => setIsDrawerOpen(false)}
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-[#16A34A]" />
                 <span>Contact Support</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-            </button>
+              <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono">hello@ofis.ng</span>
+            </a>
 
             <button
               type="button"

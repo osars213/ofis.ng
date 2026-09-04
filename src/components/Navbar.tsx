@@ -44,7 +44,6 @@ export const Navbar: React.FC = () => {
     signOut,
     isGuest,
     switchUserRole,
-    setIsLogoGalleryOpen,
   } = useApp();
 
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -81,11 +80,15 @@ export const Navbar: React.FC = () => {
           </button>
 
           <div 
-            className="flex items-center cursor-pointer transition-transform hover:opacity-95" 
+            className="flex items-center cursor-pointer transition-transform hover:opacity-90" 
             onClick={() => {
-              setCurrentView('home');
+              const url = new URL(window.location.href);
+              url.searchParams.delete('app');
+              window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
+              window.dispatchEvent(new PopStateEvent('popstate'));
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            title="Return to Launch Page"
           >
             <OFISWordmark size="md" />
           </div>
@@ -244,6 +247,18 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Extreme Right: Unified User Account / Avatar Dropdown */}
+          {isGuest && (
+            <button
+              type="button"
+              id="navbar-guest-direct-login-btn"
+              onClick={() => openAuthModal('login')}
+              className="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#10B981]/15 hover:bg-[#10B981]/25 text-[#10B981] border border-[#10B981]/30 text-xs font-bold transition-all cursor-pointer"
+            >
+              <LogIn className="w-3.5 h-3.5" />
+              <span>Sign In</span>
+            </button>
+          )}
+
           <div className="relative" ref={userMenuRef}>
             <button
               type="button"

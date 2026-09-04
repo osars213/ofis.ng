@@ -86,7 +86,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
         </div>
 
         <h3 className="text-2xl font-extrabold tracking-tight mb-2">
-          Contact OFIS
+          Contact Us
         </h3>
 
         <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed mb-6">

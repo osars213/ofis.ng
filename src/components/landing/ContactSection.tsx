@@ -65,12 +65,8 @@ export const ContactSection: React.FC = () => {
       
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-[#10B981]/15 border border-[#10B981]/30 text-xs font-bold text-[#34D399] uppercase tracking-wider mb-4">
-          <Mail className="w-3.5 h-3.5" />
-          <span>Contact Us</span>
-        </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FAF8F5] tracking-tight mb-4">
-          Contact OFIS
+          Contact Us
         </h2>
         <p className="text-base sm:text-lg text-[#A8A29E] leading-relaxed">
           We&apos;re here to answer questions about bookings, venue listings, team accounts, and investor relations.

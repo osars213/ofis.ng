@@ -75,7 +75,12 @@ export const ContactPage: React.FC = () => {
                 <Mail className="w-5 h-5 text-[#10B981] shrink-0 mt-0.5" />
                 <div className="space-y-1">
                   <h4 className="font-bold text-sm text-[#111827] dark:text-[#F8FAFC]">Email Support</h4>
-                  <p className="text-[#6B7280] dark:text-[#94A3B8]">support@ofis.ng • hello@ofis.ng</p>
+                  <p className="text-[#6B7280] dark:text-[#94A3B8]">
+                    <a href="mailto:hello@ofis.ng" className="text-[#10B981] hover:underline font-semibold">
+                      hello@ofis.ng
+                    </a>
+                    {' '}• support@ofis.ng
+                  </p>
                   <p className="text-[11px] text-[#10B981] font-medium">Average response time: &lt; 2 hours</p>
                 </div>
               </div>

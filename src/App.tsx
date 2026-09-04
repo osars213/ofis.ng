@@ -37,7 +37,6 @@ import { EmailVerificationModal } from './components/EmailVerificationModal';
 import { InfoModal } from './components/InfoModal';
 import { CompareFloatingBar } from './components/compare/CompareFloatingBar';
 import { WorkspaceCompareModal } from './components/compare/WorkspaceCompareModal';
-import { LogoGalleryModal, LogoConcept } from './components/LogoGalleryModal';
 import { DownloadAppModal } from './components/DownloadAppModal';
 
 export const App: React.FC = () => {
@@ -47,11 +46,7 @@ export const App: React.FC = () => {
     isInfoModalOpen, 
     setIsInfoModalOpen, 
     infoModalTab, 
-    setIsListSpaceModalOpen,
-    isLogoGalleryOpen,
-    setIsLogoGalleryOpen,
-    selectedLogoConceptId,
-    setSelectedLogoConceptId
+    setIsListSpaceModalOpen
   } = useApp();
 
   const renderCurrentView = () => {
@@ -140,14 +135,6 @@ export const App: React.FC = () => {
       <DirectionsModal />
       <ContactHostModal />
       <WriteReviewModal />
-      <LogoGalleryModal
-        isOpen={isLogoGalleryOpen}
-        onClose={() => setIsLogoGalleryOpen(false)}
-        selectedConceptId={selectedLogoConceptId}
-        onSelectConcept={(concept: LogoConcept) => {
-          setSelectedLogoConceptId(concept.id);
-        }}
-      />
       {/* Global Download Mobile App Modal */}
       <DownloadAppModal />
     </div>

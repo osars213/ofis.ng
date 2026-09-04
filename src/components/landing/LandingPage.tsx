@@ -205,6 +205,7 @@ const CATEGORIES_DATA = [
 ];
 
 const TRUSTED_COMPANIES = [
+  'Szndpay',
   'Flutterwave',
   'Paystack',
   'Andela',

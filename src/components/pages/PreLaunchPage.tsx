@@ -85,7 +85,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
   };
 
   const handleOpenContact = () => {
-    scrollToSection('contact');
+    window.location.href = 'mailto:hello@ofis.ng';
   };
 
   const handleOpenAbout = () => {
@@ -117,7 +117,19 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
           
           {/* Logo */}
-          <a href="/" className="flex items-center group">
+          <a 
+            href="/" 
+            onClick={(e) => {
+              e.preventDefault();
+              const url = new URL(window.location.href);
+              url.searchParams.delete('app');
+              window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
+              window.dispatchEvent(new PopStateEvent('popstate'));
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="flex items-center group cursor-pointer"
+            title="OFIS Home"
+          >
             <img 
               src="/ofis-logo-dark.png" 
               alt="OFIS" 
@@ -151,12 +163,12 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             >
               Investors
             </button>
-            <button 
-              onClick={handleOpenContact}
+            <a 
+              href="mailto:hello@ofis.ng"
               className="hover:text-[#FAF8F5] transition-colors cursor-pointer"
             >
               Contact
-            </button>
+            </a>
           </nav>
 
           {/* Desktop CTAs */}
@@ -222,12 +234,13 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             >
               About
             </button>
-            <button
-              onClick={() => scrollToSection('contact')}
+            <a
+              href="mailto:hello@ofis.ng"
+              onClick={() => setMobileMenuOpen(false)}
               className="block w-full text-left py-2 text-base font-medium text-[#A8A29E] hover:text-[#FAF8F5]"
             >
               Contact
-            </button>
+            </a>
             
             <div className="pt-3 border-t border-[#292724] flex flex-col gap-2.5">
               <button
@@ -289,7 +302,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
 
           {/* Sub-headline: Easy-to-understand plain English */}
           <p className="text-base sm:text-lg lg:text-xl text-[#A8A29E] max-w-3xl mx-auto leading-relaxed mb-8 font-normal">
-            Everything you need to work, meet, create, and record. Book desks, private offices, boardrooms, and studios across Nigeria in minutes.
+            Book verified desks, private offices, boardrooms, and production studios across Nigeria in minutes with guaranteed power and high-speed internet.
           </p>
 
           {/* Two Refined Glassmorphic Buttons with Emerald Glows & Specular Sheen */}
@@ -346,17 +359,17 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
         </div>
 
         {/* =========================================
-            SECTION 3: Work • Meet • Create • Record
+            SECTION 3: Core Workspace Categories
             Refined glassmorphic cards with emerald accents.
         ========================================== */}
         <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           
           <div className="text-center mb-14 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#FAF8F5] tracking-tight">
-              Work • Meet • Create • Record
+              Spaces Built for Every Need
             </h2>
             <p className="text-sm sm:text-base text-[#A8A29E] mt-3">
-              One platform connecting you to every type of workspace you need.
+              Explore dedicated environments designed for focused productivity, team collaboration, and creative production.
             </p>
           </div>
 
@@ -626,7 +639,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
           </h2>
 
           <p className="text-base sm:text-xl text-[#A8A29E] max-w-2xl mx-auto leading-relaxed mb-10">
-            Work comfortably, meet your clients with confidence, and create your best work without power cuts.
+            Enjoy reliable, fully equipped spaces with uninterrupted power, high-speed fiber, and instant online booking.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -663,7 +676,19 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             
             {/* Column 1: Logo & Mission */}
             <div className="lg:col-span-2 space-y-4">
-              <a href="/" className="inline-block">
+              <a 
+                href="/" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  const url = new URL(window.location.href);
+                  url.searchParams.delete('app');
+                  window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
+                  window.dispatchEvent(new PopStateEvent('popstate'));
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="inline-block cursor-pointer"
+                title="OFIS Home"
+              >
                 <img 
                   src="/ofis-logo-dark.png" 
                   alt="OFIS" 
