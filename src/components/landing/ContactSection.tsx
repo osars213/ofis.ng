@@ -10,7 +10,7 @@ import {
   Building2,
   Share2
 } from 'lucide-react';
-import { getSupabaseClient } from '../../services/supabaseClient';
+import { submitPrelaunchLead } from '../../services/leadService';
 
 export const ContactSection: React.FC = () => {
   const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
@@ -35,18 +35,15 @@ export const ContactSection: React.FC = () => {
     setStatus('idle');
 
     try {
-      const client = getSupabaseClient();
-      if (client) {
-        await client.from('leads').insert([
-          {
-            name: name.trim() || 'Inquiry Contact',
-            email: email.trim().toLowerCase(),
-            interest: `Inquiry: ${inquiryType}`,
-            message: message.trim() || 'Contact form inquiry',
-            source: 'contact_section',
-            landing_path: typeof window !== 'undefined' ? window.location.pathname : '/contact',
-          }
-        ]);
+      const res = await submitPrelaunchLead({
+        name: name.trim() || 'Inquiry Contact',
+        email: email.trim().toLowerCase(),
+        interest: `Inquiry: ${inquiryType}`,
+        message: message.trim() || 'Contact form inquiry',
+        format: 'json',
+      });
+      if (!res.success) {
+        console.warn('Contact lead notice:', res.error);
       }
       setStatus('success');
       setName('');

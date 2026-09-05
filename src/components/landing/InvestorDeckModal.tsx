@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, AlertCircle, Loader2, TrendingUp, Download, Send } from 'lucide-react';
-import { getSupabaseClient } from '../../services/supabaseClient';
+import { submitPrelaunchLead } from '../../services/leadService';
 
 interface InvestorDeckModalProps {
   isOpen: boolean;
@@ -32,19 +32,13 @@ export const InvestorDeckModal: React.FC<InvestorDeckModalProps> = ({ isOpen, on
     setStatus('idle');
 
     try {
-      const client = getSupabaseClient();
-      const payload = {
+      await submitPrelaunchLead({
         name: name.trim() || 'Investor Lead',
         email: email.trim().toLowerCase(),
-        interest: 'Investment - Deck Request',
-        message: `Company/Fund: ${company.trim() || 'Undisclosed'} | Note: ${message.trim() || 'Requested Confidential Investor Deck'}`,
-        source: 'investor_deck_request',
-        landing_path: typeof window !== 'undefined' ? window.location.pathname : '/investors',
-      };
-
-      if (client) {
-        await client.from('leads').insert([payload]);
-      }
+        interest: `Investment: Deck Request (${company.trim() || 'Undisclosed Fund/Company'})`,
+        message: message.trim() || 'Requested Confidential Investor Deck',
+        format: 'json',
+      });
 
       setStatus('success');
       setName('');

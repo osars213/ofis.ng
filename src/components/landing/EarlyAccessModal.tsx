@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, AlertCircle, Loader2, Sparkles, Send } from 'lucide-react';
-import { getSupabaseClient } from '../../services/supabaseClient';
+import { getSupabaseClient, supabase } from '../../services/supabaseClient';
 
 interface EarlyAccessModalProps {
   isOpen: boolean;
@@ -19,6 +19,7 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [interest, setInterest] = useState(defaultInterest);
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,8 +32,18 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
     e.preventDefault();
     setErrorMsg('');
 
+    if (!name.trim()) {
+      setErrorMsg('Please enter your full name.');
+      return;
+    }
+
     if (!email.trim() || !/^\S+@\S+\.\S+$/.test(email.trim())) {
       setErrorMsg('Please enter a valid work email address.');
+      return;
+    }
+
+    if (!message.trim()) {
+      setErrorMsg('Please let us know what you are looking for.');
       return;
     }
 
@@ -40,30 +51,43 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
     setStatus('idle');
 
     try {
-      const client = getSupabaseClient();
+      // Access the initialized Supabase client instance (matching spacesService / bookingsService / reviewsService)
+      const client = getSupabaseClient() || supabase;
       if (!client) {
         throw new Error('Supabase client unavailable. Please contact hello@ofis.ng directly.');
       }
 
-      const params = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+      // Map fields directly to existing columns in public.leads table:
+      // name, email, interest, message, source, landing_path
+      const formattedMessage = phone.trim()
+        ? `${message.trim()} | Phone: ${phone.trim()}`
+        : message.trim();
+
       const payload = {
-        name: name.trim() || 'Early User',
+        name: name.trim(),
         email: email.trim().toLowerCase(),
         interest,
-        message: message.trim() || 'Early access request',
-        source: 'golden_rule_prelaunch',
+        message: formattedMessage,
+        source: 'prelaunch',
         landing_path: typeof window !== 'undefined' ? window.location.pathname : '/',
-        utm_source: params?.get('utm_source') || null,
-        utm_medium: params?.get('utm_medium') || null,
-        utm_campaign: params?.get('utm_campaign') || null,
       };
 
+      // Insert directly into public.leads table
       const { error: insertError } = await client.from('leads').insert([payload]);
-      if (insertError) throw new Error(insertError.message);
+
+      if (insertError) {
+        console.error('Supabase leads insert error:', insertError);
+        let msg = insertError.message || 'Failed to submit early access lead to Supabase';
+        if (insertError.code === '42501') {
+          msg = 'Permission denied on table leads. In Supabase SQL Editor, run: GRANT INSERT ON public.leads TO anon;';
+        }
+        throw new Error(msg);
+      }
 
       setStatus('success');
       setName('');
       setEmail('');
+      setPhone('');
       setMessage('');
     } catch (err: any) {
       console.error('Lead capture error:', err);
@@ -128,10 +152,11 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">
-                  Full Name
+                  Full Name <span className="text-[#10B981]">*</span>
                 </label>
                 <input
                   type="text"
+                  required
                   placeholder="e.g. Babatunde Adeyemi"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -155,6 +180,19 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
 
               <div>
                 <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">
+                  Phone / WhatsApp (Optional)
+                </label>
+                <input
+                  type="tel"
+                  placeholder="+234 802 345 6789"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#030712] border border-[#1F2937] text-sm text-[#F9FAFB] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#10B981]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">
                   I am a...
                 </label>
                 <select
@@ -172,11 +210,12 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
 
               <div>
                 <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">
-                  Notes (Optional)
+                  What are you looking for? <span className="text-[#10B981]">*</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="City, space type or inquiry..."
+                  required
+                  placeholder="e.g. 10-desk private office in VI, hot desk in Lekki, podcast studio..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-[#030712] border border-[#1F2937] text-sm text-[#F9FAFB] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#10B981]"
@@ -185,8 +224,8 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
 
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full mt-2 py-3 rounded-xl bg-gradient-to-b from-[#10B981] to-[#059669] hover:from-[#34D399] hover:to-[#10B981] text-[#030712] font-bold text-sm shadow-[0_4px_16px_rgba(16,185,129,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2"
+                disabled={isSubmitting || !name.trim() || !email.trim() || !message.trim()}
+                className="w-full mt-2 py-3 rounded-xl bg-gradient-to-b from-[#10B981] to-[#059669] hover:from-[#34D399] hover:to-[#10B981] disabled:opacity-50 disabled:cursor-not-allowed text-[#030712] font-bold text-sm shadow-[0_4px_16px_rgba(16,185,129,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2"
               >
                 {isSubmitting ? (
                   <>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, AlertCircle, Loader2, Calendar, Sparkles, Send } from 'lucide-react';
-import { getSupabaseClient } from '../../services/supabaseClient';
+import { submitPrelaunchLead } from '../../services/leadService';
 
 interface BookDemoModalProps {
   isOpen: boolean;
@@ -38,20 +38,13 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
     setStatus('idle');
 
     try {
-      const client = getSupabaseClient();
-      const payload = {
+      await submitPrelaunchLead({
         name: name.trim() || 'Demo Lead',
         email: email.trim().toLowerCase(),
-        interest: `Demo - ${track.toUpperCase()}`,
-        message: `Org: ${organization.trim() || 'N/A'} | Time: ${preferredTime.trim() || 'Flexible'} | Note: ${message.trim() || 'Requested product walk-through'}`,
-        source: 'book_a_demo_modal',
-        landing_path: typeof window !== 'undefined' ? window.location.pathname : '/',
-      };
-
-      if (client) {
-        const { error: insertError } = await client.from('leads').insert([payload]);
-        if (insertError) console.warn('Supabase lead insert notice:', insertError.message);
-      }
+        interest: `Demo: ${track.toUpperCase()} (${organization.trim() || 'Independent'})`,
+        message: `Preferred Time: ${preferredTime.trim() || 'Flexible'} | Notes: ${message.trim() || 'Requested live platform demonstration'}`,
+        format: 'json',
+      });
 
       setStatus('success');
       setName('');
@@ -61,7 +54,6 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
       setMessage('');
     } catch (err: any) {
       console.error('Demo booking error:', err);
-      // Even if network fails, treat gracefully
       setStatus('success');
     } finally {
       setIsSubmitting(false);

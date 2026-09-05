@@ -27,6 +27,7 @@ import { InvestorDeckModal } from '../landing/InvestorDeckModal';
 import { FeaturedSpacesSection } from '../landing/FeaturedSpacesSection';
 import { AudiencesSections } from '../landing/AudiencesSections';
 import { ContactSection } from '../landing/ContactSection';
+import { PreLaunchSignupForm } from '../landing/PreLaunchSignupForm';
 import { AboutModal, ContactModal } from '../landing/SimpleModals';
 
 interface PreLaunchPageProps {
@@ -622,7 +623,17 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
 
 
         {/* =========================================
-            SECTION 11: Contact OFIS
+            SECTION 10.5: Pre-Launch Priority Signup
+            Captures leads directly into the Supabase "leads" table
+            (mapping to name, email, interest, message, source, landing_path)
+        ========================================== */}
+        <section id="prelaunch-signup" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+          <PreLaunchSignupForm />
+        </section>
+
+
+        {/* =========================================
+            SECTION 11: Contact Us
         ========================================== */}
         <ContactSection />
 

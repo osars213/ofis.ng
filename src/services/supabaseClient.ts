@@ -1,11 +1,14 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { Space, Booking, Review, UserProfile, HostPayout, AppNotification } from '../types';
 
-// Safely extract client-side Supabase environment variables
+// Safely extract client-side Supabase environment variables matching existing OFIS project
+const DEFAULT_SUPABASE_URL = 'https://skmogtyzusrdoxdwrzbk.supabase.co';
+const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_fYph0kTl_FDCLxe3oLJ6wg_2AwufWlm';
+
 const rawSupabaseUrl = (
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_URL) ||
   (typeof process !== 'undefined' && (process.env?.VITE_SUPABASE_URL || process.env?.SUPABASE_URL)) ||
-  ''
+  DEFAULT_SUPABASE_URL
 ).trim();
 
 let cleanedSupabaseUrl = rawSupabaseUrl;
@@ -16,14 +19,17 @@ try {
     cleanedSupabaseUrl = String(rawSupabaseUrl).replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
   }
 } catch {
-  cleanedSupabaseUrl = String(rawSupabaseUrl || '').replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
+  cleanedSupabaseUrl = String(rawSupabaseUrl || DEFAULT_SUPABASE_URL).replace(/\/rest\/v1\/?$/, '').replace(/\/+$/, '');
 }
 
 const supabaseAnonKey = (
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_ANON_KEY) ||
   (typeof process !== 'undefined' && (process.env?.VITE_SUPABASE_ANON_KEY || process.env?.SUPABASE_ANON_KEY)) ||
-  ''
+  DEFAULT_SUPABASE_ANON_KEY
 ).trim();
+
+export const SUPABASE_URL = cleanedSupabaseUrl;
+export const SUPABASE_ANON_KEY = supabaseAnonKey;
 
 export const isSupabaseConfigured = (): boolean => {
   return Boolean(cleanedSupabaseUrl && supabaseAnonKey && cleanedSupabaseUrl.startsWith('http'));
