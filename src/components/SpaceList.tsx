@@ -542,11 +542,11 @@ export const SpaceList: React.FC = () => {
                               {/* Content Details */}
                               <div className="p-4 space-y-3 flex-1 flex flex-col justify-between">
                                 <div className="space-y-1">
-                                  <h4 className="text-sm font-bold text-[#111827] dark:text-[#F8FAFC] line-clamp-1">
+                                  <h3 className="text-sm font-bold text-[#111827] dark:text-[#F8FAFC] line-clamp-1">
                                     {space.title}
-                                  </h4>
-                                  <p className="text-xs text-[#6B7280] dark:text-[#94A3B8] flex items-center space-x-1">
-                                    <MapPin className="w-3.5 h-3.5 text-[#10B981] shrink-0" />
+                                  </h3>
+                                  <p className="text-xs text-[#374151] dark:text-[#94A3B8] flex items-center space-x-1">
+                                    <MapPin className="w-3.5 h-3.5 text-[#047857] dark:text-[#10B981] shrink-0" />
                                     <span className="line-clamp-1">{space.neighborhood || space.city}, {space.city}</span>
                                   </p>
                                 </div>

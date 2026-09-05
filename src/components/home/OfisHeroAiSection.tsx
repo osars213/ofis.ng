@@ -138,15 +138,15 @@ export const OfisHeroAiSection: React.FC = () => {
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#111827] dark:text-[#FAF8F5]">
-            OFIS. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#10B981] via-[#34D399] to-[#059669]">PHYSICAL SPACES</span>
+            Find the right space. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#10B981] via-[#34D399] to-[#059669]">Book it when you need it.</span>
           </h1>
 
           <p className="text-lg sm:text-xl font-semibold text-[#1F2937] dark:text-[#E2E8F0]">
             “Tell OFIS what you need.”
           </p>
 
-          <p className="text-sm sm:text-base font-medium text-[#6B7280] dark:text-[#94A3B8]">
-            Find the right space, book it when you need it, or ask us anything.
+          <p className="text-sm sm:text-base font-medium text-[#374151] dark:text-[#94A3B8]">
+            Verified desks, private offices, and studios across Nigeria with 24/7 power and high-speed fiber.
           </p>
         </div>
 
@@ -236,9 +236,9 @@ export const OfisHeroAiSection: React.FC = () => {
                   </div>
 
                   <div className="relative z-10">
-                    <h4 className="text-xs font-bold text-[#111827] dark:text-[#FAF8F5] group-hover:text-[#10B981] dark:group-hover:text-[#34D399] transition-colors">
+                    <span className="block text-xs font-bold text-[#111827] dark:text-[#FAF8F5] group-hover:text-[#10B981] dark:group-hover:text-[#34D399] transition-colors">
                       {intent.title}
-                    </h4>
+                    </span>
                     <p className="text-[11px] text-[#64748B] dark:text-[#94A3B8] line-clamp-1 mt-0.5">
                       {intent.subtitle}
                     </p>

@@ -29,6 +29,7 @@ import { Space, SpaceCategory } from '../../types';
 import { WorkspaceCard } from '../WorkspaceCard';
 import { getSpacePricing } from '../../utils/pricing';
 import { getSpaceAvailability } from '../../utils/availability';
+import { optimizeImageUrl } from '../../utils/imageOptimizer';
 
 const POPULAR_NEIGHBORHOODS: Record<string, string[]> = {
   'Lagos': ['Victoria Island', 'Lekki Phase 1', 'Ikoyi', 'Ikeja GRA', 'Yaba', 'Maryland'],
@@ -126,14 +127,20 @@ export const ExploreListingView: React.FC = () => {
           
           {/* Left: Summary & City / Category quick info */}
           <div className="flex items-center space-x-3 overflow-x-auto pb-1 md:pb-0">
-            <div className="flex items-center space-x-1.5 text-xs font-mono text-[#10B981] shrink-0">
+            <h1 className="text-sm sm:text-base font-extrabold text-[#111827] dark:text-[#F8FAFC] whitespace-nowrap">
+              Explore Workspaces
+            </h1>
+
+            <span className="text-[#94A3B8]">•</span>
+
+            <div className="flex items-center space-x-1.5 text-xs font-mono text-[#047857] dark:text-[#10B981] shrink-0">
               <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-              <span className="font-bold">{sortedSpaces.length} Verified Spaces</span>
+              <span className="font-bold">{sortedSpaces.length} Verified</span>
             </div>
 
             <span className="text-[#94A3B8] hidden sm:inline">•</span>
 
-            <div className="flex items-center space-x-1 text-xs text-[#6B7280] dark:text-[#94A3B8] whitespace-nowrap">
+            <div className="flex items-center space-x-1 text-xs text-[#374151] dark:text-[#94A3B8] whitespace-nowrap">
               <span>Location:</span>
               <span className="font-bold text-[#111827] dark:text-[#F8FAFC]">{currentCity}</span>
             </div>
@@ -232,7 +239,7 @@ export const ExploreListingView: React.FC = () => {
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB] dark:border-[#1E293B]">
                 <div className="flex items-center space-x-2">
                   <SlidersHorizontal className="w-4 h-4 text-[#10B981]" />
-                  <h3 className="text-sm font-bold text-[#111827] dark:text-[#F8FAFC]">Filters</h3>
+                  <h2 className="text-sm font-bold text-[#111827] dark:text-[#F8FAFC]">Filters</h2>
                 </div>
                 {activeFiltersCount > 0 && (
                   <button
@@ -448,15 +455,15 @@ export const ExploreListingView: React.FC = () => {
                   <Search className="w-7 h-7" />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">No matching workspaces</h3>
-                  <p className="text-xs text-[#6B7280] dark:text-[#94A3B8]">
+                  <h2 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">No matching workspaces</h2>
+                  <p className="text-xs text-[#374151] dark:text-[#94A3B8]">
                     No verified spaces match your active filters. Try broadening your location or resetting filters.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={resetFilters}
-                  className="px-5 py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
+                  className="px-5 py-2.5 rounded-xl bg-[#047857] hover:bg-[#065F46] text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
                 >
                   Reset All Filters
                 </button>
@@ -494,7 +501,7 @@ export const ExploreListingView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCurrentView('map')}
-                  className="text-xs font-bold text-[#10B981] hover:underline flex items-center space-x-1 cursor-pointer"
+                  className="text-xs font-bold text-[#047857] dark:text-[#10B981] hover:underline flex items-center space-x-1 cursor-pointer"
                 >
                   <Compass className="w-3.5 h-3.5" />
                   <span>Full Map</span>
@@ -542,18 +549,19 @@ export const ExploreListingView: React.FC = () => {
                     className="p-3 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-xl flex items-center space-x-3 cursor-pointer hover:border-[#10B981]"
                   >
                     <img
-                      src={activeHoverSpace.featuredImage}
+                      src={optimizeImageUrl(activeHoverSpace.featuredImage, { width: 200, quality: 75 })}
                       alt={activeHoverSpace.title}
+                      loading="lazy"
                       className="w-14 h-14 rounded-xl object-cover shrink-0"
                     />
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-xs font-bold text-[#111827] dark:text-[#F8FAFC] truncate">
+                      <h3 className="text-xs font-bold text-[#111827] dark:text-[#F8FAFC] truncate">
                         {activeHoverSpace.title}
-                      </h4>
-                      <p className="text-[10px] text-[#6B7280] dark:text-[#94A3B8]">
+                      </h3>
+                      <p className="text-[10px] text-[#374151] dark:text-[#94A3B8]">
                         {activeHoverSpace.neighborhood}, {activeHoverSpace.city}
                       </p>
-                      <span className="text-xs font-extrabold text-[#10B981] font-mono">
+                      <span className="text-xs font-extrabold text-[#047857] dark:text-[#10B981] font-mono">
                         {formatPrice(getSpacePricing(activeHoverSpace).rate)}
                       </span>
                     </div>
@@ -574,7 +582,7 @@ export const ExploreListingView: React.FC = () => {
             
             <div className="space-y-6">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB] dark:border-[#1E293B]">
-                <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Filter Workspaces</h3>
+                <h2 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Filter Workspaces</h2>
                 <button
                   type="button"
                   onClick={() => setIsMobileFilterOpen(false)}

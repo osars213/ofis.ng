@@ -152,7 +152,7 @@ export const WorkspaceAvailabilityCalendar: React.FC<WorkspaceAvailabilityCalend
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h3 className="text-lg font-bold text-[#F2F2F2]">Real-Time Availability Calendar</h3>
+          <h2 className="text-lg font-bold text-[#F2F2F2]">Real-Time Availability Calendar</h2>
           <p className="text-xs text-[#9EABA3]">
             Select your preferred work date & hourly arrival slot
           </p>

@@ -77,7 +77,7 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h3 className="text-lg font-bold text-[#F2F2F2]">Location & Surroundings</h3>
+          <h2 className="text-lg font-bold text-[#F2F2F2]">Location & Surroundings</h2>
           <p className="text-xs text-[#9EABA3]">
             {locationLabel}
           </p>

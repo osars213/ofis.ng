@@ -229,7 +229,7 @@ export const CategorizedAmenities: React.FC<CategorizedAmenitiesProps> = ({ spac
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h3 className="text-lg font-bold text-[#F2F2F2]">Amenities & Inclusions</h3>
+          <h2 className="text-lg font-bold text-[#F2F2F2]">Amenities & Inclusions</h2>
           <p className="text-xs text-[#9EABA3]">
             Verified on-site facilities, hardware, and hospitality specs ({totalAmenityCount} total)
           </p>
@@ -280,7 +280,7 @@ export const CategorizedAmenities: React.FC<CategorizedAmenitiesProps> = ({ spac
                   <Icon className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-[#F2F2F2]">{group.name}</h4>
+                  <h3 className="text-xs font-bold text-[#F2F2F2]">{group.name}</h3>
                   <p className="text-[10px] text-[#718079]">{group.description}</p>
                 </div>
               </div>

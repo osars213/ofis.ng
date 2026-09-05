@@ -185,10 +185,10 @@ export const OfisNavigationDrawer: React.FC = () => {
               Support & Inquiries
             </p>
 
-            <a
-              href="mailto:hello@ofis.ng"
+            <button
+              type="button"
               id="drawer-contact-support-btn"
-              onClick={() => setIsDrawerOpen(false)}
+              onClick={() => handleNavigate('contact')}
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
@@ -196,7 +196,7 @@ export const OfisNavigationDrawer: React.FC = () => {
                 <span>Contact Support</span>
               </div>
               <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono">hello@ofis.ng</span>
-            </a>
+            </button>
 
             <button
               type="button"

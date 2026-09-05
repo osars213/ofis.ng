@@ -322,7 +322,7 @@ export const SpaceDetails: React.FC = () => {
 
             {/* About this Workspace */}
             <div className="space-y-3">
-              <h3 className="text-lg font-bold text-[#111827] dark:text-[#F2F2F2]">About this Workspace</h3>
+              <h2 className="text-lg font-bold text-[#111827] dark:text-[#F2F2F2]">About this Workspace</h2>
               <p className="text-sm text-[#4B5563] dark:text-[#9EABA3] leading-relaxed whitespace-pre-line">
                 {selectedSpace.description}
               </p>

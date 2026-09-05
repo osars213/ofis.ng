@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { Review } from '../../types';
 import { reviewsService } from '../../services/reviewsService';
+import { optimizeImageUrl } from '../../utils/imageOptimizer';
 
 interface EnhancedReviewsSectionProps {
   reviews: Review[];
@@ -237,7 +238,12 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
                       onClick={() => setPreviewPhoto(photo)}
                       className="relative w-16 h-16 rounded-xl overflow-hidden border border-[#232D28] hover:border-[#00C878] transition-all cursor-pointer group"
                     >
-                      <img src={photo} alt="Guest Review Photo" className="w-full h-full object-cover" />
+                      <img
+                        src={optimizeImageUrl(photo, { width: 160, quality: 75 })}
+                        alt="Guest Review Photo"
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                      />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors flex items-center justify-center">
                         <Maximize2 className="w-3.5 h-3.5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>

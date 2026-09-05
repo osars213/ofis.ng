@@ -34,6 +34,7 @@ import { SpaceCategory, Space } from '../../types';
 import { WorkspaceCard } from '../WorkspaceCard';
 import { getSpacePricing } from '../../utils/pricing';
 import { OfisHeroAiSection } from '../home/OfisHeroAiSection';
+import { optimizeImageUrl } from '../../utils/imageOptimizer';
 
 const PIDGIN_GREETINGS = [
   'Twale my great boss🙌🏼',
@@ -428,8 +429,9 @@ export const LandingPage: React.FC = () => {
             >
               {/* Background Image with Dark Overlay */}
               <img
-                src={city.image}
+                src={optimizeImageUrl(city.image, { width: 600, quality: 75 })}
                 alt={city.name}
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/60 to-transparent" />
@@ -498,18 +500,18 @@ export const LandingPage: React.FC = () => {
                     </div>
 
                     <div className="space-y-1">
-                      <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#10B981] transition-colors">
+                      <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#047857] dark:group-hover:text-[#10B981] transition-colors">
                         {cat.title}
                       </h3>
-                      <p className="text-xs text-[#6B7280] dark:text-[#94A3B8] leading-relaxed">
+                      <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
                         {cat.tagline}
                       </p>
                     </div>
                   </div>
 
                   <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#1E293B] flex items-center justify-between text-xs">
-                    <span className="font-mono font-bold text-[#10B981]">From {cat.startRate}</span>
-                    <span className="text-[#6B7280] dark:text-[#94A3B8] group-hover:text-[#111827] dark:group-hover:text-white font-semibold flex items-center space-x-1">
+                    <span className="font-mono font-bold text-[#047857] dark:text-[#10B981]">From {cat.startRate}</span>
+                    <span className="text-[#374151] dark:text-[#94A3B8] group-hover:text-[#111827] dark:group-hover:text-white font-semibold flex items-center space-x-1">
                       <span>Browse</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </span>
@@ -528,13 +530,13 @@ export const LandingPage: React.FC = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
-            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#10B981]">
+            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#047857] dark:text-[#10B981]">
               Curated Excellence
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight mt-1">
               Featured Nigerian Workspaces
             </h2>
-            <p className="text-sm text-[#6B7280] dark:text-[#94A3B8] mt-1">
+            <p className="text-sm text-[#374151] dark:text-[#94A3B8] mt-1">
               Top-rated spaces verified for power uptime, high internet bandwidth, and exceptional host standards.
             </p>
           </div>
@@ -570,13 +572,13 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 mb-14">
-            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#10B981]">
+            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#047857] dark:text-[#10B981]">
               The OFIS Standard
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
               Why High-Performers Choose OFIS
             </h2>
-            <p className="text-sm text-[#6B7280] dark:text-[#94A3B8]">
+            <p className="text-sm text-[#374151] dark:text-[#94A3B8]">
               Say goodbye to noisy cafes, 2-year upfront commercial rent lock-in, and unpredictable grid blackouts.
             </p>
           </div>
@@ -584,31 +586,31 @@ export const LandingPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             <div className="p-8 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
+              <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#047857] dark:text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
                 <Zap className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC]">100% Uninterrupted Power</h3>
-              <p className="text-xs text-[#6B7280] dark:text-[#94A3B8] leading-relaxed">
+              <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
                 Every space is audited for automated dual generator + solar pure sine inverter auto-switchover with 0.00ms switchover lag. Your zoom calls never drop.
               </p>
             </div>
 
             <div className="p-8 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
+              <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#047857] dark:text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
                 <Wifi className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC]">Enterprise Dedicated Fiber</h3>
-              <p className="text-xs text-[#6B7280] dark:text-[#94A3B8] leading-relaxed">
+              <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
                 Speed-tested 50Mbps to 300Mbps low-latency fiber lines from top ISPs (Starlink, MainOne, ipNX) with wired ethernet backup for remote developers and creators.
               </p>
             </div>
 
             <div className="p-8 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
+              <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#047857] dark:text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
                 <QrCode className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC]">Zero-Friction QR Passes</h3>
-              <p className="text-xs text-[#6B7280] dark:text-[#94A3B8] leading-relaxed">
+              <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
                 Book in seconds with Paystack/Flutterwave in Naira or USD. Arrive at the space and flash your digital QR pass at reception for immediate seamless access.
               </p>
             </div>
@@ -623,13 +625,13 @@ export const LandingPage: React.FC = () => {
       {/* ========================================================================= */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto space-y-2 mb-14">
-          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#10B981]">
+          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#047857] dark:text-[#10B981]">
             Simple & Transparent
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
             How OFIS Works
           </h2>
-          <p className="text-sm text-[#6B7280] dark:text-[#94A3B8]">
+          <p className="text-sm text-[#374151] dark:text-[#94A3B8]">
             From search to turnstile pass in under 60 seconds.
           </p>
         </div>
@@ -638,33 +640,33 @@ export const LandingPage: React.FC = () => {
           
           {/* Step 1 */}
           <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#10B981] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-[#047857] dark:bg-[#10B981] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
               1
             </div>
             <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Discover & Compare</h3>
-            <p className="text-xs text-[#6B7280] dark:text-[#94A3B8] leading-relaxed">
+            <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
               Filter by city, neighborhood, desk type, verified power rating, and live availability on our interactive map.
             </p>
           </div>
 
           {/* Step 2 */}
           <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#10B981] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-[#047857] dark:bg-[#10B981] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
               2
             </div>
             <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Book Instantly</h3>
-            <p className="text-xs text-[#6B7280] dark:text-[#94A3B8] leading-relaxed">
+            <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
               Choose an hour, full day, or multi-day pass. Checkout securely via Paystack, card, or wallet with instant confirmation.
             </p>
           </div>
 
           {/* Step 3 */}
           <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#10B981] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-[#047857] dark:bg-[#10B981] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
               3
             </div>
             <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Scan & Get to Work</h3>
-            <p className="text-xs text-[#6B7280] dark:text-[#94A3B8] leading-relaxed">
+            <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
               Scan your digital QR pass at the entrance. Get high-speed Wi-Fi credentials automatically and focus on what matters.
             </p>
           </div>
@@ -715,20 +717,21 @@ export const LandingPage: React.FC = () => {
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-xs text-[#4B5563] dark:text-[#94A3B8] leading-relaxed italic">
+                <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed italic">
                   &ldquo;{t.quote}&rdquo;
                 </p>
               </div>
 
               <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#1E293B] flex items-center space-x-3">
                 <img
-                  src={t.avatar}
+                  src={optimizeImageUrl(t.avatar, { width: 100, quality: 80 })}
                   alt={t.name}
+                  loading="lazy"
                   className="w-10 h-10 rounded-full object-cover border border-[#10B981]/50"
                 />
                 <div className="text-left">
-                  <h4 className="text-xs font-bold text-[#111827] dark:text-[#F8FAFC]">{t.name}</h4>
-                  <p className="text-[11px] text-[#6B7280] dark:text-[#94A3B8]">{t.role}</p>
+                  <h3 className="text-xs font-bold text-[#111827] dark:text-[#F8FAFC]">{t.name}</h3>
+                  <p className="text-[11px] text-[#374151] dark:text-[#94A3B8]">{t.role}</p>
                 </div>
               </div>
             </div>
@@ -748,9 +751,9 @@ export const LandingPage: React.FC = () => {
               <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-mono font-bold uppercase">
                 For Guests & Teams
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
                 Ready to Find Your Focus Hub?
-              </h3>
+              </h2>
               <p className="text-sm text-emerald-50 leading-relaxed max-w-md">
                 Book a hot desk, boardroom, or creator suite in under 60 seconds with instant digital pass access.
               </p>
@@ -764,7 +767,7 @@ export const LandingPage: React.FC = () => {
                   setCurrentView('explore');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-6 py-3.5 rounded-2xl bg-white text-[#059669] hover:bg-emerald-50 font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-2xl bg-white text-[#065F46] hover:bg-emerald-50 font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
               >
                 <span>Explore All Spaces</span>
                 <ArrowRight className="w-4 h-4 stroke-[3]" />
@@ -778,9 +781,9 @@ export const LandingPage: React.FC = () => {
               <span className="px-3 py-1 rounded-full bg-[#10B981]/20 border border-[#10B981]/30 text-[#10B981] text-[10px] font-mono font-bold uppercase">
                 For Property Owners & Hosts
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
                 Monetize Your Commercial Space
-              </h3>
+              </h2>
               <p className="text-sm text-[#94A3B8] leading-relaxed max-w-md">
                 Turn unused meeting rooms, podcast studios, or desks into recurring revenue. Automated payments and verified guests.
               </p>
@@ -794,7 +797,7 @@ export const LandingPage: React.FC = () => {
                   setCurrentView('become_host');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-6 py-3.5 rounded-2xl bg-[#10B981] hover:bg-[#059669] text-white font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-2xl bg-[#047857] hover:bg-[#065F46] text-white font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
               >
                 <span>Calculate Earnings</span>
                 <ArrowRight className="w-4 h-4 stroke-[3]" />

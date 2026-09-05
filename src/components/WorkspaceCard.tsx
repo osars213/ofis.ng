@@ -5,6 +5,7 @@ import { CATEGORY_METADATA } from '../mockData';
 import { getSpaceAvailability } from '../utils/availability';
 import { getCategoryLabel, formatSpaceRate, getSpacePricing } from '../utils/pricing';
 import { formatLocationShort } from '../utils/location';
+import { optimizeImageUrl } from '../utils/imageOptimizer';
 import { 
   Star, 
   MapPin, 
@@ -99,7 +100,7 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
         onClick={handleCardClick}
       >
         <img
-          src={space.featuredImage}
+          src={optimizeImageUrl(space.featuredImage, { width: 600, quality: 75 })}
           alt={space.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"

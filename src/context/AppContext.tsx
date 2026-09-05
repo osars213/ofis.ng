@@ -807,70 +807,64 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => {
     let isMounted = true;
 
-    async function initializeData() {
-      await checkSupabaseHealth();
-      if (!isMounted) return;
+    // Run data hydration in parallel after initial paint without blocking render
+    checkSupabaseHealth();
+    refreshSpaces();
+    refreshBookings();
 
-      // 1. Fetch spaces from Supabase
-      refreshSpaces();
+    // 3. Fetch saved favorites
+    if (currentUser.id && !currentUser.id.startsWith('guest')) {
+      favoritesService.fetchFavoritesAsync(currentUser.id).then(ids => {
+        if (isMounted) setSavedSpaceIds(ids);
+      });
+    }
 
-      // 2. Fetch bookings for current user
-      refreshBookings();
-
-      // 3. Fetch saved favorites
-      if (currentUser.id && !currentUser.id.startsWith('guest')) {
-        favoritesService.fetchFavoritesAsync(currentUser.id).then(ids => {
-          if (isMounted) setSavedSpaceIds(ids);
-        });
-      }
-
-      // 4. Listen to Supabase Auth State Changes if client is active
-      const client = getSupabaseClient();
-      if (client) {
-        try {
-          const { data: authListener } = client.auth.onAuthStateChange(async (event, session) => {
-            if (!isMounted) return;
-            if (event === 'SIGNED_IN' && session?.user) {
-              const profile = await authService.fetchProfileAsync(session.user.id);
-              if (profile && isMounted) {
-                setCurrentUser(profile);
-                setSavedSpaceIds(profile.savedSpaceIds || []);
-              }
-            } else if (event === 'SIGNED_OUT') {
-              // Sign out handled gracefully
+    // 4. Listen to Supabase Auth State Changes if client is active
+    let cleanupSubscriptions: (() => void) | undefined;
+    const client = getSupabaseClient();
+    if (client) {
+      try {
+        const { data: authListener } = client.auth.onAuthStateChange(async (event, session) => {
+          if (!isMounted) return;
+          if (event === 'SIGNED_IN' && session?.user) {
+            const profile = await authService.fetchProfileAsync(session.user.id);
+            if (profile && isMounted) {
+              setCurrentUser(profile);
+              setSavedSpaceIds(profile.savedSpaceIds || []);
             }
-          });
+          } else if (event === 'SIGNED_OUT') {
+            // Sign out handled gracefully
+          }
+        });
 
-          // Realtime subscriptions for live updates
-          const spacesChannel = client
-            .channel('public:spaces_live')
-            .on('postgres_changes', { event: '*', schema: 'public', table: 'spaces' }, () => {
-              if (isMounted) refreshSpaces();
-            })
-            .subscribe();
+        // Realtime subscriptions for live updates
+        const spacesChannel = client
+          .channel('public:spaces_live')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'spaces' }, () => {
+            if (isMounted) refreshSpaces();
+          })
+          .subscribe();
 
-          const bookingsChannel = client
-            .channel('public:bookings_live')
-            .on('postgres_changes', { event: '*', schema: 'public', table: 'bookings' }, () => {
-              if (isMounted) refreshBookings();
-            })
-            .subscribe();
+        const bookingsChannel = client
+          .channel('public:bookings_live')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'bookings' }, () => {
+            if (isMounted) refreshBookings();
+          })
+          .subscribe();
 
-          return () => {
-            authListener?.subscription?.unsubscribe();
-            spacesChannel.unsubscribe();
-            bookingsChannel.unsubscribe();
-          };
-        } catch (err) {
-          console.warn('[AppContext] Supabase realtime listener notice:', err);
-        }
+        cleanupSubscriptions = () => {
+          authListener?.subscription?.unsubscribe();
+          spacesChannel.unsubscribe();
+          bookingsChannel.unsubscribe();
+        };
+      } catch (err) {
+        console.warn('[AppContext] Supabase realtime listener notice:', err);
       }
     }
 
-    initializeData();
-
     return () => {
       isMounted = false;
+      cleanupSubscriptions?.();
     };
   }, []);
 

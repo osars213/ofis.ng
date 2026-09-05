@@ -86,7 +86,13 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
   };
 
   const handleOpenContact = () => {
-    window.location.href = 'mailto:hello@ofis.ng';
+    setMobileMenuOpen(false);
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      setIsContactOpen(true);
+    }
   };
 
   const handleOpenAbout = () => {
@@ -164,12 +170,14 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             >
               Investors
             </button>
-            <a 
-              href="mailto:hello@ofis.ng"
+            <button 
+              type="button"
+              id="prelaunch-header-contact-btn"
+              onClick={handleOpenContact}
               className="hover:text-[#FAF8F5] transition-colors cursor-pointer"
             >
               Contact
-            </a>
+            </button>
           </nav>
 
           {/* Desktop CTAs */}
@@ -235,13 +243,14 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             >
               About
             </button>
-            <a
-              href="mailto:hello@ofis.ng"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-left py-2 text-base font-medium text-[#A8A29E] hover:text-[#FAF8F5]"
+            <button
+              type="button"
+              id="prelaunch-mobile-contact-btn"
+              onClick={handleOpenContact}
+              className="block w-full text-left py-2 text-base font-medium text-[#A8A29E] hover:text-[#FAF8F5] cursor-pointer"
             >
               Contact
-            </a>
+            </button>
             
             <div className="pt-3 border-t border-[#292724] flex flex-col gap-2.5">
               <button

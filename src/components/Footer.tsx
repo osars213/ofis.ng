@@ -282,12 +282,13 @@ export const Footer: React.FC = () => {
                   </button>
                 </li>
                 <li>
-                  <a 
-                    href="mailto:hello@ofis.ng"
+                  <button 
+                    type="button"
+                    onClick={() => handleNavigate('contact')}
                     className="hover:text-[#10B981] transition-colors cursor-pointer text-left inline-block"
                   >
                     Contact Us
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <button 
