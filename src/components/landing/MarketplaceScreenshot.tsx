@@ -148,6 +148,7 @@ export const MarketplaceScreenshot: React.FC<MarketplaceScreenshotProps> = ({
 
   return (
     <section id="demo-marketplace" className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h2 className="sr-only">Interactive Live Space Preview and Instant Booking</h2>
       
       {/* Outer Glow & Warm Elevation Container with Refined Glassmorphism */}
       <div className="relative rounded-2xl sm:rounded-3xl bg-[#171615]/80 backdrop-blur-2xl border border-white/10 hover:border-[#10B981]/50 p-3 sm:p-5 lg:p-7 shadow-[0_30px_90px_rgba(0,0,0,0.7),0_0_40px_rgba(16,185,129,0.12),inset_0_1px_1px_rgba(255,255,255,0.08)] transition-all duration-300 overflow-hidden">
@@ -190,9 +191,9 @@ export const MarketplaceScreenshot: React.FC<MarketplaceScreenshotProps> = ({
             <div className="flex-1 flex items-center space-x-3 px-4 sm:px-5 py-3 rounded-xl bg-[#171615]/70 backdrop-blur-md border border-white/[0.08] text-xs text-[#A8A29E] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
               <Search className="w-4 h-4 text-[#10B981] shrink-0" />
               <span className="text-[#FAF8F5] font-medium truncate">Nigeria • Lagos & Abuja</span>
-              <span className="text-stone-600">•</span>
+              <span className="text-[#A8A29E]">•</span>
               <span className="text-[#A8A29E] truncate hidden sm:inline">Desks, Studios, Boardrooms</span>
-              <span className="text-stone-600 hidden sm:inline">•</span>
+              <span className="text-[#A8A29E] hidden sm:inline">•</span>
               <span className="text-[#34D399] font-medium truncate hidden md:inline">Instant Check-in</span>
             </div>
 
@@ -246,6 +247,9 @@ export const MarketplaceScreenshot: React.FC<MarketplaceScreenshotProps> = ({
                       <img 
                         src={space.image} 
                         alt={space.name}
+                        loading={isSelected ? 'eager' : 'lazy'}
+                        fetchPriority={isSelected ? 'high' : 'auto'}
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-transparent to-transparent" />
@@ -278,9 +282,9 @@ export const MarketplaceScreenshot: React.FC<MarketplaceScreenshotProps> = ({
                       <div className="text-[10px] font-bold uppercase tracking-wider text-[#A8A29E]">
                         {space.categoryLabel}
                       </div>
-                      <h4 className="text-sm font-bold text-[#FAF8F5] line-clamp-1 group-hover/card:text-[#34D399] transition-colors">
+                      <h3 className="text-sm font-bold text-[#FAF8F5] line-clamp-1 group-hover/card:text-[#34D399] transition-colors">
                         {space.name}
-                      </h4>
+                      </h3>
                       <div className="flex items-center text-xs text-[#A8A29E]">
                         <MapPin className="w-3.5 h-3.5 mr-1 text-[#10B981] shrink-0" />
                         <span className="truncate">{space.location}</span>

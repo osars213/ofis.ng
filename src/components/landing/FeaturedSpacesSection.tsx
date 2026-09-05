@@ -98,6 +98,8 @@ export const FeaturedSpacesSection: React.FC<FeaturedSpacesSectionProps> = ({ on
                 <img
                   src={space.image}
                   alt={space.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-transparent to-transparent" />
@@ -119,9 +121,9 @@ export const FeaturedSpacesSection: React.FC<FeaturedSpacesSectionProps> = ({ on
                 <div className="text-[10px] font-bold uppercase tracking-wider text-[#A8A29E]">
                   {space.category}
                 </div>
-                <h4 className="text-base font-bold text-[#FAF8F5] line-clamp-1 group-hover:text-[#34D399] transition-colors">
+                <h3 className="text-base font-bold text-[#FAF8F5] line-clamp-1 group-hover:text-[#34D399] transition-colors">
                   {space.title}
-                </h4>
+                </h3>
                 <div className="flex items-center text-xs text-[#A8A29E]">
                   <MapPin className="w-3.5 h-3.5 mr-1 text-[#10B981] shrink-0" />
                   <span className="truncate">{space.location}</span>

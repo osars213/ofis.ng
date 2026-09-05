@@ -294,7 +294,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             <span className="text-[#34D399] font-extrabold uppercase text-xs sm:text-sm tracking-wider">
               Launching Soon
             </span>
-            <span className="text-[#57534E] text-base sm:text-lg">•</span>
+            <span className="text-[#A8A29E] text-base sm:text-lg">•</span>
             <button
               type="button"
               onClick={() => handleOpenEarlyAccess('Early Access')}
@@ -536,7 +536,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
                 <ShieldCheck className="w-5 h-5 text-[#10B981]" />
               </div>
               <div>
-                <h4 className="text-base font-bold text-[#FAF8F5]">Verified Spaces</h4>
+                <h3 className="text-base font-bold text-[#FAF8F5]">Verified Spaces</h3>
                 <p className="text-xs text-[#A8A29E]">Inspected for quiet comfort & working AC</p>
               </div>
             </div>
@@ -546,7 +546,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
                 <Zap className="w-5 h-5 text-[#10B981]" />
               </div>
               <div>
-                <h4 className="text-base font-bold text-[#FAF8F5]">Guaranteed 24/7 Power</h4>
+                <h3 className="text-base font-bold text-[#FAF8F5]">Guaranteed 24/7 Power</h3>
                 <p className="text-xs text-[#A8A29E]">Tested generators & stable fiber Wi-Fi</p>
               </div>
             </div>
@@ -556,7 +556,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
                 <CreditCard className="w-5 h-5 text-[#10B981]" />
               </div>
               <div>
-                <h4 className="text-base font-bold text-[#FAF8F5]">Secure Payments</h4>
+                <h3 className="text-base font-bold text-[#FAF8F5]">Secure Payments</h3>
                 <p className="text-xs text-[#A8A29E]">Pay with debit card or direct transfer</p>
               </div>
             </div>
@@ -566,7 +566,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
                 <Coins className="w-5 h-5 text-[#10B981]" />
               </div>
               <div>
-                <h4 className="text-base font-bold text-[#FAF8F5]">Transparent Pricing</h4>
+                <h3 className="text-base font-bold text-[#FAF8F5]">Transparent Pricing</h3>
                 <p className="text-xs text-[#A8A29E]">Clear hourly, daily, or monthly rates</p>
               </div>
             </div>
@@ -576,7 +576,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
                 <Clock className="w-5 h-5 text-[#10B981]" />
               </div>
               <div>
-                <h4 className="text-base font-bold text-[#FAF8F5]">Instant Confirmation</h4>
+                <h3 className="text-base font-bold text-[#FAF8F5]">Instant Confirmation</h3>
                 <p className="text-xs text-[#A8A29E]">Book immediately without waiting for replies</p>
               </div>
             </div>
@@ -586,7 +586,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
                 <Headphones className="w-5 h-5 text-[#10B981]" />
               </div>
               <div>
-                <h4 className="text-base font-bold text-[#FAF8F5]">Dedicated Support</h4>
+                <h3 className="text-base font-bold text-[#FAF8F5]">Dedicated Support</h3>
                 <p className="text-xs text-[#A8A29E]">Fast local assistance via WhatsApp and phone</p>
               </div>
             </div>
@@ -623,9 +623,9 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
         ========================================== */}
         <section className="py-20 sm:py-28 border-t border-[#292724] px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-10 sm:mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#A8A29E]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[#A8A29E]">
               Trusted by top workspace operators across Nigeria
-            </span>
+            </h2>
           </div>
           <TrustedLogos />
         </section>
@@ -689,6 +689,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
           SECTION 12: FOOTER
       ========================================== */}
       <footer className="border-t border-[#292724] bg-[#0C0B0A] py-16 px-4 sm:px-6 lg:px-8">
+        <h2 className="sr-only">Footer Navigation</h2>
         <div className="max-w-7xl mx-auto space-y-12">
           
           {/* Main Footer Columns */}
@@ -725,7 +726,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
 
             {/* Column 2: Quick Links */}
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#FAF8F5]">Quick Links</h4>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#FAF8F5]">Quick Links</h3>
               <ul className="space-y-2 text-xs text-[#A8A29E]">
                 <li>
                   <button onClick={handleExplore} className="hover:text-[#34D399] transition-colors cursor-pointer">
@@ -752,7 +753,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
 
             {/* Column 3: Company */}
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#FAF8F5]">Company</h4>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#FAF8F5]">Company</h3>
               <ul className="space-y-2 text-xs text-[#A8A29E]">
                 <li>
                   <button onClick={handleOpenAbout} className="hover:text-[#34D399] transition-colors cursor-pointer">
@@ -779,7 +780,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
 
             {/* Column 4: Contact & Legal */}
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#FAF8F5]">Contact & Support</h4>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#FAF8F5]">Contact & Support</h3>
               <ul className="space-y-2 text-xs text-[#A8A29E]">
                 <li>
                   <a href="mailto:hello@ofis.ng" className="hover:text-[#34D399] transition-colors">
@@ -796,8 +797,8 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
                     investors@ofis.ng
                   </a>
                 </li>
-                <li className="pt-2 text-[11px] text-stone-500">
-                  <a href="#terms" onClick={(e) => { e.preventDefault(); handleOpenAbout(); }} className="hover:underline">
+                <li className="pt-2 text-[11px] text-[#A8A29E]">
+                  <a href="#terms" onClick={(e) => { e.preventDefault(); handleOpenAbout(); }} className="hover:underline hover:text-[#FAF8F5]">
                     Terms & Privacy Policy
                   </a>
                 </li>
@@ -808,11 +809,11 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
 
           {/* Bottom Row: Copyright */}
           <div className="pt-8 border-t border-[#292724] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A8A29E]">
-            <div className="text-stone-500">
+            <div className="text-[#A8A29E]">
               © {new Date().getFullYear()} OFIS Technologies Ltd. All rights reserved.
             </div>
 
-            <div className="flex items-center space-x-6 text-stone-500 text-xs">
+            <div className="flex items-center space-x-6 text-[#A8A29E] text-xs">
               <span>Inspected Spaces</span>
               <span>•</span>
               <span>Guaranteed Backup Power</span>

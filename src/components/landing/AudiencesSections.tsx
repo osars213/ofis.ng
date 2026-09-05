@@ -82,25 +82,25 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-5 rounded-2xl bg-[#0C0B0A] border border-[#292724] space-y-2 hover:border-[#10B981]/40 transition-all">
                 <ShieldCheck className="w-5 h-5 text-[#10B981]" />
-                <h4 className="text-sm font-bold text-[#FAF8F5]">Guaranteed 24/7 Power</h4>
+                <h3 className="text-sm font-bold text-[#FAF8F5]">Guaranteed 24/7 Power</h3>
                 <p className="text-xs text-[#A8A29E]">Tested generator backup so your staff never drop off client calls during public power cuts.</p>
               </div>
 
               <div className="p-5 rounded-2xl bg-[#0C0B0A] border border-[#292724] space-y-2 hover:border-[#10B981]/40 transition-all">
                 <Receipt className="w-5 h-5 text-[#10B981]" />
-                <h4 className="text-sm font-bold text-[#FAF8F5]">One Monthly Invoice</h4>
+                <h3 className="text-sm font-bold text-[#FAF8F5]">One Monthly Invoice</h3>
                 <p className="text-xs text-[#A8A29E]">Consolidate all employee workspace usage into a single, clean statement for your accounting team.</p>
               </div>
 
               <div className="p-5 rounded-2xl bg-[#0C0B0A] border border-[#292724] space-y-2 hover:border-[#10B981]/40 transition-all">
                 <Globe2 className="w-5 h-5 text-[#10B981]" />
-                <h4 className="text-sm font-bold text-[#FAF8F5]">Locations Across Cities</h4>
+                <h3 className="text-sm font-bold text-[#FAF8F5]">Locations Across Cities</h3>
                 <p className="text-xs text-[#A8A29E]">Desks and meeting rooms in Victoria Island, Ikoyi, Lekki, Ikeja, and Abuja.</p>
               </div>
 
               <div className="p-5 rounded-2xl bg-[#0C0B0A] border border-[#292724] space-y-2 hover:border-[#10B981]/40 transition-all">
                 <Zap className="w-5 h-5 text-[#10B981]" />
-                <h4 className="text-sm font-bold text-[#FAF8F5]">Simple QR Entry</h4>
+                <h3 className="text-sm font-bold text-[#FAF8F5]">Simple QR Entry</h3>
                 <p className="text-xs text-[#A8A29E]">Employees show an instant digital pass on their phone at the front desk and get straight to work.</p>
               </div>
             </div>
@@ -122,25 +122,25 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             <div className="lg:col-span-6 order-2 lg:order-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-5 rounded-2xl bg-[#0C0B0A] border border-[#292724] space-y-2 hover:border-[#10B981]/40 transition-all">
                 <TrendingUp className="w-5 h-5 text-[#10B981]" />
-                <h4 className="text-sm font-bold text-[#FAF8F5]">Higher Occupancy</h4>
+                <h3 className="text-sm font-bold text-[#FAF8F5]">Higher Occupancy</h3>
                 <p className="text-xs text-[#A8A29E]">Fill empty desks, quiet meeting rooms, and off-peak hours with verified business guests.</p>
               </div>
 
               <div className="p-5 rounded-2xl bg-[#0C0B0A] border border-[#292724] space-y-2 hover:border-[#10B981]/40 transition-all">
                 <Coins className="w-5 h-5 text-[#10B981]" />
-                <h4 className="text-sm font-bold text-[#FAF8F5]">Guaranteed Payouts</h4>
+                <h3 className="text-sm font-bold text-[#FAF8F5]">Guaranteed Payouts</h3>
                 <p className="text-xs text-[#A8A29E]">Weekly earnings sent straight to your bank account without chasing overdue client invoices.</p>
               </div>
 
               <div className="p-5 rounded-2xl bg-[#0C0B0A] border border-[#292724] space-y-2 hover:border-[#10B981]/40 transition-all">
                 <CalendarCheck className="w-5 h-5 text-[#10B981]" />
-                <h4 className="text-sm font-bold text-[#FAF8F5]">Calendar Sync</h4>
+                <h3 className="text-sm font-bold text-[#FAF8F5]">Calendar Sync</h3>
                 <p className="text-xs text-[#A8A29E]">Syncs directly with your Google Calendar or Outlook so you never get double-booked.</p>
               </div>
 
               <div className="p-5 rounded-2xl bg-[#0C0B0A] border border-[#292724] space-y-2 hover:border-[#10B981]/40 transition-all">
                 <Building2 className="w-5 h-5 text-[#10B981]" />
-                <h4 className="text-sm font-bold text-[#FAF8F5]">Zero Listing Fees</h4>
+                <h3 className="text-sm font-bold text-[#FAF8F5]">Zero Listing Fees</h3>
                 <p className="text-xs text-[#A8A29E]">Listing your venue is 100% free. You only pay a small commission when you earn from a booking.</p>
               </div>
             </div>
@@ -210,7 +210,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               <div className="w-10 h-10 rounded-xl bg-[#10B981]/15 flex items-center justify-center text-[#34D399]">
                 <Building2 className="w-5 h-5" />
               </div>
-              <h4 className="text-base font-bold text-[#FAF8F5]">Hotels & Hospitality</h4>
+              <h3 className="text-base font-bold text-[#FAF8F5]">Hotels & Hospitality</h3>
               <p className="text-xs text-[#A8A29E] leading-relaxed">
                 Monetize your business centers, quiet executive lounges, and daytime suites for vetted business travelers.
               </p>
@@ -220,7 +220,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               <div className="w-10 h-10 rounded-xl bg-[#10B981]/15 flex items-center justify-center text-[#34D399]">
                 <Layers className="w-5 h-5" />
               </div>
-              <h4 className="text-base font-bold text-[#FAF8F5]">Commercial Landlords</h4>
+              <h3 className="text-base font-bold text-[#FAF8F5]">Commercial Landlords</h3>
               <p className="text-xs text-[#A8A29E] leading-relaxed">
                 Transform vacant office floors into active, income-producing flexible workspaces with steady foot traffic.
               </p>
@@ -230,7 +230,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               <div className="w-10 h-10 rounded-xl bg-[#10B981]/15 flex items-center justify-center text-[#34D399]">
                 <Users2 className="w-5 h-5" />
               </div>
-              <h4 className="text-base font-bold text-[#FAF8F5]">Accelerators & VCs</h4>
+              <h3 className="text-base font-bold text-[#FAF8F5]">Accelerators & VCs</h3>
               <p className="text-xs text-[#A8A29E] leading-relaxed">
                 Provide your portfolio founders and remote teams with workspace credits and private offsite meeting space.
               </p>

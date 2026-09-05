@@ -103,9 +103,9 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
             <Sparkles className="w-3.5 h-3.5" />
             <span>Pre-Launch Signup • Phase 1</span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-[#FAF8F5] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#FAF8F5] tracking-tight">
             Reserve Your Priority Access
-          </h3>
+          </h2>
           <p className="text-sm text-[#A8A29E] mt-2 leading-relaxed max-w-xl">
             Join founders, creators, and teams across Lagos, Abuja, and Port Harcourt getting early bookings and launch credits on OFIS.
           </p>
@@ -117,9 +117,9 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#10B981]/20 border border-[#10B981]/40 text-[#34D399] mb-5">
               <CheckCircle2 className="w-7 h-7" />
             </div>
-            <h4 className="text-2xl font-bold text-[#FAF8F5] mb-2">
+            <h3 className="text-2xl font-bold text-[#FAF8F5] mb-2">
               You&apos;re On The Priority List!
-            </h4>
+            </h3>
             <p className="text-sm text-[#A8A29E] leading-relaxed mb-6 max-w-lg">
               Your details were recorded in the OFIS Supabase database. We will notify you the moment your preferred location goes live.
             </p>
@@ -127,7 +127,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
             {/* Submitted Payload Confirmation Inspector */}
             {submittedPayload && (
               <div className="mb-6 p-4 rounded-2xl bg-[#0C0B0A] border border-white/10 text-left">
-                <div className="flex items-center justify-between text-xs text-[#78716C] mb-2 pb-2 border-b border-white/5 font-mono">
+                <div className="flex items-center justify-between text-xs text-[#A8A29E] mb-2 pb-2 border-b border-white/5 font-mono">
                   <span>Supabase Table: <strong className="text-[#34D399]">public.leads</strong></span>
                   <span className="text-emerald-400 font-semibold">Row Inserted (Anon Role)</span>
                 </div>

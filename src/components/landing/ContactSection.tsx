@@ -79,7 +79,7 @@ export const ContactSection: React.FC = () => {
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#34D399] block mb-2">
               General Inquiries
             </span>
-            <h4 className="text-xl font-bold text-[#FAF8F5] mb-2">Support & Help</h4>
+            <h3 className="text-xl font-bold text-[#FAF8F5] mb-2">Support & Help</h3>
             <p className="text-xs text-[#A8A29E] leading-relaxed mb-6">
               For help with bookings, receipts, account questions, or general feedback.
             </p>
@@ -109,7 +109,7 @@ export const ContactSection: React.FC = () => {
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#34D399] block mb-2">
               Partnerships
             </span>
-            <h4 className="text-xl font-bold text-[#FAF8F5] mb-2">Venues & Team Accounts</h4>
+            <h3 className="text-xl font-bold text-[#FAF8F5] mb-2">Venues & Team Accounts</h3>
             <p className="text-xs text-[#A8A29E] leading-relaxed mb-6">
               For workspace owners, hotels, commercial landlords, and corporate team accounts.
             </p>
@@ -139,7 +139,7 @@ export const ContactSection: React.FC = () => {
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#34D399] block mb-2">
               Investors
             </span>
-            <h4 className="text-xl font-bold text-[#FAF8F5] mb-2">Investment & Expansion</h4>
+            <h3 className="text-xl font-bold text-[#FAF8F5] mb-2">Investment & Expansion</h3>
             <p className="text-xs text-[#A8A29E] leading-relaxed mb-6">
               For venture capital funds, angel investors, and confidential data room access.
             </p>
@@ -242,7 +242,7 @@ export const ContactSection: React.FC = () => {
             {status === 'success' ? (
               <div className="p-6 rounded-2xl bg-[#0C0B0A] border border-[#10B981]/40 text-center space-y-3">
                 <CheckCircle2 className="w-8 h-8 text-[#10B981] mx-auto" />
-                <h4 className="text-base font-bold text-[#FAF8F5]">Message Received</h4>
+                <h3 className="text-base font-bold text-[#FAF8F5]">Message Received</h3>
                 <p className="text-xs text-[#A8A29E]">
                   Thank you. A member of our team will follow up via email shortly.
                 </p>

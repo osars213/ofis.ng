@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
+import compression from 'compression';
 import { GoogleGenAI } from '@google/genai';
 import { createClient } from '@supabase/supabase-js';
 import { createServer as createViteServer } from 'vite';
@@ -12,6 +13,8 @@ async function startServer() {
   const app = express();
   const PORT = Number(process.env.PORT) || 3000;
 
+  // Enable Gzip/Brotli compression to dramatically reduce payload size and speed up FCP/LCP
+  app.use(compression());
   app.use(express.json());
 
   // Initialize Supabase Server Admin Client strictly using SUPABASE_SERVICE_ROLE_KEY (no fallback to anon/public keys)
@@ -806,8 +809,18 @@ Provide a JSON response with the following format:
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
+    // Cache hashed assets for 1 year immutable; HTML files served with no-cache for instant updates
+    app.use(express.static(distPath, {
+      maxAge: '1y',
+      immutable: true,
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+          res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        }
+      }
+    }));
     app.get('*', (req, res) => {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }

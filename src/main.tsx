@@ -1,9 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import { AppProvider } from './context/AppContext';
-import { App } from './App';
 import { PreLaunchPage } from './components/pages/PreLaunchPage';
 import './index.css';
+
+// Lazy-load the heavy marketplace app bundle so prelaunch page loads with minimal JS
+const AppProvider = React.lazy(() => 
+  import('./context/AppContext').then(m => ({ default: m.AppProvider }))
+);
+const App = React.lazy(() => 
+  import('./App').then(m => ({ default: m.App }))
+);
+
+function AppLoadingFallback() {
+  return (
+    <div className="min-h-screen bg-[#0C0B0A] flex flex-col items-center justify-center p-4">
+      <div className="w-8 h-8 rounded-full border-2 border-[#10B981] border-t-transparent animate-spin mb-4" />
+      <p className="text-sm font-medium text-[#FAF8F5]">Loading OFIS Workspaces...</p>
+    </div>
+  );
+}
 
 function Root() {
   const [isAppMode, setIsAppMode] = useState<boolean>(() => {
@@ -19,8 +34,23 @@ function Root() {
     };
 
     window.addEventListener('popstate', handleUrlChange);
+
+    // Prefetch App in idle time after initial paint so click-to-enter is instantaneous
+    if (!isAppMode && 'requestIdleCallback' in window) {
+      const handle = (window as any).requestIdleCallback(() => {
+        import('./App');
+        import('./context/AppContext');
+      }, { timeout: 3000 });
+      return () => {
+        window.removeEventListener('popstate', handleUrlChange);
+        if ('cancelIdleCallback' in window) {
+          (window as any).cancelIdleCallback(handle);
+        }
+      };
+    }
+
     return () => window.removeEventListener('popstate', handleUrlChange);
-  }, []);
+  }, [isAppMode]);
 
   const handleEnterApp = () => {
     const url = new URL(window.location.href);
@@ -32,9 +62,11 @@ function Root() {
 
   if (isAppMode) {
     return (
-      <AppProvider>
-        <App />
-      </AppProvider>
+      <Suspense fallback={<AppLoadingFallback />}>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </Suspense>
     );
   }
 
