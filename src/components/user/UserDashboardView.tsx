@@ -92,13 +92,13 @@ export const UserDashboardView: React.FC = () => {
             <img
               src={currentUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'}
               alt={currentUser.name}
-              className="w-16 h-16 rounded-2xl object-cover border-2 border-[#10B981]"
+              className="w-16 h-16 rounded-2xl object-cover border-2 border-[#0F766E]"
             />
             <div className="space-y-1">
               <div className="flex items-center space-x-2">
                 <h1 className="text-xl sm:text-2xl font-bold">{currentUser.name}</h1>
                 {currentUser.isEmailVerified ? (
-                  <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] text-[10px] font-mono font-bold">
+                  <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/15 text-[#0F766E] dark:text-[#14B8A6] text-[10px] font-mono font-bold">
                     <CheckCircle2 className="w-3 h-3" />
                     <span>Verified</span>
                   </span>
@@ -124,7 +124,7 @@ export const UserDashboardView: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setCurrentView('host_dashboard')}
-                className="px-4 py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow-xs cursor-pointer flex items-center space-x-1.5"
+                className="px-4 py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold shadow-xs cursor-pointer flex items-center space-x-1.5"
               >
                 <Building2 className="w-4 h-4" />
                 <span>Host Portal</span>
@@ -133,7 +133,7 @@ export const UserDashboardView: React.FC = () => {
               <button
                 type="button"
                 onClick={() => switchUserRole('host')}
-                className="px-4 py-2.5 rounded-xl bg-[#F1F5F9] dark:bg-[#1E293B] hover:bg-[#E2E8F0] dark:hover:bg-[#374151] text-xs font-bold text-[#10B981] cursor-pointer flex items-center space-x-1.5"
+                className="px-4 py-2.5 rounded-xl bg-[#F1F5F9] dark:bg-[#1E293B] hover:bg-[#E2E8F0] dark:hover:bg-[#374151] text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] cursor-pointer flex items-center space-x-1.5"
               >
                 <Building2 className="w-4 h-4" />
                 <span>Switch to Host</span>
@@ -166,7 +166,7 @@ export const UserDashboardView: React.FC = () => {
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`w-full p-3 rounded-2xl text-xs font-bold flex items-center space-x-3 transition-all cursor-pointer text-left ${
                     isActive
-                      ? 'bg-[#10B981] text-white shadow-xs'
+                      ? 'bg-[#0F766E] text-white shadow-xs'
                       : 'text-[#6B7280] dark:text-[#94A3B8] hover:bg-[#F8FAFC] dark:hover:bg-[#101827] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
                   }`}
                 >
@@ -199,7 +199,7 @@ export const UserDashboardView: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] space-y-2">
                     <span className="text-[10px] font-mono font-bold uppercase text-[#6B7280] dark:text-[#94A3B8]">Active Passes</span>
-                    <div className="text-2xl font-extrabold text-[#10B981] font-mono">{activeBookings.length}</div>
+                    <div className="text-2xl font-extrabold text-[#0F766E] dark:text-[#14B8A6] font-mono">{activeBookings.length}</div>
                     <p className="text-[11px] text-[#6B7280] dark:text-[#94A3B8]">Ready for turnstile entry</p>
                   </div>
 
@@ -223,7 +223,7 @@ export const UserDashboardView: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setActiveTab('bookings')}
-                      className="text-xs font-bold text-[#10B981] hover:underline"
+                      className="text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] hover:underline"
                     >
                       View All
                     </button>
@@ -236,7 +236,7 @@ export const UserDashboardView: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setCurrentView('explore')}
-                        className="px-4 py-2 rounded-xl bg-[#10B981] text-white text-xs font-bold shadow-xs cursor-pointer"
+                        className="px-4 py-2 rounded-xl bg-[#0F766E] text-white text-xs font-bold shadow-xs cursor-pointer"
                       >
                         Explore Workspaces
                       </button>
@@ -249,7 +249,7 @@ export const UserDashboardView: React.FC = () => {
                           className="p-4 rounded-2xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                         >
                           <div className="space-y-1">
-                            <span className="px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-[#D1FAE5] dark:bg-[#10B981]/20 text-[#10B981]">
+                            <span className="px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6]">
                               {b.status.replace(/_/g, ' ')}
                             </span>
                             <h4 className="text-sm font-bold">{b.spaceTitle}</h4>
@@ -263,7 +263,7 @@ export const UserDashboardView: React.FC = () => {
                             <button
                               type="button"
                               onClick={() => handleOpenDigitalPass(b)}
-                              className="px-4 py-2 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow-xs cursor-pointer flex items-center space-x-1.5"
+                              className="px-4 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold shadow-xs cursor-pointer flex items-center space-x-1.5"
                             >
                               <QrCode className="w-3.5 h-3.5" />
                               <span>View QR Pass</span>
@@ -286,7 +286,7 @@ export const UserDashboardView: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setCurrentView('explore')}
-                    className="px-3 py-1.5 rounded-xl bg-[#10B981] text-white text-xs font-bold shadow-xs cursor-pointer"
+                    className="px-3 py-1.5 rounded-xl bg-[#0F766E] text-white text-xs font-bold shadow-xs cursor-pointer"
                   >
                     + Book New Space
                   </button>
@@ -308,7 +308,7 @@ export const UserDashboardView: React.FC = () => {
                           <div className="flex items-center space-x-2">
                             <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
                               b.status === 'confirmed' || b.status === 'checked_in'
-                                ? 'bg-[#D1FAE5] dark:bg-[#10B981]/20 text-[#10B981]'
+                                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6]'
                                 : 'bg-[#E2E8F0] dark:bg-[#1E293B] text-[#6B7280] dark:text-[#94A3B8]'
                             }`}>
                               {b.status.replace(/_/g, ' ')}
@@ -320,7 +320,7 @@ export const UserDashboardView: React.FC = () => {
                           <p className="text-xs text-[#6B7280] dark:text-[#94A3B8]">
                             Date: {b.date} ({b.startTime} - {b.endTime || '18:00'}) • {b.guestCount} Guest{b.guestCount === 1 ? '' : 's'}
                           </p>
-                          <p className="text-xs font-mono font-bold text-[#10B981]">
+                          <p className="text-xs font-mono font-bold text-[#0F766E] dark:text-[#14B8A6]">
                             Total Paid: {formatPrice(b.totalAmount)}
                           </p>
                         </div>
@@ -329,7 +329,7 @@ export const UserDashboardView: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => handleOpenDigitalPass(b)}
-                            className="px-3 py-2 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow-xs cursor-pointer flex items-center space-x-1"
+                            className="px-3 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold shadow-xs cursor-pointer flex items-center space-x-1"
                           >
                             <QrCode className="w-3.5 h-3.5" />
                             <span>Digital Pass</span>
@@ -509,7 +509,7 @@ export const UserDashboardView: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => openAuthModal('profile')}
-                    className="px-4 py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow-xs cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold shadow-xs cursor-pointer"
                   >
                     Edit Profile Details
                   </button>
@@ -542,7 +542,7 @@ export const UserDashboardView: React.FC = () => {
                         </div>
 
                         <div className="flex items-center space-x-4">
-                          <span className="font-mono font-bold text-[#10B981]">
+                          <span className="font-mono font-bold text-[#0F766E] dark:text-[#14B8A6]">
                             {formatPrice(b.totalAmount)}
                           </span>
                           <button

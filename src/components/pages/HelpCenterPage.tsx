@@ -102,7 +102,7 @@ export const HelpCenterPage: React.FC = () => {
       {/* Search Header */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#E5E7EB] dark:border-[#1E293B] text-center bg-gradient-to-b from-white via-[#F8FAFC] to-[#F1F5F9] dark:from-[#0B1220] dark:via-[#0F172A] dark:to-[#0B1220]">
         <div className="max-w-2xl mx-auto space-y-6">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/15 border border-[#10B981]/30 text-xs font-bold text-[#10B981]">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/15 border border-[#0F766E]/30 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6]">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Knowledge Base & Guides</span>
           </div>
@@ -117,7 +117,7 @@ export const HelpCenterPage: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search help articles (e.g. WiFi password, QR pass, power backup, payouts)..."
-              className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] text-xs sm:text-sm shadow-md focus:outline-none focus:border-[#10B981]"
+              className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] text-xs sm:text-sm shadow-md focus:outline-none focus:border-[#0F766E]"
             />
           </div>
         </div>
@@ -133,12 +133,12 @@ export const HelpCenterPage: React.FC = () => {
             onClick={() => setActiveCategory('all')}
             className={`p-5 rounded-2xl text-left border transition-all cursor-pointer ${
               activeCategory === 'all'
-                ? 'bg-[#D1FAE5] dark:bg-[#10B981]/15 border-[#10B981] shadow-xs'
-                : 'bg-white dark:bg-[#172033] border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981]'
+                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/15 border-[#0F766E] shadow-xs'
+                : 'bg-white dark:bg-[#172033] border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#0F766E]'
             }`}
           >
             <div className="flex items-center space-x-3">
-              <FileQuestion className="w-6 h-6 text-[#10B981]" />
+              <FileQuestion className="w-6 h-6 text-[#0F766E] dark:text-[#14B8A6]" />
               <div>
                 <h4 className="font-bold text-xs">All Topics</h4>
                 <p className="text-[11px] text-[#6B7280] dark:text-[#94A3B8]">Browse all guides</p>
@@ -157,12 +157,12 @@ export const HelpCenterPage: React.FC = () => {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`p-5 rounded-2xl text-left border transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-[#D1FAE5] dark:bg-[#10B981]/15 border-[#10B981] shadow-xs'
-                    : 'bg-white dark:bg-[#172033] border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981]'
+                    ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/15 border-[#0F766E] shadow-xs'
+                    : 'bg-white dark:bg-[#172033] border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#0F766E]'
                 }`}
               >
                 <div className="flex items-start space-x-3">
-                  <Icon className="w-6 h-6 text-[#10B981] shrink-0 mt-0.5" />
+                  <Icon className="w-6 h-6 text-[#0F766E] dark:text-[#14B8A6] shrink-0 mt-0.5" />
                   <div className="space-y-1">
                     <h4 className="font-bold text-xs">{cat.title}</h4>
                     <p className="text-[11px] text-[#6B7280] dark:text-[#94A3B8] line-clamp-1">{cat.description}</p>
@@ -181,7 +181,7 @@ export const HelpCenterPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="text-xs text-[#10B981] font-bold hover:underline"
+                className="text-xs text-[#0F766E] dark:text-[#14B8A6] font-bold hover:underline"
               >
                 Clear Search
               </button>
@@ -200,10 +200,10 @@ export const HelpCenterPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setExpandedArticle(isExpanded ? null : art.title)}
-                    className="w-full p-4 sm:p-5 text-left flex items-center justify-between text-xs sm:text-sm font-bold cursor-pointer hover:text-[#10B981]"
+                    className="w-full p-4 sm:p-5 text-left flex items-center justify-between text-xs sm:text-sm font-bold cursor-pointer hover:text-[#0F766E] dark:text-[#14B8A6]"
                   >
                     <span>{art.title}</span>
-                    <ChevronDown className={`w-4 h-4 text-[#94A3B8] transition-transform ${isExpanded ? 'rotate-180 text-[#10B981]' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 text-[#94A3B8] transition-transform ${isExpanded ? 'rotate-180 text-[#0F766E] dark:text-[#14B8A6]' : ''}`} />
                   </button>
 
                   {isExpanded && (
@@ -227,7 +227,7 @@ export const HelpCenterPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('contact')}
-            className="px-5 py-3 rounded-2xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow-md cursor-pointer transition-all flex items-center space-x-2 shrink-0"
+            className="px-5 py-3 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold shadow-md cursor-pointer transition-all flex items-center space-x-2 shrink-0"
           >
             <MessageCircle className="w-4 h-4" />
             <span>Contact Support Desk</span>

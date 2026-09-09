@@ -68,21 +68,21 @@ export const OFISWordmark: React.FC<OFISWordmarkProps> = ({
     }
   };
 
-  // Harmonized Mode Filtering & Glow (35% reduction for subtle luxury):
-  // In Dark Mode: subtle emerald portal luminescence and crisp titanium letters
+  // Harmonized Mode Filtering & Glow:
+  // In Dark Mode: subtle teal portal luminescence and crisp white letters
   // In Light Mode: crisp contrast
   const filterStyleClass = isDark
-    ? 'filter brightness-[1.02] drop-shadow-[0_0_5px_rgba(16,185,129,0.18)]'
-    : 'filter brightness-[1.0] drop-shadow-[0_1px_2px_rgba(15,23,42,0.06)]';
+    ? 'filter brightness-[1.02] drop-shadow-[0_0_6px_rgba(20,184,166,0.22)]'
+    : 'filter brightness-[1.0] drop-shadow-[0_1px_2px_rgba(11,31,51,0.06)]';
 
   if (variant === 'mark-only') {
     return (
       <div className={`relative inline-flex items-center justify-center select-none ${className}`}>
         {shouldBreathe && (
-          <div className="absolute inset-0 rounded-full bg-emerald-500/15 blur-sm animate-ping opacity-30 pointer-events-none" />
+          <div className="absolute inset-0 rounded-full bg-teal-500/15 blur-sm animate-ping opacity-30 pointer-events-none" />
         )}
         <img
-          src="/ofis-icon.png"
+          src={`/ofis-icon.png?v=2`}
           alt="OFIS Emblem"
           className={`${getIconClass()} object-contain transition-all duration-300 hover:scale-105 ${filterStyleClass} ${getBreathingClass()}`}
           loading="eager"
@@ -93,14 +93,14 @@ export const OFISWordmark: React.FC<OFISWordmarkProps> = ({
   }
 
   // Automatic Theme Switcher for Horizontal Logo:
-  // Dark mode -> /ofis-logo-dark.png (crisp white text + emerald portal)
-  // Light mode -> /ofis-logo.png (dark charcoal text + emerald portal)
-  const logoSrc = isDark ? '/ofis-logo-dark.png' : '/ofis-logo.png';
+  // Dark mode -> /ofis-logo-dark.png (crisp white text + teal portal)
+  // Light mode -> /ofis-logo.png (dark charcoal text + teal portal)
+  const logoSrc = isDark ? '/ofis-logo-dark.png?v=2' : '/ofis-logo.png?v=2';
 
   return (
     <div className={`relative inline-flex items-center select-none ${className}`}>
       {shouldBreathe && (
-        <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/15 via-lime-400/15 to-emerald-500/15 blur-xs rounded-xl animate-pulse pointer-events-none" />
+        <div className="absolute -inset-1 bg-gradient-to-r from-[#0F766E]/20 via-[#14B8A6]/20 to-[#0F766E]/20 blur-xs rounded-xl animate-pulse pointer-events-none" />
       )}
       <img
         src={logoSrc}

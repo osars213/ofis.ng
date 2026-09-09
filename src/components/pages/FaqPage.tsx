@@ -108,7 +108,7 @@ export const FaqPage: React.FC = () => {
       {/* Header */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#E5E7EB] dark:border-[#1E293B] text-center bg-gradient-to-b from-white via-[#F8FAFC] to-[#F1F5F9] dark:from-[#0B1220] dark:via-[#0F172A] dark:to-[#0B1220]">
         <div className="max-w-2xl mx-auto space-y-4">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/15 border border-[#10B981]/30 text-xs font-bold text-[#10B981]">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/15 border border-[#0F766E]/30 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6]">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Got Questions? We&apos;ve Got Answers</span>
           </div>
@@ -128,7 +128,7 @@ export const FaqPage: React.FC = () => {
           return (
             <div key={section.id} className="space-y-4">
               <div className="flex items-center space-x-3 pb-2 border-b border-[#E5E7EB] dark:border-[#1E293B]">
-                <div className="w-8 h-8 rounded-xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-xl bg-[#0F766E]/15 dark:bg-[#0F766E]/15 text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center">
                   <Icon className="w-4 h-4" />
                 </div>
                 <h2 className="text-lg font-bold">{section.title}</h2>
@@ -147,10 +147,10 @@ export const FaqPage: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => toggleItem(itemKey)}
-                        className="w-full p-4 sm:p-5 text-left flex items-center justify-between text-xs sm:text-sm font-bold cursor-pointer hover:text-[#10B981] transition-colors"
+                        className="w-full p-4 sm:p-5 text-left flex items-center justify-between text-xs sm:text-sm font-bold cursor-pointer hover:text-[#0F766E] dark:text-[#14B8A6] transition-colors"
                       >
                         <span className="pr-4">{faq.question}</span>
-                        <ChevronDown className={`w-4 h-4 text-[#94A3B8] shrink-0 transition-transform ${isOpen ? 'rotate-180 text-[#10B981]' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 text-[#94A3B8] shrink-0 transition-transform ${isOpen ? 'rotate-180 text-[#0F766E] dark:text-[#14B8A6]' : ''}`} />
                       </button>
 
                       {isOpen && (

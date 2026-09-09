@@ -121,14 +121,14 @@ export const HostDashboard: React.FC = () => {
               type="button"
               onClick={handleSwitchToGuestMode}
               title="Switch to Guest Mode"
-              className="p-2 rounded-xl bg-white dark:bg-[#1F2937] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#16A34A] dark:hover:text-[#16A34A] border border-[#E5E7EB] dark:border-[#374151] cursor-pointer transition-colors shadow-xs"
+              className="p-2 rounded-xl bg-white dark:bg-[#1F2937] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#0F766E] dark:text-[#14B8A6] dark:hover:text-[#0F766E] dark:text-[#14B8A6] border border-[#E5E7EB] dark:border-[#374151] cursor-pointer transition-colors shadow-xs"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
             <div>
               <div className="flex items-center space-x-2">
                 <h1 className="text-lg sm:text-xl font-bold text-[#111827] dark:text-[#F9FAFB]">Host Operations & Property Portal</h1>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#DCFCE7] dark:bg-[#16A34A]/20 text-[#16A34A] font-bold border border-[#16A34A]/30">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold border border-[#0F766E]/30">
                   Host Mode Active
                 </span>
               </div>
@@ -147,7 +147,7 @@ export const HostDashboard: React.FC = () => {
               onClick={handleSwitchToGuestMode}
               className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#1F2937] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#374151] text-xs font-semibold text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap transition-colors shadow-xs"
             >
-              <Repeat className="w-3.5 h-3.5 text-[#16A34A]" />
+              <Repeat className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
               <span>Switch to Guest View</span>
             </button>
 
@@ -156,14 +156,14 @@ export const HostDashboard: React.FC = () => {
               onClick={() => setIsDiagnosticsModalOpen(true)}
               className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#1F2937] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#374151] text-xs font-semibold text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap shadow-xs"
             >
-              <Activity className="w-3.5 h-3.5 text-[#16A34A]" />
+              <Activity className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
               <span>Health</span>
             </button>
 
             <button
               type="button"
               onClick={() => setIsHostPayoutModalOpen(true)}
-              className="px-3 py-1.5 rounded-xl bg-[#DCFCE7] dark:bg-[#16A34A]/20 hover:bg-[#BBF7D0] dark:hover:bg-[#16A34A]/30 border border-[#16A34A]/30 text-xs font-bold text-[#16A34A] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap shadow-xs"
+              className="px-3 py-1.5 rounded-xl bg-[#0F766E]/15 dark:bg-[#0F766E]/20 hover:bg-[#BBF7D0] dark:hover:bg-[#0F766E]/30 border border-[#0F766E]/30 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap shadow-xs"
             >
               <Wallet className="w-3.5 h-3.5" />
               <span>Withdraw ₦</span>
@@ -172,7 +172,7 @@ export const HostDashboard: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsListSpaceModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-[#16A34A] hover:bg-[#15803D] text-white font-bold text-xs flex items-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs flex items-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer whitespace-nowrap"
             >
               <PlusCircle className="w-4 h-4" />
               <span>List Space</span>
@@ -206,7 +206,7 @@ export const HostDashboard: React.FC = () => {
                 onClick={() => setActiveTab(tab.id as HostDashboardTab)}
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap flex items-center space-x-2 transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-[#16A34A] text-white shadow-sm'
+                    ? 'bg-[#0F766E] text-white shadow-sm'
                     : 'text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151]'
                 }`}
               >
@@ -214,7 +214,7 @@ export const HostDashboard: React.FC = () => {
                 <span>{tab.label}</span>
                 {tab.badge && tab.badge > 0 ? (
                   <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${
-                    isActive ? 'bg-white text-[#16A34A]' : 'bg-[#16A34A] text-white'
+                    isActive ? 'bg-white text-[#0F766E] dark:text-[#14B8A6]' : 'bg-[#0F766E] text-white'
                   }`}>
                     {tab.badge}
                   </span>
@@ -303,7 +303,7 @@ export const HostDashboard: React.FC = () => {
                 type="button"
                 disabled={generatorTesting}
                 onClick={handleRunGeneratorTest}
-                className="px-4 py-2 rounded-xl bg-[#DCFCE7] dark:bg-[#16A34A]/20 hover:bg-[#BBF7D0] dark:hover:bg-[#16A34A]/30 border border-[#16A34A]/30 text-xs font-bold text-[#16A34A] flex items-center space-x-1.5 cursor-pointer shadow-xs"
+                className="px-4 py-2 rounded-xl bg-[#0F766E]/15 dark:bg-[#0F766E]/20 hover:bg-[#BBF7D0] dark:hover:bg-[#0F766E]/30 border border-[#0F766E]/30 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] flex items-center space-x-1.5 cursor-pointer shadow-xs"
               >
                 <Zap className={`w-3.5 h-3.5 ${generatorTesting ? 'animate-bounce' : ''}`} />
                 <span>{generatorTesting ? 'Running Test...' : 'Run Auto-Switch Test'}</span>
@@ -311,7 +311,7 @@ export const HostDashboard: React.FC = () => {
             </div>
 
             {testResult && (
-              <div className="p-4 rounded-2xl bg-[#DCFCE7] dark:bg-[#16A34A]/20 border border-[#16A34A]/30 text-xs text-[#16A34A] flex items-center space-x-2">
+              <div className="p-4 rounded-2xl bg-[#0F766E]/15 dark:bg-[#0F766E]/20 border border-[#0F766E]/30 text-xs text-[#0F766E] dark:text-[#14B8A6] flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 shrink-0" />
                 <span className="font-semibold">{testResult}</span>
               </div>
@@ -321,13 +321,13 @@ export const HostDashboard: React.FC = () => {
               <div className="p-5 rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] space-y-2 shadow-xs">
                 <div className="flex items-center justify-between text-xs text-[#6B7280] dark:text-[#9CA3AF]">
                   <span>Generator Load</span>
-                  <Zap className="w-4 h-4 text-[#16A34A]" />
+                  <Zap className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 </div>
                 <div className="text-2xl font-extrabold text-[#111827] dark:text-[#F9FAFB] font-mono">
                   145 kVA
                 </div>
                 <div className="w-full bg-[#F1F5F9] dark:bg-[#374151] h-1.5 rounded-full overflow-hidden">
-                  <div className="bg-[#16A34A] h-full w-[58%]" />
+                  <div className="bg-[#0F766E] h-full w-[58%]" />
                 </div>
                 <p className="text-[11px] text-[#6B7280] dark:text-[#9CA3AF]">58% of 250 kVA Perkins Genset</p>
               </div>
@@ -335,13 +335,13 @@ export const HostDashboard: React.FC = () => {
               <div className="p-5 rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] space-y-2 shadow-xs">
                 <div className="flex items-center justify-between text-xs text-[#6B7280] dark:text-[#9CA3AF]">
                   <span>Solar Battery SoC</span>
-                  <BatteryCharging className="w-4 h-4 text-[#16A34A]" />
+                  <BatteryCharging className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 </div>
-                <div className="text-2xl font-extrabold text-[#16A34A] font-mono">
+                <div className="text-2xl font-extrabold text-[#0F766E] dark:text-[#14B8A6] font-mono">
                   94% Full
                 </div>
                 <div className="w-full bg-[#F1F5F9] dark:bg-[#374151] h-1.5 rounded-full overflow-hidden">
-                  <div className="bg-[#16A34A] h-full w-[94%]" />
+                  <div className="bg-[#0F766E] h-full w-[94%]" />
                 </div>
                 <p className="text-[11px] text-[#6B7280] dark:text-[#9CA3AF]">Lithium-Iron Phosphate Bank</p>
               </div>
@@ -363,13 +363,13 @@ export const HostDashboard: React.FC = () => {
               <div className="p-5 rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] space-y-2 shadow-xs">
                 <div className="flex items-center justify-between text-xs text-[#6B7280] dark:text-[#9CA3AF]">
                   <span>Dual Fiber & Starlink Ping</span>
-                  <Wifi className="w-4 h-4 text-[#16A34A]" />
+                  <Wifi className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 </div>
-                <div className="text-2xl font-extrabold text-[#16A34A] font-mono">
+                <div className="text-2xl font-extrabold text-[#0F766E] dark:text-[#14B8A6] font-mono">
                   6 ms
                 </div>
                 <div className="w-full bg-[#F1F5F9] dark:bg-[#374151] h-1.5 rounded-full overflow-hidden">
-                  <div className="bg-[#16A34A] h-full w-[98%]" />
+                  <div className="bg-[#0F766E] h-full w-[98%]" />
                 </div>
                 <p className="text-[11px] text-[#6B7280] dark:text-[#9CA3AF]">MainOne Fiber + Starlink Failover</p>
               </div>

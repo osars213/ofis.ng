@@ -36,7 +36,7 @@ export const BookAgainSection: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center space-x-2 text-[#111827] dark:text-[#F9FAFB] font-mono text-[11px] font-bold tracking-wider uppercase">
-            <RotateCw className="w-3.5 h-3.5 text-[#16A34A]" />
+            <RotateCw className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
             <span>Book Again</span>
           </div>
           <p className="text-xs text-[#6B7280] dark:text-[#9CA3AF] mt-0.5">
@@ -53,7 +53,7 @@ export const BookAgainSection: React.FC = () => {
           return (
             <div
               key={`book-again-${space.id}-${booking.id}`}
-              className="bg-white dark:bg-[#1F2937] rounded-2xl border border-[#E5E7EB] dark:border-[#374151] hover:border-[#16A34A]/50 p-4 transition-all duration-200 flex flex-col justify-between space-y-3 shadow-xs dark:shadow-md group"
+              className="bg-white dark:bg-[#1F2937] rounded-2xl border border-[#E5E7EB] dark:border-[#374151] hover:border-[#0F766E]/50 p-4 transition-all duration-200 flex flex-col justify-between space-y-3 shadow-xs dark:shadow-md group"
             >
               <div className="flex items-start gap-3.5">
                 <div
@@ -70,7 +70,7 @@ export const BookAgainSection: React.FC = () => {
                     loading="lazy"
                   />
                   {space.hasBackupPower && (
-                    <div className="absolute top-1 left-1 p-0.5 rounded bg-black/80 text-[#16A34A]">
+                    <div className="absolute top-1 left-1 p-0.5 rounded bg-black/80 text-[#0F766E] dark:text-[#14B8A6]">
                       <Zap className="w-2.5 h-2.5" />
                     </div>
                   )}
@@ -82,18 +82,18 @@ export const BookAgainSection: React.FC = () => {
                       setSelectedSpaceId(space.id);
                       setCurrentView('details');
                     }}
-                    className="text-sm font-bold text-[#111827] dark:text-[#F9FAFB] group-hover:text-[#16A34A] truncate cursor-pointer transition-colors"
+                    className="text-sm font-bold text-[#111827] dark:text-[#F9FAFB] group-hover:text-[#0F766E] dark:text-[#14B8A6] truncate cursor-pointer transition-colors"
                   >
                     {space.title}
                   </h4>
 
                   <div className="flex items-center space-x-1 text-xs text-[#6B7280] dark:text-[#9CA3AF] mt-0.5 truncate">
-                    <MapPin className="w-3 h-3 text-[#16A34A] shrink-0" />
+                    <MapPin className="w-3 h-3 text-[#0F766E] dark:text-[#14B8A6] shrink-0" />
                     <span>{space.neighborhood}, {space.city}</span>
                   </div>
 
                   <div className="flex items-center space-x-2 text-[11px] text-[#6B7280] dark:text-[#9CA3AF] font-mono mt-1.5 bg-[#F8FAFC] dark:bg-[#111827] px-2 py-0.5 rounded-lg border border-[#E5E7EB] dark:border-[#374151] w-fit">
-                    <span className="text-[#16A34A] font-bold">{booking.date}</span>
+                    <span className="text-[#0F766E] dark:text-[#14B8A6] font-bold">{booking.date}</span>
                     <span>•</span>
                     <span>{formattedStartTime} ({booking.durationHours}h)</span>
                   </div>
@@ -102,7 +102,7 @@ export const BookAgainSection: React.FC = () => {
 
               {/* Bottom Action Row */}
               <div className="pt-2.5 border-t border-[#E5E7EB] dark:border-[#374151] flex items-center justify-between">
-                <div className="text-xs font-mono font-bold text-[#16A34A]">
+                <div className="text-xs font-mono font-bold text-[#0F766E] dark:text-[#14B8A6]">
                   {formatPrice(space.pricePerHour)}<span className="text-[10px] text-[#6B7280] dark:text-[#9CA3AF] font-normal">/hr</span>
                 </div>
 
@@ -121,7 +121,7 @@ export const BookAgainSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => handleBookAgain(space, booking)}
-                    className="px-3 py-1.5 rounded-xl bg-[#16A34A] hover:bg-[#15803D] text-xs font-bold text-white transition-all flex items-center space-x-1 active:scale-95 shadow-sm cursor-pointer"
+                    className="px-3 py-1.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-xs font-bold text-white transition-all flex items-center space-x-1 active:scale-95 shadow-sm cursor-pointer"
                   >
                     <RotateCw className="w-3 h-3" />
                     <span>Book Again</span>

@@ -132,14 +132,14 @@ export const InfoModal: React.FC<InfoModalProps> = ({
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-3xl bg-[#121614] border border-[#232D28] rounded-3xl shadow-2xl overflow-hidden z-10 flex flex-col max-h-[90vh]">
+      <div className="relative w-full max-w-3xl bg-[#121614] border border-[#1E3A4D] rounded-3xl shadow-2xl overflow-hidden z-10 flex flex-col max-h-[90vh]">
         
         {/* Header */}
-        <div className="px-6 py-4 border-b border-[#1E2522] flex items-center justify-between bg-[#141816]/80 backdrop-blur-md shrink-0">
+        <div className="px-6 py-4 border-b border-[#1E3A4D] flex items-center justify-between bg-[#071521]/80 backdrop-blur-md shrink-0">
           <div className="flex items-center space-x-3">
             <OFISWordmark size="sm" />
             <span className="text-[#35433C]">|</span>
-            <span className="text-xs font-bold text-[#9EABA3] uppercase tracking-wider">
+            <span className="text-xs font-bold text-[#94A3B8] uppercase tracking-wider">
               {activeTab === 'about' && 'About OFIS'}
               {activeTab === 'faq' && 'Frequently Asked Questions'}
               {activeTab === 'help' && 'Help Centre'}
@@ -155,14 +155,14 @@ export const InfoModal: React.FC<InfoModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-xl text-[#718079] hover:text-[#F2F2F2] hover:bg-[#18201B] transition-colors cursor-pointer"
+            className="p-1.5 rounded-xl text-[#718079] hover:text-[#F2F2F2] hover:bg-[#0B1F33] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Navigation Tabs Header */}
-        <div className="px-6 py-2.5 bg-[#0D0D0D] border-b border-[#1E2522] flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0">
+        <div className="px-6 py-2.5 bg-[#0D0D0D] border-b border-[#1E3A4D] flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0">
           {[
             { id: 'about', label: 'About', icon: Info },
             { id: 'faq', label: 'FAQ', icon: HelpCircle },
@@ -185,7 +185,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap flex items-center space-x-1.5 transition-all cursor-pointer ${
                   isActive 
                     ? 'bg-[#00C878]/15 text-[#00C878] border border-[#00C878]/30' 
-                    : 'text-[#718079] hover:text-[#F2F2F2] hover:bg-[#18201B]'
+                    : 'text-[#718079] hover:text-[#F2F2F2] hover:bg-[#0B1F33]'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -196,12 +196,12 @@ export const InfoModal: React.FC<InfoModalProps> = ({
         </div>
 
         {/* Content Body */}
-        <div className="p-6 overflow-y-auto space-y-6 flex-1 text-sm text-[#9EABA3] leading-relaxed">
+        <div className="p-6 overflow-y-auto space-y-6 flex-1 text-sm text-[#94A3B8] leading-relaxed">
           
           {/* 1. ABOUT OFIS */}
           {activeTab === 'about' && (
             <div className="space-y-5">
-              <div className="p-5 rounded-2xl bg-[#18201B] border border-[#232D28] space-y-3">
+              <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] space-y-3">
                 <h3 className="text-base font-bold text-[#F2F2F2]">
                   Powering Nigeria's Next Generation of Creators & Builders
                 </h3>
@@ -209,19 +209,19 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                   OFIS is Nigeria’s on-demand workspace network. We connect remote professionals, startups, creators, and distributed teams with verified, reliable workspaces equipped with guaranteed 24/7 power, ultra-fast internet, and inspiring community environments.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                  <div className="p-3 rounded-xl bg-[#121614] border border-[#232D28] text-center">
+                  <div className="p-3 rounded-xl bg-[#121614] border border-[#1E3A4D] text-center">
                     <p className="text-lg font-bold text-[#00C878]">100%</p>
                     <p className="text-[11px] text-[#718079]">Verified Hubs</p>
                   </div>
-                  <div className="p-3 rounded-xl bg-[#121614] border border-[#232D28] text-center">
+                  <div className="p-3 rounded-xl bg-[#121614] border border-[#1E3A4D] text-center">
                     <p className="text-lg font-bold text-[#00C878]">4 Cities</p>
                     <p className="text-[11px] text-[#718079]">Lagos, ABJ, PH, IB</p>
                   </div>
-                  <div className="p-3 rounded-xl bg-[#121614] border border-[#232D28] text-center">
+                  <div className="p-3 rounded-xl bg-[#121614] border border-[#1E3A4D] text-center">
                     <p className="text-lg font-bold text-[#00C878]">24/7</p>
                     <p className="text-[11px] text-[#718079]">Power Uptime</p>
                   </div>
-                  <div className="p-3 rounded-xl bg-[#121614] border border-[#232D28] text-center">
+                  <div className="p-3 rounded-xl bg-[#121614] border border-[#1E3A4D] text-center">
                     <p className="text-lg font-bold text-[#00C878]">Instant</p>
                     <p className="text-[11px] text-[#718079]">Digital Passes</p>
                   </div>
@@ -230,7 +230,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
 
               <div className="space-y-2">
                 <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#718079]">Our Promise</h4>
-                <p className="text-xs text-[#9EABA3]">
+                <p className="text-xs text-[#94A3B8]">
                   No hidden subscription lock-ins. Pay only for the hours or days you use with transparent pricing in Naira.
                 </p>
               </div>
@@ -245,7 +245,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                 return (
                   <div 
                     key={idx}
-                    className="rounded-2xl bg-[#18201B] border border-[#232D28] overflow-hidden transition-all"
+                    className="rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] overflow-hidden transition-all"
                   >
                     <button
                       type="button"
@@ -256,7 +256,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                       <ChevronDown className={`w-4 h-4 text-[#718079] transition-transform ${isOpen ? 'rotate-180 text-[#00C878]' : ''}`} />
                     </button>
                     {isOpen && (
-                      <div className="px-4 pb-4 text-xs text-[#9EABA3] border-t border-[#232D28] pt-3 leading-relaxed">
+                      <div className="px-4 pb-4 text-xs text-[#94A3B8] border-t border-[#1E3A4D] pt-3 leading-relaxed">
                         {faq.a}
                       </div>
                     )}
@@ -270,7 +270,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
           {activeTab === 'help' && (
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] space-y-2">
+                <div className="p-4 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] space-y-2">
                   <div className="w-8 h-8 rounded-xl bg-[#00C878]/15 text-[#00C878] flex items-center justify-center">
                     <Headphones className="w-4 h-4" />
                   </div>
@@ -280,7 +280,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] space-y-2">
+                <div className="p-4 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] space-y-2">
                   <div className="w-8 h-8 rounded-xl bg-[#00C878]/15 text-[#00C878] flex items-center justify-center">
                     <ShieldCheck className="w-4 h-4" />
                   </div>
@@ -291,7 +291,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#141816] border border-[#232D28] flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-[#071521] border border-[#1E3A4D] flex items-center justify-between">
                 <div>
                   <h4 className="text-xs font-bold text-[#F2F2F2]">Need immediate live agent help?</h4>
                   <p className="text-[11px] text-[#718079]">Our Lagos support desk is active 8:00 AM – 9:00 PM WAT.</p>
@@ -311,18 +311,18 @@ export const InfoModal: React.FC<InfoModalProps> = ({
           {activeTab === 'support' && (
             <div className="space-y-4">
               {supportSubmitted ? (
-                <div className="p-6 rounded-2xl bg-[#18201B] border border-[#00C878]/40 text-center space-y-2 animate-in fade-in">
+                <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#00C878]/40 text-center space-y-2 animate-in fade-in">
                   <div className="w-10 h-10 rounded-full bg-[#00C878]/20 text-[#00C878] flex items-center justify-center mx-auto">
                     <Check className="w-5 h-5" />
                   </div>
                   <h4 className="text-sm font-bold text-[#F2F2F2]">Support Message Dispatched!</h4>
-                  <p className="text-xs text-[#9EABA3]">
+                  <p className="text-xs text-[#94A3B8]">
                     Your ticket (#OFIS-{Math.floor(100000 + Math.random() * 900000)}) has been received. Our support team will reply to your email within 30 minutes.
                   </p>
                   <button
                     type="button"
                     onClick={() => setSupportSubmitted(false)}
-                    className="mt-3 px-4 py-1.5 rounded-xl bg-[#232D28] text-xs font-semibold text-[#F2F2F2] hover:bg-[#35433C] cursor-pointer"
+                    className="mt-3 px-4 py-1.5 rounded-xl bg-[#1E3A4D] text-xs font-semibold text-[#F2F2F2] hover:bg-[#35433C] cursor-pointer"
                   >
                     Send Another Message
                   </button>
@@ -331,38 +331,38 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                 <form onSubmit={handleSupportSubmit} className="space-y-3">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[11px] font-bold text-[#9EABA3] mb-1">Your Name</label>
+                      <label className="block text-[11px] font-bold text-[#94A3B8] mb-1">Your Name</label>
                       <input
                         type="text"
                         required
                         value={supportName}
                         onChange={(e) => setSupportName(e.target.value)}
                         placeholder="e.g. Tunde Balogun"
-                        className="w-full px-3 py-2 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none"
+                        className="w-full px-3 py-2 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-[#9EABA3] mb-1">Contact Email</label>
+                      <label className="block text-[11px] font-bold text-[#94A3B8] mb-1">Contact Email</label>
                       <input
                         type="email"
                         required
                         value={supportEmail}
                         onChange={(e) => setSupportEmail(e.target.value)}
                         placeholder="tunde@example.com"
-                        className="w-full px-3 py-2 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none"
+                        className="w-full px-3 py-2 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-[#9EABA3] mb-1">How can we help you today?</label>
+                    <label className="block text-[11px] font-bold text-[#94A3B8] mb-1">How can we help you today?</label>
                     <textarea
                       required
                       rows={3}
                       value={supportMessage}
                       onChange={(e) => setSupportMessage(e.target.value)}
                       placeholder="Describe your issue or booking question..."
-                      className="w-full px-3 py-2 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none resize-none"
+                      className="w-full px-3 py-2 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none resize-none"
                     />
                   </div>
 
@@ -376,7 +376,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                 </form>
               )}
 
-              <div className="pt-3 border-t border-[#232D28] grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#718079]">
+              <div className="pt-3 border-t border-[#1E3A4D] grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#718079]">
                 <div className="flex items-center space-x-2">
                   <Mail className="w-3.5 h-3.5 text-[#00C878]" />
                   <span>support@ofis.ng</span>
@@ -392,7 +392,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
           {/* 5. PARTNER WITH OFIS / BECOME A HOST */}
           {activeTab === 'partner' && (
             <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-[#18201B] border border-[#232D28] space-y-3">
+              <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] space-y-3">
                 <div className="flex items-center space-x-2 text-[#00C878]">
                   <Handshake className="w-5 h-5" />
                   <h3 className="text-sm font-bold text-[#F2F2F2]">Monetize Your Extra Desk & Office Capacity</h3>
@@ -440,8 +440,8 @@ export const InfoModal: React.FC<InfoModalProps> = ({
               </p>
               <form onSubmit={handleSupportSubmit} className="space-y-3">
                 <div>
-                  <label className="block text-[11px] font-bold text-[#9EABA3] mb-1">Issue Category</label>
-                  <select className="w-full px-3 py-2 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none">
+                  <label className="block text-[11px] font-bold text-[#94A3B8] mb-1">Issue Category</label>
+                  <select className="w-full px-3 py-2 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none">
                     <option>Internet Speed / Connectivity Issue</option>
                     <option>Power / Inverter Outage at Space</option>
                     <option>Check-in QR Code Scanner Issue</option>
@@ -452,12 +452,12 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-[#9EABA3] mb-1">Details & Space Name (if applicable)</label>
+                  <label className="block text-[11px] font-bold text-[#94A3B8] mb-1">Details & Space Name (if applicable)</label>
                   <textarea
                     required
                     rows={3}
                     placeholder="Provide details of the problem..."
-                    className="w-full px-3 py-2 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none resize-none"
+                    className="w-full px-3 py-2 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none resize-none"
                   />
                 </div>
 
@@ -476,12 +476,12 @@ export const InfoModal: React.FC<InfoModalProps> = ({
           {activeTab === 'rate' && (
             <div className="space-y-4 text-center">
               {ratingSubmitted ? (
-                <div className="p-6 rounded-2xl bg-[#18201B] border border-[#00C878]/40 space-y-2">
+                <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#00C878]/40 space-y-2">
                   <div className="w-10 h-10 rounded-full bg-[#00C878]/20 text-[#00C878] flex items-center justify-center mx-auto">
                     <Check className="w-5 h-5" />
                   </div>
                   <h4 className="text-sm font-bold text-[#F2F2F2]">Thank you for your feedback!</h4>
-                  <p className="text-xs text-[#9EABA3]">
+                  <p className="text-xs text-[#94A3B8]">
                     Your rating helps us maintain high-uptime workspaces and verified standards across Africa.
                   </p>
                 </div>
@@ -516,7 +516,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                     value={feedbackText}
                     onChange={(e) => setFeedbackText(e.target.value)}
                     placeholder="Tell us what you love or how we can improve..."
-                    className="w-full px-3 py-2 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none resize-none"
+                    className="w-full px-3 py-2 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] text-xs text-[#F2F2F2] focus:border-[#00C878] focus:outline-none resize-none"
                   />
 
                   <button
@@ -533,13 +533,13 @@ export const InfoModal: React.FC<InfoModalProps> = ({
           {/* 8. DOWNLOAD OFIS APP */}
           {(activeTab === 'download' || activeTab === 'share') && (
             <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-[#18201B] border border-[#232D28] text-center space-y-4">
+              <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] text-center space-y-4">
                 <div className="w-10 h-10 rounded-full bg-[#00C878]/15 text-[#00C878] flex items-center justify-center mx-auto">
                   <Smartphone className="w-5 h-5" />
                 </div>
                 <div className="space-y-1">
                   <h3 className="text-sm font-bold text-[#F2F2F2]">Get the OFIS Mobile App</h3>
-                  <p className="text-xs text-[#9EABA3]">
+                  <p className="text-xs text-[#94A3B8]">
                     Scan turnstiles offline, receive instant generator switchover alerts, and reserve workspaces with 1 tap.
                   </p>
                 </div>
@@ -562,7 +562,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                       e.preventDefault();
                       handleCopyLink();
                     }}
-                    className="p-2.5 rounded-xl bg-[#121614] border border-[#232D28] hover:border-[#00C878] text-[#F2F2F2] text-xs font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer"
+                    className="p-2.5 rounded-xl bg-[#121614] border border-[#1E3A4D] hover:border-[#00C878] text-[#F2F2F2] text-xs font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer"
                   >
                     <Apple className="w-4 h-4 fill-white" />
                     <span>App Store</span>
@@ -574,19 +574,19 @@ export const InfoModal: React.FC<InfoModalProps> = ({
                       e.preventDefault();
                       handleCopyLink();
                     }}
-                    className="p-2.5 rounded-xl bg-[#121614] border border-[#232D28] hover:border-[#00C878] text-[#F2F2F2] text-xs font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer"
+                    className="p-2.5 rounded-xl bg-[#121614] border border-[#1E3A4D] hover:border-[#00C878] text-[#F2F2F2] text-xs font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer"
                   >
-                    <span className="text-emerald-400 font-black">▶</span>
+                    <span className="text-teal-500 font-black">▶</span>
                     <span>Google Play</span>
                   </a>
                 </div>
 
-                <div className="flex items-center space-x-2 pt-2 border-t border-[#232D28]">
+                <div className="flex items-center space-x-2 pt-2 border-t border-[#1E3A4D]">
                   <input
                     type="text"
                     readOnly
                     value="https://ofis.ng/download"
-                    className="flex-1 px-3 py-2 rounded-xl bg-[#121614] border border-[#232D28] text-xs font-mono text-[#00C878] select-all focus:outline-none"
+                    className="flex-1 px-3 py-2 rounded-xl bg-[#121614] border border-[#1E3A4D] text-xs font-mono text-[#00C878] select-all focus:outline-none"
                   />
                   <button
                     type="button"

@@ -90,23 +90,23 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
   return (
     <div
       id="prelaunch-signup"
-      className={`relative rounded-3xl bg-[#141210]/85 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.08)] overflow-hidden transition-all duration-300 ${className}`}
+      className={`relative rounded-3xl bg-[#071521]/90 backdrop-blur-2xl border border-[#1E3A4D] shadow-[0_20px_50px_rgba(7,21,33,0.6),inset_0_1px_1px_rgba(255,255,255,0.08)] overflow-hidden transition-all duration-300 ${className}`}
     >
-      {/* Decorative Emerald Glow */}
-      <div className="absolute -top-16 -right-16 w-56 h-56 bg-[#10B981]/15 blur-3xl pointer-events-none rounded-full" />
-      <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-[#34D399]/10 blur-3xl pointer-events-none rounded-full" />
+      {/* Decorative Brand Teal & Peach Ambient Glow */}
+      <div className="absolute -top-16 -right-16 w-56 h-56 bg-[#0F766E]/20 blur-3xl pointer-events-none rounded-full" />
+      <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-[#F4A261]/15 blur-3xl pointer-events-none rounded-full" />
 
       <div className="relative z-10 p-6 sm:p-8 lg:p-10">
         {/* Header */}
         <div className="mb-6 sm:mb-8 text-center sm:text-left">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#10B981]/15 border border-[#10B981]/30 text-xs font-bold text-[#34D399] uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Pre-Launch Signup • Phase 1</span>
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#0F766E]/15 border border-[#0F766E]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#F4A261] animate-pulse" />
+            <span>Pre-Launch Signup • Phase 1 Priority</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#FAF8F5] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Reserve Your Priority Access
           </h2>
-          <p className="text-sm text-[#A8A29E] mt-2 leading-relaxed max-w-xl">
+          <p className="text-sm text-[#94A3B8] mt-2 leading-relaxed max-w-xl">
             Join founders, creators, and teams across Lagos, Abuja, and Port Harcourt getting early bookings and launch credits on OFIS.
           </p>
         </div>
@@ -114,43 +114,43 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
         {/* Success State */}
         {status === 'success' ? (
           <div className="py-8 text-center sm:text-left">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#10B981]/20 border border-[#10B981]/40 text-[#34D399] mb-5">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#0F766E]/20 border border-[#14B8A6]/40 text-[#14B8A6] mb-5">
               <CheckCircle2 className="w-7 h-7" />
             </div>
-            <h3 className="text-2xl font-bold text-[#FAF8F5] mb-2">
+            <h3 className="text-2xl font-bold text-white mb-2">
               You&apos;re On The Priority List!
             </h3>
-            <p className="text-sm text-[#A8A29E] leading-relaxed mb-6 max-w-lg">
+            <p className="text-sm text-[#94A3B8] leading-relaxed mb-6 max-w-lg">
               Your details were recorded in the OFIS Supabase database. We will notify you the moment your preferred location goes live.
             </p>
 
             {/* Submitted Payload Confirmation Inspector */}
             {submittedPayload && (
-              <div className="mb-6 p-4 rounded-2xl bg-[#0C0B0A] border border-white/10 text-left">
-                <div className="flex items-center justify-between text-xs text-[#A8A29E] mb-2 pb-2 border-b border-white/5 font-mono">
-                  <span>Supabase Table: <strong className="text-[#34D399]">public.leads</strong></span>
-                  <span className="text-emerald-400 font-semibold">Row Inserted (Anon Role)</span>
+              <div className="mb-6 p-4 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] text-left">
+                <div className="flex items-center justify-between text-xs text-[#94A3B8] mb-2 pb-2 border-b border-[#1E3A4D] font-mono">
+                  <span>Supabase Table: <strong className="text-[#14B8A6]">public.leads</strong></span>
+                  <span className="text-[#14B8A6] font-semibold">Row Inserted (Anon Role)</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
                   <div>
-                    <span className="text-[#A8A29E] block mb-0.5">name:</span>
-                    <span className="text-[#FAF8F5]">{submittedPayload.name}</span>
+                    <span className="text-[#94A3B8] block mb-0.5">name:</span>
+                    <span className="text-white">{submittedPayload.name}</span>
                   </div>
                   <div>
-                    <span className="text-[#A8A29E] block mb-0.5">email:</span>
-                    <span className="text-[#FAF8F5]">{submittedPayload.email}</span>
+                    <span className="text-[#94A3B8] block mb-0.5">email:</span>
+                    <span className="text-white">{submittedPayload.email}</span>
                   </div>
                   <div>
-                    <span className="text-[#A8A29E] block mb-0.5">interest:</span>
-                    <span className="text-[#FAF8F5]">{submittedPayload.interest}</span>
+                    <span className="text-[#94A3B8] block mb-0.5">interest:</span>
+                    <span className="text-white">{submittedPayload.interest}</span>
                   </div>
                   <div>
-                    <span className="text-[#A8A29E] block mb-0.5">source:</span>
-                    <span className="text-emerald-400">prelaunch</span>
+                    <span className="text-[#94A3B8] block mb-0.5">source:</span>
+                    <span className="text-[#14B8A6]">prelaunch</span>
                   </div>
                   <div className="sm:col-span-2">
-                    <span className="text-[#A8A29E] block mb-0.5">message:</span>
-                    <span className="text-[#FAF8F5] break-words">{submittedPayload.message}</span>
+                    <span className="text-[#94A3B8] block mb-0.5">message:</span>
+                    <span className="text-white break-words">{submittedPayload.message}</span>
                   </div>
                 </div>
               </div>
@@ -161,7 +161,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                 setStatus('idle');
                 setSubmittedPayload(null);
               }}
-              className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-[#FAF8F5] font-semibold text-xs uppercase tracking-wider transition-colors cursor-pointer"
+              className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs uppercase tracking-wider transition-colors cursor-pointer"
             >
               Submit Another Response
             </button>
@@ -187,11 +187,11 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Full Name */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#A8A29E] mb-1.5">
-                  Full Name <span className="text-[#10B981]">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
+                  Full Name <span className="text-[#F4A261]">*</span>
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#78716C]">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
                     <User className="w-4 h-4" />
                   </div>
                   <input
@@ -200,18 +200,18 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                     placeholder="e.g. Babatunde Adeyemi"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0C0B0A] border border-[#292724] focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] text-sm text-[#FAF8F5] placeholder-[#78716C] outline-none transition-colors"
+                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors"
                   />
                 </div>
               </div>
 
               {/* Work Email */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#A8A29E] mb-1.5">
-                  Email Address <span className="text-[#10B981]">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
+                  Email Address <span className="text-[#F4A261]">*</span>
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#78716C]">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
                     <Mail className="w-4 h-4" />
                   </div>
                   <input
@@ -220,7 +220,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                     placeholder="babatunde@company.ng"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0C0B0A] border border-[#292724] focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] text-sm text-[#FAF8F5] placeholder-[#78716C] outline-none transition-colors"
+                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -229,11 +229,11 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Phone / WhatsApp */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#A8A29E] mb-1.5">
-                  Phone / WhatsApp <span className="text-[#78716C] font-normal lowercase">(optional)</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
+                  Phone / WhatsApp <span className="text-[#94A3B8] font-normal lowercase">(optional)</span>
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#78716C]">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
                     <Phone className="w-4 h-4" />
                   </div>
                   <input
@@ -241,20 +241,20 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                     placeholder="+234 802 345 6789"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0C0B0A] border border-[#292724] focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] text-sm text-[#FAF8F5] placeholder-[#78716C] outline-none transition-colors"
+                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors"
                   />
                 </div>
               </div>
 
               {/* Primary Workspace Need */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#A8A29E] mb-1.5">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
                   Primary Workspace Need
                 </label>
                 <select
                   value={interest}
                   onChange={(e) => setInterest(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl bg-[#0C0B0A] border border-[#292724] focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] text-sm text-[#FAF8F5] outline-none transition-colors cursor-pointer"
+                  className="w-full px-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white outline-none transition-colors cursor-pointer"
                 >
                   <option value="Hot Desk & Coworking">Hot Desk &amp; Coworking</option>
                   <option value="Private Office / Team Suite">Private Office / Team Suite</option>
@@ -268,11 +268,11 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
 
             {/* Message / Requirements */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#A8A29E] mb-1.5">
-                What are you looking for? <span className="text-[#10B981]">*</span>
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
+                What are you looking for? <span className="text-[#F4A261]">*</span>
               </label>
               <div className="relative">
-                <div className="absolute top-3.5 left-3.5 pointer-events-none text-[#78716C]">
+                <div className="absolute top-3.5 left-3.5 pointer-events-none text-[#94A3B8]">
                   <MessageSquare className="w-4 h-4" />
                 </div>
                 <textarea
@@ -281,14 +281,14 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                   placeholder="e.g. Need a 10-person private suite in Victoria Island with high-speed fiber from November."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0C0B0A] border border-[#292724] focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] text-sm text-[#FAF8F5] placeholder-[#78716C] outline-none transition-colors resize-none"
+                  className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors resize-none"
                 />
               </div>
             </div>
 
             {/* Security note */}
-            <div className="flex items-center space-x-2 text-xs text-[#78716C] pt-1">
-              <ShieldCheck className="w-4 h-4 text-[#10B981]" />
+            <div className="flex items-center space-x-2 text-xs text-[#94A3B8] pt-1">
+              <ShieldCheck className="w-4 h-4 text-[#14B8A6]" />
               <span>Submits directly to <strong>public.leads</strong> (anon role)</span>
             </div>
 
@@ -296,7 +296,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
             <button
               type="submit"
               disabled={isSubmitting || !name.trim() || !email.trim() || !message.trim()}
-              className="w-full py-4 px-6 rounded-xl bg-gradient-to-b from-[#34D399] via-[#10B981] to-[#059669] hover:from-[#10B981] hover:to-[#047857] text-[#0C0B0A] font-extrabold text-sm sm:text-base shadow-[0_4px_25px_rgba(16,185,129,0.35),inset_0_1px_1px_rgba(255,255,255,0.6)] active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 px-6 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] active:bg-[#14B8A6] text-white font-extrabold text-sm sm:text-base shadow-[0_4px_25px_rgba(15,118,110,0.4),inset_0_1px_1px_rgba(255,255,255,0.2)] active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <>

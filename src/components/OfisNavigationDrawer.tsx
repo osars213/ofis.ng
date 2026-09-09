@@ -119,7 +119,7 @@ export const OfisNavigationDrawer: React.FC = () => {
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer border border-[#E5E7EB] dark:border-[#374151] bg-[#F8FAFC] dark:bg-[#1F2937]/50"
             >
               <div className="flex items-center space-x-3">
-                <div className="p-1 rounded-lg bg-[#DCFCE7] dark:bg-[#16A34A]/20 text-[#16A34A]">
+                <div className="p-1 rounded-lg bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6]">
                   <Settings className="w-4 h-4" />
                 </div>
                 <div className="text-left">
@@ -146,7 +146,7 @@ export const OfisNavigationDrawer: React.FC = () => {
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <Info className="w-4 h-4 text-[#16A34A]" />
+                <Info className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 <span>About OFIS</span>
               </div>
               <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
@@ -159,7 +159,7 @@ export const OfisNavigationDrawer: React.FC = () => {
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <HelpCircle className="w-4 h-4 text-[#16A34A]" />
+                <HelpCircle className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 <span>Frequently Asked Questions (FAQ)</span>
               </div>
               <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
@@ -172,7 +172,7 @@ export const OfisNavigationDrawer: React.FC = () => {
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <Headphones className="w-4 h-4 text-[#16A34A]" />
+                <Headphones className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 <span>Help Centre</span>
               </div>
               <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
@@ -192,10 +192,10 @@ export const OfisNavigationDrawer: React.FC = () => {
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <Mail className="w-4 h-4 text-[#16A34A]" />
+                <Mail className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 <span>Contact Support</span>
               </div>
-              <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono">hello@ofis.ng</span>
+              <span className="text-[11px] text-teal-700 dark:text-teal-500 font-mono">hello@ofis.ng</span>
             </button>
 
             <button
@@ -222,13 +222,13 @@ export const OfisNavigationDrawer: React.FC = () => {
               type="button"
               id="drawer-become-host-btn"
               onClick={handleBecomeHost}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#DCFCE7] dark:hover:bg-[#16A34A]/20 text-xs font-bold text-[#16A34A] transition-colors cursor-pointer"
+              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#0F766E]/15 dark:hover:bg-[#0F766E]/20 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <Building2 className="w-4 h-4 text-[#16A34A]" />
+                <Building2 className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 <span>Become a Host</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#16A34A]" />
+              <ChevronRight className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
             </button>
 
             <button
@@ -238,7 +238,7 @@ export const OfisNavigationDrawer: React.FC = () => {
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <Handshake className="w-4 h-4 text-[#16A34A]" />
+                <Handshake className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 <span>Partner With OFIS</span>
               </div>
               <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
@@ -271,7 +271,7 @@ export const OfisNavigationDrawer: React.FC = () => {
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <Smartphone className="w-4 h-4 text-[#10B981]" />
+                <Smartphone className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                 <span>Download App</span>
               </div>
               <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
@@ -317,7 +317,7 @@ export const OfisNavigationDrawer: React.FC = () => {
         <div className="p-5 border-t border-[#E5E7EB] dark:border-[#374151] bg-[#F8FAFC] dark:bg-[#1F2937]">
           <div className="text-[11px] text-[#6B7280] dark:text-[#9CA3AF] font-mono flex items-center justify-between">
             <span>OFIS Nigeria</span>
-            <span className="text-[#16A34A] font-bold">● Verified Workspaces</span>
+            <span className="text-[#0F766E] dark:text-[#14B8A6] font-bold">● Verified Workspaces</span>
           </div>
         </div>
 

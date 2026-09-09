@@ -13,9 +13,9 @@ const App = React.lazy(() =>
 
 function AppLoadingFallback() {
   return (
-    <div className="min-h-screen bg-[#0C0B0A] flex flex-col items-center justify-center p-4">
-      <div className="w-8 h-8 rounded-full border-2 border-[#10B981] border-t-transparent animate-spin mb-4" />
-      <p className="text-sm font-medium text-[#FAF8F5]">Loading OFIS Workspaces...</p>
+    <div className="min-h-screen bg-[#071521] flex flex-col items-center justify-center p-4">
+      <div className="w-8 h-8 rounded-full border-2 border-[#14B8A6] border-t-transparent animate-spin mb-4" />
+      <p className="text-sm font-medium text-[#F8FAFC]">Loading OFIS Workspaces...</p>
     </div>
   );
 }

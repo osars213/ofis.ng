@@ -47,7 +47,7 @@ export const ContactPage: React.FC = () => {
       {/* Header */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#E5E7EB] dark:border-[#1E293B] text-center bg-gradient-to-b from-white via-[#F8FAFC] to-[#F1F5F9] dark:from-[#0B1220] dark:via-[#0F172A] dark:to-[#0B1220]">
         <div className="max-w-2xl mx-auto space-y-4">
-          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#10B981]">
+          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
             We&apos;re Here to Help
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Contact OFIS Support</h1>
@@ -72,31 +72,31 @@ export const ContactPage: React.FC = () => {
 
             <div className="space-y-6 text-xs">
               <div className="flex items-start space-x-3.5 p-4 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm">
-                <Mail className="w-5 h-5 text-[#10B981] shrink-0 mt-0.5" />
+                <Mail className="w-5 h-5 text-[#0F766E] dark:text-[#14B8A6] shrink-0 mt-0.5" />
                 <div className="space-y-1">
                   <h4 className="font-bold text-sm text-[#111827] dark:text-[#F8FAFC]">Email Support</h4>
                   <p className="text-[#6B7280] dark:text-[#94A3B8]">
-                    <a href="mailto:hello@ofis.ng" className="text-[#10B981] hover:underline font-semibold">
+                    <a href="mailto:hello@ofis.ng" className="text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold">
                       hello@ofis.ng
                     </a>
                     {' '}• support@ofis.ng
                   </p>
-                  <p className="text-[11px] text-[#10B981] font-medium">Average response time: &lt; 2 hours</p>
+                  <p className="text-[11px] text-[#0F766E] dark:text-[#14B8A6] font-medium">Average response time: &lt; 2 hours</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3.5 p-4 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm">
-                <Phone className="w-5 h-5 text-[#10B981] shrink-0 mt-0.5" />
+                <Phone className="w-5 h-5 text-[#0F766E] dark:text-[#14B8A6] shrink-0 mt-0.5" />
                 <div className="space-y-1">
                   <h4 className="font-bold text-sm text-[#111827] dark:text-[#F8FAFC]">Phone & WhatsApp Hotline</h4>
                   <p className="text-[#6B7280] dark:text-[#94A3B8]">+234 (0) 802 345 6789</p>
                   <p className="text-[#6B7280] dark:text-[#94A3B8]">+234 (0) 1 456 7890</p>
-                  <p className="text-[11px] text-[#10B981] font-medium">Monday – Saturday: 7:00 AM – 9:00 PM WAT</p>
+                  <p className="text-[11px] text-[#0F766E] dark:text-[#14B8A6] font-medium">Monday – Saturday: 7:00 AM – 9:00 PM WAT</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3.5 p-4 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm">
-                <MapPin className="w-5 h-5 text-[#10B981] shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-[#0F766E] dark:text-[#14B8A6] shrink-0 mt-0.5" />
                 <div className="space-y-1">
                   <h4 className="font-bold text-sm text-[#111827] dark:text-[#F8FAFC]">Headquarters & Hubs</h4>
                   <p className="text-[#6B7280] dark:text-[#94A3B8]">
@@ -120,8 +120,8 @@ export const ContactPage: React.FC = () => {
               </div>
 
               {isSent ? (
-                <div className="p-8 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 border border-[#10B981]/30 text-center space-y-4">
-                  <CheckCircle2 className="w-12 h-12 text-[#10B981] mx-auto" />
+                <div className="p-8 rounded-2xl bg-[#0F766E]/15 dark:bg-[#0F766E]/15 border border-[#0F766E]/30 text-center space-y-4">
+                  <CheckCircle2 className="w-12 h-12 text-[#0F766E] dark:text-[#14B8A6] mx-auto" />
                   <div className="space-y-1">
                     <h4 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Message Sent!</h4>
                     <p className="text-xs text-[#4B5563] dark:text-[#94A3B8]">
@@ -134,7 +134,7 @@ export const ContactPage: React.FC = () => {
                       setIsSent(false);
                       setFormData({ name: '', email: '', phone: '', subject: 'General Inquiry', message: '' });
                     }}
-                    className="px-4 py-2 rounded-xl bg-[#10B981] text-white text-xs font-bold shadow-xs cursor-pointer"
+                    className="px-4 py-2 rounded-xl bg-[#0F766E] text-white text-xs font-bold shadow-xs cursor-pointer"
                   >
                     Send Another Message
                   </button>
@@ -150,7 +150,7 @@ export const ContactPage: React.FC = () => {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Babatunde Adeyemi"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#10B981]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#0F766E]"
                       />
                     </div>
 
@@ -162,7 +162,7 @@ export const ContactPage: React.FC = () => {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="e.g. tunde@company.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#10B981]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#0F766E]"
                       />
                     </div>
                   </div>
@@ -175,7 +175,7 @@ export const ContactPage: React.FC = () => {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+234 802 000 0000"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#10B981]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#0F766E]"
                       />
                     </div>
 
@@ -184,7 +184,7 @@ export const ContactPage: React.FC = () => {
                       <select
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#10B981] cursor-pointer"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#0F766E] cursor-pointer"
                       >
                         <option value="General Inquiry">General Inquiry</option>
                         <option value="Booking Support">Booking & QR Pass Support</option>
@@ -203,14 +203,14 @@ export const ContactPage: React.FC = () => {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Describe how we can assist you..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#10B981] resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs focus:outline-none focus:border-[#0F766E] resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-2xl bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold shadow-md transition-all cursor-pointer flex items-center justify-center space-x-2 disabled:opacity-50"
+                    className="w-full py-3.5 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold shadow-md transition-all cursor-pointer flex items-center justify-center space-x-2 disabled:opacity-50"
                   >
                     <Send className="w-4 h-4" />
                     <span>{isSubmitting ? 'Sending Inquiry...' : 'Submit Message'}</span>

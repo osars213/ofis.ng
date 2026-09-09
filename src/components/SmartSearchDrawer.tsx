@@ -224,10 +224,10 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
       {/* ========================================================================= */}
       <form
         onSubmit={handleSearchSubmit}
-        className={`relative flex items-center h-14 sm:h-[58px] bg-white/95 dark:bg-[#172033]/95 backdrop-blur-md rounded-2xl border transition-all duration-200 shadow-md dark:shadow-2xl ${
+        className={`relative flex items-center h-14 sm:h-[58px] bg-white/95 dark:bg-[#0B1F33]/95 backdrop-blur-md rounded-2xl border transition-all duration-200 shadow-md dark:shadow-2xl ${
           isExpanded 
-            ? 'border-[#10B981] ring-2 ring-[#10B981]/25 bg-white dark:bg-[#172033]' 
-            : 'border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#CBD5E1] dark:hover:border-[#334155]'
+            ? 'border-[#0F766E] ring-2 ring-[#0F766E]/25 bg-white dark:bg-[#0B1F33]' 
+            : 'border-[#E5E7EB] dark:border-[#1E3A4D] hover:border-[#CBD5E1] dark:hover:border-[#334155]'
         }`}
       >
         <button
@@ -240,10 +240,10 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
               setIsExpanded(!isExpanded);
             }
           }}
-          className="h-full px-4 sm:px-4.5 flex items-center justify-center text-[#6B7280] dark:text-[#94A3B8] hover:text-[#10B981] transition-colors focus:outline-none cursor-pointer"
+          className="h-full px-4 sm:px-4.5 flex items-center justify-center text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:text-[#14B8A6] transition-colors focus:outline-none cursor-pointer"
           aria-label="Search and apply filters"
         >
-          <Search className={`w-4.5 h-4.5 sm:w-5 sm:h-5 transition-colors ${isExpanded || filters.searchQuery ? 'text-[#10B981]' : ''}`} />
+          <Search className={`w-4.5 h-4.5 sm:w-5 sm:h-5 transition-colors ${isExpanded || filters.searchQuery ? 'text-[#0F766E] dark:text-[#14B8A6]' : ''}`} />
         </button>
 
         <input
@@ -288,10 +288,10 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
             }}
             className={`flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl border text-xs font-semibold transition-all duration-200 cursor-pointer shadow-2xs ${
               isExpanded
-                ? 'bg-[#10B981] text-white border-[#10B981]'
+                ? 'bg-[#0F766E] text-white border-[#0F766E]'
                 : activeFiltersCount > 0
-                ? 'bg-[#D1FAE5] dark:bg-[#10B981]/15 border-[#10B981]/50 text-[#10B981]'
-                : 'bg-[#F1F5F9] dark:bg-[#101827] border-[#E5E7EB] dark:border-[#1E293B] text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:border-[#10B981]/50'
+                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 border-[#0F766E]/50 text-[#0F766E] dark:text-[#14B8A6]'
+                : 'bg-[#F1F5F9] dark:bg-[#101827] border-[#E5E7EB] dark:border-[#1E3A4D] text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:border-[#0F766E]/50'
             }`}
             aria-label="Expand search filter drawer"
             aria-expanded={isExpanded}
@@ -300,7 +300,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
             <span className="hidden sm:inline text-xs">Filters</span>
             {activeFiltersCount > 0 && (
               <span className={`w-4 h-4 rounded-full text-[10px] font-bold flex items-center justify-center ${
-                isExpanded ? 'bg-white text-[#10B981]' : 'bg-[#10B981] text-white'
+                isExpanded ? 'bg-white text-[#0F766E]' : 'bg-[#0F766E] text-white'
               }`}>
                 {activeFiltersCount}
               </span>
@@ -345,8 +345,8 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                 }}
                 className={`min-h-[44px] sm:min-h-[48px] px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-[13px] font-semibold transition-all duration-150 flex items-center justify-center cursor-pointer shadow-2xs select-none ${
                   isActive
-                    ? 'bg-[#10B981] text-white border border-[#10B981] shadow-xs scale-[1.02]'
-                    : 'bg-white dark:bg-[#172033] text-[#4B5563] dark:text-[#CBD5E1] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981]/50 hover:text-[#10B981] dark:hover:text-[#10B981] active:scale-[0.98]'
+                    ? 'bg-[#0F766E] text-white border border-[#0F766E] shadow-xs scale-[1.02]'
+                    : 'bg-white dark:bg-[#0B1F33] text-[#4B5563] dark:text-[#CBD5E1] border border-[#E5E7EB] dark:border-[#1E3A4D] hover:border-[#0F766E]/50 hover:text-[#0F766E] dark:hover:text-[#14B8A6] active:scale-[0.98]'
                 }`}
               >
                 {item.label}
@@ -364,7 +364,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
           {recentSearches.length > 0 ? (
             <div className="flex items-center gap-2.5">
               <div className="flex items-center space-x-1 text-[11px] font-medium text-[#6B7280] dark:text-[#94A3B8] shrink-0 uppercase tracking-wider">
-                <History className="w-3 h-3 text-[#10B981]" />
+                <History className="w-3 h-3 text-[#0F766E] dark:text-[#14B8A6]" />
                 <span>Recent:</span>
               </div>
               <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 whitespace-nowrap">
@@ -373,7 +373,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     key={`recent-${query}-${idx}`}
                     type="button"
                     onClick={() => executeSearchQuery(query)}
-                    className="shrink-0 px-2.5 py-1 rounded-lg bg-white/90 dark:bg-[#172033] hover:bg-white dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981]/50 text-xs text-[#6B7280] dark:text-[#94A3B8] hover:text-[#10B981] transition-all font-medium cursor-pointer shadow-2xs hover:scale-[1.02] active:scale-[0.98]"
+                    className="shrink-0 px-2.5 py-1 rounded-lg bg-white/90 dark:bg-[#0B1F33] hover:bg-white dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E3A4D] hover:border-[#0F766E]/50 text-xs text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:text-[#14B8A6] transition-all font-medium cursor-pointer shadow-2xs hover:scale-[1.02] active:scale-[0.98]"
                   >
                     {query}
                   </button>
@@ -394,7 +394,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
           ) : (
             <div className="flex items-center gap-2.5">
               <div className="flex items-center space-x-1 text-[11px] font-medium text-[#6B7280] dark:text-[#94A3B8] shrink-0 uppercase tracking-wider">
-                <TrendingUp className="w-3 h-3 text-[#10B981]" />
+                <TrendingUp className="w-3 h-3 text-[#0F766E] dark:text-[#14B8A6]" />
                 <span>Trending:</span>
               </div>
               <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 whitespace-nowrap">
@@ -403,7 +403,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     key={`trending-${query}-${idx}`}
                     type="button"
                     onClick={() => executeSearchQuery(query)}
-                    className="shrink-0 px-2.5 py-1 rounded-lg bg-white/90 dark:bg-[#172033] hover:bg-white dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981]/50 text-xs text-[#6B7280] dark:text-[#94A3B8] hover:text-[#10B981] transition-all font-medium cursor-pointer shadow-2xs hover:scale-[1.02] active:scale-[0.98]"
+                    className="shrink-0 px-2.5 py-1 rounded-lg bg-white/90 dark:bg-[#0B1F33] hover:bg-white dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E3A4D] hover:border-[#0F766E]/50 text-xs text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:text-[#14B8A6] transition-all font-medium cursor-pointer shadow-2xs hover:scale-[1.02] active:scale-[0.98]"
                   >
                     {query}
                   </button>
@@ -433,13 +433,13 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
                   <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B7280] dark:text-[#9CA3AF] flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[#16A34A]" />
+                    <MapPin className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span>Location & City</span>
                   </label>
                   <button
                     type="button"
                     onClick={handleLocationRequest}
-                    className="text-[11px] text-[#16A34A] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
+                    className="text-[11px] text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
                   >
                     <span>
                       {locationStatus === 'granted'
@@ -454,14 +454,14 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {/* City Selector */}
                   <div className="relative">
-                    <MapPin className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#16A34A] pointer-events-none" />
+                    <MapPin className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0F766E] dark:text-[#14B8A6] pointer-events-none" />
                     <select
                       value={filters.city}
                       onChange={(e) => {
                         updateFilter('city', e.target.value);
                         updateFilter('neighborhood', 'All');
                       }}
-                      className="w-full pl-10 pr-9 py-2.5 bg-[#F8FAFC] dark:bg-[#111827] rounded-xl text-xs sm:text-sm text-[#111827] dark:text-[#F9FAFB] border border-[#E5E7EB] dark:border-[#374151] focus:border-[#16A34A] focus:outline-none appearance-none cursor-pointer"
+                      className="w-full pl-10 pr-9 py-2.5 bg-[#F8FAFC] dark:bg-[#071521] rounded-xl text-xs sm:text-sm text-[#111827] dark:text-[#F9FAFB] border border-[#E5E7EB] dark:border-[#374151] focus:border-[#0F766E] focus:outline-none appearance-none cursor-pointer"
                     >
                       <option value="All Cities">All Cities & Regions</option>
                       {availableCities.map(c => (
@@ -476,7 +476,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     <select
                       value={filters.neighborhood || 'All'}
                       onChange={(e) => updateFilter('neighborhood', e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-[#F8FAFC] dark:bg-[#111827] rounded-xl text-xs sm:text-sm text-[#111827] dark:text-[#F9FAFB] border border-[#E5E7EB] dark:border-[#374151] focus:border-[#16A34A] focus:outline-none appearance-none cursor-pointer"
+                      className="w-full px-3.5 py-2.5 bg-[#F8FAFC] dark:bg-[#071521] rounded-xl text-xs sm:text-sm text-[#111827] dark:text-[#F9FAFB] border border-[#E5E7EB] dark:border-[#374151] focus:border-[#0F766E] focus:outline-none appearance-none cursor-pointer"
                     >
                       <option value="All">All Neighborhoods & Hubs</option>
                       {availableNeighborhoods.map(n => (
@@ -508,8 +508,8 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                           }}
                           className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                             isSelected
-                              ? 'bg-[#16A34A] text-white font-bold shadow-xs'
-                              : 'bg-[#F1F5F9] dark:bg-[#111827] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] border border-[#E5E7EB] dark:border-[#374151] hover:border-[#16A34A]/50'
+                              ? 'bg-[#0F766E] text-white font-bold shadow-xs'
+                              : 'bg-[#F1F5F9] dark:bg-[#071521] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] border border-[#E5E7EB] dark:border-[#374151] hover:border-[#0F766E]/50'
                           }`}
                         >
                           {area}
@@ -523,7 +523,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
               {/* SECTION B: WORKSPACE CATEGORY */}
               <div className="space-y-2.5 pt-1 border-t border-[#E5E7EB] dark:border-[#374151]">
                 <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B7280] dark:text-[#9CA3AF] flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#16A34A]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
                   <span>Workspace Type</span>
                 </label>
                 
@@ -539,15 +539,15 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                         }}
                         className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#111827] dark:text-[#F9FAFB]'
-                            : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:border-[#16A34A]/50'
+                            ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#111827] dark:text-[#F9FAFB]'
+                            : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:border-[#0F766E]/50'
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className={`text-xs font-bold ${isSelected ? 'text-[#16A34A]' : 'text-[#111827] dark:text-[#F9FAFB]'}`}>
+                          <span className={`text-xs font-bold ${isSelected ? 'text-[#0F766E] dark:text-[#14B8A6]' : 'text-[#111827] dark:text-[#F9FAFB]'}`}>
                             {cat.label}
                           </span>
-                          {isSelected && <Check className="w-3.5 h-3.5 text-[#16A34A]" />}
+                          {isSelected && <Check className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />}
                         </div>
                         <p className="text-[10px] text-[#6B7280] dark:text-[#9CA3AF] mt-0.5 line-clamp-1">{cat.description}</p>
                       </button>
@@ -562,16 +562,16 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
               <div className="space-y-2.5 pt-1 border-t border-[#E5E7EB] dark:border-[#374151]">
                 <div className="flex items-center justify-between">
                   <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B7280] dark:text-[#9CA3AF] flex items-center gap-1.5">
-                    <span className="text-[#16A34A] font-mono font-bold text-xs">₦</span>
+                    <span className="text-[#0F766E] dark:text-[#14B8A6] font-mono font-bold text-xs">₦</span>
                     <span>Budget &amp; Billing Period</span>
                   </label>
-                  <span className="text-xs font-mono font-bold text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/10 px-2.5 py-0.5 rounded-md border border-[#16A34A]/25">
+                  <span className="text-xs font-mono font-bold text-[#0F766E] dark:text-[#14B8A6] bg-[#0F766E]/10 dark:bg-[#0F766E]/20 px-2.5 py-0.5 rounded-md border border-[#0F766E]/25">
                     {getPriceLabel(filters.maxPrice, filters.pricingPeriod)}
                   </span>
                 </div>
 
                 {/* Billing Period Selector Tabs */}
-                <div className="flex items-center gap-1.5 bg-[#F1F5F9] dark:bg-[#111827] p-1 rounded-xl border border-[#E5E7EB] dark:border-[#374151]">
+                <div className="flex items-center gap-1.5 bg-[#F1F5F9] dark:bg-[#071521] p-1 rounded-xl border border-[#E5E7EB] dark:border-[#374151]">
                   {[
                     { id: undefined, label: 'All Periods' },
                     { id: 'hour' as PricingPeriod, label: 'Hourly' },
@@ -591,7 +591,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                         }}
                         className={`flex-1 py-1.5 px-2 rounded-lg text-[11px] font-mono font-bold transition-all text-center cursor-pointer ${
                           isSelected
-                            ? 'bg-[#16A34A] text-white shadow-xs'
+                            ? 'bg-[#0F766E] text-white shadow-xs'
                             : 'text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-white/60 dark:hover:bg-[#374151]'
                         }`}
                       >
@@ -609,7 +609,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     step={currentPriceBounds.step}
                     value={filters.maxPrice || currentPriceBounds.defaultMax}
                     onChange={(e) => updateFilter('maxPrice', Number(e.target.value))}
-                    className="w-full h-2 bg-[#E5E7EB] dark:bg-[#111827] rounded-lg appearance-none cursor-pointer accent-[#16A34A] focus:outline-none"
+                    className="w-full h-2 bg-[#E5E7EB] dark:bg-[#071521] rounded-lg appearance-none cursor-pointer accent-[#0F766E] focus:outline-none"
                     aria-label="Price range slider"
                   />
                   <div className="flex items-center justify-between text-[10px] text-[#6B7280] dark:text-[#9CA3AF] font-mono">
@@ -627,10 +627,10 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
               <div className="space-y-2.5 pt-1 border-t border-[#E5E7EB] dark:border-[#374151]">
                 <div className="flex items-center justify-between">
                   <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B7280] dark:text-[#9CA3AF] flex items-center gap-1.5">
-                    <Users className="w-3.5 h-3.5 text-[#16A34A]" />
+                    <Users className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span>Capacity</span>
                   </label>
-                  <span className="text-xs font-mono font-bold text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/10 px-2.5 py-0.5 rounded-md border border-[#16A34A]/25">
+                  <span className="text-xs font-mono font-bold text-[#0F766E] dark:text-[#14B8A6] bg-[#0F766E]/10 dark:bg-[#0F766E]/20 px-2.5 py-0.5 rounded-md border border-[#0F766E]/25">
                     {getCapacityLabel(filters.minCapacity)}
                   </span>
                 </div>
@@ -643,7 +643,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     step="1"
                     value={filters.minCapacity}
                     onChange={(e) => updateFilter('minCapacity', Number(e.target.value))}
-                    className="w-full h-2 bg-[#E5E7EB] dark:bg-[#111827] rounded-lg appearance-none cursor-pointer accent-[#16A34A] focus:outline-none"
+                    className="w-full h-2 bg-[#E5E7EB] dark:bg-[#071521] rounded-lg appearance-none cursor-pointer accent-[#0F766E] focus:outline-none"
                     aria-label="Capacity range slider"
                   />
                   <div className="flex items-center justify-between text-[10px] text-[#6B7280] dark:text-[#9CA3AF] font-mono">
@@ -662,10 +662,10 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
               <div className="space-y-2.5 pt-1 border-t border-[#E5E7EB] dark:border-[#374151]">
                 <div className="flex items-center justify-between">
                   <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B7280] dark:text-[#9CA3AF] flex items-center gap-1.5">
-                    <Timer className="w-3.5 h-3.5 text-[#16A34A]" />
+                    <Timer className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span>Booking Duration</span>
                   </label>
-                  <span className="text-xs font-mono font-bold text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/10 px-2.5 py-0.5 rounded-md border border-[#16A34A]/25">
+                  <span className="text-xs font-mono font-bold text-[#0F766E] dark:text-[#14B8A6] bg-[#0F766E]/10 dark:bg-[#0F766E]/20 px-2.5 py-0.5 rounded-md border border-[#0F766E]/25">
                     {getDurationLabel(filters.duration)}
                   </span>
                 </div>
@@ -678,7 +678,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     step="1"
                     value={filters.duration}
                     onChange={(e) => updateFilter('duration', Number(e.target.value))}
-                    className="w-full h-2 bg-[#E5E7EB] dark:bg-[#111827] rounded-lg appearance-none cursor-pointer accent-[#16A34A] focus:outline-none"
+                    className="w-full h-2 bg-[#E5E7EB] dark:bg-[#071521] rounded-lg appearance-none cursor-pointer accent-[#0F766E] focus:outline-none"
                     aria-label="Booking duration slider"
                   />
                   <div className="flex items-center justify-between text-[10px] text-[#6B7280] dark:text-[#9CA3AF] font-mono">
@@ -696,10 +696,10 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
               <div className="space-y-2.5 pt-1 border-t border-[#E5E7EB] dark:border-[#374151]">
                 <div className="flex items-center justify-between">
                   <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B7280] dark:text-[#9CA3AF] flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-[#16A34A]" />
+                    <Clock className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span>Start Time</span>
                   </label>
-                  <span className="text-[11px] font-mono text-[#16A34A] font-semibold">
+                  <span className="text-[11px] font-mono text-[#0F766E] dark:text-[#14B8A6] font-semibold">
                     {filters.startHour === 'any' ? 'Any Time' : formatTime(filters.startHour)}
                   </span>
                 </div>
@@ -709,26 +709,26 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                   id="compact-time-selector-btn"
                   type="button"
                   onClick={() => setIsTimePickerOpen(true)}
-                  className="w-full flex items-center justify-between p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#111827] hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] hover:border-[#16A34A]/50 transition-all text-left group cursor-pointer"
+                  className="w-full flex items-center justify-between p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#071521] hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] hover:border-[#0F766E]/50 transition-all text-left group cursor-pointer"
                   aria-label="Open time picker"
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="w-9 h-9 rounded-xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] flex items-center justify-center text-[#16A34A] group-hover:border-[#16A34A]/50 transition-colors shadow-2xs">
+                    <div className="w-9 h-9 rounded-xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] flex items-center justify-center text-[#0F766E] dark:text-[#14B8A6] group-hover:border-[#0F766E]/50 transition-colors shadow-2xs">
                       <Clock className="w-4 h-4" />
                     </div>
                     <div>
                       <div className="text-[10px] uppercase font-mono tracking-wider text-[#6B7280] dark:text-[#9CA3AF]">Start Time</div>
-                      <div className="text-sm font-mono font-bold text-[#111827] dark:text-[#F9FAFB] group-hover:text-[#16A34A] transition-colors">
+                      <div className="text-sm font-mono font-bold text-[#111827] dark:text-[#F9FAFB] group-hover:text-[#0F766E] dark:group-hover:text-[#14B8A6] transition-colors">
                         {filters.startHour === 'any' ? formatTime('08:00') : formatTime(filters.startHour)}
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <span className="text-xs font-mono font-semibold text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/10 px-2.5 py-1 rounded-lg border border-[#16A34A]/25">
+                    <span className="text-xs font-mono font-semibold text-[#0F766E] dark:text-[#14B8A6] bg-[#0F766E]/10 dark:bg-[#0F766E]/20 px-2.5 py-1 rounded-lg border border-[#0F766E]/25">
                       {filters.startHour === 'any' ? 'Any Time' : formatTime(filters.startHour)}
                     </span>
-                    <ChevronDown className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF] group-hover:text-[#16A34A] transition-colors" />
+                    <ChevronDown className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF] group-hover:text-[#0F766E] dark:group-hover:text-[#14B8A6] transition-colors" />
                   </div>
                 </button>
               </div>
@@ -736,7 +736,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
               {/* SECTION F: INTERNET & SPACE ESSENTIALS (SIMPLIFIED) */}
               <div className="space-y-2.5 pt-1 border-t border-[#E5E7EB] dark:border-[#374151]">
                 <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B7280] dark:text-[#9CA3AF] flex items-center gap-1.5">
-                  <Wifi className="w-3.5 h-3.5 text-[#16A34A]" />
+                  <Wifi className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
                   <span>Internet & Space Essentials</span>
                 </label>
 
@@ -746,11 +746,11 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     onClick={() => updateFilter('needsFixedInternet', !filters.needsFixedInternet)}
                     className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center space-x-2 transition-all cursor-pointer ${
                       filters.needsFixedInternet
-                        ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                        : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
-                    <Wifi className="w-4 h-4 shrink-0 text-[#16A34A]" />
+                    <Wifi className="w-4 h-4 shrink-0 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span className="truncate">Wi-Fi / Internet</span>
                   </button>
 
@@ -759,11 +759,11 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     onClick={() => updateFilter('needsWiredInternet', !filters.needsWiredInternet)}
                     className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center space-x-2 transition-all cursor-pointer ${
                       filters.needsWiredInternet
-                        ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                        : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
-                    <Cable className="w-4 h-4 shrink-0 text-[#16A34A]" />
+                    <Cable className="w-4 h-4 shrink-0 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span className="truncate">Wired Internet (Ethernet/LAN)</span>
                   </button>
 
@@ -772,11 +772,11 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     onClick={() => updateFilter('needsBackupPower', !filters.needsBackupPower)}
                     className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center space-x-2 transition-all cursor-pointer ${
                       filters.needsBackupPower
-                        ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                        : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
-                    <Zap className="w-4 h-4 shrink-0 text-[#16A34A]" />
+                    <Zap className="w-4 h-4 shrink-0 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span className="truncate">24/7 Power</span>
                   </button>
 
@@ -785,11 +785,11 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     onClick={() => updateFilter('needsSoundproofing', !filters.needsSoundproofing)}
                     className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center space-x-2 transition-all cursor-pointer ${
                       filters.needsSoundproofing
-                        ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                        : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
-                    <Volume2 className="w-4 h-4 shrink-0 text-[#16A34A]" />
+                    <Volume2 className="w-4 h-4 shrink-0 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span className="truncate">Quiet / Soundproof</span>
                   </button>
 
@@ -798,11 +798,11 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     onClick={() => updateFilter('needsWhiteboard', !filters.needsWhiteboard)}
                     className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center space-x-2 transition-all cursor-pointer ${
                       filters.needsWhiteboard
-                        ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                        : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
-                    <Presentation className="w-4 h-4 shrink-0 text-[#16A34A]" />
+                    <Presentation className="w-4 h-4 shrink-0 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span className="truncate">Whiteboard / Board</span>
                   </button>
 
@@ -811,11 +811,11 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     onClick={() => updateFilter('needsProjector', !filters.needsProjector)}
                     className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center space-x-2 transition-all cursor-pointer ${
                       filters.needsProjector
-                        ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                        : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
-                    <Tv className="w-4 h-4 shrink-0 text-[#16A34A]" />
+                    <Tv className="w-4 h-4 shrink-0 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span className="truncate">Projector / Screen</span>
                   </button>
 
@@ -824,11 +824,11 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     onClick={() => updateFilter('needsCameraEquipment', !filters.needsCameraEquipment)}
                     className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center space-x-2 transition-all cursor-pointer ${
                       filters.needsCameraEquipment
-                        ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                        : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
-                    <Camera className="w-4 h-4 shrink-0 text-[#16A34A]" />
+                    <Camera className="w-4 h-4 shrink-0 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span className="truncate">Camera / Studio Rig</span>
                   </button>
 
@@ -837,11 +837,11 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     onClick={() => updateFilter('instantBookingOnly', !filters.instantBookingOnly)}
                     className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center space-x-2 transition-all cursor-pointer ${
                       filters.instantBookingOnly
-                        ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                        : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
-                    <Sparkles className="w-4 h-4 shrink-0 text-[#16A34A]" />
+                    <Sparkles className="w-4 h-4 shrink-0 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span className="truncate">Instant Digital Pass</span>
                   </button>
 
@@ -850,13 +850,13 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     onClick={() => updateFilter('availableNowOnly', !filters.availableNowOnly)}
                     className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center space-x-2 transition-all cursor-pointer ${
                       filters.availableNowOnly
-                        ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                        : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
                     <span className="relative flex h-2 w-2 shrink-0">
-                      <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${filters.availableNowOnly ? 'bg-[#16A34A]' : 'bg-[#9CA3AF]'}`} />
-                      <span className={`relative inline-flex rounded-full h-2 w-2 ${filters.availableNowOnly ? 'bg-[#16A34A]' : 'bg-[#9CA3AF]'}`} />
+                      <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${filters.availableNowOnly ? 'bg-[#14B8A6]' : 'bg-[#9CA3AF]'}`} />
+                      <span className={`relative inline-flex rounded-full h-2 w-2 ${filters.availableNowOnly ? 'bg-[#14B8A6]' : 'bg-[#9CA3AF]'}`} />
                     </span>
                     <span className="truncate">Available Now Only</span>
                   </button>
@@ -884,8 +884,8 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                         onClick={() => updateFilter('sortBy', s.id as any)}
                         className={`py-2 px-2.5 rounded-xl text-xs font-semibold border transition-all text-center cursor-pointer ${
                           isSelected
-                            ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/15 border-[#16A34A] text-[#16A34A]'
-                            : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                            ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]'
+                            : 'bg-[#F8FAFC] dark:bg-[#071521] border-[#E5E7EB] dark:border-[#374151] text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                         }`}
                       >
                         {s.label}
@@ -919,7 +919,7 @@ export const SmartSearchDrawer: React.FC<SmartSearchDrawerProps> = ({ onApply })
                     id="search-drawer-apply-btn"
                     type="button"
                     onClick={handleApply}
-                    className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#16A34A] hover:bg-[#15803D] transition-all shadow-md active:scale-95 flex items-center gap-1.5 cursor-pointer"
+                    className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0F766E] hover:bg-[#14B8A6] transition-all shadow-md active:scale-95 flex items-center gap-1.5 cursor-pointer"
                   >
                     <span>Show {spaces.length} {spaces.length === 1 ? 'Space' : 'Spaces'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />

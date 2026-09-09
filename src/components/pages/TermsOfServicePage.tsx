@@ -8,7 +8,7 @@ export const TermsOfServicePage: React.FC = () => {
         
         {/* Header */}
         <div className="space-y-3 pb-8 border-b border-[#E5E7EB] dark:border-[#1E293B]">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/15 border border-[#10B981]/30 text-xs font-bold text-[#10B981]">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/15 border border-[#0F766E]/30 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6]">
             <FileText className="w-3.5 h-3.5" />
             <span>Marketplace Operating Terms</span>
           </div>

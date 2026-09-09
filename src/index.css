@@ -2,41 +2,115 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --color-ofis-navy: #0B1F33;
+  --color-ofis-navy-dark: #071521;
+  --color-ofis-navy-charcoal: #172B3A;
+  --color-ofis-navy-elevated: #102A3D;
+  --color-ofis-teal: #0F766E;
+  --color-ofis-teal-hover: #0B625C;
+  --color-ofis-teal-bright: #14B8A6;
+  --color-ofis-peach: #F4A261;
+  --color-ofis-peach-light: #FCEBD9;
+  --color-ofis-grey-light: #F5F7F7;
+  --color-ofis-grey-muted: #64748B;
+  --color-ofis-grey-border: #D9E1E3;
+  --color-ofis-border-dark: #1E3A4D;
+  --color-ofis-input-dark: #0D2435;
+  --color-ofis-white: #FFFFFF;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 @layer base {
   :root {
-    --color-bg-light: #FAF9F6;
+    --ofis-navy: #0B1F33;
+    --ofis-navy-dark: #071521;
+    --ofis-teal: #0F766E;
+    --ofis-teal-hover: #0B625C;
+    --ofis-teal-bright: #14B8A6;
+    --ofis-peach: #F4A261;
+    --ofis-peach-soft: rgba(244, 162, 97, 0.12);
+    --ofis-grey-light: #F5F7F7;
+    --ofis-white: #FFFFFF;
+    --ofis-navy-charcoal: #172B3A;
+    --ofis-grey-muted: #64748B;
+    --ofis-grey-border: #D9E1E3;
+
+    /* Theme Tokens - Light */
+    --ofis-bg: #F5F7F7;
+    --ofis-surface: #FFFFFF;
+    --ofis-surface-secondary: #EEF2F4;
+    --ofis-surface-elevated: #FFFFFF;
+    --ofis-text: #0B1F33;
+    --ofis-text-secondary: #172B3A;
+    --ofis-muted: #64748B;
+    --ofis-border: #D9E1E3;
+    --ofis-primary: #0F766E;
+    --ofis-primary-hover: #0B625C;
+    --ofis-accent: #F4A261;
+    --ofis-error: #DC4C4C;
+
+    /* Backward compatibility mapping */
+    --color-bg-light: #F5F7F7;
     --color-surface-light: #FFFFFF;
-    --color-surface-secondary-light: #F5F3EF;
-    --color-border-light: #E7E5E0;
-    --color-text-main-light: #1C1917;
-    --color-text-muted-light: #78716C;
+    --color-surface-secondary-light: #EEF2F4;
+    --color-border-light: #D9E1E3;
+    --color-text-main-light: #0B1F33;
+    --color-text-muted-light: #64748B;
+    --color-primary-green: #0F766E;
+    --color-primary-green-hover: #0B625C;
+    --color-primary-green-light: #14B8A6;
 
-    --color-bg-dark: #0C0B0A;
-    --color-surface-dark: #171615;
-    --color-surface-secondary-dark: #121110;
-    --color-border-dark: #292724;
-    --color-text-main-dark: #FAF8F5;
-    --color-text-muted-dark: #A8A29E;
+    --color-bg-dark: #071521;
+    --color-surface-dark: #0B1F33;
+    --color-surface-secondary-dark: #0D2435;
+    --color-border-dark: #1E3A4D;
+    --color-text-main-dark: #F8FAFC;
+    --color-text-muted-dark: #94A3B8;
+  }
 
-    --color-primary-green: #10B981;
-    --color-primary-green-hover: #059669;
-    --color-primary-green-light: #34D399;
+  html.dark {
+    /* Theme Tokens - Dark */
+    --ofis-bg: #071521;
+    --ofis-surface: #0B1F33;
+    --ofis-surface-secondary: #0D2435;
+    --ofis-surface-elevated: #102A3D;
+    --ofis-text: #F8FAFC;
+    --ofis-text-secondary: #CBD5E1;
+    --ofis-muted: #94A3B8;
+    --ofis-border: #1E3A4D;
+    --ofis-primary: #14B8A6;
+    --ofis-primary-deep: #0F766E;
+    --ofis-primary-hover: #0F766E;
+    --ofis-accent: #F4A261;
+    --ofis-input-dark: #0D2435;
+    --ofis-error: #F87171;
+
+    /* Backward compatibility mapping */
+    --color-bg-dark: #071521;
+    --color-surface-dark: #0B1F33;
+    --color-surface-secondary-dark: #0D2435;
+    --color-border-dark: #1E3A4D;
+    --color-text-main-dark: #F8FAFC;
+    --color-text-muted-dark: #94A3B8;
+    --color-primary-green: #14B8A6;
+    --color-primary-green-hover: #0F766E;
+    --color-primary-green-light: #14B8A6;
   }
 
   body {
-    background-color: #FAF9F6;
-    color: #1C1917;
+    background-color: #F5F7F7;
+    color: #0B1F33;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
 
   html.dark body {
-    background-color: #0C0B0A;
-    color: #FAF8F5;
+    background-color: #071521;
+    color: #F8FAFC;
   }
 }
 
@@ -47,16 +121,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0C0B0A;
+  background: #071521;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #292724;
+  background: #1E3A4D;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3D3935;
+  background: #0F766E;
 }
 
 /* Gentle pulse animation for status badges */

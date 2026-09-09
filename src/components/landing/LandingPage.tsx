@@ -35,6 +35,7 @@ import { WorkspaceCard } from '../WorkspaceCard';
 import { getSpacePricing } from '../../utils/pricing';
 import { OfisHeroAiSection } from '../home/OfisHeroAiSection';
 import { optimizeImageUrl } from '../../utils/imageOptimizer';
+import { ReflectivePillarIcon, PillarType } from '../ReflectivePillarIcon';
 
 const PIDGIN_GREETINGS = [
   'Twale my great boss🙌🏼',
@@ -156,7 +157,7 @@ const CATEGORIES_DATA = [
     icon: Laptop,
     badge: 'WORK',
     startRate: '₦1,500/hr',
-    bgGradient: 'from-emerald-500/10 to-teal-500/5'
+    bgGradient: 'from-teal-500/10 to-teal-600/5'
   },
   {
     id: 'meeting-room',
@@ -290,14 +291,25 @@ export const LandingPage: React.FC = () => {
     : indigenousLocales[Math.floor((cycleStep % (2 * indigenousLocales.length)) / 2) % indigenousLocales.length];
 
   const hour = new Date().getHours();
-  const baseFirstName = currentUser && currentUser.id !== 'guest' && currentUser.id !== 'guest-user' && currentUser.name 
+  const isGuestUser = !currentUser || currentUser.id === 'guest' || currentUser.id === 'guest-user' || /guest/i.test(currentUser.name || '');
+  const baseFirstName = currentUser && !isGuestUser && currentUser.name 
     ? currentUser.name.split(' ')[0] 
     : '';
 
-  const localizedName = baseFirstName ? currentLocale.formatName(baseFirstName) : 'Chief';
   const currentPidginPhrase = PIDGIN_GREETINGS[randomPidginIndex];
   const greetingPhrase = currentLocale.getGreeting(hour, currentPidginPhrase);
-  const greetingText = `${greetingPhrase}, ${localizedName}`;
+
+  let greetingText: string;
+  if (isGuestUser) {
+    if (currentLocale.code === 'en') {
+      greetingText = `${greetingPhrase}, Guest`;
+    } else {
+      greetingText = greetingPhrase;
+    }
+  } else {
+    const localizedName = baseFirstName ? currentLocale.formatName(baseFirstName) : 'Chief';
+    greetingText = `${greetingPhrase}, ${localizedName}`;
+  }
 
   // Filter curated featured spaces
   const featuredSpaces = allSpaces
@@ -355,35 +367,35 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           
           <div className="space-y-1">
-            <div className="flex items-center justify-center space-x-2 text-[#10B981]">
+            <div className="flex items-center justify-center space-x-2 text-[#0F766E] dark:text-[#14B8A6]">
               <Zap className="w-5 h-5" />
               <span className="text-xl sm:text-2xl font-black font-mono">100% Power</span>
             </div>
-            <p className="text-xs text-[#6B7280] dark:text-[#94A3B8]">Dual Diesel + Solar Hybrid Backup</p>
+            <p className="text-xs text-[#475569] dark:text-[#94A3B8]">Dual Diesel + Solar Hybrid Backup</p>
           </div>
 
           <div className="space-y-1">
-            <div className="flex items-center justify-center space-x-2 text-[#10B981]">
+            <div className="flex items-center justify-center space-x-2 text-[#0F766E] dark:text-[#14B8A6]">
               <Wifi className="w-5 h-5" />
               <span className="text-xl sm:text-2xl font-black font-mono">100+ Mbps</span>
             </div>
-            <p className="text-xs text-[#6B7280] dark:text-[#94A3B8]">Dedicated Enterprise Fiber Optic</p>
+            <p className="text-xs text-[#475569] dark:text-[#94A3B8]">Dedicated Enterprise Fiber Optic</p>
           </div>
 
           <div className="space-y-1">
-            <div className="flex items-center justify-center space-x-2 text-[#10B981]">
+            <div className="flex items-center justify-center space-x-2 text-[#0F766E] dark:text-[#14B8A6]">
               <Building2 className="w-5 h-5" />
               <span className="text-xl sm:text-2xl font-black font-mono">200+ Hubs</span>
             </div>
-            <p className="text-xs text-[#6B7280] dark:text-[#94A3B8]">Vetted in Lagos, Abuja & PH</p>
+            <p className="text-xs text-[#475569] dark:text-[#94A3B8]">Vetted in Lagos, Abuja & PH</p>
           </div>
 
           <div className="space-y-1">
-            <div className="flex items-center justify-center space-x-2 text-[#10B981]">
+            <div className="flex items-center justify-center space-x-2 text-[#0F766E] dark:text-[#14B8A6]">
               <QrCode className="w-5 h-5" />
               <span className="text-xl sm:text-2xl font-black font-mono">15s Check-in</span>
             </div>
-            <p className="text-xs text-[#6B7280] dark:text-[#94A3B8]">Instant Turnstile QR Mobile Passes</p>
+            <p className="text-xs text-[#475569] dark:text-[#94A3B8]">Instant Turnstile QR Mobile Passes</p>
           </div>
 
         </div>
@@ -395,13 +407,13 @@ export const LandingPage: React.FC = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
-            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#10B981]">
+            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
               Prime Hubs Across Nigeria
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight mt-1">
               Popular Cities & Neighborhoods
             </h2>
-            <p className="text-sm text-[#6B7280] dark:text-[#94A3B8] mt-1">
+            <p className="text-sm text-[#475569] dark:text-[#94A3B8] mt-1">
               Discover verified workspaces in Nigeria&apos;s fastest growing tech and commercial zones.
             </p>
           </div>
@@ -412,7 +424,7 @@ export const LandingPage: React.FC = () => {
               setCurrentView('map');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="inline-flex items-center space-x-2 text-xs font-bold text-[#10B981] hover:underline cursor-pointer"
+            className="inline-flex items-center space-x-2 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] hover:underline cursor-pointer"
           >
             <Compass className="w-4 h-4" />
             <span>Explore Interactive Map</span>
@@ -445,12 +457,12 @@ export const LandingPage: React.FC = () => {
 
               {/* City Details */}
               <div className="relative z-10 space-y-1.5 text-white">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#10B981] font-bold">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#14B8A6] font-bold">
                   {city.tag}
                 </span>
                 <h3 className="text-xl font-extrabold flex items-center justify-between">
                   <span>{city.name}</span>
-                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-[#10B981]" />
+                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-[#14B8A6]" />
                 </h3>
                 <p className="text-xs text-[#CBD5E1] line-clamp-1">
                   {city.neighborhoods}
@@ -468,13 +480,13 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           
           <div className="text-center max-w-2xl mx-auto space-y-2 mb-12">
-            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#10B981]">
+            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
               Every Way You Work
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
               Spaces Tailored to Your Workday
             </h2>
-            <p className="text-sm text-[#6B7280] dark:text-[#94A3B8]">
+            <p className="text-sm text-[#475569] dark:text-[#94A3B8]">
               From quiet solo focus pods to 50-person broadcast studios and executive suites.
             </p>
           </div>
@@ -487,31 +499,33 @@ export const LandingPage: React.FC = () => {
                 <div
                   key={cat.id}
                   onClick={() => handleCategorySelect(cat.id)}
-                  className="p-6 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981]/50 hover:shadow-lg transition-all cursor-pointer group flex flex-col justify-between space-y-6"
+                  className="p-6 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#0F766E]/50 hover:shadow-lg transition-all cursor-pointer group flex flex-col justify-between space-y-6"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase bg-white dark:bg-[#1E293B] text-[#6B7280] dark:text-[#94A3B8] border border-[#E5E7EB] dark:border-[#1E293B]">
+                      <ReflectivePillarIcon
+                        pillar={cat.badge.toLowerCase() as PillarType}
+                        size="md"
+                        showMirrorReflect={true}
+                      />
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase bg-white dark:bg-[#102A3D] text-[#0F766E] dark:text-[#14B8A6] border border-[#D9E1E3] dark:border-[#1E3A4D]">
                         {cat.badge}
                       </span>
                     </div>
 
                     <div className="space-y-1">
-                      <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#047857] dark:group-hover:text-[#10B981] transition-colors">
+                      <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#0F766E] dark:group-hover:text-[#14B8A6] transition-colors">
                         {cat.title}
                       </h3>
-                      <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
+                      <p className="text-xs text-[#334155] dark:text-[#94A3B8] leading-relaxed">
                         {cat.tagline}
                       </p>
                     </div>
                   </div>
 
                   <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#1E293B] flex items-center justify-between text-xs">
-                    <span className="font-mono font-bold text-[#047857] dark:text-[#10B981]">From {cat.startRate}</span>
-                    <span className="text-[#374151] dark:text-[#94A3B8] group-hover:text-[#111827] dark:group-hover:text-white font-semibold flex items-center space-x-1">
+                    <span className="font-mono font-bold text-[#0F766E] dark:text-[#14B8A6]">From {cat.startRate}</span>
+                    <span className="text-[#334155] dark:text-[#94A3B8] group-hover:text-[#111827] dark:group-hover:text-white font-semibold flex items-center space-x-1">
                       <span>Browse</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </span>
@@ -530,13 +544,13 @@ export const LandingPage: React.FC = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
-            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#047857] dark:text-[#10B981]">
+            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
               Curated Excellence
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight mt-1">
               Featured Nigerian Workspaces
             </h2>
-            <p className="text-sm text-[#374151] dark:text-[#94A3B8] mt-1">
+            <p className="text-sm text-[#475569] dark:text-[#94A3B8] mt-1">
               Top-rated spaces verified for power uptime, high internet bandwidth, and exceptional host standards.
             </p>
           </div>
@@ -547,10 +561,10 @@ export const LandingPage: React.FC = () => {
               setCurrentView('explore');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="px-5 py-2.5 rounded-xl bg-white dark:bg-[#172033] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E293B] text-xs font-bold text-[#111827] dark:text-[#F8FAFC] hover:border-[#10B981]/50 shadow-2xs transition-all flex items-center space-x-2 cursor-pointer self-start md:self-auto"
+            className="px-5 py-2.5 rounded-xl bg-white dark:bg-[#172033] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E293B] text-xs font-bold text-[#111827] dark:text-[#F8FAFC] hover:border-[#0F766E]/50 shadow-2xs transition-all flex items-center space-x-2 cursor-pointer self-start md:self-auto"
           >
             <span>View All ({allSpaces.length}) Spaces</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#10B981]" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
           </button>
         </div>
 
@@ -566,72 +580,17 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. WHY OFIS VS TRADITIONAL LEASES / CAFES                                */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#101827] border-y border-[#E5E7EB] dark:border-[#1E293B]">
-        <div className="max-w-7xl mx-auto">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-2 mb-14">
-            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#047857] dark:text-[#10B981]">
-              The OFIS Standard
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
-              Why High-Performers Choose OFIS
-            </h2>
-            <p className="text-sm text-[#374151] dark:text-[#94A3B8]">
-              Say goodbye to noisy cafes, 2-year upfront commercial rent lock-in, and unpredictable grid blackouts.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            <div className="p-8 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#047857] dark:text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
-                <Zap className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC]">100% Uninterrupted Power</h3>
-              <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
-                Every space is audited for automated dual generator + solar pure sine inverter auto-switchover with 0.00ms switchover lag. Your zoom calls never drop.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#047857] dark:text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
-                <Wifi className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC]">Enterprise Dedicated Fiber</h3>
-              <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
-                Speed-tested 50Mbps to 300Mbps low-latency fiber lines from top ISPs (Starlink, MainOne, ipNX) with wired ethernet backup for remote developers and creators.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#047857] dark:text-[#10B981] flex items-center justify-center border border-[#10B981]/30">
-                <QrCode className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC]">Zero-Friction QR Passes</h3>
-              <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
-                Book in seconds with Paystack/Flutterwave in Naira or USD. Arrive at the space and flash your digital QR pass at reception for immediate seamless access.
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 7. HOW IT WORKS (3 SIMPLE STEPS)                                          */}
+      {/* 6. HOW IT WORKS (3 SIMPLE STEPS)                                          */}
       {/* ========================================================================= */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto space-y-2 mb-14">
-          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#047857] dark:text-[#10B981]">
+          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
             Simple & Transparent
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
             How OFIS Works
           </h2>
-          <p className="text-sm text-[#374151] dark:text-[#94A3B8]">
+          <p className="text-sm text-[#475569] dark:text-[#94A3B8]">
             From search to turnstile pass in under 60 seconds.
           </p>
         </div>
@@ -640,33 +599,33 @@ export const LandingPage: React.FC = () => {
           
           {/* Step 1 */}
           <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#047857] dark:bg-[#10B981] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
               1
             </div>
             <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Discover & Compare</h3>
-            <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
+            <p className="text-xs text-[#334155] dark:text-[#94A3B8] leading-relaxed">
               Filter by city, neighborhood, desk type, verified power rating, and live availability on our interactive map.
             </p>
           </div>
 
           {/* Step 2 */}
           <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#047857] dark:bg-[#10B981] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
               2
             </div>
             <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Book Instantly</h3>
-            <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
+            <p className="text-xs text-[#334155] dark:text-[#94A3B8] leading-relaxed">
               Choose an hour, full day, or multi-day pass. Checkout securely via Paystack, card, or wallet with instant confirmation.
             </p>
           </div>
 
           {/* Step 3 */}
           <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#047857] dark:bg-[#10B981] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
               3
             </div>
             <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Scan & Get to Work</h3>
-            <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed">
+            <p className="text-xs text-[#334155] dark:text-[#94A3B8] leading-relaxed">
               Scan your digital QR pass at the entrance. Get high-speed Wi-Fi credentials automatically and focus on what matters.
             </p>
           </div>
@@ -679,7 +638,7 @@ export const LandingPage: React.FC = () => {
       {/* ========================================================================= */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#101827] border-y border-[#E5E7EB] dark:border-[#1E293B]">
         <div className="max-w-7xl mx-auto text-center space-y-6">
-          <p className="text-xs font-bold font-mono uppercase tracking-widest text-[#6B7280] dark:text-[#94A3B8]">
+          <p className="text-xs font-bold font-mono uppercase tracking-widest text-[#475569] dark:text-[#94A3B8]">
             Trusted by teams & remote professionals across Africa
           </p>
           <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 opacity-60 dark:opacity-50 grayscale hover:grayscale-0 transition-all">
@@ -697,7 +656,7 @@ export const LandingPage: React.FC = () => {
       {/* ========================================================================= */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto space-y-2 mb-12">
-          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#10B981]">
+          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
             Verified Feedback
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
@@ -727,7 +686,7 @@ export const LandingPage: React.FC = () => {
                   src={optimizeImageUrl(t.avatar, { width: 100, quality: 80 })}
                   alt={t.name}
                   loading="lazy"
-                  className="w-10 h-10 rounded-full object-cover border border-[#10B981]/50"
+                  className="w-10 h-10 rounded-full object-cover border border-[#0F766E]/50"
                 />
                 <div className="text-left">
                   <h3 className="text-xs font-bold text-[#111827] dark:text-[#F8FAFC]">{t.name}</h3>
@@ -746,7 +705,7 @@ export const LandingPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Guest CTA Card */}
-          <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#10B981] to-[#059669] text-white shadow-xl space-y-6 flex flex-col justify-between">
+          <div className="p-8 sm:p-12 rounded-3xl bg-[#0F766E] text-white shadow-xl space-y-6 flex flex-col justify-between border border-[#14B8A6]/30">
             <div className="space-y-3">
               <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-mono font-bold uppercase">
                 For Guests & Teams
@@ -754,7 +713,7 @@ export const LandingPage: React.FC = () => {
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
                 Ready to Find Your Focus Hub?
               </h2>
-              <p className="text-sm text-emerald-50 leading-relaxed max-w-md">
+              <p className="text-sm text-[#CBD5E1] leading-relaxed max-w-md">
                 Book a hot desk, boardroom, or creator suite in under 60 seconds with instant digital pass access.
               </p>
             </div>
@@ -767,7 +726,7 @@ export const LandingPage: React.FC = () => {
                   setCurrentView('explore');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-6 py-3.5 rounded-2xl bg-white text-[#065F46] hover:bg-emerald-50 font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-2xl bg-white text-[#0B1F33] hover:bg-[#F5F7F7] font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
               >
                 <span>Explore All Spaces</span>
                 <ArrowRight className="w-4 h-4 stroke-[3]" />
@@ -776,9 +735,9 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Host CTA Card */}
-          <div className="p-8 sm:p-12 rounded-3xl bg-[#172033] border border-[#1E293B] text-white shadow-xl space-y-6 flex flex-col justify-between">
+          <div className="p-8 sm:p-12 rounded-3xl bg-[#0B1F33] border border-[#1E3A4D] text-white shadow-xl space-y-6 flex flex-col justify-between">
             <div className="space-y-3">
-              <span className="px-3 py-1 rounded-full bg-[#10B981]/20 border border-[#10B981]/30 text-[#10B981] text-[10px] font-mono font-bold uppercase">
+              <span className="px-3 py-1 rounded-full bg-[#0F766E]/20 border border-[#0F766E]/30 text-[#14B8A6] text-[10px] font-mono font-bold uppercase">
                 For Property Owners & Hosts
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -797,7 +756,7 @@ export const LandingPage: React.FC = () => {
                   setCurrentView('become_host');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-6 py-3.5 rounded-2xl bg-[#047857] hover:bg-[#065F46] text-white font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
               >
                 <span>Calculate Earnings</span>
                 <ArrowRight className="w-4 h-4 stroke-[3]" />

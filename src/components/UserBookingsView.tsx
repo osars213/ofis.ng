@@ -47,22 +47,22 @@ export const UserBookingsView: React.FC = () => {
       case 'reserved':
         return { label: 'Reserved', className: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30' };
       case 'confirmed':
-        return { label: 'Confirmed', className: 'bg-[#DCFCE7] dark:bg-[#16A34A]/20 text-[#16A34A] border-[#16A34A]/30' };
+        return { label: 'Confirmed', className: 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] border-[#0F766E]/30' };
       case 'ready_for_checkin':
         return { label: 'Ready for Check-In', className: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/30' };
       case 'checked_in':
-        return { label: 'Checked In', className: 'bg-[#DCFCE7] dark:bg-[#16A34A]/25 text-[#16A34A] border-[#16A34A]/40' };
+        return { label: 'Checked In', className: 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 text-[#0F766E] dark:text-[#14B8A6] border-[#0F766E]/40' };
       case 'in_progress':
       case 'active':
-        return { label: 'In Progress', className: 'bg-[#DCFCE7] dark:bg-[#16A34A]/25 text-[#16A34A] border-[#16A34A]/40' };
+        return { label: 'In Progress', className: 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 text-[#0F766E] dark:text-[#14B8A6] border-[#0F766E]/40' };
       case 'completed':
         return { label: 'Completed', className: 'bg-[#F1F5F9] dark:bg-[#374151] text-[#6B7280] dark:text-[#D1D5DB] border-[#E5E7EB] dark:border-[#4B5563]' };
       case 'reviewed':
-        return { label: 'Reviewed', className: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' };
+        return { label: 'Reviewed', className: 'bg-teal-600/10 text-teal-700 dark:text-teal-500 border-teal-600/30' };
       case 'cancelled':
         return { label: 'Cancelled', className: 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/30' };
       default:
-        return { label: status, className: 'bg-[#DCFCE7] dark:bg-[#16A34A]/20 text-[#16A34A] border-[#16A34A]/30' };
+        return { label: status, className: 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] border-[#0F766E]/30' };
     }
   };
 
@@ -87,7 +87,7 @@ export const UserBookingsView: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('explore')}
-            className="px-3.5 py-2 rounded-xl bg-[#16A34A] hover:bg-[#15803D] text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
+            className="px-3.5 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
           >
             Find New Space
           </button>
@@ -129,7 +129,7 @@ export const UserBookingsView: React.FC = () => {
         ) : bookings.length === 0 ? (
           <div className="py-20 text-center space-y-4 max-w-md mx-auto">
             <div className="w-16 h-16 rounded-2xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] flex items-center justify-center mx-auto text-[#6B7280] dark:text-[#9CA3AF] shadow-sm">
-              <CalendarCheck className="w-8 h-8 text-[#16A34A]" />
+              <CalendarCheck className="w-8 h-8 text-[#0F766E] dark:text-[#14B8A6]" />
             </div>
             <h3 className="text-lg font-bold text-[#111827] dark:text-[#F9FAFB]">No active passes</h3>
             <p className="text-xs text-[#6B7280] dark:text-[#9CA3AF] leading-relaxed">
@@ -138,7 +138,7 @@ export const UserBookingsView: React.FC = () => {
             <button
               type="button"
               onClick={() => setCurrentView('explore')}
-              className="px-5 py-2.5 rounded-xl bg-[#16A34A] hover:bg-[#15803D] text-white text-xs font-bold shadow-md cursor-pointer transition-colors"
+              className="px-5 py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold shadow-md cursor-pointer transition-colors"
             >
               Explore Spaces
             </button>
@@ -156,7 +156,7 @@ export const UserBookingsView: React.FC = () => {
               return (
                 <div
                   key={b.id}
-                  className="p-5 rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] hover:border-[#16A34A]/40 shadow-xs transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+                  className="p-5 rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] hover:border-[#0F766E]/40 shadow-xs transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
                 >
                   <div className="flex items-start sm:items-center space-x-4 min-w-0">
                     <img
@@ -178,7 +178,7 @@ export const UserBookingsView: React.FC = () => {
                             title={hasReminder ? "Reminder active (30m before). Click to disable." : "Click to set 30-min reminder"}
                             className={`flex items-center space-x-1 px-1.5 py-0.5 rounded text-[10px] font-mono transition-colors cursor-pointer ${
                               hasReminder
-                                ? 'bg-[#DCFCE7] dark:bg-[#16A34A]/20 text-[#16A34A] border border-[#16A34A]/30'
+                                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] border border-[#0F766E]/30'
                                 : 'bg-[#F1F5F9] dark:bg-[#374151] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] border border-[#E5E7EB] dark:border-[#4B5563]'
                             }`}
                           >
@@ -197,7 +197,7 @@ export const UserBookingsView: React.FC = () => {
                           {formatTime(b.startTime)} – {formatTime(b.endTime || '17:00')} ({b.durationHours} hrs)
                         </span>
                         <span>•</span>
-                        <span className="font-mono font-semibold text-[#16A34A]">{formatPrice(b.totalAmount)}</span>
+                        <span className="font-mono font-semibold text-[#0F766E] dark:text-[#14B8A6]">{formatPrice(b.totalAmount)}</span>
                       </div>
                     </div>
                   </div>
@@ -215,7 +215,7 @@ export const UserBookingsView: React.FC = () => {
                             setIsDigitalPassOpen(true);
                           }
                         }}
-                        className="px-3.5 py-2 rounded-xl bg-[#DCFCE7] dark:bg-[#16A34A]/20 hover:bg-[#BBF7D0] dark:hover:bg-[#16A34A]/30 text-[#16A34A] text-xs font-bold flex items-center space-x-1.5 border border-[#16A34A]/30 shadow-xs cursor-pointer active:scale-95 transition-all"
+                        className="px-3.5 py-2 rounded-xl bg-[#0F766E]/15 dark:bg-[#0F766E]/20 hover:bg-[#BBF7D0] dark:hover:bg-[#0F766E]/30 text-[#0F766E] dark:text-[#14B8A6] text-xs font-bold flex items-center space-x-1.5 border border-[#0F766E]/30 shadow-xs cursor-pointer active:scale-95 transition-all"
                       >
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Check In</span>
@@ -230,7 +230,7 @@ export const UserBookingsView: React.FC = () => {
                           setActiveDigitalPassBooking(b);
                           setIsDigitalPassOpen(true);
                         }}
-                        className="px-4 py-2 rounded-xl bg-[#16A34A] hover:bg-[#15803D] text-white text-xs font-bold flex items-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer transition-all"
+                        className="px-4 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold flex items-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer transition-all"
                       >
                         <QrCode className="w-4 h-4" />
                         <span>Digital Pass</span>

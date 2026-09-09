@@ -92,15 +92,15 @@ export const Footer: React.FC = () => {
             </p>
 
             <div className="pt-2 flex flex-wrap gap-2 text-xs">
-              <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/25 font-mono">
+              <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/10 text-[#0F766E] dark:text-[#14B8A6] border border-[#0F766E]/30 font-mono">
                 <Zap className="w-3 h-3" />
                 <span>100% Power Uptime</span>
               </span>
-              <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/25 font-mono">
+              <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/10 text-[#0F766E] dark:text-[#14B8A6] border border-[#0F766E]/30 font-mono">
                 <Wifi className="w-3 h-3" />
                 <span>100+ Mbps Fiber</span>
               </span>
-              <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/25 font-mono">
+              <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/10 text-[#0F766E] dark:text-[#14B8A6] border border-[#0F766E]/30 font-mono">
                 <ShieldCheck className="w-3 h-3" />
                 <span>Vetted Hubs</span>
               </span>
@@ -118,7 +118,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCityClick('Lagos')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Lagos (VI, Lekki, Ikeja)
                   </button>
@@ -127,7 +127,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCityClick('Abuja')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Abuja (Maitama, CBD)
                   </button>
@@ -136,7 +136,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCityClick('Port Harcourt')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Port Harcourt (Old GRA)
                   </button>
@@ -145,7 +145,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCityClick('Ibadan')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Ibadan (Bodija, Ring Rd)
                   </button>
@@ -154,7 +154,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('map')}
-                    className="text-[#10B981] hover:underline font-semibold flex items-center space-x-1 cursor-pointer pt-1"
+                    className="text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center space-x-1 cursor-pointer pt-1"
                   >
                     <MapPin className="w-3 h-3" />
                     <span>View Map Directory</span>
@@ -171,7 +171,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCategoryClick('coworking')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Coworking Desks
                   </button>
@@ -180,7 +180,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCategoryClick('private-office')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Private Offices
                   </button>
@@ -189,7 +189,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCategoryClick('meeting-room')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Meeting Rooms
                   </button>
@@ -198,7 +198,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCategoryClick('studio')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Podcast & Media Studios
                   </button>
@@ -207,7 +207,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCategoryClick('event-space')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Event & Demo Spaces
                   </button>
@@ -223,7 +223,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('become_host')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Become a Space Host
                   </button>
@@ -232,7 +232,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => setIsListSpaceModalOpen(true)}
-                    className="text-[#10B981] hover:underline font-semibold flex items-center space-x-1 cursor-pointer"
+                    className="text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center space-x-1 cursor-pointer"
                   >
                     <span>List Your Space</span>
                     <ArrowRight className="w-3 h-3" />
@@ -242,7 +242,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('host_dashboard')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Host Operations Portal
                   </button>
@@ -251,7 +251,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('faq')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Host Standards & Payouts
                   </button>
@@ -260,7 +260,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => setIsDiagnosticsModalOpen(true)}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     IoT Telemetry Diagnostics
                   </button>
@@ -276,7 +276,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('about')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     About OFIS
                   </button>
@@ -285,7 +285,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('contact')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left inline-block"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left inline-block"
                   >
                     Contact Us
                   </button>
@@ -294,7 +294,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('help')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Help Center & Guides
                   </button>
@@ -303,7 +303,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('faq')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Frequently Asked Questions
                   </button>
@@ -312,7 +312,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => setIsDownloadAppModalOpen(true)}
-                    className="text-[#10B981] hover:underline font-semibold flex items-center space-x-1.5 cursor-pointer text-left"
+                    className="text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center space-x-1.5 cursor-pointer text-left"
                   >
                     <Smartphone className="w-3.5 h-3.5" />
                     <span>Download Mobile App</span>
@@ -322,7 +322,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('privacy')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Privacy Policy (NDPR)
                   </button>
@@ -331,7 +331,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('terms')}
-                    className="hover:text-[#10B981] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
                   >
                     Terms of Service
                   </button>
@@ -356,7 +356,7 @@ export const Footer: React.FC = () => {
             
             {/* Currency Selector */}
             <div className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#172033] border border-[#1E293B] text-xs">
-              <Globe className="w-3.5 h-3.5 text-[#10B981]" />
+              <Globe className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
               <select
                 id="footer-currency-select"
                 value={currency}

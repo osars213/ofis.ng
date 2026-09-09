@@ -29,52 +29,52 @@ export const StickyBookingBar: React.FC<StickyBookingBarProps> = ({
   const pricing = getSpacePricing(space);
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#1E2522] py-3.5 px-4 sm:px-8 shadow-lg dark:shadow-2xl transition-all">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#071521]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#1E3A4D] py-3.5 px-4 sm:px-8 shadow-lg dark:shadow-2xl transition-all">
       <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
         
         {/* Left: Price & Selected Slot Indicator */}
         <div className="flex items-center space-x-4 min-w-0">
           <div>
             <div className="flex items-baseline space-x-1.5">
-              <span className="text-xl sm:text-2xl font-extrabold text-[#16A34A] font-mono tracking-tight">
+              <span className="text-xl sm:text-2xl font-extrabold text-[#0F766E] dark:text-[#14B8A6] font-mono tracking-tight">
                 {formatPrice(pricing.rate)}
               </span>
-              <span className="text-xs text-[#6B7280] dark:text-[#718079]">/ {pricing.period}</span>
+              <span className="text-xs text-[#6B7280] dark:text-[#94A3B8]">/ {pricing.period}</span>
               {pricing.basis === 'person' && (
-                <span className="text-[10px] text-[#16A34A] font-mono bg-[#DCFCE7] dark:bg-[#16A34A]/10 px-1.5 py-0.5 rounded border border-[#16A34A]/20">
+                <span className="text-[10px] text-[#0F766E] dark:text-[#14B8A6] font-mono bg-[#0F766E]/10 dark:bg-[#0F766E]/20 px-1.5 py-0.5 rounded border border-[#0F766E]/30">
                   per seat
                 </span>
               )}
             </div>
             
-            <div className="flex items-center space-x-2 text-[11px] text-[#6B7280] dark:text-[#9EABA3]">
+            <div className="flex items-center space-x-2 text-[11px] text-[#6B7280] dark:text-[#94A3B8]">
               {space.pricePerDay && pricing.period === 'hour' && (
                 <>
                   <span className="hidden sm:inline font-mono">
                     Full Day: {formatPrice(space.pricePerDay)}
                   </span>
-                  <span className="hidden sm:inline text-[#9CA3AF] dark:text-[#718079]">•</span>
+                  <span className="hidden sm:inline text-[#9CA3AF] dark:text-[#64748B]">•</span>
                 </>
               )}
               
               {/* Selected Slot / Live Status */}
-              <div className="flex items-center space-x-1 font-medium text-[#111827] dark:text-[#F2F2F2]">
+              <div className="flex items-center space-x-1 font-medium text-[#111827] dark:text-[#F8FAFC]">
                 {selectedDate && selectedTime ? (
                   <>
-                    <Clock className="w-3 h-3 text-[#16A34A]" />
-                    <span className="text-[#16A34A] font-bold">{selectedDate} @ {selectedTime}</span>
+                    <Clock className="w-3 h-3 text-[#0F766E] dark:text-[#14B8A6]" />
+                    <span className="text-[#0F766E] dark:text-[#14B8A6] font-bold">{selectedDate} @ {selectedTime}</span>
                   </>
                 ) : isAvailableNow ? (
                   <>
                     <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#16A34A] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#16A34A]" />
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#14B8A6]" />
                     </span>
-                    <span className="text-[#16A34A] font-bold">Instant Pass Available</span>
+                    <span className="text-[#0F766E] dark:text-[#14B8A6] font-bold">Instant Pass Available</span>
                   </>
                 ) : nextSlot ? (
                   <>
-                    <Clock className="w-3 h-3 text-[#16A34A]" />
+                    <Clock className="w-3 h-3 text-[#0F766E] dark:text-[#14B8A6]" />
                     <span>Next: {nextSlot.label}</span>
                   </>
                 ) : (
@@ -91,7 +91,7 @@ export const StickyBookingBar: React.FC<StickyBookingBarProps> = ({
             <button
               type="button"
               onClick={onContactHost}
-              className="p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#141816] hover:bg-[#F1F5F9] dark:hover:bg-[#18201B] border border-[#E5E7EB] dark:border-[#232D28] text-[#6B7280] dark:text-[#9EABA3] hover:text-[#16A34A] transition-colors active:scale-95 hidden sm:flex items-center justify-center cursor-pointer shadow-2xs"
+              className="p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B1F33] hover:bg-[#F1F5F9] dark:hover:bg-[#102A3D] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors active:scale-95 hidden sm:flex items-center justify-center cursor-pointer shadow-2xs"
               title="Message Host"
               aria-label="Message Host"
             >
@@ -103,7 +103,7 @@ export const StickyBookingBar: React.FC<StickyBookingBarProps> = ({
             <button
               type="button"
               onClick={onDirections}
-              className="p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#141816] hover:bg-[#F1F5F9] dark:hover:bg-[#18201B] border border-[#E5E7EB] dark:border-[#232D28] text-[#6B7280] dark:text-[#9EABA3] hover:text-[#16A34A] transition-colors active:scale-95 hidden sm:flex items-center justify-center cursor-pointer shadow-2xs"
+              className="p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B1F33] hover:bg-[#F1F5F9] dark:hover:bg-[#102A3D] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors active:scale-95 hidden sm:flex items-center justify-center cursor-pointer shadow-2xs"
               title="Directions"
               aria-label="Get Directions"
             >
@@ -114,7 +114,7 @@ export const StickyBookingBar: React.FC<StickyBookingBarProps> = ({
           <button
             type="button"
             onClick={onBookNow}
-            className="px-5 sm:px-8 py-3.5 rounded-2xl bg-[#16A34A] hover:bg-[#15803D] text-white font-black text-xs sm:text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
+            className="px-5 sm:px-8 py-3.5 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-black text-xs sm:text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
           >
             <span>
               {selectedDate && selectedTime ? `Book Slot (${selectedTime})` : 'Book Instant Pass'}

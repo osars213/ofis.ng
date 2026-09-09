@@ -94,7 +94,7 @@ export const App: React.FC = () => {
   const showFooter = currentView !== 'map';
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1220] text-[#111827] dark:text-[#F8FAFC] flex flex-col font-sans selection:bg-[#10B981] selection:text-white transition-colors duration-150">
+    <div className="min-h-screen bg-[#F5F7F7] dark:bg-[#071521] text-[#172B3A] dark:text-[#F8FAFC] flex flex-col font-sans selection:bg-[#0F766E] selection:text-white transition-colors duration-150">
       {/* Top Navbar */}
       <Navbar />
 

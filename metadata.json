@@ -1,6 +1,6 @@
 {
-  "name": "OFIS — Africa's Physical Space Network",
-  "description": "Discover, book and manage premium workspaces across Africa. OFIS is building the infrastructure that connects businesses, creators and workspace operators through one trusted booking network.",
+  "name": "OFIS — Nigeria's Physical Space Network",
+  "description": "Discover, compare and book the right space for work, meetings, events and more across Nigeria. OFIS is Nigeria's physical space network.",
   "requestFramePermissions": [
     "geolocation"
   ],

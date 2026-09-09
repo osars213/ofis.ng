@@ -63,11 +63,11 @@ export const AppSplashScreen: React.FC<AppSplashScreenProps> = ({
       }`}
     >
       {/* Background Architectural Ambient Radial Orbs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 dark:bg-emerald-500/15 rounded-full blur-3xl pointer-events-none animate-pulse duration-1000" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-600/10 dark:bg-teal-600/15 rounded-full blur-3xl pointer-events-none animate-pulse duration-1000" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] bg-lime-400/10 dark:bg-lime-400/10 rounded-full blur-2xl pointer-events-none" />
 
       {/* Decorative Revolving Arcs */}
-      <div className="absolute w-[360px] h-[360px] sm:w-[460px] sm:h-[460px] rounded-full border border-emerald-500/15 dark:border-emerald-500/25 animate-[ofis-spin-slow_24s_linear_infinite] pointer-events-none" />
+      <div className="absolute w-[360px] h-[360px] sm:w-[460px] sm:h-[460px] rounded-full border border-teal-600/15 dark:border-teal-600/25 animate-[ofis-spin-slow_24s_linear_infinite] pointer-events-none" />
       <div className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] rounded-full border border-dashed border-lime-500/20 dark:border-lime-500/30 animate-[ofis-spin-reverse_30s_linear_infinite] pointer-events-none" />
 
       {/* Main Logo & Breathing Centerpiece */}
@@ -75,9 +75,9 @@ export const AppSplashScreen: React.FC<AppSplashScreenProps> = ({
         {/* Breathing Logo Icon Emblem with Light Rays */}
         <div className="relative mb-6">
           {/* Breathing Glow Halo */}
-          <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-emerald-500/30 to-lime-400/30 blur-xl animate-pulse" />
+          <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-teal-600/30 to-lime-400/30 blur-xl animate-pulse" />
           
-          <div className="relative p-3 rounded-2xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-emerald-500/20 dark:border-emerald-500/30 shadow-2xl animate-bounce-subtle">
+          <div className="relative p-3 rounded-2xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-teal-600/20 dark:border-teal-600/30 shadow-2xl animate-bounce-subtle">
             <OFISWordmark 
               variant="mark-only" 
               size="hero" 
@@ -102,23 +102,23 @@ export const AppSplashScreen: React.FC<AppSplashScreenProps> = ({
           <span className="text-[11px] sm:text-xs font-black uppercase tracking-[0.22em] text-slate-800 dark:text-slate-200">
             FIND THE RIGHT SPACE.
           </span>
-          <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.25em] text-emerald-600 dark:text-lime-400">
+          <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.25em] text-teal-700 dark:text-lime-400">
             BOOK IT WHEN YOU NEED IT.
           </span>
         </div>
 
         {/* Progress Bar & Status Text */}
         <div className="w-full max-w-xs space-y-2.5">
-          <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-emerald-500/20">
+          <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-teal-600/20">
             <div 
-              className="h-full bg-gradient-to-r from-emerald-600 via-emerald-400 to-lime-400 rounded-full transition-all duration-300 ease-out shadow-[0_0_10px_rgba(74,222,128,0.5)]"
+              className="h-full bg-gradient-to-r from-teal-700 via-teal-500 to-lime-400 rounded-full transition-all duration-300 ease-out shadow-[0_0_10px_rgba(74,222,128,0.5)]"
               style={{ width: `${progress}%` }}
             />
           </div>
 
           <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 px-1">
             <span className="truncate pr-2">{statusMessage}</span>
-            <span className="font-bold text-emerald-600 dark:text-emerald-400">{progress}%</span>
+            <span className="font-bold text-teal-700 dark:text-teal-500">{progress}%</span>
           </div>
         </div>
       </div>

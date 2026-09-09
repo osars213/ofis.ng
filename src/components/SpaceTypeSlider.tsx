@@ -98,7 +98,7 @@ export const SpaceTypeSlider: React.FC = () => {
           <button
             type="button"
             onClick={() => setActiveCategory('all')}
-            className="text-xs text-[#16A34A] hover:underline font-semibold flex items-center space-x-1"
+            className="text-xs text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center space-x-1"
           >
             <span>Show all</span>
             <ArrowRight className="w-3 h-3" />
@@ -124,8 +124,8 @@ export const SpaceTypeSlider: React.FC = () => {
               }}
               className={`group relative rounded-2xl overflow-hidden text-left border transition-all duration-200 aspect-[4/5] flex flex-col justify-between p-3.5 sm:p-4 shadow-xs ${
                 isSelected 
-                  ? 'border-[#16A34A] ring-2 ring-[#16A34A]/30' 
-                  : 'border-[#E5E7EB] dark:border-[#374151] hover:border-[#16A34A]/50'
+                  ? 'border-[#0F766E] ring-2 ring-[#0F766E]/30' 
+                  : 'border-[#E5E7EB] dark:border-[#374151] hover:border-[#0F766E]/50'
               }`}
             >
               {/* Background Image */}
@@ -142,7 +142,7 @@ export const SpaceTypeSlider: React.FC = () => {
                   {type.pillar}
                 </span>
                 <div className={`p-1.5 rounded-lg backdrop-blur-md transition-colors ${
-                  isSelected ? 'bg-[#16A34A] text-white' : 'bg-black/60 text-white'
+                  isSelected ? 'bg-[#0F766E] text-white' : 'bg-black/60 text-white'
                 }`}>
                   <Icon className="w-3.5 h-3.5" />
                 </div>

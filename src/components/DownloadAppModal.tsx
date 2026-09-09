@@ -59,7 +59,7 @@ export const DownloadAppModal: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-[#E5E7EB] dark:border-[#1E293B] bg-gradient-to-r from-white to-[#F8FAFC] dark:from-[#101827] dark:to-[#172033]">
           <div className="flex items-center space-x-3">
-            <div className="w-11 h-11 rounded-2xl bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] flex items-center justify-center border border-[#10B981]/30 shadow-2xs">
+            <div className="w-11 h-11 rounded-2xl bg-[#0F766E]/15 dark:bg-[#0F766E]/15 text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center border border-[#0F766E]/30 shadow-2xs">
               <Smartphone className="w-5 h-5" />
             </div>
             <div>
@@ -99,7 +99,7 @@ export const DownloadAppModal: React.FC = () => {
               </div>
               <div className="space-y-1">
                 <p className="text-xs font-bold text-[#111827] dark:text-[#F8FAFC] flex items-center justify-center space-x-1">
-                  <QrCode className="w-3.5 h-3.5 text-[#10B981]" />
+                  <QrCode className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
                   <span>Scan with Phone Camera</span>
                 </p>
                 <p className="text-[11px] text-[#6B7280] dark:text-[#94A3B8]">
@@ -150,7 +150,7 @@ export const DownloadAppModal: React.FC = () => {
                 className="flex items-center justify-between p-3.5 rounded-2xl bg-[#111827] dark:bg-[#1E293B] hover:bg-black dark:hover:bg-[#253348] text-white border border-[#374151] transition-all group cursor-pointer shadow-sm"
               >
                 <div className="flex items-center space-x-3">
-                  <div className="w-6 h-6 flex items-center justify-center text-emerald-400 font-black text-sm">
+                  <div className="w-6 h-6 flex items-center justify-center text-teal-500 font-black text-sm">
                     ▶
                   </div>
                   <div className="text-left">
@@ -173,18 +173,18 @@ export const DownloadAppModal: React.FC = () => {
                       read: false
                     });
                   }}
-                  className="p-2.5 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981] text-[#111827] dark:text-[#F8FAFC] text-xs font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer"
+                  className="p-2.5 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#0F766E] text-[#111827] dark:text-[#F8FAFC] text-xs font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer"
                 >
-                  <Download className="w-3.5 h-3.5 text-[#10B981]" />
+                  <Download className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
                   <span>Direct APK</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={handleCopyInstallLink}
-                  className="p-2.5 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981] text-[#111827] dark:text-[#F8FAFC] text-xs font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer"
+                  className="p-2.5 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#0F766E] text-[#111827] dark:text-[#F8FAFC] text-xs font-bold flex items-center justify-center space-x-1.5 transition-all cursor-pointer"
                 >
-                  {copiedLink ? <Check className="w-3.5 h-3.5 text-[#10B981]" /> : <Copy className="w-3.5 h-3.5 text-[#10B981]" />}
+                  {copiedLink ? <Check className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" /> : <Copy className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />}
                   <span>{copiedLink ? 'Link Copied!' : 'Copy Link'}</span>
                 </button>
               </div>
@@ -204,11 +204,11 @@ export const DownloadAppModal: React.FC = () => {
                 placeholder="Enter your phone (+234...) or email address"
                 value={phoneNumberOrEmail}
                 onChange={(e) => setPhoneNumberOrEmail(e.target.value)}
-                className="flex-1 px-3.5 py-2.5 rounded-xl bg-white dark:bg-[#0B1220] border border-[#CBD5E1] dark:border-[#334155] text-xs text-[#111827] dark:text-[#F8FAFC] placeholder:text-[#94A3B8] focus:border-[#10B981] focus:outline-none"
+                className="flex-1 px-3.5 py-2.5 rounded-xl bg-white dark:bg-[#0B1220] border border-[#CBD5E1] dark:border-[#334155] text-xs text-[#111827] dark:text-[#F8FAFC] placeholder:text-[#94A3B8] focus:border-[#0F766E] focus:outline-none"
               />
               <button
                 type="submit"
-                className="px-4 py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white font-bold text-xs flex items-center justify-center space-x-1.5 transition-all cursor-pointer shrink-0 shadow-xs"
+                className="px-4 py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs flex items-center justify-center space-x-1.5 transition-all cursor-pointer shrink-0 shadow-xs"
               >
                 {isSent ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Send className="w-3.5 h-3.5" />}
                 <span>{isSent ? 'Link Dispatched!' : 'Send Link'}</span>
@@ -219,7 +219,7 @@ export const DownloadAppModal: React.FC = () => {
           {/* Mobile Highlights */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
             <div className="p-3 rounded-xl bg-white dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] space-y-1 text-center">
-              <div className="w-7 h-7 rounded-lg bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] flex items-center justify-center mx-auto text-xs">
+              <div className="w-7 h-7 rounded-lg bg-[#0F766E]/15 dark:bg-[#0F766E]/15 text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center mx-auto text-xs">
                 <Zap className="w-3.5 h-3.5" />
               </div>
               <h4 className="text-[11px] font-bold text-[#111827] dark:text-[#F8FAFC]">Offline QR Pass</h4>
@@ -227,7 +227,7 @@ export const DownloadAppModal: React.FC = () => {
             </div>
 
             <div className="p-3 rounded-xl bg-white dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] space-y-1 text-center">
-              <div className="w-7 h-7 rounded-lg bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] flex items-center justify-center mx-auto text-xs">
+              <div className="w-7 h-7 rounded-lg bg-[#0F766E]/15 dark:bg-[#0F766E]/15 text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center mx-auto text-xs">
                 <Wifi className="w-3.5 h-3.5" />
               </div>
               <h4 className="text-[11px] font-bold text-[#111827] dark:text-[#F8FAFC]">Power Telemetry</h4>
@@ -235,7 +235,7 @@ export const DownloadAppModal: React.FC = () => {
             </div>
 
             <div className="p-3 rounded-xl bg-white dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] space-y-1 text-center">
-              <div className="w-7 h-7 rounded-lg bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] flex items-center justify-center mx-auto text-xs">
+              <div className="w-7 h-7 rounded-lg bg-[#0F766E]/15 dark:bg-[#0F766E]/15 text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center mx-auto text-xs">
                 <ShieldCheck className="w-3.5 h-3.5" />
               </div>
               <h4 className="text-[11px] font-bold text-[#111827] dark:text-[#F8FAFC]">Instant Desk Hold</h4>

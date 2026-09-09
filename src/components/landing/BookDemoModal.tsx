@@ -63,34 +63,34 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in" onClick={onClose}>
       <div 
-        className="relative w-full max-w-lg bg-[#111827] border border-[#1F2937] rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden text-[#F9FAFB]"
+        className="relative w-full max-w-lg bg-[#0B1F33] border border-[#1E3A4D] rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(7,21,33,0.9)] overflow-hidden text-white"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Glow */}
-        <div className="absolute top-0 right-1/4 w-64 h-32 bg-[#10B981]/15 blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-64 h-32 bg-[#0F766E]/20 blur-3xl pointer-events-none" />
 
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#1F2937]/80 hover:bg-[#1F2937] flex items-center justify-center text-[#94A3B8] hover:text-[#F9FAFB] transition-colors cursor-pointer"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#071521] border border-[#1E3A4D] hover:border-[#14B8A6] flex items-center justify-center text-[#94A3B8] hover:text-white transition-colors cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
 
         {status === 'success' ? (
           <div className="text-center py-6">
-            <div className="w-14 h-14 rounded-full bg-[#10B981]/20 border border-[#10B981]/40 text-[#34D399] flex items-center justify-center mx-auto mb-4">
+            <div className="w-14 h-14 rounded-full bg-[#0F766E]/20 border border-[#0F766E]/50 text-[#14B8A6] flex items-center justify-center mx-auto mb-4">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Demo Request Received</h3>
+            <h3 className="text-2xl font-bold mb-2 text-white">Demo Request Received</h3>
             <p className="text-sm text-[#94A3B8] mb-6 leading-relaxed">
               Thank you! Our founding team will reach out within 2 hours to confirm your preferred time and provide direct access keys.
             </p>
-            <div className="p-3.5 rounded-xl bg-[#030712] border border-[#1F2937] text-xs text-[#94A3B8] mb-6">
-              Need immediate assistance? Email us directly at <a href="mailto:partners@ofis.ng" className="text-[#34D399] font-medium hover:underline">partners@ofis.ng</a>
+            <div className="p-3.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-xs text-[#94A3B8] mb-6">
+              Need immediate assistance? Email us directly at <a href="mailto:partners@ofis.ng" className="text-[#14B8A6] font-medium hover:underline">partners@ofis.ng</a>
             </div>
             <button
               onClick={onClose}
-              className="w-full py-3 rounded-xl bg-[#10B981] text-[#030712] font-semibold text-sm hover:bg-[#34D399] transition-all cursor-pointer"
+              className="w-full py-3 rounded-xl bg-[#0F766E] text-white font-bold text-sm hover:bg-[#0D655E] transition-all cursor-pointer shadow-[0_4px_16px_rgba(15,118,110,0.3)]"
             >
               Done
             </button>
@@ -98,11 +98,11 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
         ) : (
           <div>
             <div className="mb-6">
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#10B981]/15 border border-[#10B981]/30 text-[11px] font-bold text-[#34D399] uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#0F766E]/20 border border-[#0F766E]/50 text-[11px] font-bold text-[#14B8A6] uppercase tracking-wider mb-2">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Live 1-on-1 Walkthrough</span>
               </div>
-              <h3 className="text-2xl font-extrabold tracking-tight">Book a Demo</h3>
+              <h3 className="text-2xl font-extrabold tracking-tight text-white">Book a Demo</h3>
               <p className="text-xs text-[#94A3B8] mt-1.5 leading-relaxed">
                 See how OFIS powers decentralized teams, workspace yields, and seamless instant booking.
               </p>
@@ -119,7 +119,7 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">
-                    Full Name <span className="text-[#10B981]">*</span>
+                    Full Name <span className="text-[#14B8A6]">*</span>
                   </label>
                   <input
                     type="text"
@@ -127,13 +127,13 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
                     placeholder="e.g. Babatunde Adeyemi"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#030712] border border-[#1F2937] text-sm text-[#F9FAFB] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#10B981]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
                   />
                 </div>
 
                 <div>
                   <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#94A3B8] mb-1">
-                    Work Email <span className="text-[#10B981]">*</span>
+                    Work Email <span className="text-[#14B8A6]">*</span>
                   </label>
                   <input
                     type="email"
@@ -141,7 +141,7 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
                     placeholder="name@company.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#030712] border border-[#1F2937] text-sm text-[#F9FAFB] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#10B981]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
                   />
                 </div>
               </div>
@@ -156,7 +156,7 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
                     placeholder="e.g. Acme Tech, Ventures Hub"
                     value={organization}
                     onChange={(e) => setOrganization(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#030712] border border-[#1F2937] text-sm text-[#F9FAFB] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#10B981]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
                   />
                 </div>
 
@@ -167,7 +167,7 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
                   <select
                     value={track}
                     onChange={(e) => setTrack(e.target.value as any)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#030712] border border-[#1F2937] text-sm text-[#F9FAFB] focus:outline-none focus:border-[#10B981]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white focus:outline-none focus:border-[#14B8A6]"
                   >
                     <option value="enterprise">Enterprise / Team Lead</option>
                     <option value="operator">Workspace Operator / Host</option>
@@ -186,7 +186,7 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
                   placeholder="e.g. Tomorrow afternoon (WAT / GMT+1)"
                   value={preferredTime}
                   onChange={(e) => setPreferredTime(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#030712] border border-[#1F2937] text-sm text-[#F9FAFB] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#10B981]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
                 />
               </div>
 
@@ -199,14 +199,14 @@ export const BookDemoModal: React.FC<BookDemoModalProps> = ({
                   placeholder="e.g. 15-person desk package in Lagos or listing 3 locations"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#030712] border border-[#1F2937] text-sm text-[#F9FAFB] placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#10B981]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full mt-2 py-3 rounded-xl bg-gradient-to-b from-[#10B981] to-[#059669] hover:from-[#34D399] hover:to-[#10B981] text-[#030712] font-bold text-sm shadow-[0_4px_16px_rgba(16,185,129,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2"
+                className="w-full mt-2 py-3 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white font-bold text-sm shadow-[0_4px_16px_rgba(15,118,110,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2"
               >
                 {isSubmitting ? (
                   <>

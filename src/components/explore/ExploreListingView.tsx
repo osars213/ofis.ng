@@ -122,7 +122,7 @@ export const ExploreListingView: React.FC = () => {
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1220] text-[#111827] dark:text-[#F8FAFC] transition-colors duration-150">
       
       {/* Top Breadcrumb & Controls Bar */}
-      <div className="sticky top-16 z-30 bg-white/95 dark:bg-[#101827]/95 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#1E293B] px-4 sm:px-6 lg:px-8 py-3.5">
+      <div className="sticky top-16 z-30 bg-white/95 dark:bg-[#101827]/95 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#1E3A4D] px-4 sm:px-6 lg:px-8 py-3.5">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
           
           {/* Left: Summary & City / Category quick info */}
@@ -133,8 +133,8 @@ export const ExploreListingView: React.FC = () => {
 
             <span className="text-[#94A3B8]">•</span>
 
-            <div className="flex items-center space-x-1.5 text-xs font-mono text-[#047857] dark:text-[#10B981] shrink-0">
-              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+            <div className="flex items-center space-x-1.5 text-xs font-mono text-[#0F766E] dark:text-[#14B8A6] shrink-0">
+              <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-pulse" />
               <span className="font-bold">{sortedSpaces.length} Verified</span>
             </div>
 
@@ -148,7 +148,7 @@ export const ExploreListingView: React.FC = () => {
             {activeCategory !== 'all' && (
               <>
                 <span className="text-[#94A3B8] hidden sm:inline">•</span>
-                <span className="px-2 py-0.5 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/15 text-[#10B981] text-[10px] font-mono font-bold uppercase">
+                <span className="px-2 py-0.5 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] text-[10px] font-mono font-bold uppercase">
                   {String(activeCategory).replace(/-/g, ' ')}
                 </span>
               </>
@@ -162,20 +162,20 @@ export const ExploreListingView: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsMobileFilterOpen(true)}
-              className="lg:hidden px-3 py-1.5 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] text-xs font-bold text-[#111827] dark:text-[#F8FAFC] flex items-center space-x-1.5 shadow-2xs cursor-pointer"
+              className="lg:hidden px-3 py-1.5 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs font-bold text-[#111827] dark:text-[#F8FAFC] flex items-center space-x-1.5 shadow-2xs cursor-pointer"
             >
-              <SlidersHorizontal className="w-3.5 h-3.5 text-[#10B981]" />
+              <SlidersHorizontal className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
               <span>Filters</span>
               {activeFiltersCount > 0 && (
-                <span className="w-4 h-4 rounded-full bg-[#10B981] text-white text-[10px] flex items-center justify-center font-bold">
+                <span className="w-4 h-4 rounded-full bg-[#0F766E] text-white text-[10px] flex items-center justify-center font-bold">
                   {activeFiltersCount}
                 </span>
               )}
             </button>
 
             {/* Sort Dropdown */}
-            <div className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] text-xs shadow-2xs">
-              <ArrowUpDown className="w-3.5 h-3.5 text-[#10B981]" />
+            <div className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs shadow-2xs">
+              <ArrowUpDown className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
               <select
                 id="explore-sort-select"
                 value={sortBy}
@@ -192,13 +192,13 @@ export const ExploreListingView: React.FC = () => {
             </div>
 
             {/* View Mode Toggle (Grid vs Split Map on Desktop) */}
-            <div className="hidden sm:flex items-center p-1 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-2xs">
+            <div className="hidden sm:flex items-center p-1 rounded-xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E3A4D] shadow-2xs">
               <button
                 type="button"
                 onClick={() => setViewMode('grid')}
                 className={`p-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   viewMode === 'grid'
-                    ? 'bg-[#10B981] text-white shadow-xs'
+                    ? 'bg-[#0F766E] text-white shadow-xs'
                     : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
                 }`}
                 title="Grid Layout"
@@ -210,7 +210,7 @@ export const ExploreListingView: React.FC = () => {
                 onClick={() => setViewMode('split')}
                 className={`p-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   viewMode === 'split'
-                    ? 'bg-[#10B981] text-white shadow-xs'
+                    ? 'bg-[#0F766E] text-white shadow-xs'
                     : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
                 }`}
                 title="Split Map Layout"
@@ -233,19 +233,19 @@ export const ExploreListingView: React.FC = () => {
           {/* ========================================================================= */}
           <aside className="hidden lg:block lg:col-span-3 sticky top-36 space-y-6 max-h-[calc(100vh-10rem)] overflow-y-auto pr-2">
             
-            <div className="p-5 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-6">
+            <div className="p-5 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E3A4D] shadow-sm space-y-6">
               
               {/* Header with Reset */}
-              <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB] dark:border-[#1E293B]">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB] dark:border-[#1E3A4D]">
                 <div className="flex items-center space-x-2">
-                  <SlidersHorizontal className="w-4 h-4 text-[#10B981]" />
+                  <SlidersHorizontal className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
                   <h2 className="text-sm font-bold text-[#111827] dark:text-[#F8FAFC]">Filters</h2>
                 </div>
                 {activeFiltersCount > 0 && (
                   <button
                     type="button"
                     onClick={resetFilters}
-                    className="text-xs font-bold text-[#10B981] hover:underline flex items-center space-x-1 cursor-pointer"
+                    className="text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] hover:underline flex items-center space-x-1 cursor-pointer"
                   >
                     <RotateCcw className="w-3 h-3" />
                     <span>Reset</span>
@@ -261,7 +261,7 @@ export const ExploreListingView: React.FC = () => {
                 <select
                   value={filters.city || 'All Cities'}
                   onChange={(e) => updateFilter('city', e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs font-semibold text-[#111827] dark:text-[#F8FAFC] focus:outline-none focus:border-[#10B981] cursor-pointer"
+                  className="w-full px-3 py-2 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs font-semibold text-[#111827] dark:text-[#F8FAFC] focus:outline-none focus:border-[#0F766E] cursor-pointer"
                 >
                   <option value="All Cities">All Cities in Nigeria</option>
                   <option value="Lagos">Lagos (VI, Lekki, Ikeja)</option>
@@ -286,8 +286,8 @@ export const ExploreListingView: React.FC = () => {
                         onClick={() => updateFilter('searchQuery', isSelected ? '' : n)}
                         className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-[#10B981] text-white shadow-2xs font-bold'
-                            : 'bg-[#F8FAFC] dark:bg-[#101827] text-[#6B7280] dark:text-[#94A3B8] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981]'
+                            ? 'bg-[#0F766E] text-white shadow-2xs font-bold'
+                            : 'bg-[#F8FAFC] dark:bg-[#101827] text-[#6B7280] dark:text-[#94A3B8] border border-[#E5E7EB] dark:border-[#1E3A4D] hover:border-[#0F766E]'
                         }`}
                       >
                         {n}
@@ -320,12 +320,12 @@ export const ExploreListingView: React.FC = () => {
                         onClick={() => setActiveCategory(cat.id as any)}
                         className={`w-full px-3 py-2 rounded-xl text-xs font-medium text-left flex items-center justify-between transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-[#D1FAE5] dark:bg-[#10B981]/20 text-[#10B981] font-bold border border-[#10B981]/40'
+                            ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/25 text-[#0F766E] dark:text-[#14B8A6] font-bold border border-[#0F766E]/40'
                             : 'text-[#4B5563] dark:text-[#94A3B8] hover:bg-[#F8FAFC] dark:hover:bg-[#101827]'
                         }`}
                       >
                         <span>{cat.label}</span>
-                        {isSelected && <Check className="w-3.5 h-3.5 text-[#10B981]" />}
+                        {isSelected && <Check className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />}
                       </button>
                     );
                   })}
@@ -333,14 +333,14 @@ export const ExploreListingView: React.FC = () => {
               </div>
 
               {/* Toggles: Available Now & Instant Book */}
-              <div className="space-y-2.5 pt-2 border-t border-[#E5E7EB] dark:border-[#1E293B]">
+              <div className="space-y-2.5 pt-2 border-t border-[#E5E7EB] dark:border-[#1E3A4D]">
                 <label className="flex items-center justify-between text-xs cursor-pointer select-none">
                   <span className="font-semibold text-[#111827] dark:text-[#F8FAFC]">Available Right Now</span>
                   <input
                     type="checkbox"
                     checked={!!filters.availableNowOnly}
                     onChange={(e) => updateFilter('availableNowOnly', e.target.checked)}
-                    className="w-4 h-4 accent-[#10B981] rounded cursor-pointer"
+                    className="w-4 h-4 accent-[#0F766E] rounded cursor-pointer"
                   />
                 </label>
 
@@ -350,13 +350,13 @@ export const ExploreListingView: React.FC = () => {
                     type="checkbox"
                     checked={!!filters.instantBookingOnly}
                     onChange={(e) => updateFilter('instantBookingOnly', e.target.checked)}
-                    className="w-4 h-4 accent-[#10B981] rounded cursor-pointer"
+                    className="w-4 h-4 accent-[#0F766E] rounded cursor-pointer"
                   />
                 </label>
               </div>
 
               {/* Amenities Checklist */}
-              <div className="space-y-2 pt-2 border-t border-[#E5E7EB] dark:border-[#1E293B]">
+              <div className="space-y-2 pt-2 border-t border-[#E5E7EB] dark:border-[#1E3A4D]">
                 <label className="text-xs font-bold text-[#6B7280] dark:text-[#94A3B8] uppercase tracking-wider block">
                   Guaranteed Amenities
                 </label>
@@ -369,7 +369,7 @@ export const ExploreListingView: React.FC = () => {
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => handleToggleAmenity(am)}
-                          className="w-3.5 h-3.5 accent-[#10B981] rounded cursor-pointer"
+                          className="w-3.5 h-3.5 accent-[#0F766E] rounded cursor-pointer"
                         />
                         <span className="truncate">{am}</span>
                       </label>
@@ -388,39 +388,39 @@ export const ExploreListingView: React.FC = () => {
             
             {/* Active Filters Bar */}
             {activeFiltersCount > 0 && (
-              <div className="flex flex-wrap items-center gap-2 p-3 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] text-xs">
+              <div className="flex flex-wrap items-center gap-2 p-3 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs">
                 <span className="font-bold text-[#6B7280] dark:text-[#94A3B8]">Active:</span>
                 
                 {filters.city && filters.city !== 'All Cities' && (
-                  <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/20 text-[#10B981] font-bold">
+                  <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/25 text-[#0F766E] dark:text-[#14B8A6] font-bold">
                     <span>{filters.city}</span>
                     <X className="w-3 h-3 cursor-pointer" onClick={() => updateFilter('city', 'All Cities')} />
                   </span>
                 )}
 
                 {activeCategory !== 'all' && (
-                  <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/20 text-[#10B981] font-bold">
+                  <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/25 text-[#0F766E] dark:text-[#14B8A6] font-bold">
                     <span>{String(activeCategory).replace(/-/g, ' ')}</span>
                     <X className="w-3 h-3 cursor-pointer" onClick={() => setActiveCategory('all')} />
                   </span>
                 )}
 
                 {filters.searchQuery && (
-                  <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/20 text-[#10B981] font-bold">
+                  <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/25 text-[#0F766E] dark:text-[#14B8A6] font-bold">
                     <span>&ldquo;{filters.searchQuery}&rdquo;</span>
                     <X className="w-3 h-3 cursor-pointer" onClick={() => updateFilter('searchQuery', '')} />
                   </span>
                 )}
 
                 {filters.availableNowOnly && (
-                  <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/20 text-[#10B981] font-bold">
+                  <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/25 text-[#0F766E] dark:text-[#14B8A6] font-bold">
                     <span>Available Now</span>
                     <X className="w-3 h-3 cursor-pointer" onClick={() => updateFilter('availableNowOnly', false)} />
                   </span>
                 )}
 
                 {(filters.amenities || []).map((am) => (
-                  <span key={am} className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#D1FAE5] dark:bg-[#10B981]/20 text-[#10B981] font-bold">
+                  <span key={am} className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/25 text-[#0F766E] dark:text-[#14B8A6] font-bold">
                     <span>{am}</span>
                     <X className="w-3 h-3 cursor-pointer" onClick={() => handleToggleAmenity(am)} />
                   </span>
@@ -440,7 +440,7 @@ export const ExploreListingView: React.FC = () => {
             {isLoadingSpaces ? (
               <div className={`grid grid-cols-1 ${viewMode === 'split' ? 'sm:grid-cols-1 xl:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'} gap-6`}>
                 {[1, 2, 3, 4, 5, 6].map((n) => (
-                  <div key={n} className="h-80 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] animate-pulse p-4 flex flex-col justify-between">
+                  <div key={n} className="h-80 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E3A4D] animate-pulse p-4 flex flex-col justify-between">
                     <div className="w-full h-44 bg-[#E2E8F0] dark:bg-[#1E293B] rounded-2xl" />
                     <div className="space-y-2">
                       <div className="w-3/4 h-4 bg-[#E2E8F0] dark:bg-[#1E293B] rounded" />
@@ -450,7 +450,7 @@ export const ExploreListingView: React.FC = () => {
                 ))}
               </div>
             ) : sortedSpaces.length === 0 ? (
-              <div className="p-12 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] text-center space-y-4 max-w-md mx-auto my-12">
+              <div className="p-12 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E3A4D] text-center space-y-4 max-w-md mx-auto my-12">
                 <div className="w-14 h-14 rounded-2xl bg-[#F8FAFC] dark:bg-[#101827] flex items-center justify-center mx-auto text-[#6B7280] dark:text-[#94A3B8]">
                   <Search className="w-7 h-7" />
                 </div>
@@ -463,7 +463,7 @@ export const ExploreListingView: React.FC = () => {
                 <button
                   type="button"
                   onClick={resetFilters}
-                  className="px-5 py-2.5 rounded-xl bg-[#047857] hover:bg-[#065F46] text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
+                  className="px-5 py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
                 >
                   Reset All Filters
                 </button>
@@ -490,18 +490,18 @@ export const ExploreListingView: React.FC = () => {
           {/* RIGHT SIDEBAR: INTERACTIVE SPLIT MAP (4 cols on lg when viewMode === 'split') */}
           {/* ========================================================================= */}
           {viewMode === 'split' && (
-            <div className="hidden lg:block lg:col-span-4 sticky top-36 h-[calc(100vh-10rem)] rounded-3xl overflow-hidden border border-[#E5E7EB] dark:border-[#1E293B] bg-[#F1F5F9] dark:bg-[#0F172A] relative shadow-lg">
+            <div className="hidden lg:block lg:col-span-4 sticky top-36 h-[calc(100vh-10rem)] rounded-3xl overflow-hidden border border-[#E5E7EB] dark:border-[#1E3A4D] bg-[#F1F5F9] dark:bg-[#0F172A] relative shadow-lg">
               
               {/* Stylized Nigeria Map Background Grid */}
               <div className="absolute inset-0 bg-[radial-gradient(#94A3B8_1px,transparent_1px)] dark:bg-[radial-gradient(#374151_1px,transparent_1px)] [background-size:20px_20px] opacity-20" />
               
               {/* Map Header */}
-              <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between p-2.5 rounded-2xl bg-white/90 dark:bg-[#172033]/90 backdrop-blur-md border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm text-xs">
+              <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between p-2.5 rounded-2xl bg-white/90 dark:bg-[#172033]/90 backdrop-blur-md border border-[#E5E7EB] dark:border-[#1E3A4D] shadow-sm text-xs">
                 <span className="font-bold text-[#111827] dark:text-[#F8FAFC]">Live Map Preview</span>
                 <button
                   type="button"
                   onClick={() => setCurrentView('map')}
-                  className="text-xs font-bold text-[#047857] dark:text-[#10B981] hover:underline flex items-center space-x-1 cursor-pointer"
+                  className="text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] hover:underline flex items-center space-x-1 cursor-pointer"
                 >
                   <Compass className="w-3.5 h-3.5" />
                   <span>Full Map</span>
@@ -528,8 +528,8 @@ export const ExploreListingView: React.FC = () => {
                       style={{ top: `${topOffset}%`, left: `${leftOffset}%` }}
                       className={`absolute -translate-x-1/2 -translate-y-1/2 px-2.5 py-1 rounded-full font-mono text-[11px] font-bold transition-all shadow-md cursor-pointer ${
                         isHovered
-                          ? 'bg-[#10B981] text-white scale-110 z-30 ring-4 ring-[#10B981]/30'
-                          : 'bg-white dark:bg-[#1F2937] text-[#111827] dark:text-[#F8FAFC] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#10B981] z-10'
+                          ? 'bg-[#0F766E] text-white scale-110 z-30 ring-4 ring-[#14B8A6]/30'
+                          : 'bg-white dark:bg-[#1F2937] text-[#111827] dark:text-[#F8FAFC] border border-[#E5E7EB] dark:border-[#1E3A4D] hover:border-[#0F766E] z-10'
                       }`}
                     >
                       <span>{formatPrice(pricing.rate)}</span>
@@ -546,7 +546,7 @@ export const ExploreListingView: React.FC = () => {
                       setSelectedSpaceId(activeHoverSpace.id);
                       setCurrentView('details');
                     }}
-                    className="p-3 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-xl flex items-center space-x-3 cursor-pointer hover:border-[#10B981]"
+                    className="p-3 rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E3A4D] shadow-xl flex items-center space-x-3 cursor-pointer hover:border-[#0F766E]"
                   >
                     <img
                       src={optimizeImageUrl(activeHoverSpace.featuredImage, { width: 200, quality: 75 })}
@@ -561,7 +561,7 @@ export const ExploreListingView: React.FC = () => {
                       <p className="text-[10px] text-[#374151] dark:text-[#94A3B8]">
                         {activeHoverSpace.neighborhood}, {activeHoverSpace.city}
                       </p>
-                      <span className="text-xs font-extrabold text-[#047857] dark:text-[#10B981] font-mono">
+                      <span className="text-xs font-extrabold text-[#0F766E] dark:text-[#14B8A6] font-mono">
                         {formatPrice(getSpacePricing(activeHoverSpace).rate)}
                       </span>
                     </div>
@@ -581,7 +581,7 @@ export const ExploreListingView: React.FC = () => {
           <div className="w-full max-w-sm bg-white dark:bg-[#172033] h-full overflow-y-auto p-6 space-y-6 shadow-2xl flex flex-col justify-between">
             
             <div className="space-y-6">
-              <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB] dark:border-[#1E293B]">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB] dark:border-[#1E3A4D]">
                 <h2 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Filter Workspaces</h2>
                 <button
                   type="button"
@@ -598,7 +598,7 @@ export const ExploreListingView: React.FC = () => {
                 <select
                   value={filters.city || 'All Cities'}
                   onChange={(e) => updateFilter('city', e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E293B] text-xs font-semibold"
+                  className="w-full px-3 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#101827] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs font-semibold"
                 >
                   <option value="All Cities">All Cities in Nigeria</option>
                   <option value="Lagos">Lagos (VI, Lekki, Ikeja)</option>
@@ -626,8 +626,8 @@ export const ExploreListingView: React.FC = () => {
                       onClick={() => setActiveCategory(cat.id as any)}
                       className={`p-2 rounded-xl text-xs font-medium border text-center ${
                         activeCategory === cat.id
-                          ? 'bg-[#10B981] text-white border-[#10B981]'
-                          : 'border-[#E5E7EB] dark:border-[#1E293B] text-[#6B7280] dark:text-[#94A3B8]'
+                          ? 'bg-[#0F766E] text-white border-[#0F766E]'
+                          : 'border-[#E5E7EB] dark:border-[#1E3A4D] text-[#6B7280] dark:text-[#94A3B8]'
                       }`}
                     >
                       {cat.label}
@@ -637,18 +637,18 @@ export const ExploreListingView: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#1E293B] flex items-center gap-3">
+            <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#1E3A4D] flex items-center gap-3">
               <button
                 type="button"
                 onClick={resetFilters}
-                className="flex-1 py-3 rounded-xl border border-[#E5E7EB] dark:border-[#1E293B] text-xs font-bold"
+                className="flex-1 py-3 rounded-xl border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs font-bold"
               >
                 Reset
               </button>
               <button
                 type="button"
                 onClick={() => setIsMobileFilterOpen(false)}
-                className="flex-1 py-3 rounded-xl bg-[#10B981] text-white text-xs font-bold shadow-md"
+                className="flex-1 py-3 rounded-xl bg-[#0F766E] text-white text-xs font-bold shadow-md"
               >
                 Show Results
               </button>

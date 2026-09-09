@@ -40,15 +40,15 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
     <section id="demo-space" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative">
       
       {/* Ambient Radial Lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#10B981]/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#0F766E]/10 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#10B981]/15 border border-[#10B981]/30 text-xs font-bold text-[#34D399] uppercase tracking-wider mb-4">
-          <Sparkles className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#0F766E]/15 border border-[#0F766E]/30 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-4">
+          <Sparkles className="w-3.5 h-3.5 text-[#F4A261]" />
           <span>Interactive Prototype (POC)</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F9FAFB] tracking-tight mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
           Try OFIS
         </h2>
         <p className="text-base sm:text-xl text-[#94A3B8] leading-relaxed">
@@ -57,38 +57,38 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
       </div>
 
       {/* Main Demo Workspace Container */}
-      <div className="rounded-3xl bg-[#111827]/80 border border-[#1F2937] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+      <div className="rounded-3xl bg-[#0B1F33]/90 border border-[#1E3A4D] overflow-hidden shadow-[0_25px_60px_rgba(7,21,33,0.8)] backdrop-blur-xl">
         <div className="grid grid-cols-1 lg:grid-cols-12">
           
           {/* Left: Interactive Listing Visuals & Verified Badges (5 cols) */}
-          <div className="lg:col-span-5 relative flex flex-col justify-between p-6 sm:p-8 bg-gradient-to-b from-[#030712]/90 to-[#111827] border-b lg:border-b-0 lg:border-r border-[#1F2937]">
+          <div className="lg:col-span-5 relative flex flex-col justify-between p-6 sm:p-8 bg-gradient-to-b from-[#071521]/90 to-[#0B1F33] border-b lg:border-b-0 lg:border-r border-[#1E3A4D]">
             <div>
               {/* Space Photo with Badges */}
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] mb-6 border border-[#1F2937] shadow-inner">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] mb-6 border border-[#1E3A4D] shadow-inner">
                 <img 
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1000&auto=format&fit=crop&q=80" 
                   alt="The Atrium Executive Suite"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#071521]/80 via-[#071521]/20 to-transparent" />
                 
                 <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-                  <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#030712]/90 border border-[#10B981]/40 text-[11px] font-bold text-[#34D399]">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#10B981]" />
+                  <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#071521]/90 border border-[#0F766E]/40 text-[11px] font-bold text-[#14B8A6]">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#14B8A6]" />
                     <span>99.9% Power SLA</span>
                   </span>
-                  <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#030712]/90 border border-white/10 text-[11px] font-bold text-[#F9FAFB]">
-                    <Wifi className="w-3.5 h-3.5 text-[#10B981]" />
+                  <span className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#071521]/90 border border-white/10 text-[11px] font-bold text-white">
+                    <Wifi className="w-3.5 h-3.5 text-[#14B8A6]" />
                     <span>320 Mbps Starlink</span>
                   </span>
                 </div>
 
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
-                  <span className="px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md font-mono text-[11px] text-[#34D399]">
+                  <span className="px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md font-mono text-[11px] text-[#14B8A6]">
                     ID: OFIS-LOS-001
                   </span>
-                  <div className="flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-amber-400 font-bold">
-                    <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  <div className="flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-[#F4A261] font-bold">
+                    <Star className="w-3.5 h-3.5 fill-[#F4A261]" />
                     <span>4.98 (124 reviews)</span>
                   </div>
                 </div>
@@ -96,14 +96,14 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
 
               {/* Title and Specs */}
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-widest text-[#10B981]">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-[#14B8A6]">
                   Demo Workspace Listing
                 </span>
-                <h3 className="text-2xl font-extrabold text-[#F9FAFB] mt-1 mb-2">
+                <h3 className="text-2xl font-extrabold text-white mt-1 mb-2">
                   The Atrium Penthouse Hub
                 </h3>
                 <p className="text-xs sm:text-sm text-[#94A3B8] flex items-center mb-4">
-                  <MapPin className="w-4 h-4 mr-1 text-[#10B981] shrink-0" />
+                  <MapPin className="w-4 h-4 mr-1 text-[#14B8A6] shrink-0" />
                   <span>Victoria Island, Lagos • 4 Adeyemo Alakija St</span>
                 </p>
                 <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -113,29 +113,29 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
             </div>
 
             {/* Micro Highlights */}
-            <div className="grid grid-cols-2 gap-3 mt-6 pt-6 border-t border-[#1F2937] text-xs">
-              <div className="p-3 rounded-xl bg-[#030712] border border-[#1F2937]/70">
+            <div className="grid grid-cols-2 gap-3 mt-6 pt-6 border-t border-[#1E3A4D] text-xs">
+              <div className="p-3 rounded-xl bg-[#071521] border border-[#1E3A4D]">
                 <span className="text-[#94A3B8] block text-[10px] uppercase font-semibold">Access Type</span>
-                <span className="font-bold text-[#F9FAFB]">Smart QR Turnstile</span>
+                <span className="font-bold text-white">Smart QR Turnstile</span>
               </div>
-              <div className="p-3 rounded-xl bg-[#030712] border border-[#1F2937]/70">
+              <div className="p-3 rounded-xl bg-[#071521] border border-[#1E3A4D]">
                 <span className="text-[#94A3B8] block text-[10px] uppercase font-semibold">Instant Policy</span>
-                <span className="font-bold text-[#34D399]">No Approval Delay</span>
+                <span className="font-bold text-[#14B8A6]">No Approval Delay</span>
               </div>
             </div>
 
           </div>
 
           {/* Right: Live Interactive Booking & QR Check-in Simulator (7 cols) */}
-          <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between bg-[#030712]/40">
+          <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between bg-[#071521]/60">
             <div>
-              <div className="flex items-center justify-between pb-5 border-b border-[#1F2937] mb-6">
+              <div className="flex items-center justify-between pb-5 border-b border-[#1E3A4D] mb-6">
                 <div>
-                  <h4 className="text-lg font-bold text-[#F9FAFB]">Live Booking Simulator</h4>
+                  <h4 className="text-lg font-bold text-white">Live Booking Simulator</h4>
                   <p className="text-xs text-[#94A3B8]">Test checkout calculation and live pass generation in real-time.</p>
                 </div>
-                <div className="flex items-center space-x-2 text-xs text-[#34D399] font-semibold bg-[#10B981]/10 px-3 py-1 rounded-full border border-[#10B981]/20">
-                  <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping" />
+                <div className="flex items-center space-x-2 text-xs text-[#14B8A6] font-semibold bg-[#0F766E]/15 px-3 py-1 rounded-full border border-[#0F766E]/30">
+                  <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-ping" />
                   <span>Real-time POC</span>
                 </div>
               </div>
@@ -151,13 +151,13 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
                     onClick={() => { setSelectedPass('day'); setShowQrPreview(false); }}
                     className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
                       selectedPass === 'day'
-                        ? 'bg-[#111827] border-[#10B981] text-[#F9FAFB] shadow-[0_0_20px_rgba(16,185,129,0.15)]'
-                        : 'bg-[#030712] border-[#1F2937] text-[#94A3B8] hover:border-[#1F2937]/80'
+                        ? 'bg-[#0B1F33] border-[#14B8A6] text-white shadow-[0_0_20px_rgba(20,184,166,0.15)]'
+                        : 'bg-[#071521] border-[#1E3A4D] text-[#94A3B8] hover:border-[#14B8A6]/50'
                     }`}
                   >
                     <div className="flex justify-between items-center mb-1">
                       <span className="font-bold text-sm">Full Day Pass</span>
-                      <span className="text-xs font-mono font-bold text-[#34D399]">₦8,500</span>
+                      <span className="text-xs font-mono font-bold text-[#14B8A6]">₦8,500</span>
                     </div>
                     <span className="text-[11px] text-[#94A3B8] block">8:00 AM – 8:00 PM • Hot Desk</span>
                   </button>
@@ -167,13 +167,13 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
                     onClick={() => { setSelectedPass('hourly'); setShowQrPreview(false); }}
                     className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
                       selectedPass === 'hourly'
-                        ? 'bg-[#111827] border-[#10B981] text-[#F9FAFB] shadow-[0_0_20px_rgba(16,185,129,0.15)]'
-                        : 'bg-[#030712] border-[#1F2937] text-[#94A3B8] hover:border-[#1F2937]/80'
+                        ? 'bg-[#0B1F33] border-[#14B8A6] text-white shadow-[0_0_20px_rgba(20,184,166,0.15)]'
+                        : 'bg-[#071521] border-[#1E3A4D] text-[#94A3B8] hover:border-[#14B8A6]/50'
                     }`}
                   >
                     <div className="flex justify-between items-center mb-1">
                       <span className="font-bold text-sm">2-Hour Pod Pass</span>
-                      <span className="text-xs font-mono font-bold text-[#34D399]">₦7,000</span>
+                      <span className="text-xs font-mono font-bold text-[#14B8A6]">₦7,000</span>
                     </div>
                     <span className="text-[11px] text-[#94A3B8] block">Flexible Sprint Session</span>
                   </button>
@@ -194,8 +194,8 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
                         onClick={() => setSelectedDate(d)}
                         className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${
                           selectedDate === d
-                            ? 'bg-[#10B981] text-[#030712] border-[#10B981] font-bold'
-                            : 'bg-[#030712] border-[#1F2937] text-[#94A3B8] hover:text-[#F9FAFB]'
+                            ? 'bg-[#0F766E] text-white border-[#0F766E] font-bold'
+                            : 'bg-[#071521] border-[#1E3A4D] text-[#94A3B8] hover:text-white'
                         }`}
                       >
                         {d}
@@ -216,8 +216,8 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
                         onClick={() => setGuestCount(cnt)}
                         className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${
                           guestCount === cnt
-                            ? 'bg-[#10B981] text-[#030712] border-[#10B981] font-bold'
-                            : 'bg-[#030712] border-[#1F2937] text-[#94A3B8] hover:text-[#F9FAFB]'
+                            ? 'bg-[#0F766E] text-white border-[#0F766E] font-bold'
+                            : 'bg-[#071521] border-[#1E3A4D] text-[#94A3B8] hover:text-white'
                         }`}
                       >
                         {cnt} {cnt === 1 ? 'Desk' : 'Desks'}
@@ -228,18 +228,18 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
               </div>
 
               {/* Live Calculation Display */}
-              <div className="p-4 rounded-2xl bg-[#030712] border border-[#1F2937] mb-6 space-y-2 text-xs">
+              <div className="p-4 rounded-2xl bg-[#071521] border border-[#1E3A4D] mb-6 space-y-2 text-xs">
                 <div className="flex justify-between text-[#94A3B8]">
                   <span>Subtotal ({guestCount} {guestCount === 1 ? 'pass' : 'passes'} • {selectedDate})</span>
-                  <span className="text-[#F9FAFB] font-mono">₦{price.toLocaleString()}</span>
+                  <span className="text-white font-mono">₦{price.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-[#94A3B8]">
                   <span>OFIS Verified SLA Guarantee</span>
-                  <span className="text-[#34D399]">Included (₦0)</span>
+                  <span className="text-[#14B8A6]">Included (₦0)</span>
                 </div>
-                <div className="pt-2 border-t border-[#1F2937] flex justify-between items-baseline">
-                  <span className="font-bold text-sm text-[#F9FAFB]">Total Payable</span>
-                  <span className="font-extrabold text-lg text-[#34D399] font-mono">
+                <div className="pt-2 border-t border-[#1E3A4D] flex justify-between items-baseline">
+                  <span className="font-bold text-sm text-white">Total Payable</span>
+                  <span className="font-extrabold text-lg text-[#14B8A6] font-mono">
                     ₦{price.toLocaleString()}
                   </span>
                 </div>
@@ -247,7 +247,7 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
 
               {/* QR Code Check-in Simulator Preview */}
               {showQrPreview ? (
-                <div className="p-4 rounded-2xl bg-[#111827] border border-[#10B981]/50 mb-6 animate-fade-in">
+                <div className="p-4 rounded-2xl bg-[#0B1F33] border border-[#14B8A6]/50 mb-6 animate-fade-in">
                   <div className="flex flex-col sm:flex-row items-center gap-4">
                     {/* Simulated High-Res QR */}
                     <div className="w-24 h-24 bg-white p-2 rounded-xl flex items-center justify-center shrink-0 shadow-lg">
@@ -256,17 +256,17 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
                     
                     <div className="flex-1 text-center sm:text-left space-y-1">
                       <div className="flex items-center justify-center sm:justify-start space-x-2">
-                        <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                        <span className="text-xs font-bold text-[#F9FAFB]">Access Pass Validated</span>
+                        <CheckCircle2 className="w-4 h-4 text-[#14B8A6]" />
+                        <span className="text-xs font-bold text-white">Access Pass Validated</span>
                       </div>
                       <p className="text-xs text-[#94A3B8]">
-                        Scan at turnstile scanner: <span className="font-mono text-[#F9FAFB] font-semibold">OFIS-DEMO-88219</span>
+                        Scan at turnstile scanner: <span className="font-mono text-white font-semibold">OFIS-DEMO-88219</span>
                       </p>
                       <div className="pt-2 flex items-center justify-center sm:justify-start space-x-3">
                         <button
                           type="button"
                           onClick={handleCopyCode}
-                          className="inline-flex items-center space-x-1 text-[11px] font-semibold text-[#34D399] hover:underline"
+                          className="inline-flex items-center space-x-1 text-[11px] font-semibold text-[#14B8A6] hover:underline"
                         >
                           {copiedCode ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                           <span>{copiedCode ? 'Copied code!' : 'Copy pass code'}</span>
@@ -282,21 +282,21 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-4 border-t border-[#1F2937] flex flex-col sm:flex-row items-center gap-3">
+            <div className="pt-4 border-t border-[#1E3A4D] flex flex-col sm:flex-row items-center gap-3">
               {!showQrPreview ? (
                 <button
                   type="button"
                   onClick={() => setShowQrPreview(true)}
-                  className="w-full sm:w-1/2 py-3.5 px-4 rounded-xl bg-[#111827] hover:bg-[#1F2937] border border-[#1F2937] hover:border-[#10B981]/40 text-xs font-bold text-[#F9FAFB] transition-all cursor-pointer flex items-center justify-center space-x-2"
+                  className="w-full sm:w-1/2 py-3.5 px-4 rounded-xl bg-[#0B1F33] hover:bg-[#071521] border border-[#1E3A4D] hover:border-[#14B8A6]/50 text-xs font-bold text-white transition-all cursor-pointer flex items-center justify-center space-x-2"
                 >
-                  <QrCode className="w-4 h-4 text-[#10B981]" />
+                  <QrCode className="w-4 h-4 text-[#14B8A6]" />
                   <span>Preview QR Check-in</span>
                 </button>
               ) : (
                 <button
                   type="button"
                   onClick={() => setShowQrPreview(false)}
-                  className="w-full sm:w-1/2 py-3.5 px-4 rounded-xl bg-[#111827] border border-[#1F2937] text-xs font-semibold text-[#94A3B8] hover:text-[#F9FAFB] transition-colors cursor-pointer"
+                  className="w-full sm:w-1/2 py-3.5 px-4 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] text-xs font-semibold text-[#94A3B8] hover:text-white transition-colors cursor-pointer"
                 >
                   Reset Simulator
                 </button>
@@ -305,7 +305,7 @@ export const DemoSpaceSection: React.FC<DemoSpaceSectionProps> = ({ onExploreDem
               <button
                 type="button"
                 onClick={onExploreDemoSpace}
-                className="w-full sm:w-1/2 py-3.5 px-6 rounded-xl bg-gradient-to-b from-[#10B981] to-[#059669] hover:from-[#34D399] hover:to-[#10B981] text-[#030712] font-extrabold text-xs shadow-[0_4px_16px_rgba(16,185,129,0.35)] transition-all cursor-pointer flex items-center justify-center space-x-2 group"
+                className="w-full sm:w-1/2 py-3.5 px-6 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white font-extrabold text-xs shadow-[0_4px_16px_rgba(15,118,110,0.35)] transition-all cursor-pointer flex items-center justify-center space-x-2 group"
               >
                 <span>Explore Demo Space</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
