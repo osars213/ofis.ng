@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
               }}
               title="Return to Launch Page"
             >
-              <OFISWordmark size="lg" />
+              <OFISWordmark size="lg" theme="dark" />
             </div>
             <p className="text-sm text-[#94A3B8] leading-relaxed max-w-sm">
               Nigeria&apos;s physical-space marketplace for discovering and booking verified coworking desks, private offices, meeting rooms, and creator studios with guaranteed power and high-speed fiber.

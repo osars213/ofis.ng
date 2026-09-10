@@ -1,23 +1,61 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Component, ErrorInfo, ReactNode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { PreLaunchPage } from './components/pages/PreLaunchPage';
+import { AppProvider } from './context/AppContext';
+import { App } from './App';
 import './index.css';
 
-// Lazy-load the heavy marketplace app bundle so prelaunch page loads with minimal JS
-const AppProvider = React.lazy(() => 
-  import('./context/AppContext').then(m => ({ default: m.AppProvider }))
-);
-const App = React.lazy(() => 
-  import('./App').then(m => ({ default: m.App }))
-);
+interface ErrorBoundaryProps {
+  children: ReactNode;
+}
 
-function AppLoadingFallback() {
-  return (
-    <div className="min-h-screen bg-[#071521] flex flex-col items-center justify-center p-4">
-      <div className="w-8 h-8 rounded-full border-2 border-[#14B8A6] border-t-transparent animate-spin mb-4" />
-      <p className="text-sm font-medium text-[#F8FAFC]">Loading OFIS Workspaces...</p>
-    </div>
-  );
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Uncaught error in OFIS app:', error, errorInfo);
+  }
+
+  handleReload = () => {
+    window.location.reload();
+  };
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-[#071521] text-[#F8FAFC] flex flex-col items-center justify-center p-6 text-center">
+          <div className="w-14 h-14 rounded-2xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] mb-6 text-2xl font-bold">
+            !
+          </div>
+          <h1 className="text-2xl font-bold text-white mb-2">Something went wrong</h1>
+          <p className="text-sm text-[#94A3B8] max-w-md mb-6 leading-relaxed">
+            {this.state.error?.message || 'An unexpected error occurred while loading the application.'}
+          </p>
+          <button
+            type="button"
+            onClick={this.handleReload}
+            className="px-6 py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-sm font-semibold transition-all cursor-pointer shadow-lg shadow-[#0F766E]/20"
+          >
+            Refresh Application
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
 }
 
 function Root() {
@@ -34,23 +72,8 @@ function Root() {
     };
 
     window.addEventListener('popstate', handleUrlChange);
-
-    // Prefetch App in idle time after initial paint so click-to-enter is instantaneous
-    if (!isAppMode && 'requestIdleCallback' in window) {
-      const handle = (window as any).requestIdleCallback(() => {
-        import('./App');
-        import('./context/AppContext');
-      }, { timeout: 3000 });
-      return () => {
-        window.removeEventListener('popstate', handleUrlChange);
-        if ('cancelIdleCallback' in window) {
-          (window as any).cancelIdleCallback(handle);
-        }
-      };
-    }
-
     return () => window.removeEventListener('popstate', handleUrlChange);
-  }, [isAppMode]);
+  }, []);
 
   const handleEnterApp = () => {
     const url = new URL(window.location.href);
@@ -62,11 +85,9 @@ function Root() {
 
   if (isAppMode) {
     return (
-      <Suspense fallback={<AppLoadingFallback />}>
-        <AppProvider>
-          <App />
-        </AppProvider>
-      </Suspense>
+      <AppProvider>
+        <App />
+      </AppProvider>
     );
   }
 
@@ -75,7 +96,9 @@ function Root() {
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Root />
+    <ErrorBoundary>
+      <Root />
+    </ErrorBoundary>
   </React.StrictMode>
 );
 

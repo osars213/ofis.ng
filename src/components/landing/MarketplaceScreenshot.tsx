@@ -216,8 +216,8 @@ export const MarketplaceScreenshot: React.FC<MarketplaceScreenshotProps> = ({
                     onClick={() => setSelectedCategory(cat.id as any)}
                     className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all duration-200 cursor-pointer flex items-center space-x-2 ${
                       isSelected
-                        ? 'bg-[#0F766E] text-white font-bold shadow-[0_2px_14px_rgba(15,118,110,0.4),inset_0_1px_1px_rgba(255,255,255,0.2)] border border-[#14B8A6]/40'
-                        : 'bg-[#0B1F33] text-[#94A3B8] backdrop-blur-md border border-[#1E3A4D] hover:border-[#0F766E]/50 hover:text-white'
+                        ? 'bg-[#F4A261] text-[#071521] font-bold shadow-[0_2px_14px_rgba(244,162,97,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] border border-[#F4A261]'
+                        : 'bg-[#0B1F33] text-[#CBD5E1] backdrop-blur-md border border-[#1E3A4D] hover:border-[#F4A261]/50 hover:text-white'
                     }`}
                   >
                     {cat.id !== 'all' ? (

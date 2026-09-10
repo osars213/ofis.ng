@@ -499,7 +499,7 @@ export const LandingPage: React.FC = () => {
                 <div
                   key={cat.id}
                   onClick={() => handleCategorySelect(cat.id)}
-                  className="p-6 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#0F766E]/50 hover:shadow-lg transition-all cursor-pointer group flex flex-col justify-between space-y-6"
+                  className="p-6 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#F4A261]/50 hover:shadow-lg transition-all cursor-pointer group flex flex-col justify-between space-y-6"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
@@ -508,13 +508,13 @@ export const LandingPage: React.FC = () => {
                         size="md"
                         showMirrorReflect={true}
                       />
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase bg-white dark:bg-[#102A3D] text-[#0F766E] dark:text-[#14B8A6] border border-[#D9E1E3] dark:border-[#1E3A4D]">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase bg-white dark:bg-[#102A3D] text-[#F4A261] border border-[#F4A261]/30">
                         {cat.badge}
                       </span>
                     </div>
 
                     <div className="space-y-1">
-                      <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#0F766E] dark:group-hover:text-[#14B8A6] transition-colors">
+                      <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#F4A261] transition-colors">
                         {cat.title}
                       </h3>
                       <p className="text-xs text-[#334155] dark:text-[#94A3B8] leading-relaxed">
@@ -524,7 +524,7 @@ export const LandingPage: React.FC = () => {
                   </div>
 
                   <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#1E293B] flex items-center justify-between text-xs">
-                    <span className="font-mono font-bold text-[#0F766E] dark:text-[#14B8A6]">From {cat.startRate}</span>
+                    <span className="font-mono font-bold text-[#F4A261]">From {cat.startRate}</span>
                     <span className="text-[#334155] dark:text-[#94A3B8] group-hover:text-[#111827] dark:group-hover:text-white font-semibold flex items-center space-x-1">
                       <span>Browse</span>
                       <ChevronRight className="w-3.5 h-3.5" />
@@ -599,7 +599,7 @@ export const LandingPage: React.FC = () => {
           
           {/* Step 1 */}
           <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-[#F4A261] text-[#071521] font-mono font-black text-lg flex items-center justify-center mx-auto shadow-[0_0_16px_rgba(244,162,97,0.35)]">
               1
             </div>
             <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Discover & Compare</h3>
@@ -610,7 +610,7 @@ export const LandingPage: React.FC = () => {
 
           {/* Step 2 */}
           <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-[#F4A261] text-[#071521] font-mono font-black text-lg flex items-center justify-center mx-auto shadow-[0_0_16px_rgba(244,162,97,0.35)]">
               2
             </div>
             <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Book Instantly</h3>
@@ -621,7 +621,7 @@ export const LandingPage: React.FC = () => {
 
           {/* Step 3 */}
           <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white font-mono font-black text-lg flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-full bg-[#F4A261] text-[#071521] font-mono font-black text-lg flex items-center justify-center mx-auto shadow-[0_0_16px_rgba(244,162,97,0.35)]">
               3
             </div>
             <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Scan & Get to Work</h3>

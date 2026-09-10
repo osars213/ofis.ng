@@ -25,33 +25,33 @@ const PILLAR_CONFIG: Record<
   work: {
     label: 'WORK',
     icon: Laptop,
-    badgeColor: 'from-[#0F766E]/20 via-[#14B8A6]/10 to-transparent',
-    glowColor: 'rgba(15, 118, 110, 0.35)',
-    tintHex: '#0F766E',
+    badgeColor: 'from-[#F4A261]/25 via-[#F4A261]/10 to-transparent',
+    glowColor: 'rgba(244, 162, 97, 0.4)',
+    tintHex: '#F4A261',
     description: 'Desks & Private Offices',
   },
   meet: {
     label: 'MEET',
     icon: Presentation,
-    badgeColor: 'from-[#0D9488]/20 via-[#0F766E]/10 to-transparent',
-    glowColor: 'rgba(13, 148, 136, 0.35)',
-    tintHex: '#0D9488',
+    badgeColor: 'from-[#F4A261]/25 via-[#F4A261]/10 to-transparent',
+    glowColor: 'rgba(244, 162, 97, 0.4)',
+    tintHex: '#F4A261',
     description: 'Boardrooms & Conference',
   },
   create: {
     label: 'CREATE',
     icon: Camera,
-    badgeColor: 'from-[#0F766E]/20 via-[#F4A261]/15 to-transparent',
-    glowColor: 'rgba(20, 184, 166, 0.35)',
-    tintHex: '#14B8A6',
+    badgeColor: 'from-[#F4A261]/30 via-[#F4A261]/15 to-transparent',
+    glowColor: 'rgba(244, 162, 97, 0.45)',
+    tintHex: '#F4A261',
     description: 'Photo & Video Sets',
   },
   record: {
     label: 'RECORD',
     icon: Mic,
-    badgeColor: 'from-[#14B8A6]/20 via-[#0F766E]/15 to-transparent',
-    glowColor: 'rgba(20, 184, 166, 0.4)',
-    tintHex: '#14B8A6',
+    badgeColor: 'from-[#F4A261]/25 via-[#F4A261]/10 to-transparent',
+    glowColor: 'rgba(244, 162, 97, 0.4)',
+    tintHex: '#F4A261',
     description: 'Soundproof Podcast Suites',
   },
 };
@@ -95,8 +95,8 @@ export const ReflectivePillarIcon: React.FC<ReflectivePillarIconProps> = ({
       <div
         className={`relative ${sizeClasses.container} flex items-center justify-center transition-all duration-300 overflow-hidden cursor-pointer ${
           isActive
-            ? 'bg-gradient-to-br from-[#0F766E] to-[#0B1F33] text-white shadow-[0_8px_20px_rgba(15,118,110,0.4),inset_0_1.5px_1px_rgba(255,255,255,0.45)] scale-105'
-            : 'bg-gradient-to-br from-white via-[#F8FAFC] to-[#EEF2F6] dark:from-[#13283B] dark:via-[#0F2232] dark:to-[#071521] text-[#0F766E] dark:text-[#14B8A6] border border-[#D9E1E3] dark:border-[#1E3A4D] hover:border-[#0F766E]/60 shadow-[0_4px_16px_rgba(11,31,51,0.06),inset_0_1.5px_1px_rgba(255,255,255,0.85),inset_0_-1px_1px_rgba(11,31,51,0.04)] dark:shadow-[0_6px_20px_rgba(0,0,0,0.35),inset_0_1.5px_1px_rgba(255,255,255,0.16),inset_0_-1px_2px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_24px_rgba(15,118,110,0.18),inset_0_1.5px_1px_rgba(255,255,255,0.9)] dark:hover:shadow-[0_8px_28px_rgba(20,184,166,0.22),inset_0_1.5px_1px_rgba(255,255,255,0.25)] hover:scale-105'
+            ? 'bg-gradient-to-br from-[#F4A261] to-[#E76F51] text-white shadow-[0_8px_20px_rgba(244,162,97,0.4),inset_0_1.5px_1px_rgba(255,255,255,0.45)] scale-105'
+            : 'bg-gradient-to-br from-white via-[#F8FAFC] to-[#EEF2F6] dark:from-[#13283B] dark:via-[#0F2232] dark:to-[#071521] text-[#F4A261] dark:text-[#F4A261] border border-[#D9E1E3] dark:border-[#1E3A4D] hover:border-[#F4A261]/60 shadow-[0_4px_16px_rgba(11,31,51,0.06),inset_0_1.5px_1px_rgba(255,255,255,0.85),inset_0_-1px_1px_rgba(11,31,51,0.04)] dark:shadow-[0_6px_20px_rgba(0,0,0,0.35),inset_0_1.5px_1px_rgba(255,255,255,0.16),inset_0_-1px_2px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_24px_rgba(244,162,97,0.22),inset_0_1.5px_1px_rgba(255,255,255,0.9)] dark:hover:shadow-[0_8px_28px_rgba(244,162,97,0.28),inset_0_1.5px_1px_rgba(255,255,255,0.25)] hover:scale-105'
         }`}
       >
         {/* Optical Specular Glare (Top 45% Curved Bevel Highlight) */}

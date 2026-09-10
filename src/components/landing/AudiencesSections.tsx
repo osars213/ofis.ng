@@ -55,9 +55,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#0F766E]/60 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#0F766E]/15 text-[#14B8A6] flex items-center justify-center">
-              <Laptop className="w-5 h-5" />
+          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+              <Laptop className="w-5 h-5 text-[#F4A261]" />
             </div>
             <h3 className="text-base font-bold text-white">Tech Teams & Remote Workers</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -65,9 +65,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#0F766E]/60 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#0F766E]/15 text-[#14B8A6] flex items-center justify-center">
-              <Building2 className="w-5 h-5" />
+          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+              <Building2 className="w-5 h-5 text-[#F4A261]" />
             </div>
             <h3 className="text-base font-bold text-white">Corporate Offsites & Strategy</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -75,9 +75,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#0F766E]/60 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#0F766E]/15 text-[#14B8A6] flex items-center justify-center">
-              <Users2 className="w-5 h-5" />
+          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+              <Users2 className="w-5 h-5 text-[#F4A261]" />
             </div>
             <h3 className="text-base font-bold text-white">Founders & Startups</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -85,9 +85,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#0F766E]/60 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#0F766E]/15 text-[#14B8A6] flex items-center justify-center">
-              <Mic className="w-5 h-5" />
+          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+              <Mic className="w-5 h-5 text-[#F4A261]" />
             </div>
             <h3 className="text-base font-bold text-white">Creators & Podcasters</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -95,9 +95,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#0F766E]/60 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#0F766E]/15 text-[#14B8A6] flex items-center justify-center">
-              <Presentation className="w-5 h-5" />
+          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+              <Presentation className="w-5 h-5 text-[#F4A261]" />
             </div>
             <h3 className="text-base font-bold text-white">Event & Workshop Organizers</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -153,26 +153,26 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
 
             {/* Feature Cards Grid */}
             <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
-                <ShieldCheck className="w-5 h-5 text-[#14B8A6]" />
+              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
+                <ShieldCheck className="w-5 h-5 text-[#F4A261]" />
                 <h3 className="text-sm font-bold text-white">Guaranteed 24/7 Power</h3>
                 <p className="text-xs text-[#94A3B8]">Tested generator + solar backup so staff never drop off client calls during public power outages.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
-                <Receipt className="w-5 h-5 text-[#14B8A6]" />
+              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
+                <Receipt className="w-5 h-5 text-[#F4A261]" />
                 <h3 className="text-sm font-bold text-white">One Monthly Invoice</h3>
                 <p className="text-xs text-[#94A3B8]">Consolidate all employee workspace usage into a single, clean statement for your accounting team.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
-                <Globe2 className="w-5 h-5 text-[#14B8A6]" />
+              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
+                <Globe2 className="w-5 h-5 text-[#F4A261]" />
                 <h3 className="text-sm font-bold text-white">Locations Across Cities</h3>
                 <p className="text-xs text-[#94A3B8]">Desks and meeting rooms in Victoria Island, Ikoyi, Lekki, Ikeja GRA, and Maitama Abuja.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
-                <Zap className="w-5 h-5 text-[#14B8A6]" />
+              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
+                <Zap className="w-5 h-5 text-[#F4A261]" />
                 <h3 className="text-sm font-bold text-white">Simple QR Entry</h3>
                 <p className="text-xs text-[#94A3B8]">Employees show an instant digital pass on their phone at the front desk and get straight to work.</p>
               </div>
@@ -192,26 +192,26 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
             <div className="lg:col-span-6 order-2 lg:order-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
-                <TrendingUp className="w-5 h-5 text-[#14B8A6]" />
+              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
+                <TrendingUp className="w-5 h-5 text-[#F4A261]" />
                 <h3 className="text-sm font-bold text-white">Higher Occupancy</h3>
                 <p className="text-xs text-[#94A3B8]">Fill empty desks, quiet meeting rooms, and off-peak hours with verified business guests.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
-                <Coins className="w-5 h-5 text-[#14B8A6]" />
+              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
+                <Coins className="w-5 h-5 text-[#F4A261]" />
                 <h3 className="text-sm font-bold text-white">Guaranteed Payouts</h3>
                 <p className="text-xs text-[#94A3B8]">Weekly earnings sent straight to your bank account without chasing overdue client invoices.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
-                <CalendarCheck className="w-5 h-5 text-[#14B8A6]" />
+              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
+                <CalendarCheck className="w-5 h-5 text-[#F4A261]" />
                 <h3 className="text-sm font-bold text-white">Calendar Sync</h3>
                 <p className="text-xs text-[#94A3B8]">Syncs directly with your Google Calendar or Outlook so you never get double-booked.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
-                <Building2 className="w-5 h-5 text-[#14B8A6]" />
+              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
+                <Building2 className="w-5 h-5 text-[#F4A261]" />
                 <h3 className="text-sm font-bold text-white">Zero Listing Fees</h3>
                 <p className="text-xs text-[#94A3B8]">Listing your venue is 100% free. You only pay a small commission when you earn from a booking.</p>
               </div>
@@ -276,9 +276,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div className="p-6 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-3 hover:border-[#0F766E]/50 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#0F766E]/15 flex items-center justify-center text-[#14B8A6]">
-                <Building2 className="w-5 h-5" />
+            <div className="p-6 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-3 hover:border-[#F4A261]/50 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+                <Building2 className="w-5 h-5 text-[#F4A261]" />
               </div>
               <h3 className="text-base font-bold text-white">Hotels & Hospitality</h3>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -286,9 +286,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-3 hover:border-[#0F766E]/50 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#0F766E]/15 flex items-center justify-center text-[#14B8A6]">
-                <Layers className="w-5 h-5" />
+            <div className="p-6 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-3 hover:border-[#F4A261]/50 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+                <Layers className="w-5 h-5 text-[#F4A261]" />
               </div>
               <h3 className="text-base font-bold text-white">Commercial Landlords</h3>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -296,9 +296,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-3 hover:border-[#0F766E]/50 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#0F766E]/15 flex items-center justify-center text-[#14B8A6]">
-                <Users2 className="w-5 h-5" />
+            <div className="p-6 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-3 hover:border-[#F4A261]/50 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+                <Users2 className="w-5 h-5 text-[#F4A261]" />
               </div>
               <h3 className="text-base font-bold text-white">Accelerators & VCs</h3>
               <p className="text-xs text-[#94A3B8] leading-relaxed">

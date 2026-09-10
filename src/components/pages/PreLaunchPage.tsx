@@ -273,7 +273,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
 
         {/* =========================================
             SECTION 3: Core Workspace Categories
-            Refined cards with teal accents.
+            Refined cards with peach accents.
         ========================================== */}
         <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
           
@@ -289,10 +289,10 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* Card 1: Work */}
-            <div className="relative overflow-hidden p-8 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#14B8A6]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(20,184,166,0.15)] transition-all duration-300 hover:-translate-y-1 group">
-              <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#0F766E]/10 rounded-full blur-2xl group-hover:bg-[#0F766E]/20 transition-all duration-300 pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-[#0F766E]/20 border border-[#0F766E]/40 flex items-center justify-center text-[#14B8A6] mb-6 shadow-[0_0_15px_rgba(20,184,166,0.15)]">
-                <Building2 className="w-6 h-6" />
+            <div className="relative overflow-hidden p-8 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(244,162,97,0.15)] transition-all duration-300 hover:-translate-y-1 group">
+              <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#F4A261]/10 rounded-full blur-2xl group-hover:bg-[#F4A261]/20 transition-all duration-300 pointer-events-none" />
+              <div className="w-12 h-12 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] mb-6 shadow-[0_0_15px_rgba(244,162,97,0.18)]">
+                <Building2 className="w-6 h-6 text-[#F4A261]" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
                 🏢 Work
@@ -303,10 +303,10 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             </div>
 
             {/* Card 2: Meet */}
-            <div className="relative overflow-hidden p-8 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#14B8A6]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(20,184,166,0.15)] transition-all duration-300 hover:-translate-y-1 group">
-              <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#0F766E]/10 rounded-full blur-2xl group-hover:bg-[#0F766E]/20 transition-all duration-300 pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-[#0F766E]/20 border border-[#0F766E]/40 flex items-center justify-center text-[#14B8A6] mb-6 shadow-[0_0_15px_rgba(20,184,166,0.15)]">
-                <Users className="w-6 h-6" />
+            <div className="relative overflow-hidden p-8 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(244,162,97,0.15)] transition-all duration-300 hover:-translate-y-1 group">
+              <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#F4A261]/10 rounded-full blur-2xl group-hover:bg-[#F4A261]/20 transition-all duration-300 pointer-events-none" />
+              <div className="w-12 h-12 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] mb-6 shadow-[0_0_15px_rgba(244,162,97,0.18)]">
+                <Users className="w-6 h-6 text-[#F4A261]" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
                 🤝 Meet
@@ -317,10 +317,10 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             </div>
 
             {/* Card 3: Create */}
-            <div className="relative overflow-hidden p-8 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#14B8A6]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(20,184,166,0.15)] transition-all duration-300 hover:-translate-y-1 group">
+            <div className="relative overflow-hidden p-8 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(244,162,97,0.15)] transition-all duration-300 hover:-translate-y-1 group">
               <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#F4A261]/10 rounded-full blur-2xl group-hover:bg-[#F4A261]/20 transition-all duration-300 pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] mb-6 shadow-[0_0_15px_rgba(244,162,97,0.15)]">
-                <Video className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] mb-6 shadow-[0_0_15px_rgba(244,162,97,0.18)]">
+                <Video className="w-6 h-6 text-[#F4A261]" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
                 🎥 Create
@@ -331,10 +331,10 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             </div>
 
             {/* Card 4: Record */}
-            <div className="relative overflow-hidden p-8 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#14B8A6]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(20,184,166,0.15)] transition-all duration-300 hover:-translate-y-1 group">
-              <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#0F766E]/10 rounded-full blur-2xl group-hover:bg-[#0F766E]/20 transition-all duration-300 pointer-events-none" />
-              <div className="w-12 h-12 rounded-xl bg-[#0F766E]/20 border border-[#0F766E]/40 flex items-center justify-center text-[#14B8A6] mb-6 shadow-[0_0_15px_rgba(20,184,166,0.15)]">
-                <Mic className="w-6 h-6" />
+            <div className="relative overflow-hidden p-8 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(244,162,97,0.15)] transition-all duration-300 hover:-translate-y-1 group">
+              <div className="absolute -top-12 -right-12 w-28 h-28 bg-[#F4A261]/10 rounded-full blur-2xl group-hover:bg-[#F4A261]/20 transition-all duration-300 pointer-events-none" />
+              <div className="w-12 h-12 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] mb-6 shadow-[0_0_15px_rgba(244,162,97,0.18)]">
+                <Mic className="w-6 h-6 text-[#F4A261]" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
                 🎙 Record
@@ -369,11 +369,11 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 relative">
               
               {/* Step 1: Search */}
-              <div className="p-8 rounded-2xl bg-[#071521] border border-[#1E3A4D] text-center flex flex-col items-center group hover:border-[#14B8A6]/40 transition-all">
-                <div className="w-16 h-16 rounded-xl bg-[#0F766E]/20 border border-[#0F766E]/40 flex items-center justify-center text-xl font-extrabold text-[#14B8A6] mb-6">
-                  <Search className="w-7 h-7 text-[#14B8A6]" />
+              <div className="p-8 rounded-2xl bg-[#071521] border border-[#1E3A4D] text-center flex flex-col items-center group hover:border-[#F4A261]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(244,162,97,0.15)] transition-all">
+                <div className="w-16 h-16 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-xl font-extrabold text-[#F4A261] mb-6 shadow-[0_0_15px_rgba(244,162,97,0.18)]">
+                  <Search className="w-7 h-7 text-[#F4A261]" />
                 </div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#14B8A6] mb-2">Step 01</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#F4A261] mb-2">Step 01</span>
                 <h3 className="text-2xl font-bold text-white mb-2">
                   Search
                 </h3>
@@ -383,11 +383,11 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
               </div>
 
               {/* Step 2: Book */}
-              <div className="p-8 rounded-2xl bg-[#071521] border border-[#1E3A4D] text-center flex flex-col items-center group hover:border-[#14B8A6]/40 transition-all">
-                <div className="w-16 h-16 rounded-xl bg-[#0F766E]/20 border border-[#0F766E]/40 flex items-center justify-center text-xl font-extrabold text-[#14B8A6] mb-6">
-                  <CreditCard className="w-7 h-7 text-[#14B8A6]" />
+              <div className="p-8 rounded-2xl bg-[#071521] border border-[#1E3A4D] text-center flex flex-col items-center group hover:border-[#F4A261]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(244,162,97,0.15)] transition-all">
+                <div className="w-16 h-16 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-xl font-extrabold text-[#F4A261] mb-6 shadow-[0_0_15px_rgba(244,162,97,0.18)]">
+                  <CreditCard className="w-7 h-7 text-[#F4A261]" />
                 </div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#14B8A6] mb-2">Step 02</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#F4A261] mb-2">Step 02</span>
                 <h3 className="text-2xl font-bold text-white mb-2">
                   Book
                 </h3>
@@ -397,11 +397,11 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
               </div>
 
               {/* Step 3: Show Up */}
-              <div className="p-8 rounded-2xl bg-[#071521] border border-[#1E3A4D] text-center flex flex-col items-center group hover:border-[#14B8A6]/40 transition-all">
-                <div className="w-16 h-16 rounded-xl bg-[#0F766E]/20 border border-[#0F766E]/40 flex items-center justify-center text-xl font-extrabold text-[#14B8A6] mb-6">
-                  <QrCode className="w-7 h-7 text-[#14B8A6]" />
+              <div className="p-8 rounded-2xl bg-[#071521] border border-[#1E3A4D] text-center flex flex-col items-center group hover:border-[#F4A261]/50 shadow-[0_10px_35px_rgba(7,21,33,0.35)] hover:shadow-[0_18px_50px_rgba(7,21,33,0.55),0_0_24px_rgba(244,162,97,0.15)] transition-all">
+                <div className="w-16 h-16 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-xl font-extrabold text-[#F4A261] mb-6 shadow-[0_0_15px_rgba(244,162,97,0.18)]">
+                  <QrCode className="w-7 h-7 text-[#F4A261]" />
                 </div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#14B8A6] mb-2">Step 03</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#F4A261] mb-2">Step 03</span>
                 <h3 className="text-2xl font-bold text-white mb-2">
                   Show Up
                 </h3>
@@ -434,9 +434,9 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             
-            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#14B8A6]/40 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#0F766E]/20 flex items-center justify-center text-[#14B8A6] shrink-0">
-                <ShieldCheck className="w-5 h-5 text-[#14B8A6]" />
+            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#F4A261]/50 shadow-[0_4px_20px_rgba(7,21,33,0.3)] transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shrink-0 shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+                <ShieldCheck className="w-5 h-5 text-[#F4A261]" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-white">Verified Spaces</h3>
@@ -444,9 +444,9 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#14B8A6]/40 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#0F766E]/20 flex items-center justify-center text-[#14B8A6] shrink-0">
-                <Zap className="w-5 h-5 text-[#14B8A6]" />
+            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#F4A261]/50 shadow-[0_4px_20px_rgba(7,21,33,0.3)] transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shrink-0 shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+                <Zap className="w-5 h-5 text-[#F4A261]" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-white">Guaranteed 24/7 Power</h3>
@@ -454,9 +454,9 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#14B8A6]/40 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#0F766E]/20 flex items-center justify-center text-[#14B8A6] shrink-0">
-                <CreditCard className="w-5 h-5 text-[#14B8A6]" />
+            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#F4A261]/50 shadow-[0_4px_20px_rgba(7,21,33,0.3)] transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shrink-0 shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+                <CreditCard className="w-5 h-5 text-[#F4A261]" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-white">Secure Payments</h3>
@@ -464,9 +464,9 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#14B8A6]/40 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#0F766E]/20 flex items-center justify-center text-[#14B8A6] shrink-0">
-                <Coins className="w-5 h-5 text-[#14B8A6]" />
+            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#F4A261]/50 shadow-[0_4px_20px_rgba(7,21,33,0.3)] transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shrink-0 shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+                <Coins className="w-5 h-5 text-[#F4A261]" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-white">Transparent Pricing</h3>
@@ -474,9 +474,9 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#14B8A6]/40 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#0F766E]/20 flex items-center justify-center text-[#14B8A6] shrink-0">
-                <Clock className="w-5 h-5 text-[#14B8A6]" />
+            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#F4A261]/50 shadow-[0_4px_20px_rgba(7,21,33,0.3)] transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shrink-0 shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+                <Clock className="w-5 h-5 text-[#F4A261]" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-white">Instant Confirmation</h3>
@@ -484,9 +484,9 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#14B8A6]/40 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#0F766E]/20 flex items-center justify-center text-[#14B8A6] shrink-0">
-                <Headphones className="w-5 h-5 text-[#14B8A6]" />
+            <div className="p-6 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center space-x-4 hover:border-[#F4A261]/50 shadow-[0_4px_20px_rgba(7,21,33,0.3)] transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shrink-0 shadow-[0_0_12px_rgba(244,162,97,0.15)]">
+                <Headphones className="w-5 h-5 text-[#F4A261]" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-white">Dedicated Support</h3>
