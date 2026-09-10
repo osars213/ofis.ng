@@ -39,32 +39,32 @@ export const OFISWordmark: React.FC<OFISWordmarkProps> = ({
     }
   };
 
-  // Height rules calibrated for crisp optical clarity (-10% to -15% header size for premium balance)
+  // Height rules calibrated for prominent, crisp brand visibility
   const getHeightClass = () => {
     switch (size) {
       case 'sm':
-        return 'h-6 sm:h-6.5';
+        return 'h-7 sm:h-8';
       case 'lg':
-        return 'h-9 sm:h-11';
+        return 'h-11 sm:h-14';
       case 'hero':
-        return 'h-12 sm:h-16';
+        return 'h-14 sm:h-20';
       case 'md':
       default:
-        return 'h-7 sm:h-8';
+        return 'h-9 sm:h-10.5';
     }
   };
 
   const getIconClass = () => {
     switch (size) {
       case 'sm':
-        return 'w-6 h-6 sm:w-6.5 sm:h-6.5';
+        return 'w-7.5 h-7.5 sm:w-8.5 sm:h-8.5';
       case 'lg':
-        return 'w-10 h-10 sm:w-12 sm:h-12';
+        return 'w-12 h-12 sm:w-14 sm:h-14';
       case 'hero':
-        return 'w-14 h-14 sm:w-16 sm:h-16';
+        return 'w-16 h-16 sm:w-20 sm:h-20';
       case 'md':
       default:
-        return 'w-7.5 h-7.5 sm:w-8.5 sm:h-8.5';
+        return 'w-9 h-9 sm:w-11 sm:h-11';
     }
   };
 
@@ -105,7 +105,7 @@ export const OFISWordmark: React.FC<OFISWordmarkProps> = ({
       <img
         src={logoSrc}
         alt="OFIS"
-        className={`${getHeightClass()} w-auto max-w-[190px] sm:max-w-[240px] object-contain transition-all duration-300 hover:scale-[1.015] ${filterStyleClass} ${getBreathingClass()}`}
+        className={`${getHeightClass()} w-auto max-w-[240px] sm:max-w-[320px] object-contain transition-all duration-300 hover:scale-[1.015] ${filterStyleClass} ${getBreathingClass()}`}
         loading="eager"
         decoding="async"
       />

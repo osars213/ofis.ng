@@ -133,42 +133,47 @@ export const Navbar: React.FC = () => {
             Map
           </button>
 
-          <button
-            type="button"
-            id="nav-bookings-btn"
-            onClick={() => {
-              setCurrentView('bookings');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
-              currentView === 'bookings' 
-                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
-                : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
-            }`}
-          >
-            Bookings
-          </button>
+          {/* User-Only Navigation: Bookings & Saved (Displayed when signed in) */}
+          {!isGuest && (
+            <>
+              <button
+                type="button"
+                id="nav-bookings-btn"
+                onClick={() => {
+                  setCurrentView('bookings');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+                  currentView === 'bookings' 
+                    ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
+                    : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
+                }`}
+              >
+                Bookings
+              </button>
 
-          <button
-            type="button"
-            id="nav-saved-btn"
-            onClick={() => {
-              setCurrentView('saved');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`px-3 py-1.5 rounded-xl transition-all flex items-center space-x-1.5 cursor-pointer ${
-              currentView === 'saved' 
-                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
-                : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
-            }`}
-          >
-            <span>Saved</span>
-            {savedSpaceIds.length > 0 && (
-              <span className="w-4 h-4 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white font-bold text-[10px] flex items-center justify-center">
-                {savedSpaceIds.length}
-              </span>
-            )}
-          </button>
+              <button
+                type="button"
+                id="nav-saved-btn"
+                onClick={() => {
+                  setCurrentView('saved');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className={`px-3 py-1.5 rounded-xl transition-all flex items-center space-x-1.5 cursor-pointer ${
+                  currentView === 'saved' 
+                    ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
+                    : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
+                }`}
+              >
+                <span>Saved</span>
+                {savedSpaceIds.length > 0 && (
+                  <span className="w-4 h-4 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white font-bold text-[10px] flex items-center justify-center">
+                    {savedSpaceIds.length}
+                  </span>
+                )}
+              </button>
+            </>
+          )}
 
           <button
             type="button"
@@ -201,58 +206,48 @@ export const Navbar: React.FC = () => {
             <span>List Space</span>
           </button>
 
-          {/* Header Notification Center Bell */}
-          <div className="relative" ref={notificationButtonRef}>
-            <button
-              type="button"
-              id="navbar-notifications-btn"
-              onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-              className={`p-2 rounded-xl border transition-all cursor-pointer relative ${
-                isNotificationsOpen 
-                  ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]' 
-                  : 'bg-[#F1F5F9] dark:bg-[#0B1F33] hover:bg-[#E2E8F0] dark:hover:bg-[#1E293B] border-[#E5E7EB] dark:border-[#1E3A4D] text-[#4B5563] hover:text-[#111827] dark:text-[#94A3B8] dark:hover:text-[#F8FAFC]'
-              }`}
-              title="Notifications & Space Availability Alerts"
-              aria-label="View notifications and availability alerts"
-            >
-              <Bell className="w-4 h-4" />
-              {unreadNotificationsCount > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[1.125rem] h-4 px-1 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white text-[10px] font-black flex items-center justify-center shadow-lg animate-pulse">
-                  {unreadNotificationsCount}
-                </span>
-              )}
-            </button>
+          {/* Header Notification Center Bell (Shown when signed in) */}
+          {!isGuest && (
+            <div className="relative" ref={notificationButtonRef}>
+              <button
+                type="button"
+                id="navbar-notifications-btn"
+                onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
+                className={`p-2 rounded-xl border transition-all cursor-pointer relative ${
+                  isNotificationsOpen 
+                    ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]' 
+                    : 'bg-[#F1F5F9] dark:bg-[#0B1F33] hover:bg-[#E2E8F0] dark:hover:bg-[#1E293B] border-[#E5E7EB] dark:border-[#1E3A4D] text-[#4B5563] hover:text-[#111827] dark:text-[#94A3B8] dark:hover:text-[#F8FAFC]'
+                }`}
+                title="Notifications & Space Availability Alerts"
+                aria-label="View notifications and availability alerts"
+              >
+                <Bell className="w-4 h-4" />
+                {unreadNotificationsCount > 0 && (
+                  <span className="absolute -top-1 -right-1 min-w-[1.125rem] h-4 px-1 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white text-[10px] font-black flex items-center justify-center shadow-lg animate-pulse">
+                    {unreadNotificationsCount}
+                  </span>
+                )}
+              </button>
 
-            {/* Notification Dropdown Container */}
-            <NotificationCenterDropdown
-              isOpen={isNotificationsOpen}
-              onClose={() => setIsNotificationsOpen(false)}
-            />
-          </div>
+              {/* Notification Dropdown Container */}
+              <NotificationCenterDropdown
+                isOpen={isNotificationsOpen}
+                onClose={() => setIsNotificationsOpen(false)}
+              />
+            </div>
+          )}
 
-          {/* User Account / Sign In Dropdown */}
+          {/* User Account / Sign In */}
           <div className="relative" ref={userMenuRef}>
             {isGuest ? (
-              <div className="flex items-center space-x-1.5">
-                <button
-                  type="button"
-                  id="navbar-guest-direct-login-btn"
-                  onClick={() => openAuthModal('login')}
-                  className="px-3.5 py-1.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold transition-all cursor-pointer shadow-2xs"
-                >
-                  Sign In
-                </button>
-                <button
-                  type="button"
-                  id="navbar-user-profile-btn"
-                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="p-1.5 rounded-xl bg-[#F1F5F9] dark:bg-[#1F2937] hover:bg-[#E2E8F0] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#374151] text-xs transition-all cursor-pointer"
-                  title="Account Options"
-                  aria-label="Account Options"
-                >
-                  <ChevronDown className={`w-3.5 h-3.5 text-[#6B7280] dark:text-[#9CA3AF] transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
-                </button>
-              </div>
+              <button
+                type="button"
+                id="navbar-guest-direct-login-btn"
+                onClick={() => openAuthModal('login')}
+                className="px-4 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold transition-all cursor-pointer shadow-2xs"
+              >
+                Sign In
+              </button>
             ) : (
               <button
                 type="button"
@@ -272,8 +267,8 @@ export const Navbar: React.FC = () => {
               </button>
             )}
 
-            {/* Profile Dropdown Popover */}
-            {isUserMenuOpen && (
+            {/* Profile Dropdown Popover (Only for signed in user) */}
+            {!isGuest && isUserMenuOpen && (
               <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] shadow-xl p-2.5 space-y-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 
                 {/* User Info Header */}

@@ -6,7 +6,6 @@ import {
   Users, 
   Video, 
   Mic, 
-  Menu, 
   X, 
   Calendar,
   FileText,
@@ -17,10 +16,15 @@ import {
   Zap,
   Clock,
   Coins,
-  Headphones
+  Headphones,
+  Mail
 } from 'lucide-react';
 import { MarketplaceScreenshot } from '../landing/MarketplaceScreenshot';
+import { ResponsiveLandingVideo, ResponsiveLandingVideoProps } from '../landing/ResponsiveLandingVideo';
 import { TrustedLogos } from '../landing/TrustedLogos';
+
+export { ResponsiveLandingVideo };
+export type { ResponsiveLandingVideoProps };
 import { EarlyAccessModal } from '../landing/EarlyAccessModal';
 import { BookDemoModal } from '../landing/BookDemoModal';
 import { InvestorDeckModal } from '../landing/InvestorDeckModal';
@@ -43,7 +47,6 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
   const [isDeckModalOpen, setIsDeckModalOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleExplore = () => {
     if (onEnterApp) {
@@ -54,7 +57,6 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
   };
 
   const scrollToSection = (id: string) => {
-    setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -64,13 +66,11 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
   const handleOpenDemoModal = (track: 'enterprise' | 'operator' | 'investor' | 'partner' = 'enterprise') => {
     setDemoModalTrack(track);
     setIsDemoModalOpen(true);
-    setMobileMenuOpen(false);
   };
 
   const handleOpenEarlyAccess = (role: 'Early Access' | 'Space Operator' = 'Early Access') => {
     setEarlyAccessDefaultRole(role);
     setIsEarlyAccessOpen(true);
-    setMobileMenuOpen(false);
   };
 
   const handleOpenHosts = () => {
@@ -86,7 +86,6 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
   };
 
   const handleOpenContact = () => {
-    setMobileMenuOpen(false);
     const element = document.getElementById('contact');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -97,7 +96,6 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
 
   const handleOpenAbout = () => {
     setIsAboutOpen(true);
-    setMobileMenuOpen(false);
   };
 
   return (
@@ -116,9 +114,7 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
       </div>
 
       {/* =========================================
-          NAVIGATION:
-          Desktop: Logo | Explore | List Your Space | Partners | Investors | Contact | Explore (CTA)
-          Mobile: ☰ Menu: Explore, List Your Space, Partners, Investors, About, Contact, Request Investor Deck
+          LANDING PAGE HEADER: Logo + Contact Only
       ========================================== */}
       <header className="sticky top-0 z-40 bg-[#071521]/90 backdrop-blur-xl border-b border-[#1E3A4D]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
@@ -140,139 +136,28 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             <img 
               src="/ofis-logo-dark.png" 
               alt="OFIS" 
-              width="120"
-              height="32"
+              width="150"
+              height="40"
               fetchPriority="high"
               decoding="async"
-              className="h-7 sm:h-8 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+              className="h-9 sm:h-10.5 w-auto object-contain transition-transform group-hover:scale-[1.02]"
             />
           </a>
 
-          {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center space-x-7 lg:space-x-8 text-sm font-medium text-[#CBD5E1]">
-            <button 
-              onClick={handleExplore}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Explore
-            </button>
-            <button 
-              onClick={handleOpenHosts}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              List Your Space
-            </button>
-            <button 
-              onClick={handleOpenPartners}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Partners
-            </button>
-            <button 
-              onClick={handleOpenInvestors}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Investors
-            </button>
+          {/* Header: Contact Only */}
+          <div>
             <button 
               type="button"
               id="prelaunch-header-contact-btn"
               onClick={handleOpenContact}
-              className="hover:text-white transition-colors cursor-pointer"
+              className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#0B1F33] hover:bg-[#132A44] border border-[#1E3A4D] hover:border-[#14B8A6]/50 text-white hover:text-[#14B8A6] text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-sm flex items-center gap-2"
             >
-              Contact
-            </button>
-          </nav>
-
-          {/* Desktop CTAs */}
-          <div className="hidden md:flex items-center space-x-3">
-            <button
-              onClick={handleExplore}
-              className="px-5 py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs shadow-[0_2px_12px_rgba(15,118,110,0.3)] transition-all cursor-pointer flex items-center space-x-1.5 group"
-            >
-              <span>Explore Spaces</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-            </button>
-          </div>
-
-          {/* Mobile Actions & Hamburger */}
-          <div className="flex md:hidden items-center space-x-2">
-            <button
-              onClick={handleExplore}
-              className="px-3.5 py-1.5 rounded-lg bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs"
-            >
-              Explore
-            </button>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-[#CBD5E1] hover:text-white hover:bg-[#0B1F33] focus:outline-none cursor-pointer"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <Mail className="w-4 h-4 text-[#14B8A6]" />
+              <span>Contact</span>
             </button>
           </div>
 
         </div>
-
-        {/* Mobile Navigation Dropdown */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-[#071521] border-b border-[#1E3A4D] px-5 py-5 space-y-3 animate-fade-in">
-            <button
-              onClick={() => { setMobileMenuOpen(false); handleExplore(); }}
-              className="block w-full text-left py-2 text-base font-semibold text-white hover:text-[#14B8A6]"
-            >
-              Explore
-            </button>
-            <button
-              onClick={() => scrollToSection('hosts')}
-              className="block w-full text-left py-2 text-base font-medium text-[#CBD5E1] hover:text-white"
-            >
-              List Your Space
-            </button>
-            <button
-              onClick={() => scrollToSection('partners')}
-              className="block w-full text-left py-2 text-base font-medium text-[#CBD5E1] hover:text-white"
-            >
-              Partners
-            </button>
-            <button
-              onClick={() => scrollToSection('investors')}
-              className="block w-full text-left py-2 text-base font-medium text-[#CBD5E1] hover:text-white"
-            >
-              Investors
-            </button>
-            <button
-              onClick={handleOpenAbout}
-              className="block w-full text-left py-2 text-base font-medium text-[#CBD5E1] hover:text-white"
-            >
-              About
-            </button>
-            <button
-              type="button"
-              id="prelaunch-mobile-contact-btn"
-              onClick={handleOpenContact}
-              className="block w-full text-left py-2 text-base font-medium text-[#CBD5E1] hover:text-white cursor-pointer"
-            >
-              Contact
-            </button>
-            
-            <div className="pt-3 border-t border-[#1E3A4D] flex flex-col gap-2.5">
-              <button
-                onClick={() => { setMobileMenuOpen(false); setIsDeckModalOpen(true); }}
-                className="w-full py-2.5 rounded-xl bg-[#0B1F33] border border-[#0F766E]/50 text-xs font-semibold text-[#14B8A6] flex items-center justify-center space-x-2"
-              >
-                <FileText className="w-4 h-4 text-[#14B8A6]" />
-                <span>Request Investor Deck</span>
-              </button>
-              <button
-                onClick={() => { setMobileMenuOpen(false); handleExplore(); }}
-                className="w-full py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold text-center"
-              >
-                Explore Spaces
-              </button>
-            </div>
-          </div>
-        )}
       </header>
 
       {/* MAIN CONTENT */}
@@ -366,8 +251,24 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
             SECTION 2: Live Demo Marketplace (Centerpiece)
             Bottom CTA: "Try the Live Demo Marketplace →"
         ========================================== */}
-        <div className="-mt-6 mb-16 sm:mb-24">
+        <div className="-mt-6 mb-12 sm:mb-16">
           <MarketplaceScreenshot onExploreClick={handleExplore} />
+        </div>
+
+        {/* =========================================
+            SECTION 2.5: Verified Workspace Video Showcase
+            Responsive Video with Automatic High-Resolution Poster Switch
+            on mobile devices and when reduced-motion preferences are detected.
+        ========================================== */}
+        <div className="mb-14 sm:mb-20">
+          <ResponsiveLandingVideo 
+            videoSrc="/media/ofis-workspace-tour.mp4"
+            posterSrc="/media/ofis-workspace-poster.jpg"
+            title="Experience OFIS Workspaces in Action"
+            subtitle="From executive boardrooms in Abuja to creative soundstages and private suites across Lagos — tour our verified spaces."
+            onExploreClick={handleExplore}
+            onBookDemoClick={() => handleOpenDemoModal('enterprise')}
+          />
         </div>
 
         {/* =========================================
@@ -715,11 +616,11 @@ export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
                 <img 
                   src="/ofis-logo-dark.png" 
                   alt="OFIS" 
-                  width="105"
-                  height="28"
+                  width="135"
+                  height="36"
                   loading="lazy"
                   decoding="async"
-                  className="h-7 w-auto object-contain"
+                  className="h-9 sm:h-10 w-auto object-contain"
                 />
               </a>
               <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed max-w-sm">

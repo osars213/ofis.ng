@@ -7,7 +7,9 @@ import {
   Bookmark, 
   Building2,
   Wallet,
-  Activity
+  Activity,
+  Mail,
+  LogIn
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
@@ -19,7 +21,9 @@ export const MobileBottomNav: React.FC = () => {
     setIsDiagnosticsModalOpen,
     setIsHostPayoutModalOpen,
     currentUser,
-    switchUserRole
+    switchUserRole,
+    isGuest,
+    openAuthModal
   } = useApp();
 
   if (currentUser.role === 'host') {
@@ -109,34 +113,62 @@ export const MobileBottomNav: React.FC = () => {
         <span className="text-[11px] whitespace-nowrap">Around Me</span>
       </button>
 
-      <button
-        type="button"
-        onClick={() => setCurrentView('bookings')}
-        className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
-          currentView === 'bookings' 
-            ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
-            : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
-        }`}
-      >
-        <CalendarCheck className="w-5 h-5" />
-        <span className="text-[11px] whitespace-nowrap">Bookings</span>
-      </button>
+      {!isGuest ? (
+        <>
+          <button
+            type="button"
+            onClick={() => setCurrentView('bookings')}
+            className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
+              currentView === 'bookings' 
+                ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
+                : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+            }`}
+          >
+            <CalendarCheck className="w-5 h-5" />
+            <span className="text-[11px] whitespace-nowrap">Bookings</span>
+          </button>
 
-      <button
-        type="button"
-        onClick={() => setCurrentView('saved')}
-        className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl relative transition-all cursor-pointer active:scale-95 ${
-          currentView === 'saved' 
-            ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
-            : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
-        }`}
-      >
-        <Bookmark className="w-5 h-5" />
-        {savedSpaceIds.length > 0 && (
-          <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-[#14B8A6]" />
-        )}
-        <span className="text-[11px] whitespace-nowrap">Saved</span>
-      </button>
+          <button
+            type="button"
+            onClick={() => setCurrentView('saved')}
+            className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl relative transition-all cursor-pointer active:scale-95 ${
+              currentView === 'saved' 
+                ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
+                : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+            }`}
+          >
+            <Bookmark className="w-5 h-5" />
+            {savedSpaceIds.length > 0 && (
+              <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-[#14B8A6]" />
+            )}
+            <span className="text-[11px] whitespace-nowrap">Saved</span>
+          </button>
+        </>
+      ) : (
+        <>
+          <button
+            type="button"
+            onClick={() => setCurrentView('contact')}
+            className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
+              currentView === 'contact' 
+                ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
+                : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+            }`}
+          >
+            <Mail className="w-5 h-5" />
+            <span className="text-[11px] whitespace-nowrap">Contact</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => openAuthModal('login')}
+            className="flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 text-[#0F766E] dark:text-[#14B8A6] font-semibold"
+          >
+            <LogIn className="w-5 h-5" />
+            <span className="text-[11px] whitespace-nowrap">Sign In</span>
+          </button>
+        </>
+      )}
     </div>
   );
 };
