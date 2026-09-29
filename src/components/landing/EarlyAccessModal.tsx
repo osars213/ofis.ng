@@ -101,23 +101,23 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
       <div 
-        className="relative w-full max-w-md bg-[#0B1F33] border border-[#1E3A4D] rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(7,21,33,0.9)] overflow-hidden text-white"
+        className="relative w-full max-w-md bg-[#0B4A50] border border-[#166D74] rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(7,21,33,0.9)] overflow-hidden text-white"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Ambient Top Glow */}
-        <div className="absolute top-0 right-1/4 w-64 h-32 bg-[#0F766E]/20 blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-64 h-32 bg-[#006B70]/20 blur-3xl pointer-events-none" />
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#071521] border border-[#1E3A4D] hover:border-[#14B8A6] flex items-center justify-center text-[#94A3B8] hover:text-white transition-colors cursor-pointer"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#105A60] border border-[#166D74] hover:border-[#14B8A6] flex items-center justify-center text-[#94A3B8] hover:text-white transition-colors cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
 
         {status === 'success' ? (
           <div className="text-center py-6">
-            <div className="w-14 h-14 rounded-full bg-[#0F766E]/20 border border-[#0F766E]/50 text-[#14B8A6] flex items-center justify-center mx-auto mb-4">
+            <div className="w-14 h-14 rounded-full bg-[#006B70]/20 border border-[#006B70]/50 text-[#14B8A6] flex items-center justify-center mx-auto mb-4">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold mb-2 text-white">You&apos;re on the list</h3>
@@ -126,7 +126,7 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
             </p>
             <button
               onClick={onClose}
-              className="w-full py-3 rounded-xl bg-[#0F766E] text-white font-bold text-sm hover:bg-[#0D655E] transition-all cursor-pointer shadow-[0_4px_16px_rgba(15,118,110,0.3)]"
+              className="w-full py-3 rounded-xl bg-[#006B70] text-white font-bold text-sm hover:bg-[#0D655E] transition-all cursor-pointer shadow-[0_4px_16px_rgba(15,118,110,0.3)]"
             >
               Done
             </button>
@@ -134,7 +134,7 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
         ) : (
           <div>
             <div className="mb-6">
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#0F766E]/20 border border-[#0F766E]/50 text-[11px] font-bold text-[#14B8A6] uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#006B70]/20 border border-[#006B70]/50 text-[11px] font-bold text-[#14B8A6] uppercase tracking-wider mb-2">
                 <Sparkles className="w-3 h-3 text-[#F4A261]" />
                 <span>Priority Access</span>
               </div>
@@ -160,7 +160,7 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
                   placeholder="e.g. Babatunde Adeyemi"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#105A60] border border-[#166D74] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
                 />
               </div>
 
@@ -174,7 +174,7 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#105A60] border border-[#166D74] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
                 />
               </div>
 
@@ -187,7 +187,7 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
                   placeholder="+234 802 345 6789"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#105A60] border border-[#166D74] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
                 />
               </div>
 
@@ -198,7 +198,7 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
                 <select
                   value={interest}
                   onChange={(e) => setInterest(e.target.value as any)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white focus:outline-none focus:border-[#14B8A6]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#105A60] border border-[#166D74] text-sm text-white focus:outline-none focus:border-[#14B8A6]"
                 >
                   <option value="Early Access">Remote Professional / Individual</option>
                   <option value="Strategic Partnership">Company / Team Lead</option>
@@ -218,14 +218,14 @@ export const EarlyAccessModal: React.FC<EarlyAccessModalProps> = ({
                   placeholder="e.g. 10-desk private office in VI, hot desk in Lekki, podcast studio..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#071521] border border-[#1E3A4D] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#105A60] border border-[#166D74] text-sm text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#14B8A6]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting || !name.trim() || !email.trim() || !message.trim()}
-                className="w-full mt-2 py-3 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm shadow-[0_4px_16px_rgba(15,118,110,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2"
+                className="w-full mt-2 py-3 rounded-xl bg-[#006B70] hover:bg-[#0D655E] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm shadow-[0_4px_16px_rgba(15,118,110,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2"
               >
                 {isSubmitting ? (
                   <>

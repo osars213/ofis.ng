@@ -63,7 +63,10 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 dark:bg-[#101827]/95 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#1E3A4D] transition-colors duration-150">
+    <header className="sticky top-0 z-40 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-md border-b border-[#E2ECEB] dark:border-[#166D74] transition-colors duration-150">
+      {/* Radiant OFIS Brand Accent Line (Multi-Color Spectrum directly from Logo) */}
+      <div className="h-[2.5px] w-full bg-gradient-to-r from-[#006B70] via-[#14BEB8] via-[#FFA987] to-[#006B70]" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-[70px] flex items-center justify-between gap-4">
         
         {/* Left: Brand Logo */}
@@ -92,10 +95,10 @@ export const Navbar: React.FC = () => {
               setCurrentView('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'home' 
-                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
-                : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
+                ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
+                : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
             }`}
           >
             Home
@@ -108,10 +111,10 @@ export const Navbar: React.FC = () => {
               setCurrentView('explore');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'explore' || currentView === 'details'
-                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
-                : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
+                ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
+                : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
             }`}
           >
             Explore
@@ -124,10 +127,10 @@ export const Navbar: React.FC = () => {
               setCurrentView('map');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'map' 
-                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
-                : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
+                ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
+                : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
             }`}
           >
             Map
@@ -143,10 +146,10 @@ export const Navbar: React.FC = () => {
                   setCurrentView('bookings');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
                   currentView === 'bookings' 
-                    ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
-                    : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
+                    ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
+                    : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
                 }`}
               >
                 Bookings
@@ -159,15 +162,15 @@ export const Navbar: React.FC = () => {
                   setCurrentView('saved');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-3 py-1.5 rounded-xl transition-all flex items-center space-x-1.5 cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-xl transition-all flex items-center space-x-1.5 cursor-pointer ${
                   currentView === 'saved' 
-                    ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
-                    : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
+                    ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
+                    : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
                 }`}
               >
                 <span>Saved</span>
                 {savedSpaceIds.length > 0 && (
-                  <span className="w-4 h-4 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white font-bold text-[10px] flex items-center justify-center">
+                  <span className="px-1.5 py-0.5 rounded-full bg-gradient-to-r from-[#FFA987] to-[#FF8A65] text-[#07383D] font-black text-[10px] flex items-center justify-center shadow-xs">
                     {savedSpaceIds.length}
                   </span>
                 )}
@@ -182,10 +185,10 @@ export const Navbar: React.FC = () => {
               setCurrentView('contact');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'contact' 
-                ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] font-bold shadow-2xs' 
-                : 'text-[#4B5563] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#172033]'
+                ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
+                : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
             }`}
           >
             Contact
@@ -195,14 +198,14 @@ export const Navbar: React.FC = () => {
         {/* Right Side: List Space CTA, Notifications, Avatar, Mobile Menu */}
         <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
 
-          {/* List Space CTA (Responsive) */}
+          {/* List Space CTA (Responsive) with Warm Peach Accent */}
           <button
             type="button"
             id="navbar-list-space-btn"
             onClick={() => setIsListSpaceModalOpen(true)}
-            className="hidden sm:flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0B1F33] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs font-semibold text-[#111827] dark:text-[#F8FAFC] hover:border-[#0F766E]/50 transition-all cursor-pointer shadow-2xs"
+            className="hidden sm:flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#FFF9F4] dark:hover:bg-[#105A60] border border-[#FFA987]/60 dark:border-[#FFA987]/50 text-xs font-bold text-[#12383B] dark:text-[#FFFFFF] hover:text-[#C85A32] dark:hover:text-[#FFA987] hover:border-[#FFA987] transition-all cursor-pointer shadow-2xs group"
           >
-            <PlusCircle className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+            <PlusCircle className="w-3.5 h-3.5 text-[#FFA987] group-hover:scale-110 transition-transform" />
             <span>List Space</span>
           </button>
 
@@ -215,15 +218,15 @@ export const Navbar: React.FC = () => {
                 onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
                 className={`p-2 rounded-xl border transition-all cursor-pointer relative ${
                   isNotificationsOpen 
-                    ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6]' 
-                    : 'bg-[#F1F5F9] dark:bg-[#0B1F33] hover:bg-[#E2E8F0] dark:hover:bg-[#1E293B] border-[#E5E7EB] dark:border-[#1E3A4D] text-[#4B5563] hover:text-[#111827] dark:text-[#94A3B8] dark:hover:text-[#F8FAFC]'
+                    ? 'bg-[#006B70]/15 dark:bg-[#006B70]/20 border-[#14BEB8] text-[#006B70] dark:text-[#28D2CB]' 
+                    : 'bg-[#F1F6F5] dark:bg-[#0B4A50] hover:bg-[#E2ECEB] dark:hover:bg-[#105A60] border-[#E2ECEB] dark:border-[#166D74] text-[#5D7A7D] hover:text-[#12383B] dark:text-[#B8D1D0] dark:hover:text-[#FFFFFF]'
                 }`}
                 title="Notifications & Space Availability Alerts"
                 aria-label="View notifications and availability alerts"
               >
                 <Bell className="w-4 h-4" />
                 {unreadNotificationsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 min-w-[1.125rem] h-4 px-1 rounded-full bg-[#0F766E] dark:bg-[#14B8A6] text-white text-[10px] font-black flex items-center justify-center shadow-lg animate-pulse">
+                  <span className="absolute -top-1 -right-1 min-w-[1.125rem] h-4 px-1 rounded-full bg-gradient-to-r from-[#FFA987] to-[#FF8A65] text-[#07383D] text-[10px] font-black flex items-center justify-center shadow-lg animate-pulse">
                     {unreadNotificationsCount}
                   </span>
                 )}
@@ -244,7 +247,7 @@ export const Navbar: React.FC = () => {
                 type="button"
                 id="navbar-guest-direct-login-btn"
                 onClick={() => openAuthModal('login')}
-                className="px-4 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold transition-all cursor-pointer shadow-2xs"
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white text-xs font-bold shadow-[0_4px_16px_rgba(255,169,135,0.35)] active:scale-95 transition-all cursor-pointer"
               >
                 Sign In
               </button>
@@ -253,29 +256,29 @@ export const Navbar: React.FC = () => {
                 type="button"
                 id="navbar-user-profile-btn"
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center space-x-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-[#F1F5F9] dark:bg-[#1F2937] hover:bg-[#E2E8F0] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#374151] text-xs transition-all cursor-pointer group"
+                className="flex items-center space-x-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-[#F1F6F5] dark:bg-[#0B4A50] hover:bg-[#E2ECEB] dark:hover:bg-[#105A60] border border-[#E2ECEB] dark:border-[#166D74] text-xs transition-all cursor-pointer group"
               >
                 <img
                   src={currentUser.avatar}
                   alt={currentUser.name}
-                  className="w-6 h-6 rounded-full object-cover ring-1 ring-[#0F766E]"
+                  className="w-6 h-6 rounded-full object-cover ring-2 ring-[#FFA987]"
                 />
                 <span className="hidden sm:inline font-semibold text-[#111827] dark:text-[#F9FAFB] max-w-[90px] truncate">
                   {currentUser.name.split(' ')[0]}
                 </span>
-                <ChevronDown className={`w-3.5 h-3.5 text-[#6B7280] dark:text-[#9CA3AF] transition-transform ${isUserMenuOpen ? 'rotate-180 text-[#0F766E] dark:text-[#14B8A6]' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#6B7280] dark:text-[#9CA3AF] transition-transform ${isUserMenuOpen ? 'rotate-180 text-[#006B70] dark:text-[#28D2CB]' : ''}`} />
               </button>
             )}
 
             {/* Profile Dropdown Popover (Only for signed in user) */}
             {!isGuest && isUserMenuOpen && (
-              <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] shadow-xl p-2.5 space-y-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#166D74] shadow-xl p-2.5 space-y-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 
                 {/* User Info Header */}
-                <div className="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-[#111827] border border-[#E5E7EB] dark:border-[#374151] space-y-1">
+                <div className="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-[#07383D] border border-[#E5E7EB] dark:border-[#166D74] space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[#111827] dark:text-[#F9FAFB] truncate">{currentUser.name}</span>
-                    <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-[#0F766E]/15 dark:bg-[#0F766E]/15 text-[#0F766E] dark:text-[#14B8A6]">
+                    <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-[#006B70]/15 dark:bg-[#006B70]/15 text-[#006B70] dark:text-[#28D2CB]">
                       {currentUser.role}
                     </span>
                   </div>
@@ -292,7 +295,7 @@ export const Navbar: React.FC = () => {
                   }}
                   className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] transition-colors text-left cursor-pointer"
                 >
-                  <RefreshCw className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <RefreshCw className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>Switch to {currentUser.role === 'user' ? 'Host Mode' : 'Guest Mode'}</span>
                 </button>
 
@@ -307,7 +310,7 @@ export const Navbar: React.FC = () => {
                   }}
                   className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] transition-colors text-left cursor-pointer"
                 >
-                  <User className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <User className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>My Account Dashboard</span>
                 </button>
 
@@ -322,7 +325,7 @@ export const Navbar: React.FC = () => {
                     }}
                     className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] transition-colors text-left cursor-pointer"
                   >
-                    <Building2 className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                    <Building2 className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                     <span>Host Operations Portal</span>
                   </button>
                 )}
@@ -338,7 +341,7 @@ export const Navbar: React.FC = () => {
                   className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] transition-colors text-left cursor-pointer"
                 >
                   <div className="flex items-center space-x-2.5">
-                    <ShieldCheck className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                    <ShieldCheck className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                     <span>Admin Review Portal</span>
                   </div>
                   {pendingSpacesCount > 0 && (
@@ -358,7 +361,7 @@ export const Navbar: React.FC = () => {
                   }}
                   className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] transition-colors text-left cursor-pointer"
                 >
-                  <CalendarCheck className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <CalendarCheck className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>My Bookings & Passes</span>
                 </button>
 
@@ -373,11 +376,11 @@ export const Navbar: React.FC = () => {
                   className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] transition-colors text-left cursor-pointer"
                 >
                   <div className="flex items-center space-x-2.5">
-                    <Bookmark className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                    <Bookmark className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                     <span>Saved Spaces</span>
                   </div>
                   {savedSpaceIds.length > 0 && (
-                    <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[#0F766E] text-white">
+                    <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[#006B70] text-white">
                       {savedSpaceIds.length}
                     </span>
                   )}
@@ -394,7 +397,7 @@ export const Navbar: React.FC = () => {
                     }}
                     className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] transition-colors text-left cursor-pointer"
                   >
-                    <Activity className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                    <Activity className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                     <span>System Diagnostics</span>
                   </button>
                 )}
@@ -409,7 +412,7 @@ export const Navbar: React.FC = () => {
                   }}
                   className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] transition-colors text-left cursor-pointer"
                 >
-                  <User className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <User className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>Edit Profile & Account</span>
                 </button>
 
@@ -423,7 +426,7 @@ export const Navbar: React.FC = () => {
                   }}
                   className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs text-[#4B5563] dark:text-[#D1D5DB] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] transition-colors text-left cursor-pointer"
                 >
-                  <Settings className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <Settings className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>Settings & Theme Preferences</span>
                 </button>
 
@@ -435,14 +438,14 @@ export const Navbar: React.FC = () => {
                     setIsUserMenuOpen(false);
                     setIsDownloadAppModalOpen(true);
                   }}
-                  className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#0F766E] dark:text-[#14B8A6] hover:bg-[#0F766E]/10 transition-colors text-left cursor-pointer"
+                  className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#006B70] dark:text-[#28D2CB] hover:bg-[#006B70]/10 transition-colors text-left cursor-pointer"
                 >
-                  <Smartphone className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <Smartphone className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>Download Mobile App</span>
                 </button>
 
                 {/* Auth Actions (Sign In / Sign Up vs Sign Out) */}
-                <div className="pt-1 border-t border-[#E5E7EB] dark:border-[#374151] space-y-1">
+                <div className="pt-1 border-t border-[#E5E7EB] dark:border-[#166D74] space-y-1">
                   {isGuest ? (
                     <>
                       <button
@@ -452,7 +455,7 @@ export const Navbar: React.FC = () => {
                           setIsUserMenuOpen(false);
                           openAuthModal('signup');
                         }}
-                        className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] hover:bg-[#0F766E]/10 dark:hover:bg-[#0F766E]/20 transition-colors text-left cursor-pointer"
+                        className="w-full flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-[#006B70] dark:text-[#28D2CB] hover:bg-[#006B70]/10 dark:hover:bg-[#006B70]/20 transition-colors text-left cursor-pointer"
                       >
                         <UserPlus className="w-4 h-4" />
                         <span>Create Account (+₦25k)</span>
@@ -495,7 +498,7 @@ export const Navbar: React.FC = () => {
             type="button"
             id="navbar-menu-drawer-btn"
             onClick={() => setIsDrawerOpen(true)}
-            className="p-2 rounded-xl bg-[#F1F5F9] dark:bg-[#0B1F33] hover:bg-[#E2E8F0] dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[#4B5563] hover:text-[#111827] dark:text-[#94A3B8] dark:hover:text-[#F8FAFC] transition-all cursor-pointer shadow-2xs lg:hidden"
+            className="p-2 rounded-xl bg-[#F1F5F9] dark:bg-[#0B4A50] hover:bg-[#E2E8F0] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-[#4B5563] hover:text-[#111827] dark:text-[#94A3B8] dark:hover:text-[#F8FAFC] transition-all cursor-pointer shadow-2xs lg:hidden"
             aria-label="Open Navigation Menu"
             title="Navigation Menu"
           >

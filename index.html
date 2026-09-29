@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/favicon.png?v=2" />
-    <link rel="apple-touch-icon" href="/favicon.png?v=2" />
+    <meta name="theme-color" content="#07383D" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <title>OFIS — Nigeria's Physical Space Network</title>
     <meta name="description" content="Discover, compare and book the right space for work, meetings, events and more across Nigeria. OFIS is Nigeria's physical space network." />
     <link rel="canonical" href="https://ofis.ng/" />
@@ -12,31 +13,80 @@
     <meta property="og:description" content="Discover, compare and book the right space for work, meetings, events and more across Nigeria. OFIS is Nigeria's physical space network." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ofis.ng" />
-    <meta property="og:image" content="/ofis-logo-dark.png?v=2" />
+    <meta property="og:image" content="/ofis-logo-dark.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OFIS - Nigeria's Physical Space Network" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="OFIS — Nigeria's Physical Space Network" />
     <meta name="twitter:description" content="Discover, compare and book the right space for work, meetings, events and more across Nigeria. OFIS is Nigeria's physical space network." />
-    <meta name="twitter:image" content="/ofis-logo-dark.png?v=2" />
-    <link rel="preload" as="image" href="/ofis-logo-dark.png?v=2" fetchpriority="high" />
-    <link rel="preload" as="image" href="/ofis-logo.png?v=2" />
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600&auto=format&fit=crop&q=75" fetchpriority="high" />
+    <meta name="twitter:image" content="/ofis-logo-dark.png" />
+    
+    <!-- Structured Data (JSON-LD) for Search Engines & PageSpeed Insights -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://ofis.ng/#organization",
+          "name": "OFIS",
+          "url": "https://ofis.ng",
+          "logo": "https://ofis.ng/ofis-logo-dark.png",
+          "description": "Nigeria's physical space network for coworking desks, meeting rooms, photo studios, and podcast booths.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Lagos",
+            "addressCountry": "NG"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "hello@ofis.ng",
+            "contactType": "customer service"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ofis.ng/#website",
+          "url": "https://ofis.ng",
+          "name": "OFIS — Nigeria's Physical Space Network",
+          "publisher": {
+            "@id": "https://ofis.ng/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://ofis.ng/?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Critical above-the-fold brand asset preload -->
+    <link rel="preload" as="image" href="/ofis-logo-dark.svg" fetchpriority="high" />
+    
+    <!-- Efficient Google Fonts preconnection -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <!-- Non-render blocking font loading with font-display: swap -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" media="print" onload="this.media='all'">
+    
+    <!-- Non-render blocking font loading with display=swap -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" media="print" onload="this.media='all'">
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
     </noscript>
+    
     <style>
       /* Critical inline base styling to ensure instantaneous FCP */
       html {
         color-scheme: dark;
       }
       body {
-        background-color: #071521;
+        background-color: #07383D;
         color: #F8FAFC;
         margin: 0;
         font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -48,8 +98,34 @@
       }
     </style>
   </head>
-  <body class="bg-[#071521] text-[#F8FAFC] antialiased selection:bg-[#0F766E] selection:text-white" style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-    <div id="root"></div>
+  <body class="bg-[#FFF9F4] dark:bg-[#07383D] text-[#12383B] dark:text-[#FFFFFF] antialiased selection:bg-[#14BEB8] selection:text-white" style="font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;">
+    <div id="root">
+      <div style="position:fixed;inset:0;background-color:#07383D;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;color:#FFFFFF;padding:24px;user-select:none;overflow:hidden;">
+        <!-- Ambient radial glow behind logo -->
+        <div style="position:absolute;width:min(90vw, 700px);height:min(90vw, 700px);background:radial-gradient(circle, rgba(0,107,112,0.35) 0%, rgba(20,190,184,0.15) 40%, transparent 70%);border-radius:50%;pointer-events:none;"></div>
+        
+        <!-- Prominent Visual Focus: Full OFIS Logo -->
+        <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;width:100%;max-width:820px;padding:0 16px;text-align:center;">
+          <img 
+            src="/ofis-logo-dark.svg" 
+            alt="OFIS — Nigeria's Physical Space Network" 
+            style="width:min(88vw, 760px);max-height:42vh;object-fit:contain;filter:drop-shadow(0 0 24px rgba(20,190,184,0.25));animation:ofisPulse 2.8s ease-in-out infinite;"
+          />
+          
+          <!-- Subtle, sleek loading indicator -->
+          <div style="width:32px;height:32px;border:2.5px solid rgba(20,190,184,0.25);border-top-color:#14BEB8;border-radius:50%;margin-top:36px;animation:spin 0.85s linear infinite;"></div>
+        </div>
+      </div>
+      <style>
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+        @keyframes ofisPulse {
+          0%, 100% { transform: scale(1); opacity: 0.96; }
+          50% { transform: scale(1.025); opacity: 1; filter: drop-shadow(0 0 32px rgba(20,190,184,0.4)); }
+        }
+      </style>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

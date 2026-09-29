@@ -80,8 +80,8 @@ export const FeaturedSpacesSection: React.FC<FeaturedSpacesSectionProps> = ({ on
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 sm:mb-16 gap-4">
         <div>
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#0F766E]/15 border border-[#0F766E]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F4A261]" />
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#006B70]/15 border border-[#006B70]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#14B8A6]" />
             <span>The OFIS Verified Standard</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
@@ -108,7 +108,7 @@ export const FeaturedSpacesSection: React.FC<FeaturedSpacesSectionProps> = ({ on
             <div
               key={space.id}
               onClick={onExploreClick}
-              className="rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] overflow-hidden group hover:border-[#0F766E]/60 hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-md flex flex-col justify-between"
+              className="rounded-2xl bg-[#0B4A50] border border-[#166D74] overflow-hidden group hover:border-[#006B70]/70 hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-md flex flex-col justify-between"
             >
               {/* Image */}
               <div>
@@ -120,9 +120,9 @@ export const FeaturedSpacesSection: React.FC<FeaturedSpacesSectionProps> = ({ on
                     decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071521] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07383D] via-transparent to-transparent" />
                   
-                  <div className="absolute top-3 left-3 flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-[#071521]/85 backdrop-blur-md border border-[#1E3A4D] text-[10px] font-semibold text-[#14B8A6]">
+                  <div className="absolute top-3 left-3 flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-[#07383D]/85 backdrop-blur-md border border-[#166D74] text-[10px] font-semibold text-[#14B8A6]">
                     <BadgeIcon className="w-3.5 h-3.5 text-[#14B8A6]" />
                     <span>{space.badge}</span>
                   </div>
@@ -143,13 +143,13 @@ export const FeaturedSpacesSection: React.FC<FeaturedSpacesSectionProps> = ({ on
                     {space.title}
                   </h3>
                   <div className="flex items-center text-xs text-[#94A3B8]">
-                    <MapPin className="w-3.5 h-3.5 mr-1 text-[#0F766E] shrink-0" />
+                    <MapPin className="w-3.5 h-3.5 mr-1 text-[#14B8A6] shrink-0" />
                     <span className="truncate">{space.location}</span>
                   </div>
                 </div>
               </div>
               
-              <div className="p-4 pt-3 border-t border-[#1E3A4D] flex items-center justify-between text-xs">
+              <div className="p-4 pt-3 border-t border-[#166D74] flex items-center justify-between text-xs">
                 <span className="font-extrabold text-white text-sm">
                   {space.price} <span className="text-[11px] font-normal text-[#94A3B8]">{space.period}</span>
                 </span>

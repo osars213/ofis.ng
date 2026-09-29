@@ -90,17 +90,17 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
   return (
     <div
       id="prelaunch-signup"
-      className={`relative rounded-3xl bg-[#071521]/90 backdrop-blur-2xl border border-[#1E3A4D] shadow-[0_20px_50px_rgba(7,21,33,0.6),inset_0_1px_1px_rgba(255,255,255,0.08)] overflow-hidden transition-all duration-300 ${className}`}
+      className={`relative rounded-3xl bg-[#0B4A50]/95 backdrop-blur-2xl border border-[#166D74] shadow-[0_20px_50px_rgba(7,21,33,0.6),inset_0_1px_1px_rgba(255,255,255,0.08)] overflow-hidden transition-all duration-300 ${className}`}
     >
       {/* Decorative Brand Teal & Peach Ambient Glow */}
-      <div className="absolute -top-16 -right-16 w-56 h-56 bg-[#0F766E]/20 blur-3xl pointer-events-none rounded-full" />
-      <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-[#F4A261]/15 blur-3xl pointer-events-none rounded-full" />
+      <div className="absolute -top-16 -right-16 w-56 h-56 bg-[#006B70]/20 blur-3xl pointer-events-none rounded-full" />
+      <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-[#F4A261]/10 blur-3xl pointer-events-none rounded-full" />
 
       <div className="relative z-10 p-6 sm:p-8 lg:p-10">
         {/* Header */}
         <div className="mb-6 sm:mb-8 text-center sm:text-left">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#0F766E]/15 border border-[#0F766E]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#F4A261] animate-pulse" />
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#006B70]/15 border border-[#006B70]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-pulse" />
             <span>Pre-Launch Signup • Phase 1 Priority</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
@@ -114,7 +114,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
         {/* Success State */}
         {status === 'success' ? (
           <div className="py-8 text-center sm:text-left">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#0F766E]/20 border border-[#14B8A6]/40 text-[#14B8A6] mb-5">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#006B70]/20 border border-[#14B8A6]/40 text-[#14B8A6] mb-5">
               <CheckCircle2 className="w-7 h-7" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">
@@ -126,8 +126,8 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
 
             {/* Submitted Payload Confirmation Inspector */}
             {submittedPayload && (
-              <div className="mb-6 p-4 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] text-left">
-                <div className="flex items-center justify-between text-xs text-[#94A3B8] mb-2 pb-2 border-b border-[#1E3A4D] font-mono">
+              <div className="mb-6 p-4 rounded-2xl bg-[#07383D] border border-[#166D74] text-left">
+                <div className="flex items-center justify-between text-xs text-[#94A3B8] mb-2 pb-2 border-b border-[#166D74] font-mono">
                   <span>Supabase Table: <strong className="text-[#14B8A6]">public.leads</strong></span>
                   <span className="text-[#14B8A6] font-semibold">Row Inserted (Anon Role)</span>
                 </div>
@@ -188,7 +188,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
               {/* Full Name */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
-                  Full Name <span className="text-[#F4A261]">*</span>
+                  Full Name <span className="text-[#14B8A6]">*</span>
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
@@ -200,7 +200,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                     placeholder="e.g. Babatunde Adeyemi"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors"
+                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#105A60] border border-[#166D74] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -208,7 +208,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
               {/* Work Email */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
-                  Email Address <span className="text-[#F4A261]">*</span>
+                  Email Address <span className="text-[#14B8A6]">*</span>
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94A3B8]">
@@ -220,7 +220,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                     placeholder="babatunde@company.ng"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors"
+                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#105A60] border border-[#166D74] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -241,7 +241,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                     placeholder="+234 802 345 6789"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors"
+                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#105A60] border border-[#166D74] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -254,7 +254,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                 <select
                   value={interest}
                   onChange={(e) => setInterest(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white outline-none transition-colors cursor-pointer"
+                  className="w-full px-3.5 py-3 rounded-xl bg-[#105A60] border border-[#166D74] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white outline-none transition-colors cursor-pointer"
                 >
                   <option value="Hot Desk & Coworking">Hot Desk &amp; Coworking</option>
                   <option value="Private Office / Team Suite">Private Office / Team Suite</option>
@@ -269,7 +269,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
             {/* Message / Requirements */}
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-[#94A3B8] mb-1.5">
-                What are you looking for? <span className="text-[#F4A261]">*</span>
+                What are you looking for? <span className="text-[#14B8A6]">*</span>
               </label>
               <div className="relative">
                 <div className="absolute top-3.5 left-3.5 pointer-events-none text-[#94A3B8]">
@@ -281,7 +281,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
                   placeholder="e.g. Need a 10-person private suite in Victoria Island with high-speed fiber from November."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors resize-none"
+                  className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#105A60] border border-[#166D74] focus:border-[#14B8A6] focus:ring-1 focus:ring-[#14B8A6] text-sm text-white placeholder-[#94A3B8]/70 outline-none transition-colors resize-none"
                 />
               </div>
             </div>
@@ -296,7 +296,7 @@ export const PreLaunchSignupForm: React.FC<PreLaunchSignupFormProps> = ({
             <button
               type="submit"
               disabled={isSubmitting || !name.trim() || !email.trim() || !message.trim()}
-              className="w-full py-4 px-6 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] active:bg-[#14B8A6] text-white font-extrabold text-sm sm:text-base shadow-[0_4px_25px_rgba(15,118,110,0.4),inset_0_1px_1px_rgba(255,255,255,0.2)] active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 px-6 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] active:bg-[#14B8A6] text-white font-extrabold text-sm sm:text-base shadow-[0_4px_25px_rgba(15,118,110,0.4),inset_0_1px_1px_rgba(255,255,255,0.2)] active:scale-[0.99] transition-all duration-200 cursor-pointer flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <>

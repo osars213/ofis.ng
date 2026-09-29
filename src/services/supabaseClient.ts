@@ -248,7 +248,7 @@ export function mapDbBookingToBooking(row: any): Booking {
     checkedOutAt: row.checked_out_at,
     qrCodeValue: row.qr_code_value || `OFIS-PASS-${row.id}`,
     digitalPassCode: row.digital_pass_code || `OFIS-${row.id.slice(-4)}`,
-    paymentMethod: row.payment_method || 'paystack',
+    paymentMethod: row.payment_method || 'sznd',
     paymentReference: row.payment_reference || '',
     createdAt: row.created_at || new Date().toISOString(),
     hasReminder: row.has_reminder ?? true,
@@ -369,3 +369,21 @@ export function mapDbProfileToUser(row: any): UserProfile {
     createdAt: row.created_at || new Date().toISOString(),
   };
 }
+
+export function mapProfileToDbProfile(user: UserProfile | Partial<UserProfile>): Record<string, any> {
+  const row: Record<string, any> = {};
+  if (user.id !== undefined) row.id = user.id;
+  if (user.name !== undefined) row.name = user.name;
+  if (user.email !== undefined) row.email = user.email;
+  if (user.phone !== undefined) row.phone = user.phone;
+  if (user.avatar !== undefined) row.avatar = user.avatar;
+  if (user.role !== undefined) row.role = user.role;
+  if (user.company !== undefined) row.company = user.company;
+  if (user.bio !== undefined) row.bio = user.bio;
+  if (user.walletBalanceNgn !== undefined) row.wallet_balance_ngn = user.walletBalanceNgn;
+  if (user.savedSpaceIds !== undefined) row.saved_space_ids = user.savedSpaceIds;
+  if (user.isEmailVerified !== undefined) row.is_email_verified = user.isEmailVerified;
+  if (user.emailVerifiedAt !== undefined) row.email_verified_at = user.emailVerifiedAt;
+  return row;
+}
+

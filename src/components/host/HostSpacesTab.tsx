@@ -217,7 +217,7 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
           className={`px-4 py-2.5 rounded-2xl font-bold text-xs flex items-center justify-center space-x-2 shadow-sm cursor-pointer active:scale-95 transition-all ${
             !isEmailVerified
               ? 'bg-amber-500 hover:bg-amber-600 text-white'
-              : 'bg-[#0F766E] hover:bg-[#14B8A6] text-white'
+              : 'bg-[#006B70] hover:bg-[#0EA8A2] text-white'
           }`}
         >
           {!isEmailVerified ? (
@@ -236,7 +236,7 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
 
       {/* Workspace Listings Grid */}
       {hostSpaces.length === 0 ? (
-        <div className="p-12 text-center rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] space-y-4 shadow-xs">
+        <div className="p-12 text-center rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#166D74] space-y-4 shadow-xs">
           <Building2 className="w-12 h-12 text-[#6B7280] dark:text-[#9CA3AF] mx-auto opacity-50" />
           <h3 className="text-base font-bold text-[#111827] dark:text-[#F9FAFB]">No Workspaces Published Yet</h3>
           <p className="text-xs text-[#6B7280] dark:text-[#9CA3AF] max-w-sm mx-auto">
@@ -245,7 +245,7 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
           <button
             type="button"
             onClick={() => setIsListSpaceModalOpen(true)}
-            className="px-4 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs shadow-xs cursor-pointer"
+            className="px-4 py-2 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-xs shadow-xs cursor-pointer"
           >
             Create Your First Listing
           </button>
@@ -259,10 +259,10 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
             return (
               <div
                 key={space.id}
-                className="rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] overflow-hidden hover:border-[#0F766E]/50 transition-all flex flex-col justify-between group shadow-xs"
+                className="rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#166D74] overflow-hidden hover:border-[#006B70]/50 transition-all flex flex-col justify-between group shadow-xs"
               >
                 {/* Image Banner */}
-                <div className="relative h-48 w-full bg-[#F1F5F9] dark:bg-[#111827] overflow-hidden">
+                <div className="relative h-48 w-full bg-[#F1F5F9] dark:bg-[#07383D] overflow-hidden">
                   <img
                     src={space.featuredImage || images[0]}
                     alt={space.title}
@@ -283,7 +283,7 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                         <span>Action Required</span>
                       </span>
                     ) : (
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#0F766E]/90 text-white backdrop-blur-md flex items-center space-x-1 shadow-xs">
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#006B70]/90 text-white backdrop-blur-md flex items-center space-x-1 shadow-xs">
                         <ShieldCheck className="w-3 h-3" />
                         <span>Verified</span>
                       </span>
@@ -291,10 +291,10 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
 
                     <span className={`px-2 py-1 rounded-full text-[10px] font-bold flex items-center space-x-1 backdrop-blur-md ${
                       isActive 
-                        ? 'bg-black/60 text-[#0F766E] dark:text-[#14B8A6]' 
+                        ? 'bg-black/60 text-[#006B70] dark:text-[#28D2CB]' 
                         : 'bg-black/70 text-red-400 border border-red-500/30'
                     }`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#0F766E]' : 'bg-red-500'}`} />
+                      <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#006B70]' : 'bg-red-500'}`} />
                       <span>{isActive ? 'Active' : 'Paused'}</span>
                     </span>
                   </div>
@@ -306,7 +306,7 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                       title={isActive ? 'Pause listing' : 'Activate listing'}
                       className="p-2 rounded-xl bg-black/60 hover:bg-black text-white backdrop-blur-md cursor-pointer transition-colors shadow-xs"
                     >
-                      <Power className={`w-4 h-4 ${isActive ? 'text-[#0F766E] dark:text-[#14B8A6]' : 'text-neutral-400'}`} />
+                      <Power className={`w-4 h-4 ${isActive ? 'text-[#006B70] dark:text-[#28D2CB]' : 'text-neutral-400'}`} />
                     </button>
                   </div>
 
@@ -316,7 +316,7 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                       <span className="font-bold">{space.rating || 4.9}</span>
                       <span className="text-neutral-300">({space.reviewsCount || 42} reviews)</span>
                     </div>
-                    <div className="font-mono font-bold text-[#0F766E] dark:text-[#14B8A6]">
+                    <div className="font-mono font-bold text-[#006B70] dark:text-[#28D2CB]">
                       {formatPrice(space.pricePerHour, { perHour: true })}
                     </div>
                   </div>
@@ -325,11 +325,11 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                 {/* Body Content */}
                 <div className="p-4 space-y-3 flex-1 flex flex-col justify-between">
                   <div className="space-y-1.5">
-                    <h3 className="text-sm font-bold text-[#111827] dark:text-[#F9FAFB] line-clamp-1 group-hover:text-[#0F766E] dark:text-[#14B8A6] transition-colors">
+                    <h3 className="text-sm font-bold text-[#111827] dark:text-[#F9FAFB] line-clamp-1 group-hover:text-[#006B70] dark:text-[#28D2CB] transition-colors">
                       {space.title}
                     </h3>
                     <div className="flex items-center space-x-1.5 text-xs text-[#6B7280] dark:text-[#9CA3AF]">
-                      <MapPin className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6] shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB] shrink-0" />
                       <span className="line-clamp-1">{space.neighborhood}, {space.city}</span>
                     </div>
                     <div className="flex items-center space-x-1.5 text-[11px] text-[#6B7280] dark:text-[#9CA3AF]">
@@ -341,12 +341,12 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                   {/* Amenities Preview */}
                   <div className="flex flex-wrap gap-1 pt-1">
                     {(space.amenities || []).slice(0, 3).map((amenity, i) => (
-                      <span key={i} className="text-[10px] px-2 py-0.5 rounded-lg bg-[#F1F5F9] dark:bg-[#111827] text-[#6B7280] dark:text-[#9CA3AF] border border-[#E5E7EB] dark:border-[#374151] line-clamp-1">
+                      <span key={i} className="text-[10px] px-2 py-0.5 rounded-lg bg-[#F1F5F9] dark:bg-[#07383D] text-[#6B7280] dark:text-[#9CA3AF] border border-[#E5E7EB] dark:border-[#166D74] line-clamp-1">
                         {amenity}
                       </span>
                     ))}
                     {(space.amenities?.length || 0) > 3 && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-lg bg-[#F1F5F9] dark:bg-[#111827] text-[#6B7280] dark:text-[#9CA3AF]">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-lg bg-[#F1F5F9] dark:bg-[#07383D] text-[#6B7280] dark:text-[#9CA3AF]">
                         +{(space.amenities?.length || 0) - 3}
                       </span>
                     )}
@@ -392,7 +392,7 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                   )}
 
                   {/* Action Bar */}
-                  <div className="pt-3 border-t border-[#E5E7EB] dark:border-[#374151] grid grid-cols-4 gap-1 text-[11px]">
+                  <div className="pt-3 border-t border-[#E5E7EB] dark:border-[#166D74] grid grid-cols-4 gap-1 text-[11px]">
                     
                     {/* 1. Edit Space */}
                     <button
@@ -401,10 +401,10 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                         setEditingSpace(space);
                         setIsEditSpaceModalOpen(true);
                       }}
-                      className="p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#111827] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] text-[#111827] dark:text-[#F9FAFB] flex flex-col items-center justify-center space-y-1 cursor-pointer transition-colors border border-[#E5E7EB] dark:border-[#374151]"
+                      className="p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#07383D] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] text-[#111827] dark:text-[#F9FAFB] flex flex-col items-center justify-center space-y-1 cursor-pointer transition-colors border border-[#E5E7EB] dark:border-[#166D74]"
                       title="Edit Space Info"
                     >
-                      <Edit3 className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                      <Edit3 className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                       <span className="text-[9px]">Edit</span>
                     </button>
 
@@ -412,10 +412,10 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                     <button
                       type="button"
                       onClick={() => handleOpenPhotoManager(space)}
-                      className="p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#111827] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] text-[#111827] dark:text-[#F9FAFB] flex flex-col items-center justify-center space-y-1 cursor-pointer transition-colors border border-[#E5E7EB] dark:border-[#374151]"
+                      className="p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#07383D] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] text-[#111827] dark:text-[#F9FAFB] flex flex-col items-center justify-center space-y-1 cursor-pointer transition-colors border border-[#E5E7EB] dark:border-[#166D74]"
                       title="Photo Gallery"
                     >
-                      <ImageIcon className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                      <ImageIcon className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                       <span className="text-[9px]">Photos</span>
                     </button>
 
@@ -423,10 +423,10 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                     <button
                       type="button"
                       onClick={() => handleOpenAmenityManager(space)}
-                      className="p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#111827] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] text-[#111827] dark:text-[#F9FAFB] flex flex-col items-center justify-center space-y-1 cursor-pointer transition-colors border border-[#E5E7EB] dark:border-[#374151]"
+                      className="p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#07383D] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] text-[#111827] dark:text-[#F9FAFB] flex flex-col items-center justify-center space-y-1 cursor-pointer transition-colors border border-[#E5E7EB] dark:border-[#166D74]"
                       title="Manage Amenities"
                     >
-                      <Zap className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                      <Zap className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                       <span className="text-[9px]">Amenities</span>
                     </button>
 
@@ -434,10 +434,10 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                     <button
                       type="button"
                       onClick={() => onSelectSpaceForPricing(space)}
-                      className="p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#111827] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] text-[#111827] dark:text-[#F9FAFB] flex flex-col items-center justify-center space-y-1 cursor-pointer transition-colors border border-[#E5E7EB] dark:border-[#374151]"
+                      className="p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#07383D] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] text-[#111827] dark:text-[#F9FAFB] flex flex-col items-center justify-center space-y-1 cursor-pointer transition-colors border border-[#E5E7EB] dark:border-[#166D74]"
                       title="Pricing Rules"
                     >
-                      <Sliders className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                      <Sliders className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                       <span className="text-[9px]">Pricing</span>
                     </button>
 
@@ -453,8 +453,8 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
       {/* Photo Manager Modal */}
       {photoModalSpace && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-xl bg-white dark:bg-[#1F2937] rounded-3xl border border-[#E5E7EB] dark:border-[#374151] shadow-2xl p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#374151] pb-3">
+          <div className="relative w-full max-w-xl bg-white dark:bg-[#1F2937] rounded-3xl border border-[#E5E7EB] dark:border-[#166D74] shadow-2xl p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#166D74] pb-3">
               <div>
                 <h3 className="text-base font-bold text-[#111827] dark:text-[#F9FAFB]">Photo Gallery & Visual Assets</h3>
                 <p className="text-xs text-[#6B7280] dark:text-[#9CA3AF]">{photoModalSpace.title}</p>
@@ -471,10 +471,10 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
             {/* Photo List */}
             <div className="grid grid-cols-3 gap-3 max-h-60 overflow-y-auto p-1">
               {(photoModalSpace.images || [photoModalSpace.featuredImage]).map((img, idx) => (
-                <div key={idx} className="relative group rounded-2xl overflow-hidden h-28 bg-[#F1F5F9] dark:bg-[#111827] border border-[#E5E7EB] dark:border-[#374151]">
+                <div key={idx} className="relative group rounded-2xl overflow-hidden h-28 bg-[#F1F5F9] dark:bg-[#07383D] border border-[#E5E7EB] dark:border-[#166D74]">
                   <img src={img} alt="" className="w-full h-full object-cover" />
                   {idx === 0 && (
-                    <span className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-md bg-[#0F766E] text-white font-bold text-[9px] shadow-xs">
+                    <span className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-md bg-[#006B70] text-white font-bold text-[9px] shadow-xs">
                       Featured Cover
                     </span>
                   )}
@@ -490,7 +490,7 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
             </div>
 
             {/* Add Photo URL Input */}
-            <div className="space-y-2 pt-2 border-t border-[#E5E7EB] dark:border-[#374151]">
+            <div className="space-y-2 pt-2 border-t border-[#E5E7EB] dark:border-[#166D74]">
               <label className="text-xs font-semibold text-[#6B7280] dark:text-[#9CA3AF]">Add High-Resolution Image URL</label>
               <div className="flex items-center space-x-2">
                 <input
@@ -498,13 +498,13 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                   placeholder="https://images.unsplash.com/photo-..."
                   value={newPhotoUrl}
                   onChange={(e) => setNewPhotoUrl(e.target.value)}
-                  className="flex-1 px-4 py-2.5 rounded-2xl bg-[#F8FAFC] dark:bg-[#111827] border border-[#E5E7EB] dark:border-[#374151] text-xs text-[#111827] dark:text-[#F9FAFB] placeholder-[#6B7280] dark:placeholder-[#9CA3AF] focus:outline-none focus:border-[#0F766E]"
+                  className="flex-1 px-4 py-2.5 rounded-2xl bg-[#F8FAFC] dark:bg-[#07383D] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F9FAFB] placeholder-[#6B7280] dark:placeholder-[#9CA3AF] focus:outline-none focus:border-[#006B70]"
                 />
                 <button
                   type="button"
                   onClick={handleAddPhoto}
                   disabled={!newPhotoUrl.trim()}
-                  className="px-4 py-2.5 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] disabled:opacity-40 text-white font-bold text-xs flex items-center space-x-1 cursor-pointer shadow-xs"
+                  className="px-4 py-2.5 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] disabled:opacity-40 text-white font-bold text-xs flex items-center space-x-1 cursor-pointer shadow-xs"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add</span>
@@ -528,8 +528,8 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
       {/* Amenities Manager Modal */}
       {amenityModalSpace && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-xl bg-white dark:bg-[#1F2937] rounded-3xl border border-[#E5E7EB] dark:border-[#374151] shadow-2xl p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#374151] pb-3">
+          <div className="relative w-full max-w-xl bg-white dark:bg-[#1F2937] rounded-3xl border border-[#E5E7EB] dark:border-[#166D74] shadow-2xl p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#166D74] pb-3">
               <div>
                 <h3 className="text-base font-bold text-[#111827] dark:text-[#F9FAFB]">Manage Workspace Amenities</h3>
                 <p className="text-xs text-[#6B7280] dark:text-[#9CA3AF]">{amenityModalSpace.title}</p>
@@ -558,18 +558,18 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
                     onClick={() => handleToggleAmenity(amenity)}
                     className={`p-3 rounded-2xl border text-left flex items-center justify-between text-xs transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 border-[#0F766E] text-[#0F766E] dark:text-[#14B8A6] font-bold'
-                        : 'bg-[#F8FAFC] dark:bg-[#111827] border-[#E5E7EB] dark:border-[#374151] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
+                        ? 'bg-[#006B70]/15 dark:bg-[#006B70]/20 border-[#006B70] text-[#006B70] dark:text-[#28D2CB] font-bold'
+                        : 'bg-[#F8FAFC] dark:bg-[#07383D] border-[#E5E7EB] dark:border-[#166D74] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB]'
                     }`}
                   >
                     <span className="pr-2">{amenity}</span>
-                    {isSelected && <Check className="w-4 h-4 shrink-0 text-[#0F766E] dark:text-[#14B8A6]" />}
+                    {isSelected && <Check className="w-4 h-4 shrink-0 text-[#006B70] dark:text-[#28D2CB]" />}
                   </button>
                 );
               })}
             </div>
 
-            <div className="flex justify-end space-x-3 pt-3 border-t border-[#E5E7EB] dark:border-[#374151]">
+            <div className="flex justify-end space-x-3 pt-3 border-t border-[#E5E7EB] dark:border-[#166D74]">
               <button
                 type="button"
                 onClick={() => setAmenityModalSpace(null)}
@@ -580,7 +580,7 @@ export const HostSpacesTab: React.FC<HostSpacesTabProps> = ({
               <button
                 type="button"
                 onClick={handleSaveAmenities}
-                className="px-5 py-2.5 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs cursor-pointer shadow-sm"
+                className="px-5 py-2.5 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-xs cursor-pointer shadow-sm"
               >
                 Save Amenities
               </button>

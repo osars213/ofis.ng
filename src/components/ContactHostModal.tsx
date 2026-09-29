@@ -23,17 +23,17 @@ export const ContactHostModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="relative w-full max-w-md bg-white dark:bg-[#071521] rounded-3xl border border-[#E5E7EB] dark:border-[#1E3A4D] shadow-2xl p-6 space-y-6">
+      <div className="relative w-full max-w-md bg-white dark:bg-[#07383D] rounded-3xl border border-[#E5E7EB] dark:border-[#166D74] shadow-2xl p-6 space-y-6">
         
-        <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#1E3A4D] pb-4">
+        <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#166D74] pb-4">
           <div className="flex items-center space-x-2">
-            <MessageSquare className="w-5 h-5 text-[#0F766E] dark:text-[#14B8A6]" />
+            <MessageSquare className="w-5 h-5 text-[#006B70] dark:text-[#28D2CB]" />
             <h3 className="text-lg font-bold text-[#111827] dark:text-[#F2F2F2]">Direct Host Inquiry</h3>
           </div>
           <button
             type="button"
             onClick={() => setIsContactOpen(false)}
-            className="p-2 rounded-xl text-[#6B7280] dark:text-[#718079] hover:text-[#111827] dark:hover:text-[#F2F2F2] hover:bg-[#F1F5F9] dark:hover:bg-[#0B1F33] transition-colors cursor-pointer"
+            className="p-2 rounded-xl text-[#6B7280] dark:text-[#718079] hover:text-[#111827] dark:hover:text-[#F2F2F2] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -41,7 +41,7 @@ export const ContactHostModal: React.FC = () => {
 
         {isSent ? (
           <div className="py-10 text-center space-y-3">
-            <div className="w-12 h-12 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/15 text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-full bg-[#006B70]/15 dark:bg-[#006B70]/15 text-[#006B70] dark:text-[#28D2CB] flex items-center justify-center mx-auto">
               <Check className="w-6 h-6" />
             </div>
             <h4 className="text-base font-bold text-[#111827] dark:text-[#F2F2F2]">Inquiry Dispatched!</h4>
@@ -49,12 +49,12 @@ export const ContactHostModal: React.FC = () => {
           </div>
         ) : (
           <form onSubmit={handleSend} className="space-y-4">
-            <div className="flex items-center space-x-3 p-3.5 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D]">
+            <div className="flex items-center space-x-3 p-3.5 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74]">
               <img src={contactSpace.host.avatar} alt={contactSpace.host.name} className="w-12 h-12 rounded-full object-cover" />
               <div>
                 <div className="text-xs font-bold text-[#111827] dark:text-[#F2F2F2]">{contactSpace.host.name}</div>
                 <div className="text-[10px] text-[#6B7280] dark:text-[#718079]">{contactSpace.host.companyName}</div>
-                <div className="text-[10px] text-[#0F766E] dark:text-[#14B8A6] font-mono mt-0.5">Typically responds in &lt;10 mins</div>
+                <div className="text-[10px] text-[#006B70] dark:text-[#28D2CB] font-mono mt-0.5">Typically responds in &lt;10 mins</div>
               </div>
             </div>
 
@@ -66,7 +66,7 @@ export const ContactHostModal: React.FC = () => {
                 placeholder="Ask about custom multi-day bookings, studio gear load-in, private parking, or catering..."
                 rows={4}
                 required
-                className="w-full p-3 rounded-xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs text-[#111827] dark:text-[#F2F2F2] placeholder-[#9CA3AF] dark:placeholder-[#718079] focus:outline-none focus:border-[#0F766E]"
+                className="w-full p-3 rounded-xl bg-white dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F2F2F2] placeholder-[#9CA3AF] dark:placeholder-[#718079] focus:outline-none focus:border-[#006B70]"
               />
             </div>
 
@@ -80,7 +80,7 @@ export const ContactHostModal: React.FC = () => {
               </button>
               <button
                 type="submit"
-                className="px-5 py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs shadow-md transition-colors cursor-pointer"
+                className="px-5 py-2.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-xs shadow-md transition-colors cursor-pointer"
               >
                 Send Inquiry
               </button>

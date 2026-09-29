@@ -3,114 +3,174 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-ofis-navy: #0B1F33;
-  --color-ofis-navy-dark: #071521;
-  --color-ofis-navy-charcoal: #172B3A;
-  --color-ofis-navy-elevated: #102A3D;
-  --color-ofis-teal: #0F766E;
-  --color-ofis-teal-hover: #0B625C;
-  --color-ofis-teal-bright: #14B8A6;
-  --color-ofis-peach: #F4A261;
-  --color-ofis-peach-light: #FCEBD9;
-  --color-ofis-grey-light: #F5F7F7;
-  --color-ofis-grey-muted: #64748B;
-  --color-ofis-grey-border: #D9E1E3;
-  --color-ofis-border-dark: #1E3A4D;
-  --color-ofis-input-dark: #0D2435;
+  /* 1. Canvas & Structural Neutrals */
+  --color-ofis-canvas: #FFF9F4;
+  --color-ofis-canvas-dark: #07383D;
+  --color-ofis-surface: #FFFFFF;
+  --color-ofis-surface-dark: #0B4A50;
+  --color-ofis-surface-elevated: #F8FAF9;
+  --color-ofis-surface-elevated-dark: #105A60;
+  --color-ofis-panel: #FFFFFF;
+  --color-ofis-panel-dark: #0B4A50;
+  --color-ofis-panel-hover: #F1F5F4;
+  --color-ofis-panel-hover-dark: #105A60;
+  --color-ofis-border: #E2ECEB;
+  --color-ofis-border-dark: #166D74;
+  --color-ofis-border-subtle: rgba(22, 109, 116, 0.2);
+
+  /* 2. Authoritative Primary & Accent Brand Tokens */
+  --color-ofis-primary: #006B70;
+  --color-ofis-teal: #006B70;
+  --color-ofis-teal-hover: #0EA8A2;
+  --color-ofis-teal-bright: #14BEB8;
+  --color-ofis-accent: #14BEB8;
+  --color-ofis-cyan: #28D2CB;
+  --color-ofis-peach: #FFA987;
+  --color-ofis-peach-tint: #FFD0BD;
+  --color-ofis-teal-wash: rgba(20, 190, 184, 0.12);
+
+  /* 3. Typography & Text Hierarchy */
+  --color-ofis-text-primary: #12383B;
+  --color-ofis-text-primary-dark: #FFFFFF;
+  --color-ofis-text-secondary: #5D7A7D;
+  --color-ofis-text-secondary-dark: #B8D1D0;
+  --color-ofis-text-muted: #8AA4A6;
+  --color-ofis-text-muted-dark: #8AA4A6;
+
+  /* 4. Semantic & Functional Colors */
+  --color-ofis-success: #14BEB8;
+  --color-ofis-warning: #FFA987;
+  --color-ofis-alert: #EF4444;
+  --color-ofis-highlight: #28D2CB;
   --color-ofis-white: #FFFFFF;
+
+  /* Backward Compatibility Aliases */
+  --color-ofis-navy: #0B4A50;
+  --color-ofis-navy-dark: #07383D;
+  --color-ofis-navy-charcoal: #0B4A50;
+  --color-ofis-navy-elevated: #105A60;
+  --color-ofis-border-dark-legacy: #166D74;
+  --color-ofis-input-dark: #0B4A50;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+::selection {
+  background-color: #14BEB8;
+  color: #FFFFFF;
+}
+
 @layer base {
   :root {
-    --ofis-navy: #0B1F33;
-    --ofis-navy-dark: #071521;
-    --ofis-teal: #0F766E;
-    --ofis-teal-hover: #0B625C;
-    --ofis-teal-bright: #14B8A6;
-    --ofis-peach: #F4A261;
-    --ofis-peach-soft: rgba(244, 162, 97, 0.12);
-    --ofis-grey-light: #F5F7F7;
-    --ofis-white: #FFFFFF;
-    --ofis-navy-charcoal: #172B3A;
-    --ofis-grey-muted: #64748B;
-    --ofis-grey-border: #D9E1E3;
+    --ofis-canvas: #FFF9F4;
+    --ofis-surface: #FFFFFF;
+    --ofis-surface-elevated: #F8FAF9;
+    --ofis-surface-secondary: #F1F6F5;
+    --ofis-panel: #FFFFFF;
+    --ofis-panel-hover: #F1F5F4;
+    --ofis-border: #E2ECEB;
+    --ofis-border-subtle: rgba(0, 107, 112, 0.1);
+
+    --ofis-teal: #006B70;
+    --ofis-teal-hover: #0EA8A2;
+    --ofis-teal-bright: #14BEB8;
+    --ofis-accent: #14BEB8;
+    --ofis-cyan: #28D2CB;
+    --ofis-peach: #FFA987;
+    --ofis-peach-tint: #FFD0BD;
+    --ofis-teal-wash: rgba(20, 190, 184, 0.12);
+
+    --ofis-text-primary: #12383B;
+    --ofis-text-secondary: #5D7A7D;
+    --ofis-text-muted: #8AA4A6;
+
+    --ofis-success: #14BEB8;
+    --ofis-warning: #FFA987;
+    --ofis-alert: #EF4444;
+    --ofis-highlight: #14BEB8;
 
     /* Theme Tokens - Light */
-    --ofis-bg: #F5F7F7;
-    --ofis-surface: #FFFFFF;
-    --ofis-surface-secondary: #EEF2F4;
-    --ofis-surface-elevated: #FFFFFF;
-    --ofis-text: #0B1F33;
-    --ofis-text-secondary: #172B3A;
-    --ofis-muted: #64748B;
-    --ofis-border: #D9E1E3;
-    --ofis-primary: #0F766E;
-    --ofis-primary-hover: #0B625C;
-    --ofis-accent: #F4A261;
-    --ofis-error: #DC4C4C;
+    --ofis-bg: #FFF9F4;
+    --ofis-surface-light: #FFFFFF;
+    --ofis-surface-secondary: #F1F6F5;
+    --ofis-surface-elevated-light: #FFFFFF;
+    --ofis-text: #12383B;
+    --ofis-muted: #5D7A7D;
+    --ofis-border-light: #E2ECEB;
+    --ofis-primary: #006B70;
+    --ofis-primary-hover: #0EA8A2;
+    --ofis-error: #EF4444;
 
     /* Backward compatibility mapping */
-    --color-bg-light: #F5F7F7;
+    --color-bg-light: #FFF9F4;
     --color-surface-light: #FFFFFF;
-    --color-surface-secondary-light: #EEF2F4;
-    --color-border-light: #D9E1E3;
-    --color-text-main-light: #0B1F33;
-    --color-text-muted-light: #64748B;
-    --color-primary-green: #0F766E;
-    --color-primary-green-hover: #0B625C;
-    --color-primary-green-light: #14B8A6;
+    --color-surface-secondary-light: #F1F6F5;
+    --color-border-light: #E2ECEB;
+    --color-text-main-light: #12383B;
+    --color-text-muted-light: #5D7A7D;
+    --color-primary-green: #006B70;
+    --color-primary-green-hover: #0EA8A2;
+    --color-primary-green-light: #14BEB8;
 
-    --color-bg-dark: #071521;
-    --color-surface-dark: #0B1F33;
-    --color-surface-secondary-dark: #0D2435;
-    --color-border-dark: #1E3A4D;
-    --color-text-main-dark: #F8FAFC;
-    --color-text-muted-dark: #94A3B8;
+    --color-bg-dark: #07383D;
+    --color-surface-dark: #0B4A50;
+    --color-surface-secondary-dark: #105A60;
+    --color-border-dark: #166D74;
+    --color-text-main-dark: #FFFFFF;
+    --color-text-muted-dark: #B8D1D0;
   }
 
   html.dark {
     /* Theme Tokens - Dark */
-    --ofis-bg: #071521;
-    --ofis-surface: #0B1F33;
-    --ofis-surface-secondary: #0D2435;
-    --ofis-surface-elevated: #102A3D;
-    --ofis-text: #F8FAFC;
-    --ofis-text-secondary: #CBD5E1;
-    --ofis-muted: #94A3B8;
-    --ofis-border: #1E3A4D;
-    --ofis-primary: #14B8A6;
-    --ofis-primary-deep: #0F766E;
-    --ofis-primary-hover: #0F766E;
-    --ofis-accent: #F4A261;
-    --ofis-input-dark: #0D2435;
-    --ofis-error: #F87171;
+    --ofis-bg: #07383D;
+    --ofis-surface: #0B4A50;
+    --ofis-surface-secondary: #105A60;
+    --ofis-surface-elevated: #105A60;
+    --ofis-panel: #0B4A50;
+    --ofis-panel-hover: #105A60;
+    --ofis-text: #FFFFFF;
+    --ofis-text-secondary: #B8D1D0;
+    --ofis-muted: #8AA4A6;
+    --ofis-border: #166D74;
+    --ofis-border-subtle: rgba(22, 109, 116, 0.3);
+    --ofis-primary: #006B70;
+    --ofis-primary-deep: #07383D;
+    --ofis-primary-hover: #0EA8A2;
+    --ofis-primary-bright: #14BEB8;
+    --ofis-accent: #14BEB8;
+    --ofis-cyan: #28D2CB;
+    --ofis-peach: #FFA987;
+    --ofis-peach-tint: #FFD0BD;
+    --ofis-input-dark: #0B4A50;
+    --ofis-error: #EF4444;
+    --ofis-success: #14BEB8;
+    --ofis-warning: #FFA987;
+    --ofis-highlight: #28D2CB;
 
     /* Backward compatibility mapping */
-    --color-bg-dark: #071521;
-    --color-surface-dark: #0B1F33;
-    --color-surface-secondary-dark: #0D2435;
-    --color-border-dark: #1E3A4D;
-    --color-text-main-dark: #F8FAFC;
-    --color-text-muted-dark: #94A3B8;
-    --color-primary-green: #14B8A6;
-    --color-primary-green-hover: #0F766E;
-    --color-primary-green-light: #14B8A6;
+    --color-bg-dark: #07383D;
+    --color-surface-dark: #0B4A50;
+    --color-surface-secondary-dark: #105A60;
+    --color-border-dark: #166D74;
+    --color-text-main-dark: #FFFFFF;
+    --color-text-muted-dark: #B8D1D0;
+    --color-primary-green: #006B70;
+    --color-primary-green-hover: #0EA8A2;
+    --color-primary-green-light: #14BEB8;
   }
 
   body {
-    background-color: #F5F7F7;
-    color: #0B1F33;
+    background-color: #FFF9F4;
+    color: #12383B;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
 
   html.dark body {
-    background-color: #071521;
-    color: #F8FAFC;
+    background-color: #07383D;
+    color: #FFFFFF;
   }
 }
 
@@ -121,16 +181,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #071521;
+  background: #07383D;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E3A4D;
+  background: #166D74;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0F766E;
+  background: #14BEB8;
 }
 
 /* Gentle pulse animation for status badges */

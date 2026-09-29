@@ -1,779 +1,654 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
-  Search, 
-  MapPin, 
-  Zap, 
-  Wifi, 
-  ShieldCheck, 
-  Star, 
-  Users, 
-  Clock, 
-  Building2, 
+  Compass, 
   ArrowRight, 
   Sparkles, 
-  CheckCircle2, 
-  ChevronRight, 
+  ShieldCheck, 
+  Zap, 
+  Wifi, 
+  Building2, 
+  Users, 
   Calendar,
-  Layers,
-  Laptop,
-  Presentation,
-  Mic,
-  Camera,
-  GraduationCap,
-  Shield,
-  HeartHandshake,
-  TrendingUp,
+  CheckCircle2, 
   CreditCard,
+  Tag,
+  Headphones,
+  Search,
   QrCode,
-  Compass,
-  ArrowUpRight
+  Menu,
+  X
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { useApp } from '../../context/AppContext';
-import { SpaceCategory, Space } from '../../types';
-import { WorkspaceCard } from '../WorkspaceCard';
-import { getSpacePricing } from '../../utils/pricing';
-import { OfisHeroAiSection } from '../home/OfisHeroAiSection';
-import { optimizeImageUrl } from '../../utils/imageOptimizer';
-import { ReflectivePillarIcon, PillarType } from '../ReflectivePillarIcon';
+import { OFISWordmark } from '../OFISWordmark';
+import { TrustedLogos } from './TrustedLogos';
+import { ResponsiveLandingVideo } from './ResponsiveLandingVideo';
+import { MarketplaceScreenshot } from './MarketplaceScreenshot';
+import { FeaturedSpacesSection } from './FeaturedSpacesSection';
+import { AudiencesSections } from './AudiencesSections';
+import { PreLaunchSignupForm } from './PreLaunchSignupForm';
+import { ContactSection } from './ContactSection';
+import { BookDemoModal } from './BookDemoModal';
+import { EarlyAccessModal } from './EarlyAccessModal';
+import { InvestorDeckModal } from './InvestorDeckModal';
+import { AboutModal } from './SimpleModals';
 
-const PIDGIN_GREETINGS = [
-  'Twale my great boss🙌🏼',
-  'Special hailings my Oga',
-  'I throway Salute Boss',
-  'I dey with you 100% Boss'
-];
-
-interface GreetingLocale {
-  code: 'en' | 'yo' | 'ig' | 'ha' | 'pcm';
-  langName: string;
-  getGreeting: (hour: number, randomPidgin?: string) => string;
-  formatName: (rawFirstName: string) => string;
+interface LandingPageProps {
+  onEnterApp?: () => void;
 }
 
-const GREETING_LOCALES: GreetingLocale[] = [
-  {
-    code: 'en',
-    langName: 'English',
-    getGreeting: (hour) => {
-      if (hour >= 4 && hour < 12) return 'Good Morning';
-      if (hour >= 12 && hour < 17) return 'Good Afternoon';
-      return 'Good Evening';
-    },
-    formatName: (name) => name || 'Chief',
-  },
-  {
-    code: 'yo',
-    langName: 'Yorùbá',
-    getGreeting: (hour) => {
-      if (hour >= 4 && hour < 12) return 'Ẹ kú àárọ̀';
-      if (hour >= 12 && hour < 17) return 'Ẹ kú ọ̀sán';
-      return 'Ẹ kú ìrọ̀lẹ́';
-    },
-    formatName: (name) => {
-      if (/tunde/i.test(name)) return 'Túndé';
-      if (/babatunde/i.test(name)) return 'Bábátúndé';
-      if (/adeyemi/i.test(name)) return 'Adéyẹmí';
-      if (/funke/i.test(name)) return 'Fúnkẹ́';
-      if (/babajide/i.test(name)) return 'Bàbájídé';
-      return name || 'Chief';
-    }
-  },
-  {
-    code: 'ig',
-    langName: 'Igbo',
-    getGreeting: (hour) => {
-      if (hour >= 4 && hour < 12) return 'Ụtụtụ ọma';
-      if (hour >= 12 && hour < 17) return 'Ehihie ọma';
-      return 'Mgbede ọma';
-    },
-    formatName: (name) => {
-      if (/chidi/i.test(name)) return 'Chìdí';
-      if (/emeka/i.test(name)) return 'Èméká';
-      return name || 'Chief';
-    }
-  },
-  {
-    code: 'ha',
-    langName: 'Hausa',
-    getGreeting: (hour) => {
-      if (hour >= 4 && hour < 12) return 'Ina kwana';
-      if (hour >= 12 && hour < 17) return 'Barka da rana';
-      return 'Barka da yamma';
-    },
-    formatName: (name) => {
-      if (/amina/i.test(name)) return 'Amīna';
-      return name || 'Chief';
-    }
-  },
-  {
-    code: 'pcm',
-    langName: 'Pidgin',
-    getGreeting: (_hour, randomPidgin) => randomPidgin || 'Twale my great boss🙌🏼',
-    formatName: (name) => name || 'Chief',
-  }
-];
+export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
+  // Navigation & Modals State
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [demoTrack, setDemoTrack] = useState<'enterprise' | 'operator' | 'investor' | 'partner'>('enterprise');
+  const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
+  const [earlyAccessInterest, setEarlyAccessInterest] = useState<'Early Access' | 'Space Operator' | 'Strategic Partnership' | 'Investment' | 'Other'>('Early Access');
+  const [isDeckModalOpen, setIsDeckModalOpen] = useState(false);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
-const NIGERIAN_CITIES = [
-  {
-    name: 'Lagos',
-    state: 'Lagos State',
-    neighborhoods: 'Victoria Island • Lekki • Ikeja • Yaba',
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&auto=format&fit=crop&q=80',
-    spacesCount: '120+ Spaces',
-    tag: 'Fintech & Creative Capital'
-  },
-  {
-    name: 'Abuja',
-    state: 'Federal Capital Territory',
-    neighborhoods: 'Maitama • CBD • Wuse II • Jabi',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80',
-    spacesCount: '45+ Spaces',
-    tag: 'Executive & Diplomatic Hub'
-  },
-  {
-    name: 'Port Harcourt',
-    state: 'Rivers State',
-    neighborhoods: 'Old GRA • Peter Odili • Trans-Amadi',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=80',
-    spacesCount: '25+ Spaces',
-    tag: 'Energy & Corporate Corridor'
-  },
-  {
-    name: 'Ibadan',
-    state: 'Oyo State',
-    neighborhoods: 'Bodija • Ring Road • Jericho • Samonda',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80',
-    spacesCount: '18+ Spaces',
-    tag: 'Emerging Tech & Talent Center'
-  }
-];
-
-const CATEGORIES_DATA = [
-  {
-    id: 'coworking',
-    title: 'Coworking Desks',
-    tagline: 'Hot desks, ergonomic setups & focus quiet pods',
-    icon: Laptop,
-    badge: 'WORK',
-    startRate: '₦1,500/hr',
-    bgGradient: 'from-teal-500/10 to-teal-600/5'
-  },
-  {
-    id: 'meeting-room',
-    title: 'Meeting Rooms & Boardrooms',
-    tagline: '4K displays, video conferencing & executive seating',
-    icon: Presentation,
-    badge: 'MEET',
-    startRate: '₦8,000/hr',
-    bgGradient: 'from-blue-500/10 to-indigo-500/5'
-  },
-  {
-    id: 'private-office',
-    title: 'Private Executive Suites',
-    tagline: 'Fully serviced enclosed offices for teams of 2-20',
-    icon: Building2,
-    badge: 'WORK',
-    startRate: '₦15,000/day',
-    bgGradient: 'from-violet-500/10 to-purple-500/5'
-  },
-  {
-    id: 'studio',
-    title: 'Podcast & Media Studios',
-    tagline: 'Acoustic treatment, Shure mics & multi-cam setups',
-    icon: Mic,
-    badge: 'RECORD',
-    startRate: '₦12,000/hr',
-    bgGradient: 'from-amber-500/10 to-orange-500/5'
-  },
-  {
-    id: 'photography',
-    title: 'Photography & Production',
-    tagline: 'Infinity cyc walls, Godox strobes & dressing rooms',
-    icon: Camera,
-    badge: 'CREATE',
-    startRate: '₦20,000/hr',
-    bgGradient: 'from-pink-500/10 to-rose-500/5'
-  },
-  {
-    id: 'event-space',
-    title: 'Event & Training Spaces',
-    tagline: 'Keynotes, hackathons, workshops & corporate demos',
-    icon: GraduationCap,
-    badge: 'MEET',
-    startRate: '₦45,000/session',
-    bgGradient: 'from-cyan-500/10 to-sky-500/5'
-  }
-];
-
-const TRUSTED_COMPANIES = [
-  'Szndpay',
-  'Flutterwave',
-  'Paystack',
-  'Andela',
-  'Kuda Bank',
-  'Moniepoint',
-  'Piggyvest',
-  'Eden Life',
-  'Techstars Alumni'
-];
-
-const TESTIMONIALS = [
-  {
-    quote: 'OFIS solves the biggest headache for tech teams in Lagos: guaranteed power and enterprise fiber. We booked a 10-person boardroom in Victoria Island with 3 clicks and had zero downtime.',
-    name: 'Babatunde Adeyemi',
-    role: 'Staff Engineer at Fintech Systems',
-    city: 'Lagos, Nigeria',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
-    rating: 5,
-    space: 'The Hive Coworking VI'
-  },
-  {
-    quote: 'We recorded 6 podcast episodes in their soundproof studio in Maitama Abuja. Audio acoustics were pristine and the instant QR turnstile pass made arrival effortless.',
-    name: 'Chioma Nwosu',
-    role: 'Executive Producer, Africa Talks Tech',
-    city: 'Abuja, Nigeria',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80',
-    rating: 5,
-    space: 'The SoundPod Broadcast Studio'
-  },
-  {
-    quote: 'As a commercial property manager in Ikeja, listing our surplus meeting rooms on OFIS generated over ₦1.8M in bookings in our first 60 days. Transparent weekly payouts via Paystack.',
-    name: 'Funke Akindele-Cole',
-    role: 'Commercial Host & Facility Director',
-    city: 'Lagos, Nigeria',
-    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=80',
-    rating: 5,
-    space: 'Capital Edge Hub Ikeja'
-  }
-];
-
-export const LandingPage: React.FC = () => {
-  const {
-    currentUser,
-    allSpaces,
-    spaces,
-    setCurrentView,
-    updateFilter,
-    setActiveCategory,
-    filters,
-    executeSearchQuery,
-    setIsListSpaceModalOpen,
-    formatPrice
-  } = useApp();
-
-  // Search input state on hero
-  const [heroSearchCity, setHeroSearchCity] = useState(filters.city || 'All Cities');
-  const [heroSearchCategory, setHeroSearchCategory] = useState<string>('all');
-  const [heroSearchDate, setHeroSearchDate] = useState('Today');
-  const [heroSearchGuests, setHeroSearchGuests] = useState(1);
-  const [heroSearchPillar, setHeroSearchPillar] = useState<'all' | 'work' | 'meet' | 'create' | 'record'>('all');
-
-  // Greeting cycling state
-  const [cycleStep, setCycleStep] = useState(0);
-  const [randomPidginIndex, setRandomPidginIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCycleStep((prev) => {
-        const next = prev + 1;
-        setRandomPidginIndex(Math.floor(Math.random() * PIDGIN_GREETINGS.length));
-        return next;
-      });
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const indigenousLocales = GREETING_LOCALES.slice(1);
-  const isEnglish = cycleStep % 2 === 0;
-  const currentLocale = isEnglish 
-    ? GREETING_LOCALES[0] 
-    : indigenousLocales[Math.floor((cycleStep % (2 * indigenousLocales.length)) / 2) % indigenousLocales.length];
-
-  const hour = new Date().getHours();
-  const isGuestUser = !currentUser || currentUser.id === 'guest' || currentUser.id === 'guest-user' || /guest/i.test(currentUser.name || '');
-  const baseFirstName = currentUser && !isGuestUser && currentUser.name 
-    ? currentUser.name.split(' ')[0] 
-    : '';
-
-  const currentPidginPhrase = PIDGIN_GREETINGS[randomPidginIndex];
-  const greetingPhrase = currentLocale.getGreeting(hour, currentPidginPhrase);
-
-  let greetingText: string;
-  if (isGuestUser) {
-    if (currentLocale.code === 'en') {
-      greetingText = `${greetingPhrase}, Guest`;
+  const handleEnterMarketplace = () => {
+    if (onEnterApp) {
+      onEnterApp();
     } else {
-      greetingText = greetingPhrase;
+      const url = new URL(window.location.href);
+      url.searchParams.set('app', 'true');
+      window.history.pushState({}, '', url.pathname + '?' + url.searchParams.toString());
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  } else {
-    const localizedName = baseFirstName ? currentLocale.formatName(baseFirstName) : 'Chief';
-    greetingText = `${greetingPhrase}, ${localizedName}`;
-  }
-
-  // Filter curated featured spaces
-  const featuredSpaces = allSpaces
-    .filter(s => s.rating >= 4.8 || s.isSuperhost || s.isVerified)
-    .slice(0, 6);
-
-  const handleExecuteHeroSearch = () => {
-    updateFilter('city', heroSearchCity);
-    if (heroSearchCategory !== 'all') {
-      setActiveCategory(heroSearchCategory as SpaceCategory);
-    } else if (heroSearchPillar === 'work') {
-      setActiveCategory('coworking');
-    } else if (heroSearchPillar === 'meet') {
-      setActiveCategory('meeting-room');
-    } else if (heroSearchPillar === 'create') {
-      setActiveCategory('photography');
-    } else if (heroSearchPillar === 'record') {
-      setActiveCategory('studio');
-    }
-    updateFilter('guests', heroSearchGuests);
-    setCurrentView('explore');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleCitySelect = (cityName: string) => {
-    updateFilter('city', cityName);
-    updateFilter('searchQuery', '');
-    setCurrentView('explore');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleOpenDemo = (track: 'enterprise' | 'operator' | 'investor' | 'partner' = 'enterprise') => {
+    setDemoTrack(track);
+    setIsDemoModalOpen(true);
   };
 
-  const handleCategorySelect = (categoryId: string) => {
-    if (categoryId === 'all') {
-      setActiveCategory('all');
+  const handleOpenEarlyAccess = (interest: 'Early Access' | 'Space Operator' | 'Strategic Partnership' | 'Investment' | 'Other' = 'Early Access') => {
+    setEarlyAccessInterest(interest);
+    setIsEarlyAccessModalOpen(true);
+  };
+
+  const scrollToWaitlist = () => {
+    const el = document.getElementById('waitlist-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     } else {
-      setActiveCategory(categoryId as SpaceCategory);
+      handleOpenEarlyAccess('Early Access');
     }
-    updateFilter('searchQuery', '');
-    setCurrentView('explore');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileMenuOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1220] text-[#111827] dark:text-[#F8FAFC] transition-colors duration-150">
+    <div className="min-h-screen bg-[#07383D] text-[#FFFFFF] font-sans selection:bg-[#14BEB8] selection:text-white relative overflow-x-hidden">
       
-      {/* ========================================================================= */}
-      {/* 1. HERO SECTION: AI-FIRST ASK OFIS & QUICK INTENT TEMPLATES              */}
-      {/* ========================================================================= */}
-      <OfisHeroAiSection />
+      {/* Ambient Architectural Lighting Gradients with Subtle Teal Luminescence */}
+      <div className="fixed top-0 left-1/4 w-[900px] h-[520px] bg-gradient-to-br from-[#006B70]/30 via-[#14BEB8]/20 to-transparent blur-[120px] pointer-events-none -z-10" />
+      <div className="fixed top-1/4 right-0 w-[640px] h-[640px] bg-gradient-to-bl from-[#006B70]/25 via-[#14BEB8]/15 to-transparent blur-[130px] rounded-full pointer-events-none -z-10" />
+      <div className="fixed bottom-10 left-1/3 w-[700px] h-[350px] bg-gradient-to-t from-[#28D2CB]/20 via-[#006B70]/15 to-transparent blur-[140px] pointer-events-none -z-10" />
 
-      {/* ========================================================================= */}
-      {/* 2. INFRASTRUCTURE & TRUST METRICS BAR                                    */}
-      {/* ========================================================================= */}
-      <section className="bg-white dark:bg-[#101827] border-b border-[#E5E7EB] dark:border-[#1E293B] py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      {/* ========================================================
+          Top Navigation Bar
+         ======================================================== */}
+      <header className="sticky top-0 z-50 bg-[#07383D]/95 backdrop-blur-xl border-b border-[#166D74]/70 transition-colors">
+        {/* Radiant OFIS Brand Accent Line */}
+        <div className="h-[2px] w-full bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#006B70]" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
           
-          <div className="space-y-1">
-            <div className="flex items-center justify-center space-x-2 text-[#0F766E] dark:text-[#14B8A6]">
-              <Zap className="w-5 h-5" />
-              <span className="text-xl sm:text-2xl font-black font-mono">100% Power</span>
-            </div>
-            <p className="text-xs text-[#475569] dark:text-[#94A3B8]">Dual Diesel + Solar Hybrid Backup</p>
+          {/* Brand Logo */}
+          <div 
+            className="flex items-center cursor-pointer transition-opacity hover:opacity-90 py-1"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <OFISWordmark size="lg" />
           </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center justify-center space-x-2 text-[#0F766E] dark:text-[#14B8A6]">
-              <Wifi className="w-5 h-5" />
-              <span className="text-xl sm:text-2xl font-black font-mono">100+ Mbps</span>
+          {/* Navigation Items (Contact, Launching Soon, Join Early Access) */}
+          <div className="flex items-center space-x-3 sm:space-x-6">
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('contact-section');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="text-xs sm:text-sm font-semibold text-[#B8D1D0] hover:text-white transition-colors cursor-pointer"
+            >
+              Contact
+            </button>
+
+            <div className="hidden sm:inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#006B70]/30 border border-[#14BEB8]/30 text-xs font-semibold text-[#28D2CB]">
+              <span>Launching Soon</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#14BEB8] animate-ping" />
             </div>
-            <p className="text-xs text-[#475569] dark:text-[#94A3B8]">Dedicated Enterprise Fiber Optic</p>
+
+            <button
+              type="button"
+              onClick={scrollToWaitlist}
+              className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-[#0B4A50] hover:bg-[#105A60] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all cursor-pointer shadow-sm active:scale-98"
+            >
+              Join Early Access
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* ========================================================
+          HERO SECTION
+         ======================================================== */}
+      <section className="relative pt-12 sm:pt-20 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
+          
+          {/* Master Headline */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+            Work. Meet. Create. Record.
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-base sm:text-xl text-[#B8D1D0] max-w-3xl mx-auto font-normal leading-relaxed">
+            Book verified desks, private offices, boardrooms, and production studios across Nigeria in minutes with guaranteed power and high-speed internet.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2">
+            <button
+              type="button"
+              id="hero-explore-btn"
+              onClick={handleEnterMarketplace}
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#0EA8A2] hover:shadow-[0_0_30px_rgba(20,190,184,0.45)] text-white text-base font-bold transition-all duration-200 flex items-center justify-center space-x-3 cursor-pointer shadow-lg active:scale-98"
+            >
+              <Compass className="w-5 h-5" />
+              <span>Explore Spaces</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleOpenDemo('enterprise')}
+              className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-[#0B4A50]/90 hover:bg-[#105A60] text-[#F8FAFC] border border-[#166D74] hover:border-[#14BEB8]/50 text-sm font-semibold transition-all duration-200 flex items-center justify-center space-x-2.5 cursor-pointer shadow-sm active:scale-98"
+            >
+              <Sparkles className="w-4 h-4 text-[#28D2CB]" />
+              <span>Book a Demo</span>
+            </button>
           </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center justify-center space-x-2 text-[#0F766E] dark:text-[#14B8A6]">
-              <Building2 className="w-5 h-5" />
-              <span className="text-xl sm:text-2xl font-black font-mono">200+ Hubs</span>
+          {/* Key Trust Highlights (4 Pills) */}
+          <div className="pt-6 sm:pt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto text-left">
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-[#0B4A50]/80 border border-[#166D74] hover:border-[#14BEB8]/60 backdrop-blur-md transition-all flex items-center space-x-2.5">
+              <ShieldCheck className="w-4 h-4 text-[#14BEB8] shrink-0" />
+              <span className="text-xs sm:text-sm font-semibold text-white">Inspected Spaces</span>
             </div>
-            <p className="text-xs text-[#475569] dark:text-[#94A3B8]">Vetted in Lagos, Abuja & PH</p>
-          </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center justify-center space-x-2 text-[#0F766E] dark:text-[#14B8A6]">
-              <QrCode className="w-5 h-5" />
-              <span className="text-xl sm:text-2xl font-black font-mono">15s Check-in</span>
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-[#0B4A50]/80 border border-[#166D74] hover:border-[#28D2CB]/60 backdrop-blur-md transition-all flex items-center space-x-2.5">
+              <Zap className="w-4 h-4 text-[#F59E0B] shrink-0" />
+              <span className="text-xs sm:text-sm font-semibold text-white">Guaranteed 24/7 Power</span>
             </div>
-            <p className="text-xs text-[#475569] dark:text-[#94A3B8]">Instant Turnstile QR Mobile Passes</p>
-          </div>
 
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-[#0B4A50]/80 border border-[#166D74] hover:border-[#14BEB8]/60 backdrop-blur-md transition-all flex items-center space-x-2.5">
+              <CreditCard className="w-4 h-4 text-[#28D2CB] shrink-0" />
+              <span className="text-xs sm:text-sm font-semibold text-white">Simple Online Payment</span>
+            </div>
+
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-[#0B4A50]/80 border border-[#166D74] hover:border-[#28D2CB]/60 backdrop-blur-md transition-all flex items-center space-x-2.5">
+              <Calendar className="w-4 h-4 text-[#14BEB8] shrink-0" />
+              <span className="text-xs sm:text-sm font-semibold text-white">Instant Booking</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* 3. POPULAR NIGERIAN CITIES DIRECTORY                                     */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-          <div>
-            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
-              Prime Hubs Across Nigeria
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight mt-1">
-              Popular Cities & Neighborhoods
-            </h2>
-            <p className="text-sm text-[#475569] dark:text-[#94A3B8] mt-1">
-              Discover verified workspaces in Nigeria&apos;s fastest growing tech and commercial zones.
-            </p>
-          </div>
+      {/* ========================================================
+          SECTION: Interactive Live Space Preview & Instant Booking
+         ======================================================== */}
+      <div id="marketplace-preview">
+        <MarketplaceScreenshot 
+          onExploreClick={handleEnterMarketplace}
+          onBookDemoClick={() => handleOpenDemo('enterprise')}
+        />
+      </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              setCurrentView('map');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="inline-flex items-center space-x-2 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] hover:underline cursor-pointer"
-          >
-            <Compass className="w-4 h-4" />
-            <span>Explore Interactive Map</span>
-            <ChevronRight className="w-4 h-4" />
-          </button>
+      {/* ========================================================
+          SECTION: Verified Space Showcase
+         ======================================================== */}
+      <ResponsiveLandingVideo 
+        onExploreClick={handleEnterMarketplace}
+        onBookDemoClick={() => handleOpenDemo('enterprise')}
+      />
+
+      {/* ========================================================
+          SECTION: Spaces Built for Every Need
+         ======================================================== */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            Spaces Built for Every Need
+          </h2>
+          <p className="text-sm sm:text-base text-[#94A3B8] mt-3">
+            Explore dedicated environments designed for focused productivity, team collaboration, and creative production.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {NIGERIAN_CITIES.map((city) => (
-            <div
-              key={city.name}
-              onClick={() => handleCitySelect(city.name)}
-              className="group relative rounded-3xl overflow-hidden bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm hover:shadow-xl transition-all cursor-pointer h-80 flex flex-col justify-end p-6"
-            >
-              {/* Background Image with Dark Overlay */}
-              <img
-                src={optimizeImageUrl(city.image, { width: 600, quality: 75 })}
-                alt={city.name}
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1220] via-[#0B1220]/60 to-transparent" />
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="text-3xl" role="img" aria-label="Work">🏢</div>
+            <h3 className="text-lg font-bold text-white">Work</h3>
+            <p className="text-sm text-[#94A3B8] leading-relaxed">
+              Book hot desks, dedicated desks, and private offices for you and your team.
+            </p>
+          </div>
 
-              {/* Tag Pill Top Right */}
-              <div className="absolute top-4 right-4 z-10">
-                <span className="px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-mono font-bold">
-                  {city.spacesCount}
-                </span>
-              </div>
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="text-3xl" role="img" aria-label="Meet">🤝</div>
+            <h3 className="text-lg font-bold text-white">Meet</h3>
+            <p className="text-sm text-[#94A3B8] leading-relaxed">
+              Reserve conference rooms and boardrooms with screens, projectors, and fast internet.
+            </p>
+          </div>
 
-              {/* City Details */}
-              <div className="relative z-10 space-y-1.5 text-white">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#14B8A6] font-bold">
-                  {city.tag}
-                </span>
-                <h3 className="text-xl font-extrabold flex items-center justify-between">
-                  <span>{city.name}</span>
-                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-[#14B8A6]" />
-                </h3>
-                <p className="text-xs text-[#CBD5E1] line-clamp-1">
-                  {city.neighborhoods}
-                </p>
-              </div>
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="text-3xl" role="img" aria-label="Create">🎥</div>
+            <h3 className="text-lg font-bold text-white">Create</h3>
+            <p className="text-sm text-[#94A3B8] leading-relaxed">
+              Find ready-to-use photography and video production studios for your creative shoots.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="text-3xl" role="img" aria-label="Record">🎙</div>
+            <h3 className="text-lg font-bold text-white">Record</h3>
+            <p className="text-sm text-[#94A3B8] leading-relaxed">
+              Book soundproof podcast booths and audio recording suites with professional microphones.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================
+          SECTION: How OFIS Works
+         ======================================================== */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#166D74]/40">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            How OFIS Works
+          </h2>
+          <p className="text-sm sm:text-base text-[#94A3B8] mt-3">
+            Three simple steps to start working in any space.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="p-7 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-4">
+            <div className="inline-block px-3 py-1 rounded-full bg-[#006B70]/30 border border-[#14BEB8]/30 text-xs font-mono font-bold text-[#28D2CB]">
+              Step 01
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 4. WORKSPACE CATEGORIES SHOWCASE                                          */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#101827] border-y border-[#E5E7EB] dark:border-[#1E293B]">
-        <div className="max-w-7xl mx-auto">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-2 mb-12">
-            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
-              Every Way You Work
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
-              Spaces Tailored to Your Workday
-            </h2>
-            <p className="text-sm text-[#475569] dark:text-[#94A3B8]">
-              From quiet solo focus pods to 50-person broadcast studios and executive suites.
+            <h3 className="text-xl font-bold text-white">Search</h3>
+            <p className="text-sm text-[#94A3B8] leading-relaxed">
+              Browse verified spaces in Victoria Island, Lekki, Ikeja, Abuja, and more. Filter by location, budget, or space type.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CATEGORIES_DATA.map((cat) => {
-              const Icon = cat.icon;
-
-              return (
-                <div
-                  key={cat.id}
-                  onClick={() => handleCategorySelect(cat.id)}
-                  className="p-6 rounded-3xl bg-[#F8FAFC] dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] hover:border-[#F4A261]/50 hover:shadow-lg transition-all cursor-pointer group flex flex-col justify-between space-y-6"
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <ReflectivePillarIcon
-                        pillar={cat.badge.toLowerCase() as PillarType}
-                        size="md"
-                        showMirrorReflect={true}
-                      />
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase bg-white dark:bg-[#102A3D] text-[#F4A261] border border-[#F4A261]/30">
-                        {cat.badge}
-                      </span>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h3 className="text-lg font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#F4A261] transition-colors">
-                        {cat.title}
-                      </h3>
-                      <p className="text-xs text-[#334155] dark:text-[#94A3B8] leading-relaxed">
-                        {cat.tagline}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#1E293B] flex items-center justify-between text-xs">
-                    <span className="font-mono font-bold text-[#F4A261]">From {cat.startRate}</span>
-                    <span className="text-[#334155] dark:text-[#94A3B8] group-hover:text-[#111827] dark:group-hover:text-white font-semibold flex items-center space-x-1">
-                      <span>Browse</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 5. FEATURED TOP-RATED WORKSPACES GRID                                     */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-          <div>
-            <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
-              Curated Excellence
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight mt-1">
-              Featured Nigerian Workspaces
-            </h2>
-            <p className="text-sm text-[#475569] dark:text-[#94A3B8] mt-1">
-              Top-rated spaces verified for power uptime, high internet bandwidth, and exceptional host standards.
+          <div className="p-7 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-4">
+            <div className="inline-block px-3 py-1 rounded-full bg-[#006B70]/30 border border-[#14BEB8]/30 text-xs font-mono font-bold text-[#28D2CB]">
+              Step 02
+            </div>
+            <h3 className="text-xl font-bold text-white">Book</h3>
+            <p className="text-sm text-[#94A3B8] leading-relaxed">
+              Choose your hours or day pass, check live availability, and pay securely using your card or bank transfer.
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              setCurrentView('explore');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="px-5 py-2.5 rounded-xl bg-white dark:bg-[#172033] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E293B] text-xs font-bold text-[#111827] dark:text-[#F8FAFC] hover:border-[#0F766E]/50 shadow-2xs transition-all flex items-center space-x-2 cursor-pointer self-start md:self-auto"
-          >
-            <span>View All ({allSpaces.length}) Spaces</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
-          </button>
+          <div className="p-7 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-4">
+            <div className="inline-block px-3 py-1 rounded-full bg-[#006B70]/30 border border-[#14BEB8]/30 text-xs font-mono font-bold text-[#28D2CB]">
+              Step 03
+            </div>
+            <h3 className="text-xl font-bold text-white">Show Up</h3>
+            <p className="text-sm text-[#94A3B8] leading-relaxed">
+              You receive an instant digital QR pass on your phone. Show it at the front desk and get straight to work.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================
+          SECTION: Why OFIS
+         ======================================================== */}
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#166D74]/40">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            Why OFIS
+          </h2>
+          <p className="text-sm sm:text-base text-[#94A3B8] mt-3">
+            Built specifically for the day-to-day needs of professionals and growing businesses.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredSpaces.map((space) => (
-            <WorkspaceCard
-              key={space.id}
-              space={space}
-              layout="grid"
-            />
-          ))}
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/30 border border-[#14BEB8]/30 flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5 text-[#14BEB8]" />
+            </div>
+            <h3 className="text-base font-bold text-white">Verified Spaces</h3>
+            <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed">
+              Inspected for quiet comfort &amp; working AC
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/30 border border-[#14BEB8]/30 flex items-center justify-center">
+              <Zap className="w-5 h-5 text-[#F59E0B]" />
+            </div>
+            <h3 className="text-base font-bold text-white">Guaranteed 24/7 Power</h3>
+            <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed">
+              Tested generators &amp; stable fiber Wi-Fi
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/30 border border-[#14BEB8]/30 flex items-center justify-center">
+              <CreditCard className="w-5 h-5 text-[#28D2CB]" />
+            </div>
+            <h3 className="text-base font-bold text-white">Secure Payments</h3>
+            <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed">
+              Pay with debit card or direct transfer
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/30 border border-[#14BEB8]/30 flex items-center justify-center">
+              <Tag className="w-5 h-5 text-[#28D2CB]" />
+            </div>
+            <h3 className="text-base font-bold text-white">Transparent Pricing</h3>
+            <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed">
+              Clear hourly, daily, or monthly rates
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/30 border border-[#14BEB8]/30 flex items-center justify-center">
+              <CheckCircle2 className="w-5 h-5 text-[#14BEB8]" />
+            </div>
+            <h3 className="text-base font-bold text-white">Instant Confirmation</h3>
+            <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed">
+              Book immediately without waiting for replies
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14BEB8]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/30 border border-[#14BEB8]/30 flex items-center justify-center">
+              <Headphones className="w-5 h-5 text-[#28D2CB]" />
+            </div>
+            <h3 className="text-base font-bold text-white">Dedicated Support</h3>
+            <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed">
+              Fast local assistance via WhatsApp and phone
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* 6. HOW IT WORKS (3 SIMPLE STEPS)                                          */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto space-y-2 mb-14">
-          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
-            Simple & Transparent
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
-            How OFIS Works
+      {/* ========================================================
+          SECTION: The OFIS Verified Standard - Featured Spaces
+         ======================================================== */}
+      <FeaturedSpacesSection onExploreClick={handleEnterMarketplace} />
+
+      {/* ========================================================
+          SECTION: Who Uses OFIS? & Audience Solutions
+         ======================================================== */}
+      <div id="audiences-section" className="py-12 border-t border-[#166D74]/40">
+        <AudiencesSections
+          onBookDemo={handleOpenDemo}
+          onListSpace={() => handleOpenEarlyAccess('Space Operator')}
+          onPartner={() => handleOpenEarlyAccess('Strategic Partnership')}
+          onRequestDeck={() => setIsDeckModalOpen(true)}
+          onScheduleMeeting={() => handleOpenDemo('investor')}
+        />
+      </div>
+
+      {/* ========================================================
+          SECTION: Trusted by Top Operators
+         ======================================================== */}
+      <TrustedLogos />
+
+      {/* ========================================================
+          SECTION: Pre-Launch Signup • Phase 1 Priority
+         ======================================================== */}
+      <section id="waitlist-section" className="py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#14BEB8]/15 border border-[#14BEB8]/30 text-xs font-bold text-[#14BEB8] uppercase tracking-wider mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-[#28D2CB]" />
+            <span>Pre-Launch Signup • Phase 1 Priority</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Reserve Your Priority Access
           </h2>
-          <p className="text-sm text-[#475569] dark:text-[#94A3B8]">
-            From search to turnstile pass in under 60 seconds.
+          <p className="text-sm sm:text-base text-[#94A3B8] max-w-xl mx-auto mt-2">
+            Join founders, creators, and teams across Lagos, Abuja, and Port Harcourt getting early bookings and launch credits on OFIS.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          
-          {/* Step 1 */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#F4A261] text-[#071521] font-mono font-black text-lg flex items-center justify-center mx-auto shadow-[0_0_16px_rgba(244,162,97,0.35)]">
-              1
-            </div>
-            <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Discover & Compare</h3>
-            <p className="text-xs text-[#334155] dark:text-[#94A3B8] leading-relaxed">
-              Filter by city, neighborhood, desk type, verified power rating, and live availability on our interactive map.
-            </p>
-          </div>
-
-          {/* Step 2 */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#F4A261] text-[#071521] font-mono font-black text-lg flex items-center justify-center mx-auto shadow-[0_0_16px_rgba(244,162,97,0.35)]">
-              2
-            </div>
-            <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Book Instantly</h3>
-            <p className="text-xs text-[#334155] dark:text-[#94A3B8] leading-relaxed">
-              Choose an hour, full day, or multi-day pass. Checkout securely via Paystack, card, or wallet with instant confirmation.
-            </p>
-          </div>
-
-          {/* Step 3 */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm space-y-4 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#F4A261] text-[#071521] font-mono font-black text-lg flex items-center justify-center mx-auto shadow-[0_0_16px_rgba(244,162,97,0.35)]">
-              3
-            </div>
-            <h3 className="text-base font-bold text-[#111827] dark:text-[#F8FAFC]">Scan & Get to Work</h3>
-            <p className="text-xs text-[#334155] dark:text-[#94A3B8] leading-relaxed">
-              Scan your digital QR pass at the entrance. Get high-speed Wi-Fi credentials automatically and focus on what matters.
-            </p>
-          </div>
-
-        </div>
+        <PreLaunchSignupForm variant="card" />
       </section>
 
-      {/* ========================================================================= */}
-      {/* 8. TRUSTED ECOSYSTEM LOGOS                                               */}
-      {/* ========================================================================= */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#101827] border-y border-[#E5E7EB] dark:border-[#1E293B]">
-        <div className="max-w-7xl mx-auto text-center space-y-6">
-          <p className="text-xs font-bold font-mono uppercase tracking-widest text-[#475569] dark:text-[#94A3B8]">
-            Trusted by teams & remote professionals across Africa
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 opacity-60 dark:opacity-50 grayscale hover:grayscale-0 transition-all">
-            {TRUSTED_COMPANIES.map((company) => (
-              <span key={company} className="font-extrabold text-sm sm:text-base tracking-wider text-[#111827] dark:text-[#F8FAFC]">
-                {company}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ========================================================
+          SECTION: Get in Touch / Contact OFIS
+         ======================================================== */}
+      <div id="contact-section">
+        <ContactSection />
+      </div>
 
-      {/* ========================================================================= */}
-      {/* 9. REAL TESTIMONIALS                                                      */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto space-y-2 mb-12">
-          <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#0F766E] dark:text-[#14B8A6]">
-            Verified Feedback
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-[#F8FAFC] tracking-tight">
-            What Our Community Says
+      {/* ========================================================
+          SECTION: Pre-Footer CTA Banner
+         ======================================================== */}
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <div className="rounded-3xl bg-[#0B4A50] border border-[#166D74] p-8 sm:p-14 relative overflow-hidden">
+          <div className="absolute top-0 right-1/4 w-[500px] h-[250px] bg-[#006B70]/20 blur-[100px] rounded-full pointer-events-none" />
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight relative z-10">
+            Ready to find your next workspace?
           </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((t, idx) => (
-            <div
-              key={idx}
-              className="p-6 rounded-3xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] shadow-sm flex flex-col justify-between space-y-6"
+          <p className="text-sm sm:text-base text-[#94A3B8] max-w-2xl mx-auto mt-3 mb-8 relative z-10">
+            Enjoy reliable, fully equipped spaces with uninterrupted power, high-speed fiber, and instant online booking.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+            <button
+              type="button"
+              onClick={handleEnterMarketplace}
+              className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#0EA8A2] hover:shadow-[0_0_24px_rgba(20,190,184,0.5)] text-white text-sm font-bold transition-all flex items-center justify-center space-x-2 cursor-pointer shadow-md active:scale-98"
             >
-              <div className="space-y-3">
-                <div className="flex items-center space-x-1">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-xs text-[#374151] dark:text-[#94A3B8] leading-relaxed italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#1E293B] flex items-center space-x-3">
-                <img
-                  src={optimizeImageUrl(t.avatar, { width: 100, quality: 80 })}
-                  alt={t.name}
-                  loading="lazy"
-                  className="w-10 h-10 rounded-full object-cover border border-[#0F766E]/50"
-                />
-                <div className="text-left">
-                  <h3 className="text-xs font-bold text-[#111827] dark:text-[#F8FAFC]">{t.name}</h3>
-                  <p className="text-[11px] text-[#374151] dark:text-[#94A3B8]">{t.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+              <Compass className="w-4 h-4" />
+              <span>Explore Spaces</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleOpenDemo('enterprise')}
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#07383D] hover:bg-[#105A60] text-white border border-[#166D74] text-sm font-semibold transition-all flex items-center justify-center space-x-2 cursor-pointer shadow-sm active:scale-98"
+            >
+              <Sparkles className="w-4 h-4 text-[#28D2CB]" />
+              <span>Book a Demo</span>
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* 10. DUAL CALL TO ACTION: GUEST EXPLORE & BECOME A HOST                    */}
-      {/* ========================================================================= */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* ========================================================
+          LANDING PAGE FOOTER
+         ======================================================== */}
+      <footer className="border-t border-[#166D74] bg-[#07383D] text-[#94A3B8] py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
           
-          {/* Guest CTA Card */}
-          <div className="p-8 sm:p-12 rounded-3xl bg-[#0F766E] text-white shadow-xl space-y-6 flex flex-col justify-between border border-[#14B8A6]/30">
-            <div className="space-y-3">
-              <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-mono font-bold uppercase">
-                For Guests & Teams
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-                Ready to Find Your Focus Hub?
-              </h2>
-              <p className="text-sm text-[#CBD5E1] leading-relaxed max-w-md">
-                Book a hot desk, boardroom, or creator suite in under 60 seconds with instant digital pass access.
-              </p>
-            </div>
-
-            <div>
-              <button
-                type="button"
-                id="landing-find-space-cta"
-                onClick={() => {
-                  setCurrentView('explore');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="px-6 py-3.5 rounded-2xl bg-white text-[#0B1F33] hover:bg-[#F5F7F7] font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
-              >
-                <span>Explore All Spaces</span>
-                <ArrowRight className="w-4 h-4 stroke-[3]" />
-              </button>
-            </div>
+          <div className="space-y-4">
+            <OFISWordmark size="lg" />
+            <p className="text-sm text-[#94A3B8] leading-relaxed">
+              Discover, book, and manage flexible workspaces, boardrooms, and creative studios across Nigeria with guaranteed power and internet.
+            </p>
+            <p className="text-xs font-mono text-[#64748B]">
+              Victoria Island, Lagos, Nigeria
+            </p>
           </div>
 
-          {/* Host CTA Card */}
-          <div className="p-8 sm:p-12 rounded-3xl bg-[#0B1F33] border border-[#1E3A4D] text-white shadow-xl space-y-6 flex flex-col justify-between">
-            <div className="space-y-3">
-              <span className="px-3 py-1 rounded-full bg-[#0F766E]/20 border border-[#0F766E]/30 text-[#14B8A6] text-[10px] font-mono font-bold uppercase">
-                For Property Owners & Hosts
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-                Monetize Your Commercial Space
-              </h2>
-              <p className="text-sm text-[#94A3B8] leading-relaxed max-w-md">
-                Turn unused meeting rooms, podcast studios, or desks into recurring revenue. Automated payments and verified guests.
-              </p>
-            </div>
+          <div>
+            <h4 className="text-xs font-mono font-bold uppercase text-white tracking-wider mb-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <button 
+                  type="button" 
+                  onClick={handleEnterMarketplace}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Explore Spaces
+                </button>
+              </li>
+              <li>
+                <button 
+                  type="button" 
+                  onClick={() => handleOpenEarlyAccess('Space Operator')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  List Your Space
+                </button>
+              </li>
+              <li>
+                <button 
+                  type="button" 
+                  onClick={() => handleOpenDemo('enterprise')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  For Businesses
+                </button>
+              </li>
+              <li>
+                <button 
+                  type="button" 
+                  onClick={() => handleOpenDemo('enterprise')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Book a Team Demo
+                </button>
+              </li>
+            </ul>
+          </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                id="landing-become-host-cta"
-                onClick={() => {
-                  setCurrentView('become_host');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="px-6 py-3.5 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
-              >
-                <span>Calculate Earnings</span>
-                <ArrowRight className="w-4 h-4 stroke-[3]" />
-              </button>
+          <div>
+            <h4 className="text-xs font-mono font-bold uppercase text-white tracking-wider mb-4">
+              Company
+            </h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <button 
+                  type="button" 
+                  onClick={() => setIsAboutModalOpen(true)}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  About OFIS
+                </button>
+              </li>
+              <li>
+                <button 
+                  type="button" 
+                  onClick={() => handleOpenEarlyAccess('Strategic Partnership')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Partners
+                </button>
+              </li>
+              <li>
+                <button 
+                  type="button" 
+                  onClick={() => handleOpenDemo('investor')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Investors
+                </button>
+              </li>
+              <li>
+                <button 
+                  type="button" 
+                  onClick={() => setIsDeckModalOpen(true)}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Investor Deck
+                </button>
+              </li>
+              <li>
+                <a 
+                  href="/api/download/ofis-logo-assets.zip" 
+                  download="ofis-logo-assets.zip"
+                  className="text-[#28D2CB] hover:underline font-semibold flex items-center gap-1.5 pt-1"
+                >
+                  <span>Download Logo Assets (.zip)</span>
+                </a>
+              </li>
+            </ul>
+          </div>
 
-              <button
-                type="button"
-                onClick={() => setIsListSpaceModalOpen(true)}
-                className="px-5 py-3.5 rounded-2xl bg-[#1F2937] hover:bg-[#374151] border border-[#374151] text-white font-bold text-sm transition-all cursor-pointer"
-              >
-                List Space Now
-              </button>
-            </div>
+          <div>
+            <h4 className="text-xs font-mono font-bold uppercase text-white tracking-wider mb-4">
+              Contact &amp; Support
+            </h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <a href="mailto:hello@ofis.ng" className="hover:text-white transition-colors">
+                  hello@ofis.ng
+                </a>
+              </li>
+              <li>
+                <a href="mailto:partners@ofis.ng" className="hover:text-white transition-colors">
+                  partners@ofis.ng
+                </a>
+              </li>
+              <li>
+                <a href="mailto:investors@ofis.ng" className="hover:text-white transition-colors">
+                  investors@ofis.ng
+                </a>
+              </li>
+              <li className="pt-2">
+                <button 
+                  type="button"
+                  onClick={() => setIsAboutModalOpen(true)}
+                  className="text-xs text-[#64748B] hover:text-[#94A3B8] transition-colors"
+                >
+                  Terms &amp; Privacy Policy
+                </button>
+              </li>
+            </ul>
           </div>
 
         </div>
-      </section>
+
+        <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-[#166D74]/50 flex flex-col sm:flex-row items-center justify-between text-xs text-[#64748B]">
+          <p>© 2026 OFIS Technologies Ltd. All rights reserved.</p>
+          <div className="flex items-center space-x-2 mt-4 sm:mt-0 font-medium text-[#94A3B8]">
+            <span>Inspected Spaces</span>
+            <span>•</span>
+            <span>Guaranteed Backup Power</span>
+            <span>•</span>
+            <span>Lagos &amp; Abuja, Nigeria</span>
+          </div>
+        </div>
+      </footer>
+
+      {/* ========================================================
+          MODALS
+         ======================================================== */}
+      <BookDemoModal 
+        isOpen={isDemoModalOpen} 
+        onClose={() => setIsDemoModalOpen(false)} 
+        defaultTrack={demoTrack}
+      />
+
+      <EarlyAccessModal 
+        isOpen={isEarlyAccessModalOpen} 
+        onClose={() => setIsEarlyAccessModalOpen(false)} 
+        defaultInterest={earlyAccessInterest}
+      />
+
+      <InvestorDeckModal 
+        isOpen={isDeckModalOpen} 
+        onClose={() => setIsDeckModalOpen(false)} 
+      />
+
+      <AboutModal 
+        isOpen={isAboutModalOpen} 
+        onClose={() => setIsAboutModalOpen(false)} 
+        onExploreClick={handleEnterMarketplace}
+      />
 
     </div>
   );

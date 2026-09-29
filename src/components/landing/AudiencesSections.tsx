@@ -42,8 +42,8 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
       ========================================== */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#0F766E]/15 border border-[#0F766E]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F4A261]" />
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#006B70]/15 border border-[#006B70]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#14B8A6]" />
             <span>Built For Every Professional Need</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -55,9 +55,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
-              <Laptop className="w-5 h-5 text-[#F4A261]" />
+          <div className="p-5 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#006B70]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/20 border border-[#006B70]/40 text-[#14B8A6] flex items-center justify-center shadow-[0_0_12px_rgba(15,118,110,0.18)]">
+              <Laptop className="w-5 h-5 text-[#14B8A6]" />
             </div>
             <h3 className="text-base font-bold text-white">Tech Teams & Remote Workers</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -65,9 +65,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
-              <Building2 className="w-5 h-5 text-[#F4A261]" />
+          <div className="p-5 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#006B70]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/20 border border-[#006B70]/40 text-[#14B8A6] flex items-center justify-center shadow-[0_0_12px_rgba(15,118,110,0.18)]">
+              <Building2 className="w-5 h-5 text-[#14B8A6]" />
             </div>
             <h3 className="text-base font-bold text-white">Corporate Offsites & Strategy</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -75,9 +75,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
-              <Users2 className="w-5 h-5 text-[#F4A261]" />
+          <div className="p-5 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#006B70]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/20 border border-[#006B70]/40 text-[#14B8A6] flex items-center justify-center shadow-[0_0_12px_rgba(15,118,110,0.18)]">
+              <Users2 className="w-5 h-5 text-[#14B8A6]" />
             </div>
             <h3 className="text-base font-bold text-white">Founders & Startups</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -85,9 +85,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
-              <Mic className="w-5 h-5 text-[#F4A261]" />
+          <div className="p-5 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#006B70]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/20 border border-[#006B70]/40 text-[#14B8A6] flex items-center justify-center shadow-[0_0_12px_rgba(15,118,110,0.18)]">
+              <Mic className="w-5 h-5 text-[#14B8A6]" />
             </div>
             <h3 className="text-base font-bold text-white">Creators & Podcasters</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -95,9 +95,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#0B1F33] border border-[#1E3A4D] hover:border-[#F4A261]/50 transition-all space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 text-[#F4A261] flex items-center justify-center shadow-[0_0_12px_rgba(244,162,97,0.15)]">
-              <Presentation className="w-5 h-5 text-[#F4A261]" />
+          <div className="p-5 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#006B70]/60 transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-[#006B70]/20 border border-[#006B70]/40 text-[#14B8A6] flex items-center justify-center shadow-[0_0_12px_rgba(15,118,110,0.18)]">
+              <Presentation className="w-5 h-5 text-[#14B8A6]" />
             </div>
             <h3 className="text-base font-bold text-white">Event & Workshop Organizers</h3>
             <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -111,14 +111,14 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
           SECTION: For Companies & Teams
       ========================================== */}
       <section id="businesses" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-[#0B1F33] border border-[#1E3A4D] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_20px_50px_rgba(7,21,33,0.5)]">
+        <div className="rounded-3xl bg-[#0B4A50] border border-[#166D74] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_20px_50px_rgba(7,21,33,0.5)]">
           {/* Subtle Ambient Glow */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#0F766E]/10 blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#006B70]/10 blur-3xl pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
             <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#0F766E]/15 border border-[#0F766E]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#006B70]/15 border border-[#006B70]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider">
                 <Users2 className="w-3.5 h-3.5" />
                 <span>For Companies & Teams</span>
               </div>
@@ -135,7 +135,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
                 <button
                   type="button"
                   onClick={() => onBookDemo('enterprise')}
-                  className="px-7 py-3.5 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white font-bold text-sm shadow-[0_4px_16px_rgba(15,118,110,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2 group"
+                  className="px-7 py-3.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-sm shadow-[0_4px_16px_rgba(15,118,110,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2 group"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Book a Team Demo</span>
@@ -144,7 +144,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
 
                 <a
                   href="mailto:partners@ofis.ng?subject=Corporate%20Team%20Inquiry"
-                  className="px-6 py-3.5 rounded-xl bg-[#071521] hover:bg-[#0B1F33] border border-[#1E3A4D] text-xs font-semibold text-white transition-colors text-center flex items-center justify-center"
+                  className="px-6 py-3.5 rounded-xl bg-[#07383D] hover:bg-[#105A60] border border-[#166D74] text-xs font-semibold text-white transition-colors text-center flex items-center justify-center"
                 >
                   partners@ofis.ng
                 </a>
@@ -153,26 +153,26 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
 
             {/* Feature Cards Grid */}
             <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
-                <ShieldCheck className="w-5 h-5 text-[#F4A261]" />
+              <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
+                <ShieldCheck className="w-5 h-5 text-[#14B8A6]" />
                 <h3 className="text-sm font-bold text-white">Guaranteed 24/7 Power</h3>
                 <p className="text-xs text-[#94A3B8]">Tested generator + solar backup so staff never drop off client calls during public power outages.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
-                <Receipt className="w-5 h-5 text-[#F4A261]" />
+              <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
+                <Receipt className="w-5 h-5 text-[#14B8A6]" />
                 <h3 className="text-sm font-bold text-white">One Monthly Invoice</h3>
                 <p className="text-xs text-[#94A3B8]">Consolidate all employee workspace usage into a single, clean statement for your accounting team.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
-                <Globe2 className="w-5 h-5 text-[#F4A261]" />
+              <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
+                <Globe2 className="w-5 h-5 text-[#14B8A6]" />
                 <h3 className="text-sm font-bold text-white">Locations Across Cities</h3>
                 <p className="text-xs text-[#94A3B8]">Desks and meeting rooms in Victoria Island, Ikoyi, Lekki, Ikeja GRA, and Maitama Abuja.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
-                <Zap className="w-5 h-5 text-[#F4A261]" />
+              <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
+                <Zap className="w-5 h-5 text-[#14B8A6]" />
                 <h3 className="text-sm font-bold text-white">Simple QR Entry</h3>
                 <p className="text-xs text-[#94A3B8]">Employees show an instant digital pass on their phone at the front desk and get straight to work.</p>
               </div>
@@ -186,39 +186,39 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
           SECTION: List Your Space (For Space Operators)
       ========================================== */}
       <section id="hosts" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-[#0B1F33] border border-[#1E3A4D] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_20px_50px_rgba(7,21,33,0.5)]">
-          <div className="absolute top-0 left-0 w-80 h-80 bg-[#0F766E]/10 blur-3xl pointer-events-none" />
+        <div className="rounded-3xl bg-[#0B4A50] border border-[#166D74] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_20px_50px_rgba(7,21,33,0.5)]">
+          <div className="absolute top-0 left-0 w-80 h-80 bg-[#006B70]/10 blur-3xl pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
             <div className="lg:col-span-6 order-2 lg:order-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
-                <TrendingUp className="w-5 h-5 text-[#F4A261]" />
+              <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
+                <TrendingUp className="w-5 h-5 text-[#14B8A6]" />
                 <h3 className="text-sm font-bold text-white">Higher Occupancy</h3>
                 <p className="text-xs text-[#94A3B8]">Fill empty desks, quiet meeting rooms, and off-peak hours with verified business guests.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
-                <Coins className="w-5 h-5 text-[#F4A261]" />
+              <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
+                <Coins className="w-5 h-5 text-[#14B8A6]" />
                 <h3 className="text-sm font-bold text-white">Guaranteed Payouts</h3>
                 <p className="text-xs text-[#94A3B8]">Weekly earnings sent straight to your bank account without chasing overdue client invoices.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
-                <CalendarCheck className="w-5 h-5 text-[#F4A261]" />
+              <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
+                <CalendarCheck className="w-5 h-5 text-[#14B8A6]" />
                 <h3 className="text-sm font-bold text-white">Calendar Sync</h3>
                 <p className="text-xs text-[#94A3B8]">Syncs directly with your Google Calendar or Outlook so you never get double-booked.</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#F4A261]/50 transition-all">
-                <Building2 className="w-5 h-5 text-[#F4A261]" />
+              <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
+                <Building2 className="w-5 h-5 text-[#14B8A6]" />
                 <h3 className="text-sm font-bold text-white">Zero Listing Fees</h3>
                 <p className="text-xs text-[#94A3B8]">Listing your venue is 100% free. You only pay a small commission when you earn from a booking.</p>
               </div>
             </div>
 
             <div className="lg:col-span-6 order-1 lg:order-2 space-y-6">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#0F766E]/15 border border-[#0F766E]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#006B70]/15 border border-[#006B70]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider">
                 <Building2 className="w-3.5 h-3.5" />
                 <span>For Space Operators & Landlords</span>
               </div>
@@ -235,7 +235,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
                 <button
                   type="button"
                   onClick={onListSpace}
-                  className="px-7 py-3.5 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white font-bold text-sm shadow-[0_4px_16px_rgba(15,118,110,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2 group"
+                  className="px-7 py-3.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-sm shadow-[0_4px_16px_rgba(15,118,110,0.3)] transition-all cursor-pointer flex items-center justify-center space-x-2 group"
                 >
                   <span>List Your Space</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -244,7 +244,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
                 <button
                   type="button"
                   onClick={() => onBookDemo('operator')}
-                  className="px-6 py-3.5 rounded-xl bg-[#071521] hover:bg-[#0B1F33] border border-[#1E3A4D] text-xs font-semibold text-white transition-colors text-center cursor-pointer"
+                  className="px-6 py-3.5 rounded-xl bg-[#07383D] hover:bg-[#105A60] border border-[#166D74] text-xs font-semibold text-white transition-colors text-center cursor-pointer"
                 >
                   Host Onboarding Demo
                 </button>
@@ -259,11 +259,11 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
           SECTION: Strategic Partners
       ========================================== */}
       <section id="partners" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-[#0B1F33] border border-[#1E3A4D] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_20px_50px_rgba(7,21,33,0.5)]">
-          <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#0F766E]/10 blur-3xl pointer-events-none" />
+        <div className="rounded-3xl bg-[#0B4A50] border border-[#166D74] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_20px_50px_rgba(7,21,33,0.5)]">
+          <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#006B70]/10 blur-3xl pointer-events-none" />
 
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#0F766E]/15 border border-[#0F766E]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#006B70]/15 border border-[#006B70]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-4">
               <Handshake className="w-3.5 h-3.5" />
               <span>Strategic Partnerships</span>
             </div>
@@ -276,9 +276,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div className="p-6 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-3 hover:border-[#F4A261]/50 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shadow-[0_0_12px_rgba(244,162,97,0.15)]">
-                <Building2 className="w-5 h-5 text-[#F4A261]" />
+            <div className="p-6 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-3 hover:border-[#006B70]/50 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#006B70]/20 border border-[#006B70]/40 flex items-center justify-center text-[#14B8A6] shadow-[0_0_12px_rgba(15,118,110,0.18)]">
+                <Building2 className="w-5 h-5 text-[#14B8A6]" />
               </div>
               <h3 className="text-base font-bold text-white">Hotels & Hospitality</h3>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -286,9 +286,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-3 hover:border-[#F4A261]/50 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shadow-[0_0_12px_rgba(244,162,97,0.15)]">
-                <Layers className="w-5 h-5 text-[#F4A261]" />
+            <div className="p-6 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-3 hover:border-[#006B70]/50 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#006B70]/20 border border-[#006B70]/40 flex items-center justify-center text-[#14B8A6] shadow-[0_0_12px_rgba(15,118,110,0.18)]">
+                <Layers className="w-5 h-5 text-[#14B8A6]" />
               </div>
               <h3 className="text-base font-bold text-white">Commercial Landlords</h3>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -296,9 +296,9 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-3 hover:border-[#F4A261]/50 transition-all">
-              <div className="w-10 h-10 rounded-xl bg-[#F4A261]/20 border border-[#F4A261]/40 flex items-center justify-center text-[#F4A261] shadow-[0_0_12px_rgba(244,162,97,0.15)]">
-                <Users2 className="w-5 h-5 text-[#F4A261]" />
+            <div className="p-6 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-3 hover:border-[#006B70]/50 transition-all">
+              <div className="w-10 h-10 rounded-xl bg-[#006B70]/20 border border-[#006B70]/40 flex items-center justify-center text-[#14B8A6] shadow-[0_0_12px_rgba(15,118,110,0.18)]">
+                <Users2 className="w-5 h-5 text-[#14B8A6]" />
               </div>
               <h3 className="text-base font-bold text-white">Accelerators & VCs</h3>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
@@ -311,7 +311,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             <button
               type="button"
               onClick={onPartner}
-              className="inline-flex items-center space-x-2 px-8 py-3.5 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white font-bold text-sm transition-all cursor-pointer shadow-[0_4px_16px_rgba(15,118,110,0.3)] group"
+              className="inline-flex items-center space-x-2 px-8 py-3.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-sm transition-all cursor-pointer shadow-[0_4px_16px_rgba(15,118,110,0.3)] group"
             >
               <span>Become a Partner</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -328,11 +328,11 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
           SECTION: Investors
       ========================================== */}
       <section id="investors" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-[#0B1F33] border border-[#1E3A4D] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_25px_60px_rgba(7,21,33,0.6)]">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#0F766E]/10 blur-[150px] rounded-3xl pointer-events-none" />
+        <div className="rounded-3xl bg-[#0B4A50] border border-[#166D74] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[0_25px_60px_rgba(7,21,33,0.6)]">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#006B70]/10 blur-[150px] rounded-3xl pointer-events-none" />
 
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#0F766E]/15 border border-[#0F766E]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#006B70]/15 border border-[#006B70]/40 text-xs font-bold text-[#14B8A6] uppercase tracking-wider mb-4">
               <TrendingUp className="w-3.5 h-3.5" />
               <span>Investment Opportunity</span>
             </div>
@@ -347,7 +347,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-            <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
+            <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#14B8A6] block">
                 01 • Market Need
               </span>
@@ -357,7 +357,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
+            <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#14B8A6] block">
                 02 • Business Model
               </span>
@@ -367,7 +367,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
+            <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#14B8A6] block">
                 03 • Early Momentum
               </span>
@@ -377,7 +377,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#071521] border border-[#1E3A4D] space-y-2 hover:border-[#0F766E]/50 transition-all">
+            <div className="p-5 rounded-2xl bg-[#07383D] border border-[#166D74] space-y-2 hover:border-[#006B70]/50 transition-all">
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#14B8A6] block">
                 04 • Expansion
               </span>
@@ -392,7 +392,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             <button
               type="button"
               onClick={onRequestDeck}
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white font-bold text-sm sm:text-base shadow-[0_4px_20px_rgba(15,118,110,0.3)] transition-all cursor-pointer group space-x-2"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-sm sm:text-base shadow-[0_4px_20px_rgba(15,118,110,0.3)] transition-all cursor-pointer group space-x-2"
             >
               <FileText className="w-4 h-4" />
               <span>Request Investor Deck</span>
@@ -402,7 +402,7 @@ export const AudiencesSections: React.FC<AudiencesSectionsProps> = ({
             <button
               type="button"
               onClick={onScheduleMeeting}
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-[#071521] hover:bg-[#0B1F33] text-white font-semibold text-sm sm:text-base border border-[#1E3A4D] hover:border-[#14B8A6]/40 transition-all cursor-pointer space-x-2"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-[#07383D] hover:bg-[#105A60] text-white font-semibold text-sm sm:text-base border border-[#166D74] hover:border-[#14B8A6]/40 transition-all cursor-pointer space-x-2"
             >
               <Calendar className="w-4 h-4 text-[#14B8A6]" />
               <span>Schedule a Meeting</span>

@@ -101,7 +101,7 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
             placeholder="Search guest, booking ID or pass..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 rounded-2xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] text-xs text-[#111827] dark:text-[#F9FAFB] placeholder-[#6B7280] dark:placeholder-[#9CA3AF] focus:outline-none focus:border-[#0F766E] shadow-xs"
+            className="w-full pl-9 pr-4 py-2 rounded-2xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F9FAFB] placeholder-[#6B7280] dark:placeholder-[#9CA3AF] focus:outline-none focus:border-[#006B70] shadow-xs"
           />
         </div>
       </div>
@@ -123,8 +123,8 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
               onClick={() => setActiveFilter(tab.id as any)}
               className={`px-4 py-2 rounded-2xl text-xs font-bold whitespace-nowrap transition-all flex items-center space-x-2 cursor-pointer shadow-xs ${
                 isActive
-                  ? 'bg-[#0F766E] text-white'
-                  : 'bg-white dark:bg-[#1F2937] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] border border-[#E5E7EB] dark:border-[#374151]'
+                  ? 'bg-[#006B70] text-white'
+                  : 'bg-white dark:bg-[#1F2937] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] border border-[#E5E7EB] dark:border-[#166D74]'
               }`}
             >
               <span>{tab.label}</span>
@@ -140,7 +140,7 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
 
       {/* Bookings List */}
       {filteredBookings.length === 0 ? (
-        <div className="p-12 text-center rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] space-y-3 shadow-xs">
+        <div className="p-12 text-center rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#166D74] space-y-3 shadow-xs">
           <Users className="w-10 h-10 text-[#6B7280] dark:text-[#9CA3AF] opacity-40 mx-auto" />
           <h3 className="text-base font-bold text-[#111827] dark:text-[#F9FAFB]">No Bookings Found</h3>
           <p className="text-xs text-[#6B7280] dark:text-[#9CA3AF]">
@@ -157,26 +157,26 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
             return (
               <div
                 key={booking.id}
-                className="p-5 rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#374151] hover:border-[#0F766E]/50 transition-all space-y-4 shadow-xs"
+                className="p-5 rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#166D74] hover:border-[#006B70]/50 transition-all space-y-4 shadow-xs"
               >
                 {/* Upper Info Row */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-start space-x-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-[#0F766E]/15 dark:bg-[#0F766E]/20 border border-[#0F766E]/30 text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center font-bold shrink-0">
-                      <User className="w-6 h-6 text-[#0F766E] dark:text-[#14B8A6]" />
+                    <div className="w-12 h-12 rounded-2xl bg-[#006B70]/15 dark:bg-[#006B70]/20 border border-[#006B70]/30 text-[#006B70] dark:text-[#28D2CB] flex items-center justify-center font-bold shrink-0">
+                      <User className="w-6 h-6 text-[#006B70] dark:text-[#28D2CB]" />
                     </div>
 
                     <div>
                       <div className="flex items-center space-x-2 flex-wrap">
                         <h4 className="text-sm font-bold text-[#111827] dark:text-[#F9FAFB]">{booking.userName}</h4>
                         
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#111827] text-[#6B7280] dark:text-[#9CA3AF] border border-[#E5E7EB] dark:border-[#374151]">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#07383D] text-[#6B7280] dark:text-[#9CA3AF] border border-[#E5E7EB] dark:border-[#166D74]">
                           {booking.id}
                         </span>
 
                         <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
                           isCheckedIn
-                            ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] border border-[#0F766E]/30'
+                            ? 'bg-[#006B70]/15 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB] border border-[#006B70]/30'
                             : isCancelled
                             ? 'bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/30'
                             : isCompleted
@@ -194,7 +194,7 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
                         {booking.selectedSeatLabel && (
                           <>
                             <span>•</span>
-                            <span className="text-[#0F766E] dark:text-[#14B8A6] font-medium">{booking.selectedSeatLabel}</span>
+                            <span className="text-[#006B70] dark:text-[#28D2CB] font-medium">{booking.selectedSeatLabel}</span>
                           </>
                         )}
                       </div>
@@ -218,8 +218,8 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
                   </div>
 
                   {/* Pricing & Digital Pass Code */}
-                  <div className="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-2 sm:pt-0 border-[#E5E7EB] dark:border-[#374151]">
-                    <div className="text-base font-mono font-extrabold text-[#0F766E] dark:text-[#14B8A6]">
+                  <div className="flex sm:flex-col items-center sm:items-end justify-between border-t sm:border-t-0 pt-2 sm:pt-0 border-[#E5E7EB] dark:border-[#166D74]">
+                    <div className="text-base font-mono font-extrabold text-[#006B70] dark:text-[#28D2CB]">
                       ₦{(booking.totalAmount || 0).toLocaleString()}
                     </div>
                     <div className="text-[10px] text-[#6B7280] dark:text-[#9CA3AF] flex items-center space-x-1">
@@ -238,23 +238,23 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
                 )}
 
                 {/* Action Buttons Row */}
-                <div className="flex items-center justify-between pt-3 border-t border-[#E5E7EB] dark:border-[#374151] flex-wrap gap-2">
+                <div className="flex items-center justify-between pt-3 border-t border-[#E5E7EB] dark:border-[#166D74] flex-wrap gap-2">
                   
                   {/* Left Group: Communication & Invoice */}
                   <div className="flex items-center space-x-2">
                     <button
                       type="button"
                       onClick={() => setMessagingBooking(booking)}
-                      className="px-3 py-1.5 rounded-xl bg-[#F8FAFC] dark:bg-[#111827] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#374151] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer transition-colors shadow-2xs"
+                      className="px-3 py-1.5 rounded-xl bg-[#F8FAFC] dark:bg-[#07383D] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#166D74] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer transition-colors shadow-2xs"
                     >
-                      <MessageSquare className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                      <MessageSquare className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                       <span>Message Guest</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => setReceiptBooking(booking)}
-                      className="px-3 py-1.5 rounded-xl bg-[#F8FAFC] dark:bg-[#111827] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#374151] text-xs font-semibold text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer transition-colors shadow-2xs"
+                      className="px-3 py-1.5 rounded-xl bg-[#F8FAFC] dark:bg-[#07383D] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#166D74] text-xs font-semibold text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer transition-colors shadow-2xs"
                     >
                       <FileText className="w-3.5 h-3.5 text-[#6B7280] dark:text-[#9CA3AF]" />
                       <span>Invoice / Receipt</span>
@@ -268,7 +268,7 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
                         <button
                           type="button"
                           onClick={() => onOpenCheckInCode(booking.digitalPassCode)}
-                          className="px-3.5 py-1.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs flex items-center space-x-1.5 cursor-pointer shadow-xs active:scale-95 transition-all"
+                          className="px-3.5 py-1.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-xs flex items-center space-x-1.5 cursor-pointer shadow-xs active:scale-95 transition-all"
                         >
                           <QrCode className="w-3.5 h-3.5" />
                           <span>Turnstile Check In</span>
@@ -280,7 +280,7 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
                             setCancelModalBooking(booking);
                             setCancellationReason('');
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#F8FAFC] dark:bg-[#111827] hover:bg-red-500/10 border border-[#E5E7EB] dark:border-[#374151] text-[#6B7280] dark:text-[#9CA3AF] hover:text-red-600 text-xs font-semibold flex items-center space-x-1 cursor-pointer transition-colors shadow-2xs"
+                          className="px-3 py-1.5 rounded-xl bg-[#F8FAFC] dark:bg-[#07383D] hover:bg-red-500/10 border border-[#E5E7EB] dark:border-[#166D74] text-[#6B7280] dark:text-[#9CA3AF] hover:text-red-600 text-xs font-semibold flex items-center space-x-1 cursor-pointer transition-colors shadow-2xs"
                         >
                           <XCircle className="w-3.5 h-3.5" />
                           <span>Cancel</span>
@@ -289,7 +289,7 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
                     )}
 
                     {isCheckedIn && (
-                      <span className="px-3 py-1.5 rounded-xl bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] text-xs font-bold border border-[#0F766E]/30 flex items-center space-x-1.5">
+                      <span className="px-3 py-1.5 rounded-xl bg-[#006B70]/15 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB] text-xs font-bold border border-[#006B70]/30 flex items-center space-x-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Checked In • Active in Hub</span>
                       </span>
@@ -306,8 +306,8 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
       {/* Cancellation Reason Modal */}
       {cancelModalBooking && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative w-full max-w-md bg-white dark:bg-[#1F2937] rounded-3xl border border-[#E5E7EB] dark:border-[#374151] shadow-2xl p-6 space-y-4 animate-in fade-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#374151] pb-3">
+          <div className="relative w-full max-w-md bg-white dark:bg-[#1F2937] rounded-3xl border border-[#E5E7EB] dark:border-[#166D74] shadow-2xl p-6 space-y-4 animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#166D74] pb-3">
               <h3 className="text-base font-bold text-[#111827] dark:text-[#F9FAFB]">Cancel Guest Booking</h3>
               <button
                 type="button"
@@ -329,7 +329,7 @@ export const HostBookingsTab: React.FC<HostBookingsTabProps> = ({
                 placeholder="e.g., Unscheduled emergency hub maintenance, private team buyout..."
                 value={cancellationReason}
                 onChange={(e) => setCancellationReason(e.target.value)}
-                className="w-full p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#111827] border border-[#E5E7EB] dark:border-[#374151] text-xs text-[#111827] dark:text-[#F9FAFB] placeholder-[#6B7280] dark:placeholder-[#9CA3AF] focus:outline-none focus:border-red-500"
+                className="w-full p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#07383D] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F9FAFB] placeholder-[#6B7280] dark:placeholder-[#9CA3AF] focus:outline-none focus:border-red-500"
               />
             </div>
 

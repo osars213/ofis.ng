@@ -60,12 +60,37 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
   // User manual override: allows explicit playback on mobile or reduced-motion devices
   const [userRequestedPlay, setUserRequestedPlay] = useState<boolean>(false);
 
+  // Viewport intersection detection to defer video resource loading until needed
+  const [isInViewport, setIsInViewport] = useState<boolean>(false);
+
   // Video playback states
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isVideoLoaded, setIsVideoLoaded] = useState<boolean>(false);
   const [playbackProgress, setPlaybackProgress] = useState<number>(0);
   const [showControlsOverlay, setShowControlsOverlay] = useState<boolean>(false);
+
+  // Defer video streaming until container approaches viewport
+  useEffect(() => {
+    if (typeof window === 'undefined' || !containerRef.current) return;
+    if (!('IntersectionObserver' in window)) {
+      setIsInViewport(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setIsInViewport(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '350px 0px' }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // 1. Detect reduced-motion preference & subscribe to changes
   useEffect(() => {
@@ -126,8 +151,8 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
   }, []);
 
   // 3. Determine whether to render the video or the high-quality static poster
-  // If mobile or reduced-motion is detected, default to high-quality poster image unless user explicitly requested play
-  const shouldRenderVideo = (!isMobile && !prefersReducedMotion) || userRequestedPlay;
+  // Video is only loaded when in viewport AND (desktop reduced-motion is false OR user explicitly pressed play)
+  const shouldRenderVideo = isInViewport && ((!isMobile && !prefersReducedMotion) || userRequestedPlay);
 
   // 4. Handle video playback lifecycle
   useEffect(() => {
@@ -212,11 +237,11 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
       className={`relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 ${className}`}
     >
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[340px] bg-gradient-to-r from-[#0F766E]/15 via-[#14B8A6]/10 to-[#0F766E]/15 blur-[120px] rounded-full pointer-events-none -z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[340px] bg-gradient-to-r from-[#006B70]/15 via-[#14B8A6]/10 to-[#006B70]/15 blur-[120px] rounded-full pointer-events-none -z-0" />
 
       {/* Header Section */}
       <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 relative z-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B1F33] border border-[#1E3A4D] text-xs font-semibold text-[#14B8A6] mb-3 shadow-[0_2px_8px_rgba(7,21,33,0.3)]">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B4A50] border border-[#166D74] text-xs font-semibold text-[#14B8A6] mb-3 shadow-[0_2px_8px_rgba(7,21,33,0.3)]">
           <Sparkles className="w-3.5 h-3.5 text-[#14B8A6]" />
           <span>Verified Space Showcase</span>
         </div>
@@ -246,7 +271,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
               </span>
             ) : (
               <span 
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#0B1F33] text-[#94A3B8] border border-[#1E3A4D]"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#0B4A50] text-[#94A3B8] border border-[#166D74]"
                 role="status"
               >
                 <Smartphone className="w-3.5 h-3.5 text-[#14B8A6]" />
@@ -262,22 +287,26 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
         ref={containerRef}
         onMouseEnter={() => setShowControlsOverlay(true)}
         onMouseLeave={() => setShowControlsOverlay(false)}
-        className="relative z-10 rounded-2xl sm:rounded-3xl overflow-hidden bg-[#071521] border border-[#1E3A4D] shadow-[0_20px_60px_rgba(7,21,33,0.7)] group transition-all duration-300 hover:border-[#14B8A6]/40"
+        className="relative z-10 rounded-2xl sm:rounded-3xl overflow-hidden bg-[#07383D] border border-[#166D74] shadow-[0_20px_60px_rgba(7,21,33,0.7)] group transition-all duration-300 hover:border-[#14B8A6]/40"
       >
         {/* Aspect Ratio Box (16:9) */}
-        <div className="relative w-full aspect-[16/9] bg-[#071521] overflow-hidden">
+        <div className="relative w-full aspect-[16/9] bg-[#07383D] overflow-hidden">
           
           {/* 1. HIGH-QUALITY POSTER IMAGE (Shown on mobile, reduced-motion, or before video loads) */}
-          <img
-            src={posterSrc}
-            alt="Inspected OFIS flexible workspace in Lagos featuring executive desks, natural lighting, and high-speed fiber setup"
-            loading={isMobile ? "eager" : "lazy"}
-            fetchPriority={isMobile ? "high" : "auto"}
-            decoding="async"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-              shouldRenderVideo && isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
-            }`}
-          />
+          <picture className={`absolute inset-0 w-full h-full transition-opacity duration-700 ${
+            shouldRenderVideo && isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}>
+            <source srcSet="/media/ofis-workspace-poster.webp" type="image/webp" />
+            <img
+              src={posterSrc}
+              alt="Inspected OFIS flexible workspace in Lagos featuring executive desks, natural lighting, and high-speed fiber setup"
+              width="1280"
+              height="720"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+            />
+          </picture>
 
           {/* 2. RESPONSIVE VIDEO (Rendered on desktop when reduced-motion is false, or on user request) */}
           {shouldRenderVideo && (
@@ -287,7 +316,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
               muted={isMuted}
               loop
               autoPlay={!prefersReducedMotion}
-              preload="metadata"
+              preload="none"
               aria-label={videoDescription}
               onLoadedData={() => setIsVideoLoaded(true)}
               onTimeUpdate={handleTimeUpdate}
@@ -306,7 +335,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
           )}
 
           {/* Top Info HUD Bar */}
-          <div className="absolute top-0 inset-x-0 p-4 sm:p-6 bg-gradient-to-b from-[#071521]/90 via-[#071521]/40 to-transparent flex items-center justify-between z-20 pointer-events-none">
+          <div className="absolute top-0 inset-x-0 p-4 sm:p-6 bg-gradient-to-b from-[#07383D]/90 via-[#07383D]/40 to-transparent flex items-center justify-between z-20 pointer-events-none">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#14B8A6] shadow-[0_0_8px_#14B8A6]" />
               <span className="text-xs sm:text-sm font-bold tracking-wide text-white uppercase">
@@ -315,15 +344,15 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3 text-xs text-[#CBD5E1]">
-              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0B1F33]/80 backdrop-blur-md border border-[#1E3A4D]">
+              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0B4A50]/80 backdrop-blur-md border border-[#166D74]">
                 <Zap className="w-3.5 h-3.5 text-[#14B8A6]" />
                 <span>24/7 Power</span>
               </div>
-              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0B1F33]/80 backdrop-blur-md border border-[#1E3A4D]">
+              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0B4A50]/80 backdrop-blur-md border border-[#166D74]">
                 <Wifi className="w-3.5 h-3.5 text-[#14B8A6]" />
                 <span>Fiber + Starlink</span>
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0B1F33]/80 backdrop-blur-md border border-[#1E3A4D]">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#0B4A50]/80 backdrop-blur-md border border-[#166D74]">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#14B8A6]" />
                 <span>Inspected</span>
               </div>
@@ -337,7 +366,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
                 type="button"
                 onClick={togglePlay}
                 aria-label={isPlaying ? 'Pause video' : 'Play video tour'}
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#0F766E] hover:bg-[#14B8A6] text-white flex items-center justify-center shadow-[0_0_30px_rgba(15,118,110,0.5)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer group/play focus:outline-none focus:ring-4 focus:ring-[#14B8A6]/50"
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#006B70] hover:bg-[#0EA8A2] text-white flex items-center justify-center shadow-[0_0_30px_rgba(15,118,110,0.5)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer group/play focus:outline-none focus:ring-4 focus:ring-[#14B8A6]/50"
               >
                 <Play className="w-7 h-7 sm:w-9 h-9 text-white ml-1 transition-transform group-hover/play:scale-105" />
               </button>
@@ -355,14 +384,14 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
 
           {/* Bottom Interactive Controls Bar */}
           <div 
-            className={`absolute bottom-0 inset-x-0 p-3 sm:p-5 bg-gradient-to-t from-[#071521]/95 via-[#071521]/70 to-transparent z-20 transition-opacity duration-300 ${
+            className={`absolute bottom-0 inset-x-0 p-3 sm:p-5 bg-gradient-to-t from-[#07383D]/95 via-[#07383D]/70 to-transparent z-20 transition-opacity duration-300 ${
               showControlsOverlay || !isPlaying ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
             {/* Progress Bar */}
-            <div className="w-full bg-[#1E3A4D]/80 h-1.5 rounded-full overflow-hidden mb-3.5">
+            <div className="w-full bg-[#166D74]/80 h-1.5 rounded-full overflow-hidden mb-3.5">
               <div 
-                className="bg-gradient-to-r from-[#0F766E] to-[#14B8A6] h-full transition-all duration-150"
+                className="bg-gradient-to-r from-[#006B70] to-[#14B8A6] h-full transition-all duration-150"
                 style={{ width: `${playbackProgress}%` }}
               />
             </div>
@@ -375,7 +404,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
                   onClick={togglePlay}
                   aria-label={isPlaying ? 'Pause workspace video' : 'Play workspace video'}
                   aria-pressed={isPlaying}
-                  className="p-2 sm:p-2.5 rounded-xl bg-[#0B1F33]/90 hover:bg-[#1E3A4D] text-white border border-[#1E3A4D] hover:border-[#14B8A6]/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
+                  className="p-2 sm:p-2.5 rounded-xl bg-[#0B4A50]/90 hover:bg-[#166D74] text-white border border-[#166D74] hover:border-[#14B8A6]/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
                 >
                   {isPlaying ? <Pause className="w-4 h-4 sm:w-4.5 sm:h-4.5" /> : <Play className="w-4 h-4 sm:w-4.5 sm:h-4.5" />}
                 </button>
@@ -385,7 +414,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
                   onClick={toggleMute}
                   aria-label={isMuted ? 'Unmute video audio' : 'Mute video audio'}
                   aria-pressed={!isMuted}
-                  className="p-2 sm:p-2.5 rounded-xl bg-[#0B1F33]/90 hover:bg-[#1E3A4D] text-white border border-[#1E3A4D] hover:border-[#14B8A6]/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
+                  className="p-2 sm:p-2.5 rounded-xl bg-[#0B4A50]/90 hover:bg-[#166D74] text-white border border-[#166D74] hover:border-[#14B8A6]/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
                 >
                   {isMuted ? <VolumeX className="w-4 h-4 sm:w-4.5 sm:h-4.5" /> : <Volume2 className="w-4 h-4 sm:w-4.5 sm:h-4.5" />}
                 </button>
@@ -394,7 +423,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
                   type="button"
                   onClick={handleReplay}
                   aria-label="Replay video tour from start"
-                  className="hidden sm:flex p-2 sm:p-2.5 rounded-xl bg-[#0B1F33]/90 hover:bg-[#1E3A4D] text-white border border-[#1E3A4D] hover:border-[#14B8A6]/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
+                  className="hidden sm:flex p-2 sm:p-2.5 rounded-xl bg-[#0B4A50]/90 hover:bg-[#166D74] text-white border border-[#166D74] hover:border-[#14B8A6]/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
                 >
                   <RotateCcw className="w-4 h-4" />
                 </button>
@@ -407,7 +436,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
                       setUserRequestedPlay(false);
                       if (videoRef.current) videoRef.current.pause();
                     }}
-                    className="text-xs text-[#CBD5E1] hover:text-white px-2.5 py-1.5 rounded-lg bg-[#0B1F33]/80 border border-[#1E3A4D] transition-colors"
+                    className="text-xs text-[#CBD5E1] hover:text-white px-2.5 py-1.5 rounded-lg bg-[#0B4A50]/80 border border-[#166D74] transition-colors"
                   >
                     Switch to Poster View
                   </button>
@@ -420,7 +449,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
                   <button
                     type="button"
                     onClick={onExploreClick}
-                    className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold transition-all shadow-[0_2px_10px_rgba(15,118,110,0.3)]"
+                    className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#006B70] hover:bg-[#0EA8A2] text-white text-xs font-bold transition-all shadow-[0_2px_10px_rgba(15,118,110,0.3)]"
                   >
                     <span>Explore Spaces</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -431,7 +460,7 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
                   type="button"
                   onClick={handleFullscreen}
                   aria-label="Toggle fullscreen view"
-                  className="p-2 sm:p-2.5 rounded-xl bg-[#0B1F33]/90 hover:bg-[#1E3A4D] text-white border border-[#1E3A4D] hover:border-[#14B8A6]/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
+                  className="p-2 sm:p-2.5 rounded-xl bg-[#0B4A50]/90 hover:bg-[#166D74] text-white border border-[#166D74] hover:border-[#14B8A6]/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
                 >
                   <Maximize className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                 </button>
@@ -444,19 +473,19 @@ export const ResponsiveLandingVideo: React.FC<ResponsiveLandingVideoProps> = ({
 
       {/* Trust & Location Summary Strip Below Video */}
       <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-        <div className="p-3.5 rounded-xl bg-[#0B1F33]/60 border border-[#1E3A4D]">
+        <div className="p-3.5 rounded-xl bg-[#0B4A50]/60 border border-[#166D74]">
           <span className="block text-white font-extrabold text-sm sm:text-base">100+</span>
           <span className="text-xs text-[#94A3B8]">Verified Desks & Suites</span>
         </div>
-        <div className="p-3.5 rounded-xl bg-[#0B1F33]/60 border border-[#1E3A4D]">
+        <div className="p-3.5 rounded-xl bg-[#0B4A50]/60 border border-[#166D74]">
           <span className="block text-white font-extrabold text-sm sm:text-base">24/7 Power</span>
           <span className="text-xs text-[#94A3B8]">Automatic Generator SLA</span>
         </div>
-        <div className="p-3.5 rounded-xl bg-[#0B1F33]/60 border border-[#1E3A4D]">
+        <div className="p-3.5 rounded-xl bg-[#0B4A50]/60 border border-[#166D74]">
           <span className="block text-white font-extrabold text-sm sm:text-base">4K Studios</span>
           <span className="text-xs text-[#94A3B8]">Soundproof Pods & Stages</span>
         </div>
-        <div className="p-3.5 rounded-xl bg-[#0B1F33]/60 border border-[#1E3A4D]">
+        <div className="p-3.5 rounded-xl bg-[#0B4A50]/60 border border-[#166D74]">
           <span className="block text-white font-extrabold text-sm sm:text-base">Zero Leases</span>
           <span className="text-xs text-[#94A3B8]">Book by Hour or Day</span>
         </div>

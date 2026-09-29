@@ -18,40 +18,50 @@ const PILLAR_CONFIG: Record<
     icon: LucideIcon;
     badgeColor: string;
     glowColor: string;
+    activeGradient: string;
     tintHex: string;
+    textClass: string;
     description: string;
   }
 > = {
   work: {
     label: 'WORK',
     icon: Laptop,
-    badgeColor: 'from-[#F4A261]/25 via-[#F4A261]/10 to-transparent',
-    glowColor: 'rgba(244, 162, 97, 0.4)',
-    tintHex: '#F4A261',
+    badgeColor: 'from-[#006B70]/40 via-[#14BEB8]/25 to-transparent',
+    glowColor: 'rgba(20, 190, 184, 0.6)',
+    activeGradient: 'from-[#006B70] via-[#14BEB8] to-[#FFA987]',
+    tintHex: '#14BEB8',
+    textClass: 'text-[#006B70] dark:text-[#28D2CB]',
     description: 'Desks & Private Offices',
   },
   meet: {
     label: 'MEET',
     icon: Presentation,
-    badgeColor: 'from-[#F4A261]/25 via-[#F4A261]/10 to-transparent',
-    glowColor: 'rgba(244, 162, 97, 0.4)',
-    tintHex: '#F4A261',
+    badgeColor: 'from-[#006B70]/40 via-[#28D2CB]/30 to-transparent',
+    glowColor: 'rgba(40, 210, 203, 0.65)',
+    activeGradient: 'from-[#006B70] via-[#14BEB8] to-[#28D2CB]',
+    tintHex: '#28D2CB',
+    textClass: 'text-[#006B70] dark:text-[#28D2CB]',
     description: 'Boardrooms & Conference',
   },
   create: {
     label: 'CREATE',
     icon: Camera,
-    badgeColor: 'from-[#F4A261]/30 via-[#F4A261]/15 to-transparent',
-    glowColor: 'rgba(244, 162, 97, 0.45)',
-    tintHex: '#F4A261',
+    badgeColor: 'from-[#FFA987]/50 via-[#FF8A65]/35 to-transparent',
+    glowColor: 'rgba(255, 169, 135, 0.85)',
+    activeGradient: 'from-[#FFA987] via-[#FF8A65] to-[#FFD0BD]',
+    tintHex: '#FFA987',
+    textClass: 'text-[#C85A32] dark:text-[#FFA987]',
     description: 'Photo & Video Sets',
   },
   record: {
     label: 'RECORD',
     icon: Mic,
-    badgeColor: 'from-[#F4A261]/25 via-[#F4A261]/10 to-transparent',
-    glowColor: 'rgba(244, 162, 97, 0.4)',
-    tintHex: '#F4A261',
+    badgeColor: 'from-[#FFA987]/45 via-[#14BEB8]/30 to-transparent',
+    glowColor: 'rgba(255, 169, 135, 0.75)',
+    activeGradient: 'from-[#FF8A65] via-[#FFA987] to-[#14BEB8]',
+    tintHex: '#FFA987',
+    textClass: 'text-[#C85A32] dark:text-[#FFA987]',
     description: 'Soundproof Podcast Suites',
   },
 };
@@ -95,8 +105,8 @@ export const ReflectivePillarIcon: React.FC<ReflectivePillarIconProps> = ({
       <div
         className={`relative ${sizeClasses.container} flex items-center justify-center transition-all duration-300 overflow-hidden cursor-pointer ${
           isActive
-            ? 'bg-gradient-to-br from-[#F4A261] to-[#E76F51] text-white shadow-[0_8px_20px_rgba(244,162,97,0.4),inset_0_1.5px_1px_rgba(255,255,255,0.45)] scale-105'
-            : 'bg-gradient-to-br from-white via-[#F8FAFC] to-[#EEF2F6] dark:from-[#13283B] dark:via-[#0F2232] dark:to-[#071521] text-[#F4A261] dark:text-[#F4A261] border border-[#D9E1E3] dark:border-[#1E3A4D] hover:border-[#F4A261]/60 shadow-[0_4px_16px_rgba(11,31,51,0.06),inset_0_1.5px_1px_rgba(255,255,255,0.85),inset_0_-1px_1px_rgba(11,31,51,0.04)] dark:shadow-[0_6px_20px_rgba(0,0,0,0.35),inset_0_1.5px_1px_rgba(255,255,255,0.16),inset_0_-1px_2px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_24px_rgba(244,162,97,0.22),inset_0_1.5px_1px_rgba(255,255,255,0.9)] dark:hover:shadow-[0_8px_28px_rgba(244,162,97,0.28),inset_0_1.5px_1px_rgba(255,255,255,0.25)] hover:scale-105'
+            ? `bg-gradient-to-br ${config.activeGradient} text-white shadow-[0_8px_24px_${config.glowColor},inset_0_1.5px_1px_rgba(255,255,255,0.5)] scale-105 ring-2 ring-white/40`
+            : `bg-gradient-to-br from-white via-[#FFF9F4] to-[#F1F6F5] dark:from-[#0B4A50] dark:via-[#07383D] dark:to-[#07383D] ${config.textClass} border border-[#E2ECEB] dark:border-[#166D74] hover:border-[${config.tintHex}]/70 shadow-[0_4px_16px_rgba(7,56,61,0.08),inset_0_1.5px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_6px_20px_rgba(0,0,0,0.4),inset_0_1.5px_1px_rgba(255,255,255,0.2)] hover:shadow-[0_8px_24px_${config.glowColor},inset_0_1.5px_1px_rgba(255,255,255,0.9)] hover:scale-105`
         }`}
       >
         {/* Optical Specular Glare (Top 45% Curved Bevel Highlight) */}

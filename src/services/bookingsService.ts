@@ -296,7 +296,7 @@ export const bookingsService = {
     bookingId: string,
     options: { additionalHours?: number; additionalDays?: number } | number,
     unitRate: number,
-    paymentMethod: 'paystack' | 'flutterwave' | 'wallet' | 'card' = 'wallet'
+    paymentMethod: 'sznd' | 'paystack' | 'flutterwave' | 'wallet' | 'card' = 'wallet'
   ): { success: boolean; message: string; booking?: Booking } => {
     const bookings = bookingsService.getBookings();
     const target = bookings.find(b => b.id === bookingId);

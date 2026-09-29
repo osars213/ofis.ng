@@ -1,5 +1,6 @@
 export type AppView = 
   | 'home'
+  | 'landing'
   | 'explore' 
   | 'map' 
   | 'details' 
@@ -14,7 +15,8 @@ export type AppView =
   | 'privacy'
   | 'terms'
   | 'become_host'
-  | 'not_found';
+  | 'not_found'
+  | 'payment_result';
 
 export type SpaceCategory = 
   | 'coworking'
@@ -238,6 +240,7 @@ export interface Space {
 }
 
 export type BookingLifecycleStatus = 
+  | 'pending'
   | 'reserved'
   | 'confirmed'
   | 'ready_for_checkin'
@@ -299,7 +302,7 @@ export interface Booking {
   isReviewed?: boolean;
   qrCodeValue: string;
   digitalPassCode: string;
-  paymentMethod: 'paystack' | 'flutterwave' | 'wallet' | 'card';
+  paymentMethod: 'sznd' | 'paystack' | 'flutterwave' | 'wallet' | 'card';
   paymentReference: string;
   createdAt: string;
   hasReminder?: boolean;

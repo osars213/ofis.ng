@@ -287,6 +287,10 @@ CREATE POLICY "Admins can view leads" ON public.leads
         )
     );
 
+-- 11. INDEXES FOR REAL-TIME AVAILABILITY & CONCURRENCY
+CREATE INDEX IF NOT EXISTS idx_bookings_availability ON public.bookings (space_id, date, status, payment_status);
+CREATE INDEX IF NOT EXISTS idx_bookings_seat_time ON public.bookings (space_id, selected_seat_id, date, start_time);
+
 -- ============================================================================
 -- HELPER FUNCTIONS & TRIGGERS
 -- ============================================================================
@@ -321,29 +325,138 @@ CREATE TRIGGER on_auth_user_created
     AFTER INSERT ON auth.users
     FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
 
--- RPC: Confirm booking payment securely
+-- RPC: Confirm booking payment securely with transactional concurrency lock
 CREATE OR REPLACE FUNCTION public.confirm_booking_payment(
     p_booking_id TEXT,
     p_transaction_reference TEXT,
-    p_provider TEXT DEFAULT 'paystack',
+    p_provider TEXT DEFAULT 'sznd',
     p_amount NUMERIC DEFAULT 0,
     p_metadata JSONB DEFAULT '{}'::JSONB
 )
 RETURNS JSONB AS $$
 DECLARE
     v_booking RECORD;
+    v_space RECORD;
+    v_conflict_count INT := 0;
+    v_conflicting_id TEXT := NULL;
+    v_calc_end_time TEXT;
 BEGIN
+    -- 1. Fetch target booking record
     SELECT * INTO v_booking FROM public.bookings WHERE id = p_booking_id;
     IF NOT FOUND THEN
         RAISE EXCEPTION 'Booking % not found', p_booking_id;
     END IF;
 
+    -- Idempotent check: if already confirmed with this reference, return immediately
+    IF (v_booking.status = 'confirmed' OR v_booking.booking_status = 'confirmed') AND v_booking.payment_status = 'paid' THEN
+        RETURN jsonb_build_object(
+            'success', true,
+            'conflict', false,
+            'booking_id', p_booking_id,
+            'reference', p_transaction_reference,
+            'status', 'confirmed',
+            'already_confirmed', true
+        );
+    END IF;
+
+    -- 2. Transaction-level advisory lock on resource/space/date
+    -- Guarantees concurrent transactions attempting to confirm the same space/date wait and execute serially
+    PERFORM pg_advisory_xact_lock(hashtext(v_booking.space_id || '_' || v_booking.date));
+
+    -- 3. Calculate effective end time for time-window overlap comparison
+    v_calc_end_time := COALESCE(
+        v_booking.end_time,
+        to_char(to_timestamp(v_booking.start_time, 'HH24:MI') + (v_booking.duration_hours || ' hours')::interval, 'HH24:MI')
+    );
+
+    -- 4. Check space exclusive policy & capacity
+    SELECT * INTO v_space FROM public.spaces WHERE id = v_booking.space_id;
+
+    -- 5. Transaction-Safe Conflict / Overlap Detection
+    -- Overlap condition: start_A < end_B AND start_B < end_A
+    -- Active statuses: confirmed, ready_for_checkin, checked_in, in_progress, active
+    IF v_booking.selected_seat_id IS NOT NULL AND v_booking.selected_seat_id <> '' THEN
+        -- Specific seat conflict check
+        SELECT id INTO v_conflicting_id
+        FROM public.bookings
+        WHERE space_id = v_booking.space_id
+          AND date = v_booking.date
+          AND id <> p_booking_id
+          AND selected_seat_id = v_booking.selected_seat_id
+          AND status IN ('confirmed', 'ready_for_checkin', 'checked_in', 'in_progress', 'active')
+          AND payment_status = 'paid'
+          AND (
+            v_booking.start_time < COALESCE(end_time, to_char(to_timestamp(start_time, 'HH24:MI') + (duration_hours || ' hours')::interval, 'HH24:MI'))
+            AND
+            start_time < v_calc_end_time
+          )
+        LIMIT 1;
+    ELSE
+        -- Whole-space / Non-seat conflict check (for private offices, meeting rooms, podcasts, or capacity-limited hot desks)
+        IF v_space.category IN ('private_office', 'meeting', 'podcast', 'photography', 'event') OR COALESCE(v_space.capacity, 1) = 1 THEN
+            SELECT id INTO v_conflicting_id
+            FROM public.bookings
+            WHERE space_id = v_booking.space_id
+              AND date = v_booking.date
+              AND id <> p_booking_id
+              AND status IN ('confirmed', 'ready_for_checkin', 'checked_in', 'in_progress', 'active')
+              AND payment_status = 'paid'
+              AND (
+                v_booking.start_time < COALESCE(end_time, to_char(to_timestamp(start_time, 'HH24:MI') + (duration_hours || ' hours')::interval, 'HH24:MI'))
+                AND
+                start_time < v_calc_end_time
+              )
+            LIMIT 1;
+        ELSE
+            -- Hot-desk / multi-capacity check: sum of overlapping booked guests
+            SELECT COALESCE(SUM(guest_count), 0) INTO v_conflict_count
+            FROM public.bookings
+            WHERE space_id = v_booking.space_id
+              AND date = v_booking.date
+              AND id <> p_booking_id
+              AND status IN ('confirmed', 'ready_for_checkin', 'checked_in', 'in_progress', 'active')
+              AND payment_status = 'paid'
+              AND (
+                v_booking.start_time < COALESCE(end_time, to_char(to_timestamp(start_time, 'HH24:MI') + (duration_hours || ' hours')::interval, 'HH24:MI'))
+                AND
+                start_time < v_calc_end_time
+              );
+
+            IF (v_conflict_count + v_booking.guest_count) > COALESCE(v_space.capacity, 50) THEN
+                v_conflicting_id := 'CAPACITY_EXCEEDED';
+            END IF;
+        END IF;
+    END IF;
+
+    -- 6. If conflicting reservation exists, prevent confirmation and mark conflict
+    IF v_conflicting_id IS NOT NULL THEN
+        UPDATE public.bookings
+        SET
+            status = 'cancelled',
+            booking_status = 'cancelled',
+            payment_status = 'failed',
+            cancellation_reason = 'Concurrency conflict: slot already confirmed by another booking',
+            updated_at = NOW()
+        WHERE id = p_booking_id;
+
+        RETURN jsonb_build_object(
+            'success', false,
+            'conflict', true,
+            'error', 'The selected workspace or seat was already confirmed by another member for this time slot.',
+            'booking_id', p_booking_id,
+            'conflicting_id', v_conflicting_id,
+            'status', 'conflict'
+        );
+    END IF;
+
+    -- 7. No conflict: Confirm booking and log payment
     UPDATE public.bookings
     SET
         status = 'confirmed',
         booking_status = 'confirmed',
         payment_status = 'paid',
         payment_reference = p_transaction_reference,
+        payment_method = p_provider,
         updated_at = NOW()
     WHERE id = p_booking_id;
 
@@ -353,6 +466,7 @@ BEGIN
 
     RETURN jsonb_build_object(
         'success', true,
+        'conflict', false,
         'booking_id', p_booking_id,
         'reference', p_transaction_reference,
         'status', 'confirmed'

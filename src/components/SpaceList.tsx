@@ -351,10 +351,10 @@ export const SpaceList: React.FC = () => {
   const hasMessages = messages.length > 0;
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-[#F8FAFC] dark:bg-[#0B1220] text-[#111827] dark:text-[#F8FAFC] flex flex-col transition-colors duration-150 relative">
+    <div className="min-h-[calc(100vh-64px)] bg-[#FFF9F4] dark:bg-[#07383D] text-[#12383B] dark:text-[#FFFFFF] flex flex-col transition-colors duration-150 relative">
       
       {/* Subtle Background Radial Glow */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[340px] h-[340px] sm:w-[540px] sm:h-[540px] bg-[#0F766E]/5 dark:bg-[#0F766E]/10 rounded-full blur-3xl pointer-events-none -z-0" />
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[340px] h-[340px] sm:w-[540px] sm:h-[540px] bg-[#14BEB8]/5 dark:bg-[#14BEB8]/10 rounded-full blur-3xl pointer-events-none -z-0" />
 
       {/* Main Container */}
       <div className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-32 flex flex-col justify-start relative z-10">
@@ -362,7 +362,7 @@ export const SpaceList: React.FC = () => {
         {/* ========================================================================= */}
         {/* HEADER: GREETING, SUBTITLE, PILLARS & CORE ATTRIBUTES                     */}
         {/* ========================================================================= */}
-        <div className={`text-center transition-all duration-300 ${hasMessages ? 'py-4 border-b border-[#E5E7EB] dark:border-[#1E3A4D] mb-6' : 'py-6 sm:py-10 space-y-6'}`}>
+        <div className={`text-center transition-all duration-300 ${hasMessages ? 'py-4 border-b border-[#E5E7EB] dark:border-[#166D74] mb-6' : 'py-6 sm:py-10 space-y-6'}`}>
           
           {/* 1. Dynamic Indigenous Nigerian Greeting */}
           <div className="flex items-center justify-center min-h-[38px] sm:min-h-[46px]">
@@ -399,8 +399,8 @@ export const SpaceList: React.FC = () => {
                   onClick={() => handlePillarClick(pillar)}
                   className={`inline-flex items-center space-x-2 pl-2 pr-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer select-none group ${
                     isSelected
-                      ? 'bg-[#0F766E] text-white shadow-md ring-2 ring-[#0F766E]/25'
-                      : 'bg-white dark:bg-[#102A3D] hover:bg-[#F5F7F7] dark:hover:bg-[#13283B] border border-[#D9E1E3] dark:border-[#1E3A4D] text-[#172B3A] dark:text-[#CBD5E1] hover:text-[#0F766E] dark:hover:text-[#14B8A6] shadow-2xs hover:shadow-xs'
+                      ? 'bg-[#14BEB8] text-white shadow-md ring-2 ring-[#14BEB8]/25'
+                      : 'bg-white text-[#12383B] border border-[#E2ECEB] hover:border-[#14BEB8]/50 hover:text-[#006B70] dark:bg-[#0B4A50] dark:text-[#B8D1D0] dark:border-[#166D74] dark:hover:border-[#14BEB8]/50 dark:hover:text-white shadow-2xs hover:shadow-xs'
                   }`}
                 >
                   <ReflectivePillarIcon
@@ -420,28 +420,28 @@ export const SpaceList: React.FC = () => {
             <div className="pt-2">
               {/* Selected Pillar Specific Attributes if active */}
               {selectedPillar !== 'all' ? (
-                <div className="inline-flex items-center flex-wrap justify-center gap-2 px-4 py-2 rounded-2xl bg-white dark:bg-[#161F32] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs font-medium text-[#4B5563] dark:text-[#94A3B8] shadow-2xs">
-                  <span className="font-bold text-[#0F766E] dark:text-[#14B8A6] uppercase tracking-wider text-[11px]">
+                <div className="inline-flex items-center flex-wrap justify-center gap-2 px-4 py-2 rounded-2xl bg-white dark:bg-[#0B4A50] border border-[#E2ECEB] dark:border-[#166D74] text-xs font-medium text-[#5D7A7D] dark:text-[#B8D1D0] shadow-2xs">
+                  <span className="font-bold text-[#006B70] dark:text-[#28D2CB] uppercase tracking-wider text-[11px]">
                     {selectedPillar.toUpperCase()} SPACES:
                   </span>
                   {PILLARS_IN_ORDER.find(p => p.id === selectedPillar)?.attributes.map((attr, idx, arr) => (
                     <React.Fragment key={attr}>
-                      <span className="text-[#111827] dark:text-[#F8FAFC]">{attr}</span>
-                      {idx < arr.length - 1 && <span className="text-[#94A3B8] dark:text-[#64748B]">•</span>}
+                      <span className="text-[#12383B] dark:text-[#FFFFFF]">{attr}</span>
+                      {idx < arr.length - 1 && <span className="text-[#5D7A7D] dark:text-[#B8D1D0]">•</span>}
                     </React.Fragment>
                   ))}
                 </div>
               ) : (
                 /* Platform Core Attributes: Power, Fiber, Verified, Instant, Hubs */
-                <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-1.5 text-xs text-[#6B7280] dark:text-[#94A3B8] font-medium">
+                <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-1.5 text-xs text-[#5D7A7D] dark:text-[#B8D1D0] font-medium">
                   {CORE_ATTRIBUTES.map((attr, idx) => {
                     const AttrIcon = attr.icon;
                     return (
                       <div key={attr.id} className="inline-flex items-center space-x-1.5" title={attr.detail}>
-                        <AttrIcon className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                        <AttrIcon className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                         <span>{attr.label}</span>
                         {idx < CORE_ATTRIBUTES.length - 1 && (
-                          <span className="text-[#CBD5E1] dark:text-[#334155] pl-2 hidden sm:inline">•</span>
+                          <span className="text-[#CBD5E1] dark:text-[#166D74] pl-2 hidden sm:inline">•</span>
                         )}
                       </div>
                     );
@@ -454,13 +454,13 @@ export const SpaceList: React.FC = () => {
           {/* Reset Chat Header Button (Only visible during active conversation) */}
           {hasMessages && (
             <div className="flex items-center justify-between pt-2">
-              <span className="text-xs font-semibold text-[#6B7280] dark:text-[#94A3B8]">
+              <span className="text-xs font-semibold text-[#5D7A7D] dark:text-[#B8D1D0]">
                 Conversational Search
               </span>
               <button
                 type="button"
                 onClick={handleResetChat}
-                className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:text-[#14B8A6] hover:bg-[#E5E7EB]/50 dark:hover:bg-[#1E293B] transition-colors cursor-pointer"
+                className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#006B70] dark:hover:text-[#28D2CB] hover:bg-[#E2ECEB]/50 dark:hover:bg-[#0B4A50] transition-colors cursor-pointer"
                 title="Start a fresh conversation"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -488,15 +488,15 @@ export const SpaceList: React.FC = () => {
                   <div
                     className={`max-w-[92%] sm:max-w-[85%] rounded-3xl px-4 sm:px-5 py-3.5 text-sm sm:text-base leading-relaxed ${
                       isUser
-                        ? 'bg-[#0F766E] text-white font-medium rounded-br-xs shadow-xs'
-                        : 'bg-white dark:bg-[#161F32] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[#111827] dark:text-[#F8FAFC] rounded-bl-xs shadow-xs'
+                        ? 'bg-[#14BEB8] text-white font-medium rounded-br-xs shadow-xs'
+                        : 'bg-white dark:bg-[#0B4A50] border border-[#E2ECEB] dark:border-[#166D74] text-[#12383B] dark:text-[#FFFFFF] rounded-bl-xs shadow-xs'
                     }`}
                   >
                     <p className="whitespace-pre-line">{msg.text}</p>
 
                     {/* Knowledge base link button if present */}
                     {msg.knowledgeLink && (
-                      <div className="mt-3 pt-3 border-t border-[#E5E7EB] dark:border-[#1E3A4D]">
+                      <div className="mt-3 pt-3 border-t border-[#E2ECEB] dark:border-[#166D74]">
                         <button
                           type="button"
                           onClick={() => {
@@ -506,7 +506,7 @@ export const SpaceList: React.FC = () => {
                               setCurrentView(msg.knowledgeLink?.view as any || 'explore');
                             }
                           }}
-                          className="inline-flex items-center space-x-1.5 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6] hover:underline cursor-pointer"
+                          className="inline-flex items-center space-x-1.5 text-xs font-bold text-[#006B70] dark:text-[#28D2CB] hover:underline cursor-pointer"
                         >
                           <span>{msg.knowledgeLink.label}</span>
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -523,7 +523,7 @@ export const SpaceList: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => setCurrentView('explore')}
-                          className="text-[#0F766E] dark:text-[#14B8A6] hover:underline cursor-pointer lowercase first-letter:uppercase"
+                          className="text-[#006B70] dark:text-[#28D2CB] hover:underline cursor-pointer lowercase first-letter:uppercase"
                         >
                           view in catalog →
                         </button>
@@ -536,10 +536,10 @@ export const SpaceList: React.FC = () => {
                           return (
                             <div
                               key={space.id}
-                              className="rounded-2xl bg-white dark:bg-[#161F32] border border-[#E5E7EB] dark:border-[#1E3A4D] overflow-hidden shadow-xs hover:border-[#0F766E]/50 transition-all flex flex-col justify-between group"
+                              className="rounded-2xl bg-white dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74] overflow-hidden shadow-xs hover:border-[#14BEB8]/50 transition-all flex flex-col justify-between group"
                             >
                               {/* Photo Header */}
-                              <div className="relative h-40 w-full overflow-hidden bg-[#E2E8F0] dark:bg-[#1E293B]">
+                              <div className="relative h-40 w-full overflow-hidden bg-[#E2E8F0] dark:bg-[#07383D]">
                                 <img
                                   src={space.images?.[0] || 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'}
                                   alt={space.title}
@@ -562,7 +562,7 @@ export const SpaceList: React.FC = () => {
                                     {space.title}
                                   </h3>
                                   <p className="text-xs text-[#374151] dark:text-[#94A3B8] flex items-center space-x-1">
-                                    <MapPin className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6] shrink-0" />
+                                    <MapPin className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB] shrink-0" />
                                     <span className="line-clamp-1">{space.neighborhood || space.city}, {space.city}</span>
                                   </p>
                                 </div>
@@ -575,14 +575,14 @@ export const SpaceList: React.FC = () => {
                                   </span>
                                   {space.internetSpeedMbps && (
                                     <span className="flex items-center space-x-1">
-                                      <Wifi className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                                      <Wifi className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                                       <span>{space.internetSpeedMbps}Mbps</span>
                                     </span>
                                   )}
                                 </div>
 
                                 {/* Pricing & Actions */}
-                                <div className="pt-2 border-t border-[#E5E7EB] dark:border-[#1E3A4D] flex items-center justify-between gap-2">
+                                <div className="pt-2 border-t border-[#E5E7EB] dark:border-[#166D74] flex items-center justify-between gap-2">
                                   <div>
                                     <span className="text-sm font-extrabold text-[#111827] dark:text-[#F8FAFC]">
                                       {formatPriceNGN(pricing.rate)}
@@ -599,7 +599,7 @@ export const SpaceList: React.FC = () => {
                                         setSelectedSpaceId(space.id);
                                         setCurrentView('details');
                                       }}
-                                      className="px-2.5 py-1.5 rounded-xl border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs font-semibold text-[#4B5563] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] transition-colors cursor-pointer"
+                                      className="px-2.5 py-1.5 rounded-xl border border-[#E2ECEB] dark:border-[#166D74] text-xs font-semibold text-[#5D7A7D] dark:text-[#B8D1D0] hover:bg-[#F1F6F5] dark:hover:bg-[#105A60] transition-colors cursor-pointer"
                                     >
                                       Details
                                     </button>
@@ -607,7 +607,7 @@ export const SpaceList: React.FC = () => {
                                     <button
                                       type="button"
                                       onClick={() => openQuickBook(space)}
-                                      className="px-3.5 py-1.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white text-xs font-bold shadow-xs transition-transform active:scale-95 cursor-pointer"
+                                      className="px-3.5 py-1.5 rounded-xl bg-[#14BEB8] hover:bg-[#006B70] text-white text-xs font-bold shadow-xs transition-transform active:scale-95 cursor-pointer"
                                     >
                                       Book Space
                                     </button>
@@ -630,7 +630,7 @@ export const SpaceList: React.FC = () => {
                           key={suggestion}
                           type="button"
                           onClick={() => handleSendMessage(suggestion)}
-                          className="px-3 py-1 rounded-full bg-white dark:bg-[#161F32] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs text-[#4B5563] dark:text-[#94A3B8] hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-all cursor-pointer shadow-2xs"
+                          className="px-3 py-1 rounded-full bg-white dark:bg-[#0B4A50] hover:bg-[#F1F6F5] dark:hover:bg-[#105A60] border border-[#E2ECEB] dark:border-[#166D74] text-xs text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#006B70] dark:hover:text-[#28D2CB] transition-all cursor-pointer shadow-2xs"
                         >
                           {suggestion}
                         </button>
@@ -644,8 +644,8 @@ export const SpaceList: React.FC = () => {
 
             {/* Thinking / Searching State */}
             {loading && (
-              <div className="flex items-center space-x-2 text-xs font-semibold text-[#0F766E] dark:text-[#14B8A6] pl-2 py-2">
-                <Sparkles className="w-4 h-4 animate-spin text-[#0F766E] dark:text-[#14B8A6]" />
+              <div className="flex items-center space-x-2 text-xs font-semibold text-[#006B70] dark:text-[#28D2CB] pl-2 py-2">
+                <Sparkles className="w-4 h-4 animate-spin text-[#006B70] dark:text-[#28D2CB]" />
                 <span>Searching verified spaces & calculating real rates...</span>
               </div>
             )}
@@ -666,7 +666,7 @@ export const SpaceList: React.FC = () => {
                 e.preventDefault();
                 handleSendMessage();
               }}
-              className="relative bg-white dark:bg-[#161F32] rounded-3xl border-2 border-[#E2E8F0] dark:border-[#1E3A4D] focus-within:border-[#0F766E] shadow-xl focus-within:shadow-2xl transition-all duration-200 p-2 sm:p-3"
+              className="relative bg-white dark:bg-[#0B4A50] rounded-3xl border-2 border-[#E2E8F0] dark:border-[#166D74] focus-within:border-[#14BEB8] shadow-xl focus-within:shadow-2xl transition-all duration-200 p-2 sm:p-3"
             >
               <div className="flex flex-col gap-2">
                 <textarea
@@ -686,7 +686,7 @@ export const SpaceList: React.FC = () => {
 
                 <div className="flex items-center justify-between pt-1 px-2">
                   <span className="text-[11px] text-[#94A3B8] dark:text-[#64748B] hidden sm:inline">
-                    Press <kbd className="px-1.5 py-0.5 rounded bg-[#F1F5F9] dark:bg-[#1E293B] font-mono text-[10px]">Enter ↵</kbd> to search
+                    Press <kbd className="px-1.5 py-0.5 rounded bg-[#F1F5F9] dark:bg-[#105A60] font-mono text-[10px]">Enter ↵</kbd> to search
                   </span>
 
                   <button
@@ -694,8 +694,8 @@ export const SpaceList: React.FC = () => {
                     disabled={!inputQuery.trim() || loading}
                     className={`ml-auto px-5 py-2.5 rounded-2xl font-bold text-xs sm:text-sm flex items-center space-x-2 transition-all cursor-pointer ${
                       inputQuery.trim() && !loading
-                        ? 'bg-[#0F766E] hover:bg-[#14B8A6] text-white shadow-md active:scale-95'
-                        : 'bg-[#E2E8F0] dark:bg-[#1E293B] text-[#94A3B8] dark:text-[#64748B] cursor-not-allowed opacity-70'
+                        ? 'bg-[#14BEB8] hover:bg-[#006B70] text-white shadow-md active:scale-95'
+                        : 'bg-[#E2E8F0] dark:bg-[#105A60] text-[#94A3B8] dark:text-[#64748B] cursor-not-allowed opacity-70'
                     }`}
                   >
                     <Sparkles className="w-3.5 h-3.5" />
@@ -712,17 +712,17 @@ export const SpaceList: React.FC = () => {
                   key={starter.title}
                   type="button"
                   onClick={() => handleSendMessage(starter.prompt)}
-                  className="p-3.5 rounded-2xl bg-white dark:bg-[#161F32] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] border border-[#E5E7EB] dark:border-[#1E3A4D] hover:border-[#0F766E]/50 text-left transition-all cursor-pointer shadow-2xs group flex flex-col justify-between space-y-2"
+                  className="p-3.5 rounded-2xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] hover:border-[#14BEB8]/50 text-left transition-all cursor-pointer shadow-2xs group flex flex-col justify-between space-y-2"
                 >
                   <div className="space-y-0.5">
-                    <p className="text-xs sm:text-sm font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#0F766E] dark:group-hover:text-[#14B8A6] transition-colors">
+                    <p className="text-xs sm:text-sm font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#006B70] dark:group-hover:text-[#14B8A6] transition-colors">
                       {starter.title}
                     </p>
                     <p className="text-[11px] text-[#6B7280] dark:text-[#94A3B8]">
                       {starter.subtitle}
                     </p>
                   </div>
-                  <div className="flex items-center justify-end text-[#94A3B8] group-hover:text-[#0F766E] dark:group-hover:text-[#14B8A6] text-xs">
+                  <div className="flex items-center justify-end text-[#94A3B8] group-hover:text-[#006B70] dark:group-hover:text-[#14B8A6] text-xs">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </button>
@@ -734,7 +734,7 @@ export const SpaceList: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setCurrentView('explore')}
-                className="text-xs font-semibold text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors inline-flex items-center space-x-1 cursor-pointer"
+                className="text-xs font-semibold text-[#6B7280] dark:text-[#94A3B8] hover:text-[#006B70] dark:hover:text-[#14B8A6] transition-colors inline-flex items-center space-x-1 cursor-pointer"
               >
                 <span>Or browse our full directory of 40+ physical workspaces</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -750,14 +750,14 @@ export const SpaceList: React.FC = () => {
       {/* STICKY BOTTOM INPUT BAR (DURING ACTIVE GEMINI CHAT)                       */}
       {/* ========================================================================= */}
       {hasMessages && (
-        <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/95 dark:bg-[#0B1220]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#1E3A4D] py-3 px-4 sm:px-6 shadow-xl">
+        <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#166D74] py-3 px-4 sm:px-6 shadow-xl">
           <div className="max-w-4xl mx-auto flex items-center space-x-2">
             
             {/* New Chat Reset Button */}
             <button
               type="button"
               onClick={handleResetChat}
-              className="p-3 rounded-2xl bg-[#F1F5F9] dark:bg-[#161F32] hover:bg-[#E2E8F0] dark:hover:bg-[#1E293B] text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:text-[#14B8A6] transition-colors cursor-pointer shrink-0"
+              className="p-3 rounded-2xl bg-[#F1F5F9] dark:bg-[#0B4A50] hover:bg-[#E2E8F0] dark:hover:bg-[#105A60] text-[#6B7280] dark:text-[#94A3B8] hover:text-[#006B70] dark:hover:text-[#14B8A6] transition-colors cursor-pointer shrink-0 border border-transparent dark:border-[#166D74]"
               title="Reset and start new chat"
             >
               <RotateCcw className="w-4 h-4" />
@@ -769,7 +769,7 @@ export const SpaceList: React.FC = () => {
                 e.preventDefault();
                 handleSendMessage();
               }}
-              className="flex-1 flex items-center bg-[#F8FAFC] dark:bg-[#161F32] border border-[#E2E8F0] dark:border-[#1E3A4D] focus-within:border-[#0F766E] rounded-2xl px-3 py-1.5 shadow-2xs"
+              className="flex-1 flex items-center bg-[#F8FAFC] dark:bg-[#0B4A50] border border-[#E2E8F0] dark:border-[#166D74] focus-within:border-[#14BEB8] rounded-2xl px-3 py-1.5 shadow-2xs"
             >
               <input
                 type="text"
@@ -784,8 +784,8 @@ export const SpaceList: React.FC = () => {
                 disabled={!inputQuery.trim() || loading}
                 className={`p-2 rounded-xl text-white transition-all cursor-pointer shrink-0 ${
                   inputQuery.trim() && !loading
-                    ? 'bg-[#0F766E] hover:bg-[#14B8A6] shadow-xs active:scale-95'
-                    : 'bg-[#E2E8F0] dark:bg-[#1E293B] text-[#94A3B8] dark:text-[#64748B] cursor-not-allowed opacity-60'
+                    ? 'bg-[#14BEB8] hover:bg-[#006B70] shadow-xs active:scale-95'
+                    : 'bg-[#E2ECEB] dark:bg-[#0B4A50] text-[#718079] dark:text-[#5D7A7D] cursor-not-allowed opacity-60'
                 }`}
                 title="Send"
               >

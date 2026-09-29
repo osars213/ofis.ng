@@ -53,7 +53,7 @@ export const ContinueBrowsingSection: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center space-x-2 text-[#111827] dark:text-[#F9FAFB] font-mono text-[11px] font-bold tracking-wider uppercase">
-            <History className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+            <History className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
             <span>Continue Browsing</span>
           </div>
           <p className="text-xs text-[#6B7280] dark:text-[#9CA3AF] mt-0.5">
@@ -76,7 +76,7 @@ export const ContinueBrowsingSection: React.FC = () => {
           <button
             type="button"
             onClick={() => scroll('left')}
-            className="p-2 rounded-xl bg-white dark:bg-[#1F2937] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#374151] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] transition-colors shadow-2xs cursor-pointer"
+            className="p-2 rounded-xl bg-white dark:bg-[#1F2937] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#166D74] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] transition-colors shadow-2xs cursor-pointer"
             aria-label="Scroll left"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -84,7 +84,7 @@ export const ContinueBrowsingSection: React.FC = () => {
           <button
             type="button"
             onClick={() => scroll('right')}
-            className="p-2 rounded-xl bg-white dark:bg-[#1F2937] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#374151] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] transition-colors shadow-2xs cursor-pointer"
+            className="p-2 rounded-xl bg-white dark:bg-[#1F2937] hover:bg-[#F1F5F9] dark:hover:bg-[#374151] border border-[#E5E7EB] dark:border-[#166D74] text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] transition-colors shadow-2xs cursor-pointer"
             aria-label="Scroll right"
           >
             <ChevronRight className="w-4 h-4" />

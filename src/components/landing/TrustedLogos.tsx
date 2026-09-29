@@ -12,7 +12,7 @@ const PARTNER_ITEMS: Partner[] = [
     name: 'Szndpay',
     node: (
       <div className="flex items-center space-x-2.5 grayscale hover:grayscale-0 transition-all text-[#94A3B8] hover:text-white shrink-0 px-6 sm:px-8 py-2">
-        <div className="w-7 h-7 rounded-lg bg-[#0F766E]/20 border border-[#0F766E]/40 flex items-center justify-center text-[#14B8A6] shadow-[0_0_12px_rgba(20,184,166,0.2)]">
+        <div className="w-7 h-7 rounded-lg bg-[#006B70]/20 border border-[#006B70]/40 flex items-center justify-center text-[#14B8A6] shadow-[0_0_12px_rgba(20,184,166,0.2)]">
           <svg className="w-4 h-4 text-[#14B8A6]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="5" width="20" height="14" rx="3" fill="currentColor" fillOpacity="0.15" />
             <line x1="2" y1="10" x2="22" y2="10" />
@@ -121,8 +121,8 @@ export const TrustedLogos: React.FC = () => {
   return (
     <div className="relative w-full max-w-6xl mx-auto overflow-hidden py-3">
       {/* Edge gradient masks for continuous fade */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-10 bg-gradient-to-r from-[#071521] via-[#071521]/80 to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-10 bg-gradient-to-l from-[#071521] via-[#071521]/80 to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-10 bg-gradient-to-r from-[#07383D] via-[#07383D]/80 to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-10 bg-gradient-to-l from-[#07383D] via-[#07383D]/80 to-transparent" />
 
       {/* Revolving infinite track */}
       <div className="animate-marquee-revolve items-center">

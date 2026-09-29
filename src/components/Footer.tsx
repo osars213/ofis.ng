@@ -1,30 +1,14 @@
 import React from 'react';
 import { 
-  Building2, 
   MapPin, 
   ShieldCheck, 
   Zap, 
   Wifi, 
-  Mail, 
-  Phone, 
   Globe, 
   Sun, 
   Moon, 
-  Sparkles,
   ArrowRight,
-  Heart,
-  Laptop,
-  Presentation,
-  Mic,
-  Camera,
-  Layers,
-  ChevronRight,
-  HelpCircle,
-  FileText,
-  Lock,
-  Smartphone,
-  Download,
-  Apple
+  Smartphone
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { OFISWordmark } from './OFISWordmark';
@@ -37,8 +21,6 @@ export const Footer: React.FC = () => {
     updateFilter, 
     setActiveCategory, 
     setIsListSpaceModalOpen,
-    setIsAiModalOpen,
-    setIsDiagnosticsModalOpen,
     setIsDownloadAppModalOpen,
     theme,
     toggleTheme,
@@ -66,14 +48,20 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#0B1220] text-[#94A3B8] border-t border-[#1E293B] pt-16 pb-12 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#07383D] text-[#B8D1D0] border-t border-[#166D74] pt-12 pb-10 transition-colors relative overflow-hidden">
+      {/* Radiant OFIS Brand Accent Line (Multi-Color Spectrum with Prominent Peach Glow) */}
+      <div className="h-[2.5px] w-full absolute top-0 left-0 bg-gradient-to-r from-[#006B70] via-[#14BEB8] via-[#FFA987] to-[#006B70]" />
+
+      {/* Ambient Warm Peach Glow in the Background */}
+      <div className="absolute -bottom-20 right-1/4 w-96 h-48 bg-[#FFA987]/10 blur-3xl rounded-full pointer-events-none -z-0" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Top Section: Brand + Value Highlights */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-[#1E293B]">
+        {/* Main Grid: Streamlined & Decluttered */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-10 border-b border-[#166D74]/70">
           
-          {/* Brand Col (5 cols on lg) */}
-          <div className="lg:col-span-4 space-y-4">
+          {/* Brand Info (4 cols) */}
+          <div className="lg:col-span-4 space-y-3.5">
             <div 
               className="cursor-pointer inline-block transition-transform hover:opacity-90" 
               onClick={() => {
@@ -87,38 +75,43 @@ export const Footer: React.FC = () => {
             >
               <OFISWordmark size="lg" theme="dark" />
             </div>
-            <p className="text-sm text-[#94A3B8] leading-relaxed max-w-sm">
-              Nigeria&apos;s physical-space marketplace for discovering and booking verified coworking desks, private offices, meeting rooms, and creator studios with guaranteed power and high-speed fiber.
+
+            <p className="text-xs sm:text-sm text-[#B8D1D0] leading-relaxed max-w-sm">
+              Nigeria&apos;s physical workspace network. Discover and book verified desks, offices, meeting rooms, and studios with guaranteed power.
             </p>
 
-            <div className="pt-2 flex flex-wrap gap-2 text-xs">
-              <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/10 text-[#0F766E] dark:text-[#14B8A6] border border-[#0F766E]/30 font-mono">
-                <Zap className="w-3 h-3" />
-                <span>100% Power Uptime</span>
+            {/* Clean Trust Indicators with Warm Peach Highlight */}
+            <div className="pt-1 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs">
+              <span className="inline-flex items-center space-x-1.5 text-[#FFA987] font-medium">
+                <Zap className="w-3.5 h-3.5 fill-[#FFA987]/30 text-[#FFA987]" />
+                <span>100% Power SLA</span>
               </span>
-              <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/10 text-[#0F766E] dark:text-[#14B8A6] border border-[#0F766E]/30 font-mono">
-                <Wifi className="w-3 h-3" />
-                <span>100+ Mbps Fiber</span>
+              <span className="inline-flex items-center space-x-1.5 text-[#28D2CB] font-medium">
+                <Wifi className="w-3.5 h-3.5 text-[#28D2CB]" />
+                <span>Fiber + Starlink</span>
               </span>
-              <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-[#0F766E]/10 text-[#0F766E] dark:text-[#14B8A6] border border-[#0F766E]/30 font-mono">
-                <ShieldCheck className="w-3 h-3" />
+              <span className="inline-flex items-center space-x-1.5 text-[#FFD0BD] font-medium">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#FFA987]" />
                 <span>Vetted Hubs</span>
               </span>
             </div>
           </div>
 
-          {/* Quick Links (7 cols on lg) */}
-          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8 text-xs">
+          {/* Clean 3-Column Navigation Grid (8 cols) */}
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8 text-xs">
             
-            {/* Col 1: Popular Hubs */}
+            {/* Column 1: Explore Spaces & Cities */}
             <div className="space-y-3">
-              <h4 className="font-bold text-sm text-[#F8FAFC] tracking-wider uppercase">Nigerian Hubs</h4>
-              <ul className="space-y-2.5">
+              <h4 className="font-bold text-xs uppercase tracking-wider text-[#FFFFFF] flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFA987]" />
+                <span>Spaces & Hubs</span>
+              </h4>
+              <ul className="space-y-2 text-[#B8D1D0]">
                 <li>
                   <button 
                     type="button"
                     onClick={() => handleCityClick('Lagos')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
                     Lagos (VI, Lekki, Ikeja)
                   </button>
@@ -127,7 +120,7 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleCityClick('Abuja')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
                     Abuja (Maitama, CBD)
                   </button>
@@ -135,43 +128,8 @@ export const Footer: React.FC = () => {
                 <li>
                   <button 
                     type="button"
-                    onClick={() => handleCityClick('Port Harcourt')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
-                  >
-                    Port Harcourt (Old GRA)
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    type="button"
-                    onClick={() => handleCityClick('Ibadan')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
-                  >
-                    Ibadan (Bodija, Ring Rd)
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    type="button"
-                    onClick={() => handleNavigate('map')}
-                    className="text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center space-x-1 cursor-pointer pt-1"
-                  >
-                    <MapPin className="w-3 h-3" />
-                    <span>View Map Directory</span>
-                  </button>
-                </li>
-              </ul>
-            </div>
-
-            {/* Col 2: Categories */}
-            <div className="space-y-3">
-              <h4 className="font-bold text-sm text-[#F8FAFC] tracking-wider uppercase">Spaces</h4>
-              <ul className="space-y-2.5">
-                <li>
-                  <button 
-                    type="button"
                     onClick={() => handleCategoryClick('coworking')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
                     Coworking Desks
                   </button>
@@ -179,8 +137,8 @@ export const Footer: React.FC = () => {
                 <li>
                   <button 
                     type="button"
-                    onClick={() => handleCategoryClick('private-office')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    onClick={() => handleCategoryClick('private_office')}
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
                     Private Offices
                   </button>
@@ -188,51 +146,37 @@ export const Footer: React.FC = () => {
                 <li>
                   <button 
                     type="button"
-                    onClick={() => handleCategoryClick('meeting-room')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
-                  >
-                    Meeting Rooms
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    type="button"
                     onClick={() => handleCategoryClick('studio')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
-                    Podcast & Media Studios
+                    Podcast & Production
                   </button>
                 </li>
                 <li>
                   <button 
                     type="button"
-                    onClick={() => handleCategoryClick('event-space')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    onClick={() => handleNavigate('map')}
+                    className="text-[#FFA987] hover:text-[#FFD0BD] font-semibold flex items-center space-x-1 cursor-pointer pt-0.5"
                   >
-                    Event & Demo Spaces
+                    <MapPin className="w-3 h-3" />
+                    <span>Interactive Map</span>
                   </button>
                 </li>
               </ul>
             </div>
 
-            {/* Col 3: For Hosts */}
+            {/* Column 2: For Space Hosts */}
             <div className="space-y-3">
-              <h4 className="font-bold text-sm text-[#F8FAFC] tracking-wider uppercase">For Hosts</h4>
-              <ul className="space-y-2.5">
-                <li>
-                  <button 
-                    type="button"
-                    onClick={() => handleNavigate('become_host')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
-                  >
-                    Become a Space Host
-                  </button>
-                </li>
+              <h4 className="font-bold text-xs uppercase tracking-wider text-[#FFFFFF] flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#28D2CB]" />
+                <span>For Hosts</span>
+              </h4>
+              <ul className="space-y-2 text-[#B8D1D0]">
                 <li>
                   <button 
                     type="button"
                     onClick={() => setIsListSpaceModalOpen(true)}
-                    className="text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center space-x-1 cursor-pointer"
+                    className="text-[#FFA987] hover:text-[#FFD0BD] font-bold flex items-center space-x-1 cursor-pointer"
                   >
                     <span>List Your Space</span>
                     <ArrowRight className="w-3 h-3" />
@@ -241,42 +185,45 @@ export const Footer: React.FC = () => {
                 <li>
                   <button 
                     type="button"
-                    onClick={() => handleNavigate('host_dashboard')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    onClick={() => handleNavigate('become_host')}
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
-                    Host Operations Portal
+                    Become an OFIS Host
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    type="button"
+                    onClick={() => handleNavigate('host_dashboard')}
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
+                  >
+                    Host Operations Hub
                   </button>
                 </li>
                 <li>
                   <button 
                     type="button"
                     onClick={() => handleNavigate('faq')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
                     Host Standards & Payouts
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    type="button"
-                    onClick={() => setIsDiagnosticsModalOpen(true)}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
-                  >
-                    IoT Telemetry Diagnostics
                   </button>
                 </li>
               </ul>
             </div>
 
-            {/* Col 4: Company & Legal */}
-            <div className="space-y-3">
-              <h4 className="font-bold text-sm text-[#F8FAFC] tracking-wider uppercase">Company</h4>
-              <ul className="space-y-2.5">
+            {/* Column 3: Company & Support */}
+            <div className="space-y-3 col-span-2 sm:col-span-1">
+              <h4 className="font-bold text-xs uppercase tracking-wider text-[#FFFFFF] flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#14BEB8]" />
+                <span>Company</span>
+              </h4>
+              <ul className="space-y-2 text-[#B8D1D0]">
                 <li>
                   <button 
                     type="button"
                     onClick={() => handleNavigate('about')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
                     About OFIS
                   </button>
@@ -285,16 +232,16 @@ export const Footer: React.FC = () => {
                   <button 
                     type="button"
                     onClick={() => handleNavigate('contact')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left inline-block"
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
-                    Contact Us
+                    Contact Support
                   </button>
                 </li>
                 <li>
                   <button 
                     type="button"
                     onClick={() => handleNavigate('help')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#FFA987] transition-colors cursor-pointer text-left"
                   >
                     Help Center & Guides
                   </button>
@@ -302,38 +249,29 @@ export const Footer: React.FC = () => {
                 <li>
                   <button 
                     type="button"
-                    onClick={() => handleNavigate('faq')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    onClick={() => setIsDownloadAppModalOpen(true)}
+                    className="text-[#FFA987] hover:text-[#FFD0BD] font-semibold flex items-center space-x-1.5 cursor-pointer text-left"
                   >
-                    Frequently Asked Questions
+                    <Smartphone className="w-3.5 h-3.5" />
+                    <span>Download App</span>
                   </button>
                 </li>
                 <li>
-                  <button 
-                    type="button"
-                    onClick={() => setIsDownloadAppModalOpen(true)}
-                    className="text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center space-x-1.5 cursor-pointer text-left"
+                  <a 
+                    href="/api/download/ofis-logo-assets.zip" 
+                    download="ofis-logo-assets.zip"
+                    className="text-[#28D2CB] hover:underline font-semibold flex items-center space-x-1.5 cursor-pointer text-left text-xs"
                   >
-                    <Smartphone className="w-3.5 h-3.5" />
-                    <span>Download Mobile App</span>
-                  </button>
+                    <span>Download Brand Assets (.zip)</span>
+                  </a>
                 </li>
                 <li>
                   <button 
                     type="button"
                     onClick={() => handleNavigate('privacy')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
+                    className="hover:text-[#B8D1D0] transition-colors cursor-pointer text-left text-[11px]"
                   >
-                    Privacy Policy (NDPR)
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    type="button"
-                    onClick={() => handleNavigate('terms')}
-                    className="hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer text-left"
-                  >
-                    Terms of Service
+                    Privacy (NDPR) & Terms
                   </button>
                 </li>
               </ul>
@@ -344,29 +282,27 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar: Utilities, Currency, Theme & Copyright */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-          
-          <div className="flex items-center space-x-4">
-            <span>© {new Date().getFullYear()} OFIS Technologies Ltd. All rights reserved.</span>
-            <span className="hidden sm:inline text-[#475569]">•</span>
-            <span className="hidden sm:inline text-[#64748B]">Built for Nigeria&apos;s High-Performance Workforce</span>
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <div className="flex items-center space-x-2 text-[#B8D1D0] text-[11px] sm:text-xs">
+            <span>© {new Date().getFullYear()} OFIS Technologies Ltd.</span>
+            <span className="text-[#166D74]">•</span>
+            <span className="text-[#FFA987] font-medium">Power Guaranteed</span>
           </div>
 
-          <div className="flex items-center space-x-3">
-            
+          <div className="flex items-center space-x-2.5">
             {/* Currency Selector */}
-            <div className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#172033] border border-[#1E293B] text-xs">
-              <Globe className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+            <div className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-[#0B4A50] border border-[#166D74] text-xs">
+              <Globe className="w-3.5 h-3.5 text-[#FFA987]" />
               <select
                 id="footer-currency-select"
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value as SupportedCurrency)}
-                className="bg-transparent text-[#F8FAFC] font-mono text-xs focus:outline-none cursor-pointer"
+                className="bg-transparent text-[#FFFFFF] font-mono text-xs focus:outline-none cursor-pointer"
                 aria-label="Select Currency"
               >
                 {(Object.keys(CURRENCY_RATES) as SupportedCurrency[]).map((curr) => (
-                  <option key={curr} value={curr} className="bg-[#172033] text-[#F8FAFC]">
-                    {CURRENCY_RATES[curr].symbol} {curr} ({CURRENCY_RATES[curr].name})
+                  <option key={curr} value={curr} className="bg-[#0B4A50] text-[#FFFFFF]">
+                    {CURRENCY_RATES[curr].symbol} {curr}
                   </option>
                 ))}
               </select>
@@ -377,14 +313,13 @@ export const Footer: React.FC = () => {
               type="button"
               id="footer-theme-toggle-btn"
               onClick={toggleTheme}
-              className="p-2 rounded-xl bg-[#172033] hover:bg-[#1E293B] border border-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-xl bg-[#0B4A50] hover:bg-[#105A60] border border-[#166D74] text-[#B8D1D0] hover:text-[#FFFFFF] transition-colors cursor-pointer"
               title={`Toggle ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
               aria-label="Toggle theme"
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-400" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-[#FFA987]" /> : <Moon className="w-4 h-4 text-[#28D2CB]" />}
             </button>
           </div>
-
         </div>
 
       </div>

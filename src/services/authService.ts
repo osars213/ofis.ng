@@ -1,7 +1,7 @@
 import { UserProfile } from '../types';
 import { INITIAL_USER, INITIAL_HOST, GUEST_USER } from '../mockData';
 import { storage } from './storageService';
-import { getSupabaseClient, mapDbProfileToUser } from './supabaseClient';
+import { getSupabaseClient, mapDbProfileToUser, mapProfileToDbProfile } from './supabaseClient';
 
 const USER_KEY = 'current_user';
 const USERS_DB_KEY = 'registered_users_db';
@@ -143,19 +143,7 @@ export const authService = {
 
           // Upsert into public.profiles
           try {
-            await client.from('profiles').upsert({
-              id: authData.user.id,
-              name: userProfile.name,
-              email: userProfile.email,
-              phone: userProfile.phone,
-              avatar: userProfile.avatar,
-              role: userProfile.role,
-              company: userProfile.company,
-              bio: userProfile.bio,
-              wallet_balance_ngn: userProfile.walletBalanceNgn,
-              saved_space_ids: userProfile.savedSpaceIds,
-              is_email_verified: userProfile.isEmailVerified,
-            });
+            await client.from('profiles').upsert(mapProfileToDbProfile(userProfile), { onConflict: 'id' });
           } catch (profileErr) {
             console.warn('[authService] Note on upserting profile table:', profileErr);
           }
@@ -248,33 +236,47 @@ export const authService = {
     // 1. Try Supabase Auth if email and password provided
     if (client && query.includes('@') && password) {
       try {
+        const cleanEmail = query;
         const { data: authData, error: authError } = await client.auth.signInWithPassword({
-          email: query,
-          password: password,
+          email: cleanEmail,
+          password,
         });
 
         if (!authError && authData.user) {
-          // Fetch authoritative profile
+          // Fetch authoritative profile from public.profiles
           const { data: profileData } = await client
             .from('profiles')
             .select('*')
             .eq('id', authData.user.id)
             .single();
 
-          const userProfile: UserProfile = profileData
-            ? mapDbProfileToUser(profileData)
-            : {
-                id: authData.user.id,
-                name: authData.user.user_metadata?.name || 'OFIS Member',
-                email: authData.user.email || query,
-                phone: authData.user.user_metadata?.phone || '+234 800 000 0000',
-                avatar: authData.user.user_metadata?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
-                role: authData.user.user_metadata?.role || 'user',
-                company: authData.user.user_metadata?.company || 'Independent Professional',
-                walletBalanceNgn: 25000,
-                savedSpaceIds: [],
-                createdAt: new Date().toISOString(),
-              };
+          let userProfile: UserProfile;
+
+          if (profileData) {
+            userProfile = mapDbProfileToUser(profileData);
+          } else {
+            userProfile = {
+              id: authData.user.id,
+              name: authData.user.user_metadata?.name || 'OFIS Member',
+              email: authData.user.email || cleanEmail,
+              phone: authData.user.user_metadata?.phone || '+234 800 000 0000',
+              avatar: authData.user.user_metadata?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+              role: authData.user.user_metadata?.role || 'user',
+              company: authData.user.user_metadata?.company || 'Independent Professional',
+              walletBalanceNgn: 25000,
+              savedSpaceIds: [],
+              isEmailVerified: Boolean(authData.user.email_confirmed_at),
+              emailVerifiedAt: authData.user.email_confirmed_at,
+              createdAt: new Date().toISOString(),
+            };
+
+            // Auto-create missing profile in database
+            try {
+              await client.from('profiles').upsert(mapProfileToDbProfile(userProfile), { onConflict: 'id' });
+            } catch {
+              // Non-blocking fallback
+            }
+          }
 
           authService.setCurrentUser(userProfile);
           return {
@@ -282,9 +284,14 @@ export const authService = {
             user: userProfile,
             message: `Welcome back, ${userProfile.name}! (Authenticated with Supabase)`,
           };
+        } else if (authError && authError.message.toLowerCase().includes('invalid login credentials')) {
+          return {
+            success: false,
+            message: 'Invalid email or password. Please verify your credentials and try again.',
+          };
         }
-      } catch (err) {
-        console.warn('[authService] Supabase login attempt note:', err);
+      } catch (err: any) {
+        console.warn('[authService] Supabase login error:', err);
       }
     }
 
@@ -328,6 +335,27 @@ export const authService = {
       success: false,
       message: 'Account not found with this email or phone. Please create a new account.',
     };
+  },
+
+  loginWithGoogle: async (): Promise<{ success: boolean; message: string }> => {
+    const client = getSupabaseClient();
+    if (client) {
+      try {
+        const { error } = await client.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: typeof window !== 'undefined' ? window.location.origin : undefined,
+          },
+        });
+        if (error) {
+          return { success: false, message: error.message };
+        }
+        return { success: true, message: 'Redirecting to Google sign in...' };
+      } catch (err: any) {
+        return { success: false, message: err?.message || 'Failed to initiate Google sign in' };
+      }
+    }
+    return { success: false, message: 'Supabase client is not configured.' };
   },
 
   switchRole: (role: 'user' | 'host'): UserProfile => {

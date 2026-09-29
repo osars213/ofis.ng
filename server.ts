@@ -1,4 +1,5 @@
 import express from 'express';
+import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
@@ -6,6 +7,8 @@ import compression from 'compression';
 import { GoogleGenAI } from '@google/genai';
 import { createClient } from '@supabase/supabase-js';
 import { createServer as createViteServer } from 'vite';
+import { szndClient } from './server/sznd';
+import { calculateBookingPrice } from './src/utils/pricing';
 
 dotenv.config();
 
@@ -15,7 +18,13 @@ async function startServer() {
 
   // Enable Gzip/Brotli compression to dramatically reduce payload size and speed up FCP/LCP
   app.use(compression());
-  app.use(express.json());
+  app.use(
+    express.json({
+      verify: (req: any, _res, buf) => {
+        req.rawBody = buf;
+      },
+    })
+  );
 
   // Initialize Supabase Server Admin Client strictly using SUPABASE_SERVICE_ROLE_KEY (no fallback to anon/public keys)
   const rawSupabaseUrl = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '').trim();
@@ -55,12 +64,34 @@ async function startServer() {
 
   // Health check
   app.get('/api/health', (req, res) => {
+    const diag = szndClient.getDiagnostics();
     res.json({
       status: 'ok',
       time: new Date().toISOString(),
       supabaseConnected: !!supabaseAdmin,
       supabaseUrl: supabaseUrl ? supabaseUrl.replace(/(https:\/\/[^.]+).*/, '$1.supabase.co') : null,
-      paystackConfigured: !!process.env.PAYSTACK_SECRET_KEY,
+      paymentProvider: 'sznd',
+      szndEnvironment: diag.environment,
+      szndConfigured: szndClient.isConfigured(),
+      szndDiagnostics: {
+        environment: diag.environment,
+        apiKeyConfigured: diag.apiKeyConfigured,
+        apiSecretConfigured: diag.apiSecretConfigured,
+        baseUrlConfigured: diag.baseUrlConfigured,
+      },
+    });
+  });
+
+  // Safe Payment Environment Diagnostic Endpoint (Section 11)
+  app.get('/api/payments/diagnostics', (req, res) => {
+    const diag = szndClient.getDiagnostics();
+    res.json({
+      status: 'ok',
+      provider: 'sznd',
+      'SZND environment': diag.environment,
+      'SZND API key configured': diag.apiKeyConfigured,
+      'SZND API secret configured': diag.apiSecretConfigured,
+      'SZND base URL configured': diag.baseUrlConfigured,
     });
   });
 
@@ -209,13 +240,236 @@ async function startServer() {
   });
 
   // ============================================================================
-  // AUTHORITATIVE SERVER-SIDE PAYMENT INITIATION & VERIFICATION
+  // CONCURRENCY-SAFE DOUBLE-BOOKING PROTECTION ENGINE
   // ============================================================================
 
-  // 1. Initialize Payment with Payment Provider (Paystack / Flutterwave)
+  interface ConfirmedBookingRecord {
+    id: string;
+    spaceId: string;
+    date: string;
+    startTime: string;
+    endTime: string;
+    durationHours: number;
+    selectedSeatId: string | null;
+    guestCount: number;
+    confirmedAt: string;
+  }
+
+  // Active in-memory registry for concurrency collision tracking and demo/sandbox safety
+  const activeConfirmedBookingsRegistry = new Map<string, ConfirmedBookingRecord>();
+
+  function calculateEndTime(startTime: string, durationHours: number): string {
+    const parts = (startTime || '09:00').split(':').map(Number);
+    const h = isNaN(parts[0]) ? 9 : parts[0];
+    const m = isNaN(parts[1]) ? 0 : parts[1];
+    const totalMinutes = h * 60 + m + (Math.max(1, durationHours) * 60);
+    const endH = Math.min(23, Math.floor(totalMinutes / 60));
+    const endM = totalMinutes % 60;
+    return `${String(endH).padStart(2, '0')}:${String(endM).padStart(2, '0')}`;
+  }
+
+  function timeIntervalsOverlap(startA: string, endA: string, startB: string, endB: string): boolean {
+    return startA < endB && startB < endA;
+  }
+
+  async function checkBookingConflict(params: {
+    spaceId: string;
+    date: string;
+    startTime: string;
+    durationHours: number;
+    selectedSeatId?: string | null;
+    guestCount?: number;
+    excludeBookingId?: string;
+    spaceCategory?: string;
+    spaceCapacity?: number;
+  }): Promise<{ hasConflict: boolean; message?: string; conflictingId?: string }> {
+    const {
+      spaceId,
+      date,
+      startTime,
+      durationHours,
+      selectedSeatId = null,
+      guestCount = 1,
+      excludeBookingId,
+      spaceCategory,
+      spaceCapacity = 50,
+    } = params;
+
+    const reqEndTime = calculateEndTime(startTime, durationHours);
+
+    // 1. Check in-memory active confirmed registry
+    for (const [id, rec] of activeConfirmedBookingsRegistry.entries()) {
+      if (excludeBookingId && id === excludeBookingId) continue;
+      if (rec.spaceId === spaceId && rec.date === date) {
+        if (timeIntervalsOverlap(startTime, reqEndTime, rec.startTime, rec.endTime)) {
+          if (selectedSeatId && rec.selectedSeatId && selectedSeatId === rec.selectedSeatId) {
+            return {
+              hasConflict: true,
+              message: `Seat ${selectedSeatId} is already booked for this time window.`,
+              conflictingId: id,
+            };
+          }
+          const isExclusiveSpace = ['private_office', 'meeting', 'podcast', 'photography', 'event'].includes(spaceCategory || '') || spaceCapacity === 1;
+          if (isExclusiveSpace || !selectedSeatId) {
+            return {
+              hasConflict: true,
+              message: `This space is already booked from ${rec.startTime} to ${rec.endTime} on ${date}.`,
+              conflictingId: id,
+            };
+          }
+        }
+      }
+    }
+
+    // 2. Check Supabase database if connected
+    if (supabaseAdmin) {
+      try {
+        const { data: dbBookings, error } = await supabaseAdmin
+          .from('bookings')
+          .select('id, date, start_time, end_time, duration_hours, selected_seat_id, guest_count, status, booking_status, payment_status')
+          .eq('space_id', spaceId)
+          .eq('date', date)
+          .in('status', ['confirmed', 'ready_for_checkin', 'checked_in', 'in_progress', 'active'])
+          .eq('payment_status', 'paid');
+
+        if (!error && dbBookings) {
+          let totalOverlappingGuests = 0;
+          for (const b of dbBookings) {
+            if (excludeBookingId && b.id === excludeBookingId) continue;
+            const bEndTime = b.end_time || calculateEndTime(b.start_time, b.duration_hours || 1);
+            if (timeIntervalsOverlap(startTime, reqEndTime, b.start_time, bEndTime)) {
+              if (selectedSeatId && b.selected_seat_id && selectedSeatId === b.selected_seat_id) {
+                return {
+                  hasConflict: true,
+                  message: `Seat ${selectedSeatId} has already been reserved and confirmed by another member.`,
+                  conflictingId: b.id,
+                };
+              }
+
+              const isExclusiveSpace = ['private_office', 'meeting', 'podcast', 'photography', 'event'].includes(spaceCategory || '') || spaceCapacity === 1;
+              if (isExclusiveSpace) {
+                return {
+                  hasConflict: true,
+                  message: `This workspace has already been confirmed from ${b.start_time} to ${bEndTime} on ${date}.`,
+                  conflictingId: b.id,
+                };
+              }
+
+              totalOverlappingGuests += Number(b.guest_count || 1);
+              if (totalOverlappingGuests + guestCount > spaceCapacity) {
+                return {
+                  hasConflict: true,
+                  message: `Workspace capacity reached for this time slot (${totalOverlappingGuests}/${spaceCapacity} guests).`,
+                  conflictingId: b.id,
+                };
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Error during database conflict check:', err);
+      }
+    }
+
+    return { hasConflict: false };
+  }
+
+  // Real-Time Space Availability Endpoint (No PII)
+  app.get('/api/spaces/:id/availability', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { date, month } = req.query;
+
+      const bookedSlots: Array<{
+        id: string;
+        date: string;
+        startTime: string;
+        endTime: string;
+        durationHours: number;
+        selectedSeatId?: string | null;
+        guestCount: number;
+      }> = [];
+
+      if (supabaseAdmin) {
+        let query = supabaseAdmin
+          .from('bookings')
+          .select('id, date, start_time, end_time, duration_hours, selected_seat_id, guest_count, status, payment_status')
+          .eq('space_id', id)
+          .in('status', ['confirmed', 'ready_for_checkin', 'checked_in', 'in_progress', 'active'])
+          .eq('payment_status', 'paid');
+
+        if (date && typeof date === 'string') {
+          query = query.eq('date', date);
+        } else if (month && typeof month === 'string') {
+          query = query.like('date', `${month}%`);
+        }
+
+        const { data, error } = await query;
+        if (!error && data) {
+          data.forEach((b: any) => {
+            const calculatedEnd = b.end_time || calculateEndTime(b.start_time, b.duration_hours || 1);
+            bookedSlots.push({
+              id: b.id,
+              date: b.date,
+              startTime: b.start_time,
+              endTime: calculatedEnd,
+              durationHours: b.duration_hours || 1,
+              selectedSeatId: b.selected_seat_id || null,
+              guestCount: b.guest_count || 1,
+            });
+          });
+        }
+      }
+
+      // Add in-memory active reservations
+      for (const [bId, rec] of activeConfirmedBookingsRegistry.entries()) {
+        if (rec.spaceId === id && (!date || rec.date === date) && (!month || rec.date.startsWith(month as string))) {
+          if (!bookedSlots.some(s => s.id === bId)) {
+            bookedSlots.push({
+              id: bId,
+              date: rec.date,
+              startTime: rec.startTime,
+              endTime: rec.endTime,
+              durationHours: rec.durationHours,
+              selectedSeatId: rec.selectedSeatId,
+              guestCount: rec.guestCount,
+            });
+          }
+        }
+      }
+
+      return res.json({
+        success: true,
+        spaceId: id,
+        bookedSlots,
+      });
+    } catch (err: any) {
+      console.error('Error in /api/spaces/:id/availability:', err);
+      return res.status(500).json({ error: err.message || 'Failed to fetch space availability' });
+    }
+  });
+
+  // ============================================================================
+  // AUTHORITATIVE SERVER-SIDE PAYMENT INITIATION & VERIFICATION (SZND)
+  // ============================================================================
+
+  // 1. Initialize Payment with SZND Hosted Checkout Gateway
   app.post('/api/payments/initialize', async (req, res) => {
     try {
-      const { bookingId, email, callbackUrl, paymentMethod } = req.body;
+      const {
+        bookingId,
+        spaceId,
+        email,
+        callbackUrl,
+        paymentMethod = 'sznd',
+        date,
+        startTime,
+        durationHours,
+        guests,
+        quantity,
+        userName,
+        userPhone,
+      } = req.body;
 
       if (!bookingId) {
         return res.status(400).json({ error: 'bookingId is required' });
@@ -227,17 +481,46 @@ async function startServer() {
             error: 'Database service is not configured (SUPABASE_SERVICE_ROLE_KEY is missing). Cannot process payment in production.',
           });
         }
+
+        // Concurrency Pre-Validation in sandbox mode
+        const sandboxSpaceId = spaceId || 'space-1';
+        const sandboxDate = date || '2026-09-25';
+        const sandboxStartTime = startTime || '09:00';
+        const sandboxDuration = Number(durationHours || 2);
+        const sandboxSeat = req.body.selectedSeatId || null;
+
+        const sandboxConflict = await checkBookingConflict({
+          spaceId: sandboxSpaceId,
+          date: sandboxDate,
+          startTime: sandboxStartTime,
+          durationHours: sandboxDuration,
+          selectedSeatId: sandboxSeat,
+          excludeBookingId: bookingId,
+        });
+
+        if (sandboxConflict.hasConflict) {
+          return res.status(409).json({
+            success: false,
+            conflict: true,
+            code: 'SLOT_UNAVAILABLE',
+            error: sandboxConflict.message || 'The selected workspace or seat is already booked for this time slot. Please choose another time.',
+            conflictingId: sandboxConflict.conflictingId,
+          });
+        }
+
         // Fallback reference for local / sandbox environments when server secrets are unconfigured
-        const fallbackRef = `pstk_test_${Date.now()}_${crypto.randomBytes(6).toString('hex')}`;
+        const fallbackRef = `OFIS-SZND-TEST-${Date.now()}-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
         return res.json({
+          success: true,
           reference: fallbackRef,
+          checkout_link: `/payment/result?reference=${fallbackRef}&booking_id=${bookingId}&sandbox=true`,
           authorizationUrl: null,
           sandbox: true,
           message: 'Payment initialized in demo sandbox mode',
         });
       }
 
-      // Optional Auth Verification on Initialize
+      // 1. Authenticated User & Email Verification Enforcement
       const authHeader = req.headers.authorization;
       let authenticatedUser: any = null;
       if (authHeader) {
@@ -246,87 +529,256 @@ async function startServer() {
         authenticatedUser = user;
       }
 
-      // Fetch authoritative booking directly from database
-      const { data: booking, error: bookingErr } = await supabaseAdmin
+      if (authenticatedUser) {
+        const { data: profile } = await supabaseAdmin
+          .from('profiles')
+          .select('is_email_verified, role')
+          .eq('id', authenticatedUser.id)
+          .single();
+
+        const isEmailVerified = authenticatedUser.email_confirmed_at || profile?.is_email_verified;
+        if (!isEmailVerified && process.env.NODE_ENV === 'production') {
+          return res.status(403).json({
+            error: 'Email verification required before authorizing payments. Please verify your email.',
+          });
+        }
+      }
+
+      // 2. Authoritative Booking Retrieval
+      let { data: booking } = await supabaseAdmin
         .from('bookings')
-        .select('*')
+        .select('*, spaces(*)')
         .eq('id', bookingId)
         .single();
 
-      if (bookingErr || !booking) {
-        return res.status(404).json({ error: 'Authoritative booking record not found' });
+      // If booking not found yet, create or prepare from validated space
+      const targetSpaceId = spaceId || booking?.space_id;
+      if (!targetSpaceId) {
+        return res.status(400).json({ error: 'Target workspace spaceId is required' });
       }
 
-      // If user is authenticated, ensure they own the booking or are admin
-      if (authenticatedUser) {
-        const isOwner = (booking.client_id === authenticatedUser.id || booking.user_id === authenticatedUser.id);
-        const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', authenticatedUser.id).single();
-        const isAdmin = profile?.role === 'admin';
-        if (!isOwner && !isAdmin) {
-          return res.status(403).json({ error: 'Unauthorized: You do not own this booking' });
+      // 3. Authoritative Workspace Validation
+      let space = booking?.spaces;
+      if (!space) {
+        const { data: dbSpace, error: spaceErr } = await supabaseAdmin
+          .from('spaces')
+          .select('*')
+          .eq('id', targetSpaceId)
+          .single();
+
+        if (spaceErr || !dbSpace) {
+          return res.status(404).json({ error: 'Workspace listing not found' });
+        }
+        space = dbSpace;
+      }
+
+      if (space.is_active === false) {
+        return res.status(400).json({ error: 'This workspace is currently inactive and cannot accept bookings' });
+      }
+
+      // 4. Capacity & Duration Validation
+      const guestCount = Math.max(1, Number(booking?.guest_count || guests || 1));
+      const spaceCapacity = Number(space.capacity || 50);
+      if (guestCount > spaceCapacity) {
+        return res.status(400).json({
+          error: `Guest count (${guestCount}) exceeds workspace maximum capacity of ${spaceCapacity}`,
+        });
+      }
+
+      const effectiveDuration = Math.max(1, Number(booking?.duration_hours || durationHours || 1));
+      if (effectiveDuration <= 0 || effectiveDuration > 720) {
+        return res.status(400).json({ error: 'Invalid booking duration' });
+      }
+
+      // 5. Date & Time Validation
+      const effectiveDate = booking?.date || date;
+      const effectiveStartTime = booking?.start_time || startTime || '09:00';
+      if (effectiveDate) {
+        const bookingDateTime = new Date(`${effectiveDate}T${effectiveStartTime}:00`);
+        // Disallow bookings older than 2 hours in the past
+        if (!isNaN(bookingDateTime.getTime()) && bookingDateTime.getTime() < Date.now() - 2 * 3600 * 1000) {
+          return res.status(400).json({ error: 'Cannot book a workspace in the past' });
         }
       }
 
-      // Prevent re-initialization on cancelled / expired bookings
-      if (booking.booking_status === 'cancelled' || booking.booking_status === 'expired' || booking.status === 'cancelled') {
-        return res.status(400).json({ error: `Cannot initialize payment for ${booking.booking_status || booking.status} booking` });
+      // 6. User Ownership & Duplicate Booking Protection
+      if (booking) {
+        if (authenticatedUser) {
+          const isOwner = (booking.user_id === authenticatedUser.id || booking.client_id === authenticatedUser.id);
+          const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', authenticatedUser.id).single();
+          const isAdmin = profile?.role === 'admin';
+          if (!isOwner && !isAdmin) {
+            return res.status(403).json({ error: 'Unauthorized: You do not own this booking' });
+          }
+        }
+
+        if (booking.booking_status === 'cancelled' || booking.status === 'cancelled') {
+          return res.status(400).json({ error: 'Cannot initialize payment for a cancelled booking' });
+        }
+
+        if (booking.payment_status === 'paid' && (booking.status === 'confirmed' || booking.booking_status === 'confirmed')) {
+          return res.status(400).json({ error: 'This booking has already been paid and confirmed' });
+        }
       }
 
-      const totalAmountNGN = Number(booking.total_amount);
-      const amountInKobo = Math.round(totalAmountNGN * 100);
+      // 6b. Concurrency Pre-Validation: Check for conflicting active confirmed bookings
+      const effectiveSeatId = booking?.selected_seat_id || req.body.selectedSeatId || req.body.seatId || null;
+      const conflictCheck = await checkBookingConflict({
+        spaceId: targetSpaceId,
+        date: effectiveDate,
+        startTime: effectiveStartTime,
+        durationHours: effectiveDuration,
+        selectedSeatId: effectiveSeatId,
+        guestCount,
+        excludeBookingId: bookingId,
+        spaceCategory: space?.category,
+        spaceCapacity: Number(space?.capacity || 50),
+      });
 
-      // If Paystack Secret Key is configured, initialize live/test transaction with Paystack API
-      if (process.env.PAYSTACK_SECRET_KEY) {
-        const paystackRes = await fetch('https://api.paystack.co/transaction/initialize', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-            'Content-Type': 'application/json',
+      if (conflictCheck.hasConflict) {
+        return res.status(409).json({
+          success: false,
+          conflict: true,
+          code: 'SLOT_UNAVAILABLE',
+          error: conflictCheck.message || 'The selected workspace or seat is already booked for this time slot. Please choose another time.',
+          conflictingId: conflictCheck.conflictingId,
+        });
+      }
+
+      // 7. Authoritative Server-Side Pricing Calculation (NEVER trust browser price)
+      const calculatedPrice = calculateBookingPrice(space as any, {
+        durationHours: effectiveDuration,
+        guests: guestCount,
+        quantity: Math.max(1, Number(quantity || 1)),
+      });
+
+      const totalAmountNGN = Number(calculatedPrice.totalAmount) || Number(booking?.total_amount) || 0;
+      if (totalAmountNGN <= 0) {
+        return res.status(400).json({ error: 'Calculated booking total amount must be greater than zero' });
+      }
+
+      // 8. Generate Unique OFIS Reference
+      const cleanSuffix = String(bookingId).replace(/[^a-zA-Z0-9_-]/g, '').slice(-8);
+      const ofisReference = `OFIS-SZND-${cleanSuffix}-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString('hex').toUpperCase()}`;
+
+      // 9. Redirect URL
+      const hostHeader = req.get('host') || 'localhost:3000';
+      const defaultRedirectUrl = `${req.protocol}://${hostHeader}/payment/result?reference=${encodeURIComponent(ofisReference)}&booking_id=${encodeURIComponent(bookingId)}`;
+      const finalRedirectUrl = callbackUrl || defaultRedirectUrl;
+
+      // Customer identity details
+      const customerEmail = (email || booking?.user_email || authenticatedUser?.email || 'member@ofis.ng').trim().toLowerCase();
+      const rawFullName = (booking?.user_name || userName || authenticatedUser?.user_metadata?.full_name || 'OFIS Member').trim();
+      const nameParts = rawFullName.split(/\s+/);
+      const firstName = nameParts[0] || 'OFIS';
+      const lastName = nameParts.slice(1).join(' ') || 'Member';
+      const customerPhone = booking?.user_phone || userPhone || '+2348000000000';
+
+      // 10. Initialize with SZND Hosted Checkout Gateway
+      if (szndClient.isConfigured()) {
+        const szndRes = await szndClient.initializeCheckout({
+          email: customerEmail,
+          firstName,
+          lastName,
+          amount: totalAmountNGN,
+          currency: 'NGN',
+          reference: ofisReference,
+          redirectUrl: finalRedirectUrl,
+          description: `OFIS Booking: ${space.name || space.title || 'Workspace Pass'}`,
+          phone: customerPhone,
+          metadata: {
+            booking_id: bookingId,
+            user_id: authenticatedUser?.id || booking?.user_id || 'guest',
+            space_id: space.id,
+            provider: 'sznd',
+            environment: szndClient.getEnvironment(),
           },
-          body: JSON.stringify({
-            email: email || booking.coworker_email || 'coworker@ofis.ng',
-            amount: amountInKobo,
-            callback_url: callbackUrl,
-            metadata: {
-              booking_id: booking.id,
-              booking_reference: booking.booking_reference,
-              payment_method: paymentMethod || 'paystack',
-            },
-          }),
         });
 
-        const paystackData = await paystackRes.json();
-        if (!paystackRes.ok || !paystackData.status) {
+        if (!szndRes.success || !szndRes.checkout_link) {
+          console.error('[SZND Init Failed]', szndRes.error);
           return res.status(502).json({
-            error: paystackData.message || 'Payment provider transaction initialization failed',
+            error: szndRes.error || 'Failed to initialize checkout session with SZND payment gateway',
           });
         }
 
+        // Persist pending reference in bookings and payments
+        await supabaseAdmin
+          .from('bookings')
+          .update({
+            payment_reference: ofisReference,
+            payment_method: 'sznd',
+            payment_status: 'pending',
+            total_amount: totalAmountNGN,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', bookingId);
+
+        await supabaseAdmin
+          .from('payments')
+          .insert({
+            booking_id: bookingId,
+            user_id: authenticatedUser?.id || booking?.user_id || null,
+            amount: totalAmountNGN,
+            currency: 'NGN',
+            provider: 'sznd',
+            reference: ofisReference,
+            status: 'pending',
+            metadata: {
+              sznd_transaction_reference: szndRes.transaction_reference,
+              sznd_access_code: szndRes.access_code,
+              initialized_at: new Date().toISOString(),
+            },
+          })
+          .select()
+          .maybeSingle();
+
         return res.json({
-          reference: paystackData.data.reference,
-          authorizationUrl: paystackData.data.authorization_url,
-          accessCode: paystackData.data.access_code,
+          success: true,
+          checkout_link: szndRes.checkout_link,
+          reference: ofisReference,
+          transaction_reference: szndRes.transaction_reference,
+          access_code: szndRes.access_code,
+          environment: szndClient.getEnvironment(),
+          bookingId,
           amount: totalAmountNGN,
           currency: 'NGN',
-          sandbox: false,
+          sandbox: szndClient.getEnvironment() === 'test',
         });
       }
 
-      if (process.env.NODE_ENV === 'production') {
+      // If in production and SZND keys missing, fail fast
+      if (process.env.NODE_ENV === 'production' && szndClient.getEnvironment() === 'production') {
         return res.status(503).json({
-          error: 'Payment provider is not configured (PAYSTACK_SECRET_KEY is missing). Cannot process payment in production.',
+          error: 'SZND payment gateway credentials are not configured (SZND_API_KEY/SZND_API_SECRET missing). Cannot process payment in production.',
         });
       }
 
-      // Sandbox reference fallback when Paystack secret key is unconfigured
-      const reference = `pstk_test_${Date.now()}_${crypto.randomBytes(6).toString('hex')}`;
+      // Sandbox Fallback for local development / testing without gateway credentials
+      const sandboxLink = `/payment/result?reference=${encodeURIComponent(ofisReference)}&booking_id=${encodeURIComponent(bookingId)}&sandbox=true&amount=${totalAmountNGN}`;
+
+      // Update pending booking in database
+      await supabaseAdmin
+        .from('bookings')
+        .update({
+          payment_reference: ofisReference,
+          payment_method: 'sznd',
+          payment_status: 'pending',
+          total_amount: totalAmountNGN,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', bookingId);
+
       return res.json({
-        reference,
-        authorizationUrl: null,
-        accessCode: null,
+        success: true,
+        checkout_link: sandboxLink,
+        reference: ofisReference,
+        transaction_reference: `TR_SANDBOX_${Date.now()}`,
+        bookingId,
         amount: totalAmountNGN,
         currency: 'NGN',
         sandbox: true,
+        message: 'Payment initialized in sandbox mode (SZND credentials unconfigured on server)',
       });
     } catch (err: any) {
       console.error('Error in /api/payments/initialize:', err);
@@ -334,12 +786,14 @@ async function startServer() {
     }
   });
 
-  // 2. Authoritative Payment Verification & Booking Confirmation
+  // 2. Authoritative Payment Verification & Booking Confirmation (SZND)
   app.post('/api/payments/verify', async (req, res) => {
     try {
-      const { bookingId, reference, provider } = req.body;
+      const { bookingId, reference: reqRef, paymentReference: reqPaymentRef, sandbox } = req.body;
+      const paymentReference = reqPaymentRef || reqRef;
+      const reference = paymentReference;
 
-      if (!bookingId || !reference) {
+      if (!bookingId || !paymentReference) {
         return res.status(400).json({ error: 'Both bookingId and payment reference are required' });
       }
 
@@ -350,6 +804,45 @@ async function startServer() {
             error: 'Database service is not configured (SUPABASE_SERVICE_ROLE_KEY is missing). Cannot verify payment in production.',
           });
         }
+
+        // Concurrency check in sandbox mode
+        const sandboxDate = req.body.date || '2026-09-25';
+        const sandboxStartTime = req.body.startTime || '09:00';
+        const sandboxDuration = Number(req.body.durationHours || 2);
+        const sandboxSeat = req.body.selectedSeatId || null;
+        const sandboxSpaceId = req.body.spaceId || 'space-1';
+
+        const sandboxConflict = await checkBookingConflict({
+          spaceId: sandboxSpaceId,
+          date: sandboxDate,
+          startTime: sandboxStartTime,
+          durationHours: sandboxDuration,
+          selectedSeatId: sandboxSeat,
+          excludeBookingId: bookingId,
+        });
+
+        if (sandboxConflict.hasConflict) {
+          return res.status(409).json({
+            success: false,
+            conflict: true,
+            error: sandboxConflict.message || 'Double-booking conflict: this slot was already confirmed by another member.',
+            bookingId,
+          });
+        }
+
+        // Record confirmed reservation in registry
+        activeConfirmedBookingsRegistry.set(bookingId, {
+          id: bookingId,
+          spaceId: sandboxSpaceId,
+          date: sandboxDate,
+          startTime: sandboxStartTime,
+          endTime: calculateEndTime(sandboxStartTime, sandboxDuration),
+          durationHours: sandboxDuration,
+          selectedSeatId: sandboxSeat,
+          guestCount: Number(req.body.guestCount || 1),
+          confirmedAt: new Date().toISOString(),
+        });
+
         return res.json({
           success: true,
           booking: {
@@ -357,9 +850,10 @@ async function startServer() {
             payment_status: 'paid',
             booking_status: 'confirmed',
             payment_reference: reference,
+            payment_method: 'sznd',
           },
           sandbox: true,
-          message: 'Payment verified in local demo mode (SUPABASE_SERVICE_ROLE_KEY unconfigured on server)',
+          message: 'Payment verified and booking confirmed in sandbox mode',
         });
       }
 
@@ -401,7 +895,7 @@ async function startServer() {
       }
 
       // Idempotency check: If already confirmed with this reference, return idempotent success
-      if ((booking.booking_status === 'confirmed' || booking.status === 'confirmed') && booking.payment_reference === reference) {
+      if ((booking.booking_status === 'confirmed' || booking.status === 'confirmed') && booking.payment_status === 'paid' && booking.payment_reference === reference) {
         return res.json({
           success: true,
           booking,
@@ -410,66 +904,125 @@ async function startServer() {
         });
       }
 
-      // If Paystack Secret Key is configured, verify transaction strictly against Paystack
-      if (process.env.PAYSTACK_SECRET_KEY) {
-        const verifyRes = await fetch(`https://api.paystack.co/transaction/verify/${encodeURIComponent(reference)}`, {
-          headers: {
-            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-          },
-        });
+      let szndVerifyResult: any = null;
 
-        const verifyData = await verifyRes.json();
-        if (!verifyRes.ok || !verifyData.status || verifyData.data?.status !== 'success') {
+      // Verify transaction strictly against SZND API if gateway is configured
+      if (szndClient.isConfigured()) {
+        const szndVerify = await szndClient.verifyPayment(reference);
+
+        if (!szndVerify.success || szndVerify.status !== 'COMPLETED') {
           return res.status(400).json({
-            error: verifyData.data?.gateway_response || 'Payment verification failed at provider gateway',
+            error: szndVerify.error || szndVerify.gateway_response || 'Payment verification failed at SZND gateway',
+            status: szndVerify.status,
           });
         }
 
         // Verify currency
-        if (verifyData.data.currency && verifyData.data.currency !== 'NGN' && verifyData.data.currency !== booking.currency) {
+        if (szndVerify.currency && szndVerify.currency !== 'NGN' && szndVerify.currency !== booking.currency) {
           return res.status(400).json({
-            error: `Currency mismatch: received ${verifyData.data.currency}, expected NGN`,
+            error: `Currency mismatch: received ${szndVerify.currency}, expected NGN`,
           });
         }
 
         // Verify amount
-        const verifiedKobo = Number(verifyData.data.amount);
-        const expectedKobo = Math.round(Number(booking.total_amount) * 100);
-        if (verifiedKobo < expectedKobo) {
-          return res.status(400).json({
-            error: `Payment amount mismatch: received ${verifiedKobo / 100} NGN, expected ${booking.total_amount} NGN`,
-          });
+        if (szndVerify.amount !== undefined) {
+          const verifiedAmount = Number(szndVerify.amount);
+          const expectedAmount = Number(booking.total_amount);
+          if (Math.abs(verifiedAmount - expectedAmount) > 1) {
+            return res.status(400).json({
+              error: `Payment amount mismatch: received ${verifiedAmount} NGN, expected ${expectedAmount} NGN`,
+            });
+          }
         }
 
         // Verify booking metadata binding if present
-        if (verifyData.data.metadata?.booking_id && verifyData.data.metadata.booking_id !== booking.id) {
+        if (szndVerify.metadata?.booking_id && szndVerify.metadata.booking_id !== booking.id) {
           return res.status(400).json({
             error: 'Payment transaction reference does not match this booking record',
           });
         }
-      } else if (process.env.NODE_ENV === 'production') {
+
+        szndVerifyResult = szndVerify;
+      } else if (process.env.NODE_ENV === 'production' && szndClient.getEnvironment() === 'production') {
         return res.status(503).json({
           success: false,
-          error: 'Payment provider service is not configured (PAYSTACK_SECRET_KEY is missing). Cannot verify payment in production.',
+          error: 'SZND payment gateway is not configured (SZND_API_KEY/SZND_API_SECRET missing). Cannot verify payment in production.',
         });
+      } else if (!sandbox && !reference.includes('SANDBOX')) {
+        console.warn(`[SZND Verify Note] Verifying in ${szndClient.getEnvironment()} fallback mode without active credentials`);
       }
 
       // Invoke the hardened confirm_booking_payment RPC using service_role authority
       const { data: confirmResult, error: rpcErr } = await supabaseAdmin.rpc('confirm_booking_payment', {
         p_booking_id: bookingId,
         p_transaction_reference: reference,
-        p_provider: provider || 'paystack',
+        p_provider: 'sznd',
         p_amount: Number(booking.total_amount),
         p_metadata: {
           verified_at: new Date().toISOString(),
-          verification_path: 'server_api_verify',
+          verification_path: 'server_sznd_verify',
+          gateway: 'sznd',
+          environment: szndClient.getEnvironment(),
+          sznd_transaction_reference: szndVerifyResult?.transaction_reference || null,
         },
       });
 
+      // Strict Concurrency-Safe Collision Detection
+      if (confirmResult && (confirmResult.conflict === true || confirmResult.success === false)) {
+        return res.status(409).json({
+          success: false,
+          conflict: true,
+          error: confirmResult.error || 'The selected workspace or seat was already confirmed by another member for this time slot.',
+          bookingId,
+          conflictingId: confirmResult.conflicting_id,
+        });
+      }
+
       if (rpcErr) {
         console.error('RPC confirm_booking_payment error:', rpcErr);
-        return res.status(400).json({ error: rpcErr.message || 'Failed to confirm booking payment' });
+        // Fallback: Authoritative server-side conflict check before applying direct update
+        const conflictCheck = await checkBookingConflict({
+          spaceId: booking.space_id,
+          date: booking.date,
+          startTime: booking.start_time,
+          durationHours: booking.duration_hours,
+          selectedSeatId: booking.selected_seat_id,
+          guestCount: booking.guest_count,
+          excludeBookingId: bookingId,
+          spaceCategory: booking.spaces?.category,
+          spaceCapacity: booking.spaces?.capacity,
+        });
+
+        if (conflictCheck.hasConflict) {
+          return res.status(409).json({
+            success: false,
+            conflict: true,
+            error: conflictCheck.message || 'Double-booking conflict: this slot was already confirmed by another member.',
+            bookingId,
+          });
+        }
+
+        // Direct update only if no conflict
+        await supabaseAdmin.from('bookings').update({
+          status: 'confirmed',
+          payment_status: 'paid',
+          payment_reference: paymentReference,
+          updated_at: new Date().toISOString(),
+        }).eq('id', bookingId);
       }
+
+      // Record in local active registry for instant memory caching and real-time reflection
+      activeConfirmedBookingsRegistry.set(bookingId, {
+        id: bookingId,
+        spaceId: booking.space_id,
+        date: booking.date,
+        startTime: booking.start_time,
+        endTime: booking.end_time || calculateEndTime(booking.start_time, booking.duration_hours || 1),
+        durationHours: booking.duration_hours || 1,
+        selectedSeatId: booking.selected_seat_id || null,
+        guestCount: booking.guest_count || 1,
+        confirmedAt: new Date().toISOString(),
+      });
 
       // Fetch confirmed booking payload with space details
       const { data: updatedBooking } = await supabaseAdmin
@@ -485,9 +1038,16 @@ async function startServer() {
 
       return res.json({
         success: true,
-        booking: updatedBooking || booking,
+        booking: updatedBooking || {
+          ...booking,
+          status: 'confirmed',
+          booking_status: 'confirmed',
+          payment_status: 'paid',
+          payment_reference: reference,
+          payment_method: 'sznd',
+        },
         confirmResult,
-        message: 'Payment successfully verified and booking confirmed',
+        message: 'Payment successfully verified and booking confirmed with SZND',
       });
     } catch (err: any) {
       console.error('Error in /api/payments/verify:', err);
@@ -495,59 +1055,100 @@ async function startServer() {
     }
   });
 
-  // 3. Webhook Receiver for Gateway Callbacks (Paystack / Flutterwave)
-  app.post('/api/payments/webhook', async (req, res) => {
+  // 3. Webhook Receiver for SZND Gateway Notifications
+  const handleSzndWebhook = async (req: express.Request, res: express.Response) => {
     try {
       if (!supabaseAdmin) {
         return res.status(503).json({ error: 'SUPABASE_SERVICE_ROLE_KEY is required for webhook operations' });
       }
 
-      if (process.env.PAYSTACK_SECRET_KEY) {
-        const signature = req.headers['x-paystack-signature'];
-        if (!signature) {
-          return res.status(401).json({ error: 'Missing x-paystack-signature header' });
-        }
+      // Verify HMAC-SHA256 signature from X-Transfaar-Signature or X-Signature header
+      if (szndClient.isConfigured()) {
+        const signatureHeader = req.headers['x-transfaar-signature'] || req.headers['x-signature'];
+        const rawBody = (req as any).rawBody || JSON.stringify(req.body);
 
-        const hash = crypto
-          .createHmac('sha512', process.env.PAYSTACK_SECRET_KEY)
-          .update(JSON.stringify(req.body))
-          .digest('hex');
-
-        if (signature !== hash) {
-          console.warn('Invalid Paystack webhook signature received');
-          return res.status(401).send('Invalid signature');
+        const isValid = szndClient.verifyWebhookSignature(rawBody, signatureHeader as string);
+        if (!isValid) {
+          console.warn('[SZND Webhook] Invalid webhook signature received');
+          return res.status(401).json({ error: 'Invalid webhook signature' });
         }
       }
 
-      const event = req.body;
-      if (event && event.event === 'charge.success') {
-        const { reference, amount, metadata } = event.data || {};
-        const bookingId = metadata?.booking_id;
+      const payload = req.body || {};
+      const eventData = payload.data || payload;
+      const rawStatus = String(eventData.status || payload.event || '').toUpperCase();
+      const reference = eventData.reference || payload.reference || eventData.transaction_reference;
+      const bookingId = eventData.metadata?.booking_id || payload.metadata?.booking_id;
+      const amountVal = eventData.amount !== undefined ? parseFloat(String(eventData.amount)) : undefined;
 
-        if (bookingId && reference) {
-          // Fetch booking to verify amount
-          const { data: booking } = await supabaseAdmin.from('bookings').select('id, total_amount').eq('id', bookingId).single();
-          if (booking) {
-            await supabaseAdmin.rpc('confirm_booking_payment', {
+      const isCompleted =
+        rawStatus === 'COMPLETED' ||
+        rawStatus === 'SUCCESS' ||
+        rawStatus === 'CHARGE.SUCCESS' ||
+        rawStatus === 'PAYMENT.SUCCESS' ||
+        rawStatus === 'TRANSACTION.SUCCESSFUL';
+
+      if (isCompleted && bookingId && reference) {
+        // Fetch booking to verify existence and amount
+        const { data: booking } = await supabaseAdmin
+          .from('bookings')
+          .select('id, total_amount, payment_status, payment_reference')
+          .eq('id', bookingId)
+          .single();
+
+        if (booking) {
+          // Idempotency check: if already confirmed with this reference, return immediately
+          if (booking.payment_status === 'paid' && booking.payment_reference === reference) {
+            return res.status(200).json({ status: 'ok', message: 'Already processed' });
+          }
+
+          // Verify amount if provided
+          if (amountVal !== undefined) {
+            const expected = Number(booking.total_amount);
+            if (Math.abs(amountVal - expected) > 1) {
+              console.warn(`[SZND Webhook] Amount mismatch: received ${amountVal}, expected ${expected}`);
+              return res.status(400).json({ error: 'Amount mismatch' });
+            }
+          }
+
+          // Authoritative confirmation via RPC with direct update fallback
+          const paymentReference = reference;
+          try {
+            const { error: rpcErr } = await supabaseAdmin.rpc('confirm_booking_payment', {
               p_booking_id: bookingId,
-              p_transaction_reference: reference,
-              p_provider: 'paystack',
-              p_amount: amount ? amount / 100 : Number(booking.total_amount),
+              p_transaction_reference: paymentReference,
+              p_provider: 'sznd',
+              p_amount: amountVal || Number(booking.total_amount),
               p_metadata: {
-                webhook_event_id: event.id,
+                webhook_event: payload.event || 'charge.completed',
+                gateway: 'sznd',
                 received_at: new Date().toISOString(),
+                sznd_transaction_reference: eventData.transaction_reference || null,
               },
             });
+            if (rpcErr) throw rpcErr;
+          } catch (rpcErr) {
+            console.warn('[SZND Webhook] RPC fallback to direct update:', rpcErr);
+            await supabaseAdmin.from('bookings').update({
+              status: 'confirmed',
+              payment_status: 'paid',
+              payment_reference: paymentReference,
+              updated_at: new Date().toISOString(),
+            }).eq('id', bookingId);
           }
         }
       }
 
-      res.status(200).json({ status: 'ok', received: true });
+      return res.status(200).json({ status: 'ok', received: true });
     } catch (err: any) {
-      console.error('Webhook error:', err);
-      res.status(500).json({ error: err.message });
+      console.error('[SZND Webhook Error]:', err);
+      return res.status(500).json({ error: err.message });
     }
-  });
+  };
+
+  // Dedicated SZND Webhook Endpoint and Legacy Fallback Alias
+  app.post('/api/payments/sznd/webhook', handleSzndWebhook);
+  app.post('/api/payments/webhook', handleSzndWebhook);
 
   // 4. Secure Access Credentials RPC Proxy
   app.post('/api/bookings/credentials', async (req, res) => {
@@ -676,6 +1277,44 @@ async function startServer() {
     }
   });
 
+  // 5. Booking Cancellation Endpoint (Releases occupied slot)
+  app.post('/api/bookings/:id/cancel', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { reason = 'User requested cancellation' } = req.body || {};
+
+      // Always remove from active in-memory registry so slot is immediately available
+      activeConfirmedBookingsRegistry.delete(id);
+
+      if (supabaseAdmin) {
+        const { error } = await supabaseAdmin
+          .from('bookings')
+          .update({
+            status: 'cancelled',
+            booking_status: 'cancelled',
+            cancellation_reason: reason,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', id);
+
+        if (error) {
+          console.error('Error cancelling booking in database:', error);
+          return res.status(500).json({ error: error.message });
+        }
+      }
+
+      return res.json({
+        success: true,
+        bookingId: id,
+        status: 'cancelled',
+        message: 'Booking cancelled and workspace slot released',
+      });
+    } catch (err: any) {
+      console.error('Error in /api/bookings/:id/cancel:', err);
+      return res.status(500).json({ error: err.message || 'Failed to cancel booking' });
+    }
+  });
+
   // AI Workspace Matcher endpoint for Coworkers
   app.post('/api/ai/match', async (req, res) => {
     try {
@@ -800,6 +1439,17 @@ Provide a JSON response with the following format:
     }
   });
 
+  // Explicit download endpoint for logo assets zip file
+  app.get('/api/download/ofis-logo-assets.zip', (req, res) => {
+    const zipPath = path.join(process.cwd(), 'public', 'ofis-logo-assets.zip');
+    if (fs.existsSync(zipPath)) {
+      res.setHeader('Content-Type', 'application/zip');
+      res.setHeader('Content-Disposition', 'attachment; filename="ofis-logo-assets.zip"');
+      return res.sendFile(zipPath);
+    }
+    return res.status(404).json({ error: 'Zip file not found' });
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
@@ -809,13 +1459,17 @@ Provide a JSON response with the following format:
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    // Cache hashed assets for 1 year immutable; HTML files served with no-cache for instant updates
+    // Advanced cache control: 1y immutable for hashed assets in /assets/, 1d stale-while-revalidate for static media, no-cache for html
     app.use(express.static(distPath, {
-      maxAge: '1y',
-      immutable: true,
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('.html')) {
           res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        } else if (filePath.includes('/assets/')) {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        } else if (/\.(png|jpe?g|webp|svg|ico|mp4|webm|woff2?|ttf|eot)$/i.test(filePath)) {
+          res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+        } else {
+          res.setHeader('Cache-Control', 'public, max-age=3600');
         }
       }
     }));

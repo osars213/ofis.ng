@@ -28,11 +28,12 @@ export const MobileBottomNav: React.FC = () => {
 
   if (currentUser.role === 'host') {
     return (
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-[64px] bg-white/95 dark:bg-[#0B1220]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#1E3A4D] px-3 flex items-center justify-around transition-colors shadow-lg">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-[64px] bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E2ECEB] dark:border-[#166D74] px-3 flex items-center justify-around transition-colors shadow-lg">
+        <div className="h-[2px] w-full absolute top-0 left-0 bg-gradient-to-r from-[#006B70] via-[#14BEB8] via-[#FFA987] to-[#006B70]" />
         <button
           type="button"
           onClick={() => setCurrentView('host_dashboard')}
-          className="flex flex-col items-center justify-center space-y-1 p-1 rounded-xl text-[#0F766E] dark:text-[#14B8A6] cursor-pointer transition-transform active:scale-95"
+          className="flex flex-col items-center justify-center space-y-1 p-1 rounded-xl text-[#006B70] dark:text-[#28D2CB] cursor-pointer transition-transform active:scale-95"
         >
           <Building2 className="w-5 h-5" />
           <span className="text-[11px] font-semibold whitespace-nowrap">Hubs</span>
@@ -41,7 +42,7 @@ export const MobileBottomNav: React.FC = () => {
         <button
           type="button"
           onClick={() => setIsHostPayoutModalOpen(true)}
-          className="flex flex-col items-center justify-center space-y-1 p-1 rounded-xl text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:text-[#14B8A6] cursor-pointer transition-transform active:scale-95"
+          className="flex flex-col items-center justify-center space-y-1 p-1 rounded-xl text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#006B70] dark:hover:text-[#28D2CB] cursor-pointer transition-transform active:scale-95"
         >
           <Wallet className="w-5 h-5" />
           <span className="text-[11px] font-medium whitespace-nowrap">Payouts</span>
@@ -50,10 +51,10 @@ export const MobileBottomNav: React.FC = () => {
         <button
           type="button"
           onClick={() => setIsDiagnosticsModalOpen(true)}
-          className="flex flex-col items-center justify-center space-y-1 p-1 text-[#0F766E] dark:text-[#14B8A6] cursor-pointer transition-transform active:scale-95"
+          className="flex flex-col items-center justify-center space-y-1 p-1 text-[#006B70] dark:text-[#28D2CB] cursor-pointer transition-transform active:scale-95"
         >
-          <div className="w-7 h-7 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/25 border border-[#0F766E]/40 flex items-center justify-center -mt-1 shadow-sm">
-            <Activity className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+          <div className="w-7 h-7 rounded-full bg-[#006B70]/15 dark:bg-[#006B70]/25 border border-[#14BEB8]/40 flex items-center justify-center -mt-1 shadow-sm">
+            <Activity className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
           </div>
           <span className="text-[11px] font-semibold whitespace-nowrap">Health</span>
         </button>
@@ -61,7 +62,7 @@ export const MobileBottomNav: React.FC = () => {
         <button
           type="button"
           onClick={() => switchUserRole('user')}
-          className="flex flex-col items-center justify-center space-y-1 p-1 rounded-xl text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:text-[#14B8A6] cursor-pointer transition-transform active:scale-95"
+          className="flex flex-col items-center justify-center space-y-1 p-1 rounded-xl text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#006B70] dark:hover:text-[#28D2CB] cursor-pointer transition-transform active:scale-95"
         >
           <Compass className="w-5 h-5" />
           <span className="text-[11px] font-medium whitespace-nowrap">Explore</span>
@@ -71,14 +72,15 @@ export const MobileBottomNav: React.FC = () => {
   }
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-[64px] bg-white/95 dark:bg-[#0B1220]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#1E3A4D] px-3 flex items-center justify-around transition-colors shadow-lg">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-[64px] bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E2ECEB] dark:border-[#166D74] px-3 flex items-center justify-around transition-colors shadow-lg">
+      <div className="h-[2px] w-full absolute top-0 left-0 bg-gradient-to-r from-[#006B70] via-[#14BEB8] via-[#FFA987] to-[#006B70]" />
       <button
         type="button"
         onClick={() => setCurrentView('home')}
-        className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
+        className={`flex flex-col items-center justify-center space-y-1 px-2 py-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
           currentView === 'home' 
-            ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
-            : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+            ? 'text-[#006B70] dark:text-[#28D2CB] font-bold bg-[#14BEB8]/10 dark:bg-[#28D2CB]/15 shadow-2xs' 
+            : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
         }`}
         title="Chat"
       >
@@ -89,10 +91,10 @@ export const MobileBottomNav: React.FC = () => {
       <button
         type="button"
         onClick={() => setCurrentView('explore')}
-        className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
+        className={`flex flex-col items-center justify-center space-y-1 px-2 py-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
           currentView === 'explore' 
-            ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
-            : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+            ? 'text-[#006B70] dark:text-[#28D2CB] font-bold bg-[#14BEB8]/10 dark:bg-[#28D2CB]/15 shadow-2xs' 
+            : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
         }`}
       >
         <Compass className="w-5 h-5" />
@@ -102,10 +104,10 @@ export const MobileBottomNav: React.FC = () => {
       <button
         type="button"
         onClick={() => setCurrentView('map')}
-        className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
+        className={`flex flex-col items-center justify-center space-y-1 px-2 py-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
           currentView === 'map' 
-            ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
-            : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+            ? 'text-[#006B70] dark:text-[#28D2CB] font-bold bg-[#14BEB8]/10 dark:bg-[#28D2CB]/15 shadow-2xs' 
+            : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
         }`}
         title="Around Me"
       >
@@ -118,10 +120,10 @@ export const MobileBottomNav: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('bookings')}
-            className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
+            className={`flex flex-col items-center justify-center space-y-1 px-2 py-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
               currentView === 'bookings' 
-                ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
-                : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+                ? 'text-[#006B70] dark:text-[#28D2CB] font-bold bg-[#14BEB8]/10 dark:bg-[#28D2CB]/15 shadow-2xs' 
+                : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
             }`}
           >
             <CalendarCheck className="w-5 h-5" />
@@ -131,15 +133,15 @@ export const MobileBottomNav: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('saved')}
-            className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl relative transition-all cursor-pointer active:scale-95 ${
+            className={`flex flex-col items-center justify-center space-y-1 px-2 py-1 rounded-xl relative transition-all cursor-pointer active:scale-95 ${
               currentView === 'saved' 
-                ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
-                : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+                ? 'text-[#006B70] dark:text-[#28D2CB] font-bold bg-[#14BEB8]/10 dark:bg-[#28D2CB]/15 shadow-2xs' 
+                : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
             }`}
           >
             <Bookmark className="w-5 h-5" />
             {savedSpaceIds.length > 0 && (
-              <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-[#14B8A6]" />
+              <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-gradient-to-r from-[#FFA987] to-[#FF8A65]" />
             )}
             <span className="text-[11px] whitespace-nowrap">Saved</span>
           </button>
@@ -149,10 +151,10 @@ export const MobileBottomNav: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('contact')}
-            className={`flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
+            className={`flex flex-col items-center justify-center space-y-1 px-2 py-1 rounded-xl transition-all cursor-pointer active:scale-95 ${
               currentView === 'contact' 
-                ? 'text-[#0F766E] dark:text-[#14B8A6] font-semibold scale-105' 
-                : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F8FAFC]'
+                ? 'text-[#006B70] dark:text-[#28D2CB] font-bold bg-[#14BEB8]/10 dark:bg-[#28D2CB]/15 shadow-2xs' 
+                : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
             }`}
           >
             <Mail className="w-5 h-5" />
@@ -162,7 +164,7 @@ export const MobileBottomNav: React.FC = () => {
           <button
             type="button"
             onClick={() => openAuthModal('login')}
-            className="flex flex-col items-center justify-center space-y-1 p-1 rounded-xl transition-all cursor-pointer active:scale-95 text-[#0F766E] dark:text-[#14B8A6] font-semibold"
+            className="flex flex-col items-center justify-center space-y-1 px-2 py-1 rounded-xl transition-all cursor-pointer active:scale-95 text-[#14BEB8] dark:text-[#28D2CB] font-bold"
           >
             <LogIn className="w-5 h-5" />
             <span className="text-[11px] whitespace-nowrap">Sign In</span>

@@ -81,7 +81,7 @@ export const SpaceDetails: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('explore')}
-            className="px-4 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs cursor-pointer"
+            className="px-4 py-2 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-xs cursor-pointer"
           >
             Back to Explore
           </button>
@@ -155,7 +155,7 @@ export const SpaceDetails: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('explore')}
-            className="flex items-center space-x-2 text-xs font-semibold text-[#6B7280] dark:text-[#94A3B8] hover:text-[#0F766E] dark:text-[#14B8A6] transition-colors cursor-pointer"
+            className="flex items-center space-x-2 text-xs font-semibold text-[#6B7280] dark:text-[#94A3B8] hover:text-[#006B70] dark:text-[#28D2CB] transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Workspaces</span>
@@ -168,8 +168,8 @@ export const SpaceDetails: React.FC = () => {
               onClick={() => toggleSpaceCompare(selectedSpace.id)}
               className={`px-3 py-2 rounded-xl border text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
                 comparedSpaceIds.includes(selectedSpace.id)
-                  ? 'bg-[#0F766E] text-white border-[#0F766E] font-bold shadow-xs'
-                  : 'bg-white dark:bg-[#0B1F33] hover:bg-[#F1F5F9] dark:hover:bg-[#102A3D] border-[#E5E7EB] dark:border-[#1E3A4D] text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2]'
+                  ? 'bg-[#006B70] text-white border-[#006B70] font-bold shadow-xs'
+                  : 'bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border-[#E5E7EB] dark:border-[#166D74] text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2]'
               }`}
               title={comparedSpaceIds.includes(selectedSpace.id) ? 'Remove from compare list' : 'Add to compare list'}
             >
@@ -180,7 +180,7 @@ export const SpaceDetails: React.FC = () => {
             <button
               type="button"
               onClick={() => toggleSaveSpace(selectedSpace.id)}
-              className="p-2 rounded-xl bg-white dark:bg-[#0B1F33] hover:bg-[#F1F5F9] dark:hover:bg-[#102A3D] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[#111827] dark:text-[#F2F2F2] hover:text-[#0F766E] dark:text-[#14B8A6] transition-all cursor-pointer shadow-2xs"
+              className="p-2 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-[#111827] dark:text-[#F2F2F2] hover:text-[#006B70] dark:text-[#28D2CB] transition-all cursor-pointer shadow-2xs"
               aria-label="Save to favorites"
             >
               <Heart className={`w-4 h-4 ${isSaved ? 'fill-[#14B8A6] text-[#14B8A6]' : ''}`} />
@@ -188,7 +188,7 @@ export const SpaceDetails: React.FC = () => {
             <button
               type="button"
               onClick={handleShare}
-              className="p-2 rounded-xl bg-white dark:bg-[#0B1F33] hover:bg-[#F1F5F9] dark:hover:bg-[#102A3D] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[#111827] dark:text-[#F2F2F2] hover:text-[#0F766E] dark:text-[#14B8A6] transition-all cursor-pointer shadow-2xs"
+              className="p-2 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-[#111827] dark:text-[#F2F2F2] hover:text-[#006B70] dark:text-[#28D2CB] transition-all cursor-pointer shadow-2xs"
               aria-label="Share workspace"
             >
               <Share2 className="w-4 h-4" />
@@ -206,30 +206,30 @@ export const SpaceDetails: React.FC = () => {
             <div 
               className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-lg text-xs font-mono font-bold tracking-wide border ${
                 availability.status === 'available_now'
-                  ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] border-[#0F766E]/40'
+                  ? 'bg-[#006B70]/15 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB] border-[#006B70]/40'
                   : availability.status === 'available_today'
-                  ? 'bg-[#0F766E]/10 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] border-[#0F766E]/25'
-                  : 'bg-[#F1F5F9] dark:bg-[#102A3D] text-[#6B7280] dark:text-[#94A3B8] border-[#E5E7EB] dark:border-[#2E3B34]'
+                  ? 'bg-[#006B70]/10 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB] border-[#006B70]/25'
+                  : 'bg-[#F1F5F9] dark:bg-[#105A60] text-[#6B7280] dark:text-[#94A3B8] border-[#E5E7EB] dark:border-[#166D74]'
               }`}
             >
               {availability.status === 'available_now' && (
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0F766E] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0F766E]" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#006B70] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#006B70]" />
                 </span>
               )}
               {availability.status === 'available_today' && (
-                <span className="inline-flex rounded-full h-1.5 w-1.5 bg-[#0F766E]" />
+                <span className="inline-flex rounded-full h-1.5 w-1.5 bg-[#006B70]" />
               )}
               <span>{availability.statusLabel}</span>
             </div>
 
-            <span className="px-2.5 py-1 rounded-lg bg-[#0F766E]/10 dark:bg-[#0F766E]/20 border border-[#0F766E]/30 text-[#0F766E] dark:text-[#14B8A6] text-xs font-mono font-bold uppercase">
+            <span className="px-2.5 py-1 rounded-lg bg-[#006B70]/10 dark:bg-[#006B70]/20 border border-[#006B70]/30 text-[#006B70] dark:text-[#28D2CB] text-xs font-mono font-bold uppercase">
               {String(selectedSpace.category || '').replace(/_/g, ' ')}
             </span>
             
             {selectedSpace.isSuperhost && (
-              <span className="px-2.5 py-1 rounded-lg bg-[#0F766E] text-white text-xs font-mono font-bold uppercase shadow-2xs">
+              <span className="px-2.5 py-1 rounded-lg bg-[#006B70] text-white text-xs font-mono font-bold uppercase shadow-2xs">
                 Superhost Verified
               </span>
             )}
@@ -237,7 +237,7 @@ export const SpaceDetails: React.FC = () => {
             <button
               type="button"
               onClick={scrollToReviews}
-              className="flex items-center space-x-1 text-xs text-[#111827] dark:text-[#F2F2F2] hover:text-[#0F766E] dark:text-[#14B8A6] transition-colors cursor-pointer"
+              className="flex items-center space-x-1 text-xs text-[#111827] dark:text-[#F2F2F2] hover:text-[#006B70] dark:text-[#28D2CB] transition-colors cursor-pointer"
             >
               <Star className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B]" />
               <span className="font-bold">{selectedSpace.rating}</span>
@@ -251,7 +251,7 @@ export const SpaceDetails: React.FC = () => {
 
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[#6B7280] dark:text-[#94A3B8]">
             <div className="flex items-center space-x-1.5">
-              <MapPin className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+              <MapPin className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
               <span>{formatLocationFull(selectedSpace)}</span>
             </div>
             <button
@@ -260,7 +260,7 @@ export const SpaceDetails: React.FC = () => {
                 setDirectionsSpace(selectedSpace);
                 setIsDirectionsOpen(true);
               }}
-              className="text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center space-x-1 cursor-pointer"
+              className="text-[#006B70] dark:text-[#28D2CB] hover:underline font-semibold flex items-center space-x-1 cursor-pointer"
             >
               <Navigation className="w-3.5 h-3.5" />
               <span>Get Directions</span>
@@ -291,19 +291,19 @@ export const SpaceDetails: React.FC = () => {
           <div className="lg:col-span-2 space-y-8">
             
             {/* Space Power & Connectivity High-Performance Metrics Banner */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-5 rounded-3xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E2522] shadow-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-5 rounded-3xl bg-white dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74] shadow-xs">
               <div className="space-y-1">
                 <div className="flex items-center space-x-1.5 text-xs text-[#6B7280] dark:text-[#718079]">
-                  <Zap className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <Zap className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>Power Backup</span>
                 </div>
                 <div className="text-sm font-bold text-[#111827] dark:text-[#F2F2F2]">{selectedSpace.powerType}</div>
-                <p className="text-[10px] text-[#0F766E] dark:text-[#14B8A6] font-mono">{selectedSpace.powerUptimeGuaranteePercent}% Uptime Guarantee</p>
+                <p className="text-[10px] text-[#006B70] dark:text-[#28D2CB] font-mono">{selectedSpace.powerUptimeGuaranteePercent}% Uptime Guarantee</p>
               </div>
 
               <div className="space-y-1">
                 <div className="flex items-center space-x-1.5 text-xs text-[#6B7280] dark:text-[#718079]">
-                  <Wifi className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <Wifi className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>Internet Speed</span>
                 </div>
                 <div className="text-sm font-bold text-[#111827] dark:text-[#F2F2F2]">{selectedSpace.internetSpeedMbps} Mbps</div>
@@ -312,7 +312,7 @@ export const SpaceDetails: React.FC = () => {
 
               <div className="space-y-1 col-span-2 sm:col-span-1">
                 <div className="flex items-center space-x-1.5 text-xs text-[#6B7280] dark:text-[#718079]">
-                  <Users className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <Users className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>Capacity & Noise</span>
                 </div>
                 <div className="text-sm font-bold text-[#111827] dark:text-[#F2F2F2]">{selectedSpace.capacity} Guests</div>
@@ -404,18 +404,18 @@ export const SpaceDetails: React.FC = () => {
 
           {/* Booking Summary Sidebar (1 Col Sticky Card) */}
           <div className="space-y-6">
-            <div className="sticky top-32 p-6 rounded-3xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] shadow-sm dark:shadow-2xl space-y-6">
+            <div className="sticky top-32 p-6 rounded-3xl bg-white dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74] shadow-sm dark:shadow-2xl space-y-6">
               
               {(() => {
                 const pricing = getSpacePricing(selectedSpace);
                 return (
-                  <div className="flex items-baseline justify-between border-b border-[#E5E7EB] dark:border-[#1E2522] pb-4">
+                  <div className="flex items-baseline justify-between border-b border-[#E5E7EB] dark:border-[#166D74] pb-4">
                     <div>
                       <div className="text-[10px] font-mono text-[#6B7280] dark:text-[#718079] uppercase tracking-wider font-semibold">
                         {pricing.basis === 'person' ? 'Per Person' : 'Entire Space'}
                       </div>
                       <div className="flex items-baseline space-x-1">
-                        <span className="text-2xl font-extrabold text-[#0F766E] dark:text-[#14B8A6] font-mono">
+                        <span className="text-2xl font-extrabold text-[#006B70] dark:text-[#28D2CB] font-mono">
                           {formatPrice(pricing.rate)}
                         </span>
                         <span className="text-xs text-[#6B7280] dark:text-[#718079]"> / {pricing.period}</span>
@@ -431,7 +431,7 @@ export const SpaceDetails: React.FC = () => {
                     )}
                     {pricing.sessionDurationHours && (
                       <div className="text-right">
-                        <div className="text-xs font-mono font-bold text-[#0F766E] dark:text-[#14B8A6]">
+                        <div className="text-xs font-mono font-bold text-[#006B70] dark:text-[#28D2CB]">
                           {pricing.sessionDurationHours}h Block
                         </div>
                         <div className="text-[10px] text-[#6B7280] dark:text-[#718079]">Per Session</div>
@@ -443,8 +443,8 @@ export const SpaceDetails: React.FC = () => {
 
               {/* Selected Slot or Live Status Banner */}
               {selectedSlot ? (
-                <div className="p-3 rounded-2xl bg-[#0F766E]/10 dark:bg-[#071521] border border-[#0F766E]/30 space-y-1">
-                  <div className="flex items-center space-x-1.5 text-xs text-[#0F766E] dark:text-[#14B8A6]">
+                <div className="p-3 rounded-2xl bg-[#006B70]/10 dark:bg-[#07383D] border border-[#006B70]/30 space-y-1">
+                  <div className="flex items-center space-x-1.5 text-xs text-[#006B70] dark:text-[#28D2CB]">
                     <Clock className="w-3.5 h-3.5" />
                     <span>Selected Date & Slot</span>
                   </div>
@@ -453,9 +453,9 @@ export const SpaceDetails: React.FC = () => {
                   </div>
                 </div>
               ) : availability.status !== 'available_now' && availability.nextSlot ? (
-                <div className="p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#102A3D] border border-[#E5E7EB] dark:border-[#1E3A4D] space-y-1">
+                <div className="p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] space-y-1">
                   <div className="flex items-center space-x-1.5 text-xs text-[#6B7280] dark:text-[#94A3B8]">
-                    <Clock className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                    <Clock className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                     <span>Next Available Reservation</span>
                   </div>
                   <div className="text-sm font-mono font-bold text-[#111827] dark:text-[#F2F2F2]">
@@ -463,12 +463,12 @@ export const SpaceDetails: React.FC = () => {
                   </div>
                 </div>
               ) : (
-                <div className="p-3 rounded-2xl bg-[#0F766E]/10 dark:bg-[#071521] border border-[#0F766E]/20 flex items-center space-x-2">
+                <div className="p-3 rounded-2xl bg-[#006B70]/10 dark:bg-[#07383D] border border-[#006B70]/20 flex items-center space-x-2">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0F766E] opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0F766E]" />
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#006B70] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#006B70]" />
                   </span>
-                  <span className="text-xs text-[#0F766E] dark:text-[#14B8A6] font-bold">Instant Pass Active Now</span>
+                  <span className="text-xs text-[#006B70] dark:text-[#28D2CB] font-bold">Instant Pass Active Now</span>
                 </div>
               )}
 
@@ -477,7 +477,7 @@ export const SpaceDetails: React.FC = () => {
                 {availability.occupancyLabel && (
                   <div className="flex items-center justify-between">
                     <span>Live Demand</span>
-                    <span className="font-semibold text-[#0F766E] dark:text-[#14B8A6]">
+                    <span className="font-semibold text-[#006B70] dark:text-[#28D2CB]">
                       {availability.occupancyLabel}
                     </span>
                   </div>
@@ -490,7 +490,7 @@ export const SpaceDetails: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <span>Digital Pass</span>
-                  <span className="text-[#0F766E] dark:text-[#14B8A6] font-semibold">Instant Mobile QR Gate</span>
+                  <span className="text-[#006B70] dark:text-[#28D2CB] font-semibold">Instant Mobile QR Gate</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>Cancellation</span>
@@ -503,7 +503,7 @@ export const SpaceDetails: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleBookNow}
-                  className="w-full py-3.5 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-extrabold text-sm shadow-md transition-all active:scale-95 flex items-center justify-center space-x-2 cursor-pointer"
+                  className="w-full py-3.5 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-extrabold text-sm shadow-md transition-all active:scale-95 flex items-center justify-center space-x-2 cursor-pointer"
                 >
                   <span>
                     {selectedSlot 
@@ -519,9 +519,9 @@ export const SpaceDetails: React.FC = () => {
                   <button
                     type="button"
                     onClick={scrollToCalendar}
-                    className="w-full py-2.5 rounded-2xl bg-[#F8FAFC] dark:bg-[#102A3D] hover:bg-[#F1F5F9] dark:hover:bg-[#1E3A4D] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs font-semibold text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2] flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-2xs"
+                    className="w-full py-2.5 rounded-2xl bg-[#F8FAFC] dark:bg-[#105A60] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs font-semibold text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2] flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-2xs"
                   >
-                    <CalendarIcon className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                    <CalendarIcon className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                     <span>Choose Dates</span>
                   </button>
 
@@ -529,22 +529,22 @@ export const SpaceDetails: React.FC = () => {
                     type="button"
                     id="space-details-availability-alert-btn"
                     onClick={() => openAvailabilityAlertModal(selectedSpace, selectedSlot ? { startDate: selectedSlot.date } : undefined)}
-                    className="w-full py-2.5 rounded-2xl bg-[#0F766E]/10 dark:bg-[#0F766E]/20 hover:bg-[#0F766E]/20 dark:hover:bg-[#0F766E]/20 border border-[#0F766E]/30 text-xs font-semibold text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
+                    className="w-full py-2.5 rounded-2xl bg-[#006B70]/10 dark:bg-[#006B70]/20 hover:bg-[#006B70]/20 dark:hover:bg-[#006B70]/20 border border-[#006B70]/30 text-xs font-semibold text-[#006B70] dark:text-[#28D2CB] flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
                     title="Get SMS/Email alert when this space is free"
                   >
-                    <Bell className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                    <Bell className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                     <span>Alert When Free</span>
                   </button>
                 </div>
               </div>
 
               {/* Host Contact Quick Link */}
-              <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#1E2522] flex items-center justify-between text-xs">
+              <div className="pt-4 border-t border-[#E5E7EB] dark:border-[#166D74] flex items-center justify-between text-xs">
                 <div className="flex items-center space-x-2.5">
                   <img 
                     src={selectedSpace.host.avatar} 
                     alt={selectedSpace.host.name} 
-                    className="w-9 h-9 rounded-xl object-cover border border-[#0F766E]/50" 
+                    className="w-9 h-9 rounded-xl object-cover border border-[#006B70]/50" 
                   />
                   <div>
                     <div className="font-bold text-[#111827] dark:text-[#F2F2F2]">{selectedSpace.host.name}</div>
@@ -558,7 +558,7 @@ export const SpaceDetails: React.FC = () => {
                     setContactSpace(selectedSpace);
                     setIsContactOpen(true);
                   }}
-                  className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#102A3D] hover:bg-[#F1F5F9] dark:hover:bg-[#1E3A4D] text-xs font-semibold text-[#0F766E] dark:text-[#14B8A6] border border-[#E5E7EB] dark:border-[#1E3A4D] cursor-pointer shadow-2xs"
+                  className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#105A60] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] text-xs font-semibold text-[#006B70] dark:text-[#28D2CB] border border-[#E5E7EB] dark:border-[#166D74] cursor-pointer shadow-2xs"
                 >
                   Contact
                 </button>

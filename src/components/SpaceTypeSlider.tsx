@@ -98,7 +98,7 @@ export const SpaceTypeSlider: React.FC = () => {
           <button
             type="button"
             onClick={() => setActiveCategory('all')}
-            className="text-xs text-[#0F766E] dark:text-[#14B8A6] hover:underline font-semibold flex items-center space-x-1"
+            className="text-xs text-[#006B70] dark:text-[#28D2CB] hover:underline font-semibold flex items-center space-x-1"
           >
             <span>Show all</span>
             <ArrowRight className="w-3 h-3" />
@@ -124,8 +124,8 @@ export const SpaceTypeSlider: React.FC = () => {
               }}
               className={`group relative rounded-2xl overflow-hidden text-left border transition-all duration-200 aspect-[4/5] flex flex-col justify-between p-3.5 sm:p-4 shadow-xs ${
                 isSelected 
-                  ? 'border-[#0F766E] ring-2 ring-[#0F766E]/30' 
-                  : 'border-[#E5E7EB] dark:border-[#374151] hover:border-[#0F766E]/50'
+                  ? 'border-[#FFA987] ring-2 ring-[#FFA987]/40 shadow-[0_4px_20px_rgba(255,169,135,0.3)]' 
+                  : 'border-[#E5E7EB] dark:border-[#166D74] hover:border-[#FFA987]/70'
               }`}
             >
               {/* Background Image */}
@@ -138,11 +138,21 @@ export const SpaceTypeSlider: React.FC = () => {
 
               {/* Pillar Badge */}
               <div className="relative z-10 flex items-center justify-between w-full">
-                <span className="px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-md border border-white/20 text-[9px] font-mono font-bold tracking-wider text-[#4ADE80]">
+                <span className={`px-2.5 py-0.5 rounded-md backdrop-blur-md text-[9px] font-bold tracking-wider uppercase shadow-xs ${
+                  type.pillar === 'CREATE'
+                    ? 'bg-gradient-to-r from-[#FFA987] to-[#FF8A65] text-[#07383D]'
+                    : type.pillar === 'RECORD'
+                    ? 'bg-gradient-to-r from-[#FF8A65] via-[#FFA987] to-[#FFD0BD] text-[#07383D]'
+                    : type.pillar === 'MEET'
+                    ? 'bg-gradient-to-r from-[#006B70] to-[#28D2CB] text-white'
+                    : 'bg-[#006B70] text-[#28D2CB] border border-[#14BEB8]/40'
+                }`}>
                   {type.pillar}
                 </span>
                 <div className={`p-1.5 rounded-lg backdrop-blur-md transition-colors ${
-                  isSelected ? 'bg-[#0F766E] text-white' : 'bg-black/60 text-white'
+                  isSelected 
+                    ? 'bg-gradient-to-br from-[#006B70] via-[#14BEB8] to-[#FFA987] text-white shadow-sm' 
+                    : 'bg-black/60 text-white group-hover:bg-[#FFA987] group-hover:text-[#07383D]'
                 }`}>
                   <Icon className="w-3.5 h-3.5" />
                 </div>

@@ -103,18 +103,18 @@ export const FaqPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1220] text-[#111827] dark:text-[#F8FAFC] transition-colors duration-150">
+    <div className="min-h-screen bg-[#FFF9F4] dark:bg-[#07383D] text-[#12383B] dark:text-[#FFFFFF] transition-colors duration-150">
       
       {/* Header */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#E5E7EB] dark:border-[#1E293B] text-center bg-gradient-to-b from-white via-[#F8FAFC] to-[#F1F5F9] dark:from-[#0B1220] dark:via-[#0F172A] dark:to-[#0B1220]">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#E2ECEB] dark:border-[#166D74] text-center bg-gradient-to-b from-white via-[#FFF9F4] to-[#F1F5F9] dark:from-[#07383D] dark:via-[#0B4A50] dark:to-[#07383D]">
         <div className="max-w-2xl mx-auto space-y-4">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/15 border border-[#0F766E]/30 text-xs font-bold text-[#0F766E] dark:text-[#14B8A6]">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#006B70]/15 dark:bg-[#006B70]/20 border border-[#006B70]/30 text-xs font-bold text-[#006B70] dark:text-[#28D2CB]">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Got Questions? We&apos;ve Got Answers</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Frequently Asked Questions</h1>
-          <p className="text-sm text-[#6B7280] dark:text-[#94A3B8]">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#12383B] dark:text-[#FFFFFF]">Frequently Asked Questions</h1>
+          <p className="text-sm text-[#5D7A7D] dark:text-[#B8D1D0]">
             Everything you need to know about booking workspaces, power guarantees, payments, and hosting on OFIS.
           </p>
         </div>
@@ -127,11 +127,11 @@ export const FaqPage: React.FC = () => {
 
           return (
             <div key={section.id} className="space-y-4">
-              <div className="flex items-center space-x-3 pb-2 border-b border-[#E5E7EB] dark:border-[#1E293B]">
-                <div className="w-8 h-8 rounded-xl bg-[#0F766E]/15 dark:bg-[#0F766E]/15 text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center">
+              <div className="flex items-center space-x-3 pb-2 border-b border-[#E2ECEB] dark:border-[#166D74]">
+                <div className="w-8 h-8 rounded-xl bg-[#006B70]/15 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB] flex items-center justify-center">
                   <Icon className="w-4 h-4" />
                 </div>
-                <h2 className="text-lg font-bold">{section.title}</h2>
+                <h2 className="text-lg font-bold text-[#12383B] dark:text-[#FFFFFF]">{section.title}</h2>
               </div>
 
               <div className="space-y-3">
@@ -142,19 +142,19 @@ export const FaqPage: React.FC = () => {
                   return (
                     <div
                       key={idx}
-                      className="rounded-2xl bg-white dark:bg-[#172033] border border-[#E5E7EB] dark:border-[#1E293B] overflow-hidden shadow-2xs"
+                      className="rounded-2xl bg-white dark:bg-[#0B4A50] border border-[#E2ECEB] dark:border-[#166D74] overflow-hidden shadow-2xs"
                     >
                       <button
                         type="button"
                         onClick={() => toggleItem(itemKey)}
-                        className="w-full p-4 sm:p-5 text-left flex items-center justify-between text-xs sm:text-sm font-bold cursor-pointer hover:text-[#0F766E] dark:text-[#14B8A6] transition-colors"
+                        className="w-full p-4 sm:p-5 text-left flex items-center justify-between text-xs sm:text-sm font-bold cursor-pointer hover:text-[#006B70] dark:hover:text-[#28D2CB] text-[#12383B] dark:text-[#FFFFFF] transition-colors"
                       >
                         <span className="pr-4">{faq.question}</span>
-                        <ChevronDown className={`w-4 h-4 text-[#94A3B8] shrink-0 transition-transform ${isOpen ? 'rotate-180 text-[#0F766E] dark:text-[#14B8A6]' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0] shrink-0 transition-transform ${isOpen ? 'rotate-180 text-[#006B70] dark:text-[#28D2CB]' : ''}`} />
                       </button>
 
                       {isOpen && (
-                        <div className="px-4 sm:px-5 pb-5 pt-1 text-xs text-[#4B5563] dark:text-[#CBD5E1] border-t border-[#E5E7EB] dark:border-[#1E293B] leading-relaxed">
+                        <div className="px-4 sm:px-5 pb-5 pt-1 text-xs text-[#5D7A7D] dark:text-[#B8D1D0] border-t border-[#E2ECEB] dark:border-[#166D74] leading-relaxed">
                           {faq.answer}
                         </div>
                       )}

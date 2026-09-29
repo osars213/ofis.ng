@@ -68,7 +68,7 @@ interface AppContextType {
   cancelBookingWithReason: (id: string, reason: string) => { success: boolean; message: string; booking?: Booking };
   checkInGuest: (bookingIdOrCode: string) => { success: boolean; message: string; booking?: Booking };
   requestEarlyAccess: (bookingId: string) => { success: boolean; message: string; booking?: Booking };
-  extendBooking: (bookingId: string, options: { additionalHours?: number; additionalDays?: number } | number, paymentMethod?: 'paystack' | 'flutterwave' | 'wallet' | 'card') => { success: boolean; message: string; booking?: Booking };
+  extendBooking: (bookingId: string, options: { additionalHours?: number; additionalDays?: number } | number, paymentMethod?: 'sznd' | 'paystack' | 'flutterwave' | 'wallet' | 'card') => { success: boolean; message: string; booking?: Booking };
   checkOutBooking: (bookingId: string) => { success: boolean; message: string; booking?: Booking };
   submitPostVisitReview: (bookingId: string, data: { rating: number; hostRating?: number; powerRating: number; internetRating: number; noiseRating: number; comment: string; verifiedAmenities?: string[]; photos?: string[] }) => void;
   toggleBookingReminder: (bookingId: string) => boolean;
@@ -274,14 +274,54 @@ const DEFAULT_FILTERS: SearchFilters = {
   sortBy: 'recommended',
 };
 
-const AppContext = createContext<AppContextType | undefined>(undefined);
+export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<UserProfile>(authService.getCurrentUser());
   const [allSpaces, setAllSpaces] = useState<Space[]>(spacesService.getSpaces());
   const [filters, setFilters] = useState<SearchFilters>(DEFAULT_FILTERS);
   const [activeCategory, setActiveCategoryState] = useState<SpaceCategory | 'all'>('all');
-  const [currentView, setCurrentView] = useState<AppView>('home');
+  const [currentView, setCurrentView] = useState<AppView>(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      const params = new URLSearchParams(window.location.search);
+      if (path.includes('/payment/result') || path.includes('/payment-result')) {
+        return 'payment_result';
+      }
+      if (path.startsWith('/space/')) {
+        return 'details';
+      }
+      if (path.startsWith('/explore')) {
+        return 'explore';
+      }
+      if (params.get('app') === 'true' || params.has('space')) {
+        return 'home';
+      }
+      return 'landing';
+    }
+    return 'landing';
+  });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      const params = new URLSearchParams(window.location.search);
+      if (path.includes('/payment/result') || path.includes('/payment-result')) {
+        setCurrentView('payment_result');
+      } else if (params.get('app') === 'true') {
+        setCurrentView('home');
+      } else if (path.startsWith('/space/')) {
+        setCurrentView('details');
+      } else if (path.startsWith('/explore')) {
+        setCurrentView('explore');
+      } else if (path === '/' && !params.get('app')) {
+        setCurrentView('landing');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
   const [selectedSpaceId, setSelectedSpaceIdState] = useState<string | null>(null);
   const [savedSpaceIds, setSavedSpaceIds] = useState<string[]>(favoritesService.getSavedIds());
   const [bookings, setBookings] = useState<Booking[]>(bookingsService.getBookings());
@@ -1017,7 +1057,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const extendBooking = (
     bookingId: string,
     options: { additionalHours?: number; additionalDays?: number } | number,
-    paymentMethod: 'paystack' | 'flutterwave' | 'wallet' | 'card' = 'wallet'
+    paymentMethod: 'sznd' | 'paystack' | 'flutterwave' | 'wallet' | 'card' = 'wallet'
   ): { success: boolean; message: string; booking?: Booking } => {
     const target = bookings.find(b => b.id === bookingId);
     const space = allSpaces.find(s => s.id === target?.spaceId);
@@ -1657,4 +1697,8 @@ export const useApp = () => {
     throw new Error('useApp must be used within an AppProvider');
   }
   return context;
+};
+
+export const useSafeApp = () => {
+  return useContext(AppContext);
 };

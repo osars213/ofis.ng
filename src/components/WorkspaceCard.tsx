@@ -90,13 +90,13 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
   return (
     <div
       id={`workspace-card-${space.id}`}
-      className={`group bg-white dark:bg-[#172033] rounded-[20px] border border-[#E5E7EB] dark:border-[#1E3A4D] hover:border-[#0F766E]/50 dark:hover:border-[#14B8A6]/40 overflow-hidden shadow-2xs dark:shadow-xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-2xl flex flex-col justify-between ${
+      className={`group bg-white dark:bg-[#0B4A50] rounded-[20px] border border-[#E2ECEB] dark:border-[#166D74] hover:border-[#14BEB8] dark:hover:border-[#28D2CB] overflow-hidden shadow-2xs dark:shadow-xl transition-all duration-200 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between ${
         isCarousel ? 'w-[285px] sm:w-[330px] shrink-0' : 'w-full'
       }`}
     >
       {/* Card Image with 18-20px top radius */}
       <div 
-        className="relative aspect-[16/10] overflow-hidden bg-[#F1F5F9] dark:bg-[#0B1220] cursor-pointer" 
+        className="relative aspect-[16/10] overflow-hidden bg-[#FFF9F4] dark:bg-[#07383D] cursor-pointer" 
         onClick={handleCardClick}
       >
         <img
@@ -104,6 +104,7 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
           alt={space.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
+          decoding="async"
           onError={(e) => {
             e.currentTarget.src = 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&auto=format&fit=crop&q=80';
           }}
@@ -115,18 +116,18 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
         {/* Top Badges (Category & Superhost) */}
         <div className="absolute top-3.5 left-3.5 flex flex-wrap items-center gap-1.5 max-w-[80%]">
           {badgeLabel ? (
-            <span className="px-2.5 py-1 rounded-lg bg-[#0F766E] border border-[#14B8A6]/40 text-white text-[10px] font-semibold tracking-wide uppercase flex items-center gap-1 shadow-xs">
-              <Sparkles className="w-3 h-3 text-[#14B8A6]" />
+            <span className="px-2.5 py-1 rounded-lg bg-gradient-to-r from-[#006B70] to-[#14BEB8] border border-[#28D2CB]/40 text-white text-[10px] font-bold tracking-wide uppercase flex items-center gap-1 shadow-xs">
+              <Sparkles className="w-3 h-3 text-[#FFA987]" />
               <span>{badgeLabel}</span>
             </span>
           ) : (
-            <span className="px-2.5 py-1 rounded-lg bg-black/65 backdrop-blur-md border border-white/20 text-[10px] font-semibold tracking-wide text-[#14B8A6] uppercase">
+            <span className="px-2.5 py-1 rounded-lg bg-black/65 backdrop-blur-md border border-white/20 text-[10px] font-bold tracking-wide text-[#28D2CB] uppercase">
               {categoryBadge}
             </span>
           )}
 
           {space.isSuperhost && (
-            <span className="px-2.5 py-1 rounded-lg bg-[#0F766E] text-white text-[10px] font-semibold uppercase tracking-wide shadow-xs">
+            <span className="px-2.5 py-1 rounded-lg bg-gradient-to-r from-[#FFA987] to-[#FF8A65] text-[#07383D] text-[10px] font-bold uppercase tracking-wide shadow-xs">
               Superhost
             </span>
           )}
@@ -141,7 +142,7 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
               e.stopPropagation();
               openAvailabilityAlertModal(space);
             }}
-            className="p-2 rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white hover:text-[#14B8A6] transition-all cursor-pointer shadow-xs active:scale-95"
+            className="p-2 rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white hover:text-[#FFA987] transition-all cursor-pointer shadow-xs active:scale-95"
             aria-label="Set availability alert"
             title="Alert me via SMS/Email when available for specific dates"
           >
@@ -157,8 +158,8 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
             }}
             className={`p-2 rounded-xl backdrop-blur-md border transition-all cursor-pointer shadow-xs active:scale-95 ${
               isCompared
-                ? 'bg-[#0F766E] text-white border-[#0F766E]'
-                : 'bg-black/60 hover:bg-black/80 border-white/20 text-white hover:text-[#14B8A6]'
+                ? 'bg-[#14BEB8] text-[#07383D] font-bold border-[#14BEB8]'
+                : 'bg-black/60 hover:bg-black/80 border-white/20 text-white hover:text-[#28D2CB]'
             }`}
             aria-label={isCompared ? 'Remove from compare' : 'Add to compare'}
             title={isCompared ? 'Remove from comparison list' : 'Add to comparison list'}
@@ -172,10 +173,10 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
               e.stopPropagation();
               toggleSaveSpace(space.id);
             }}
-            className="p-2 rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white hover:text-[#14B8A6] transition-all cursor-pointer shadow-xs active:scale-95"
+            className="p-2 rounded-xl bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white hover:text-[#FFA987] transition-all cursor-pointer shadow-xs active:scale-95"
             aria-label="Save to favorites"
           >
-            <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-[#14B8A6] text-[#14B8A6]' : ''}`} />
+            <Heart className={`w-3.5 h-3.5 ${isSaved ? 'fill-[#FFA987] text-[#FFA987]' : ''}`} />
           </button>
         </div>
 
@@ -183,28 +184,28 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
         <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between gap-2">
           {/* Location Tag */}
           <div className="flex items-center space-x-1.5 text-[11px] text-white bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/20 truncate max-w-[55%] shadow-xs">
-            <MapPin className="w-3 h-3 text-[#14B8A6] shrink-0" />
+            <MapPin className="w-3 h-3 text-[#FFA987] shrink-0" />
             <span className="font-semibold truncate">{formatLocationShort(space)}</span>
           </div>
 
           {/* Live Availability Status Pill */}
           <div 
-            className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-lg backdrop-blur-md text-[11px] font-medium tracking-wide border shrink-0 shadow-xs ${
+            className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-lg backdrop-blur-md text-[11px] font-bold tracking-wide border shrink-0 shadow-xs ${
               availability.status === 'available_now'
-                ? 'bg-[#071521]/90 text-[#14B8A6] border-[#0F766E]/50'
+                ? 'bg-[#07383D]/95 text-[#28D2CB] border-[#14BEB8]/60 shadow-[0_0_12px_rgba(20,190,184,0.3)]'
                 : availability.status === 'available_today'
-                ? 'bg-[#071521]/90 text-[#14B8A6] border-[#0F766E]/30'
+                ? 'bg-[#07383D]/90 text-[#FFA987] border-[#FFA987]/50'
                 : 'bg-black/75 text-slate-300 border-white/20'
             }`}
           >
             {availability.status === 'available_now' && (
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#14B8A6]" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14BEB8] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#28D2CB]" />
               </span>
             )}
             {availability.status === 'available_today' && (
-              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-[#14B8A6]" />
+              <span className="inline-flex rounded-full h-1.5 w-1.5 bg-[#FFA987]" />
             )}
             <span>{availability.statusLabel}</span>
           </div>
@@ -217,19 +218,19 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
           {/* Workspace Name */}
           <h3
             onClick={handleCardClick}
-            className="text-base sm:text-lg font-bold text-[#111827] dark:text-[#F8FAFC] group-hover:text-[#0F766E] dark:group-hover:text-[#14B8A6] cursor-pointer transition-colors line-clamp-1 leading-snug"
+            className="text-base sm:text-lg font-bold text-[#12383B] dark:text-[#FFFFFF] group-hover:text-[#006B70] dark:group-hover:text-[#28D2CB] cursor-pointer transition-colors line-clamp-1 leading-snug"
           >
             {space.title}
           </h3>
 
           {/* Next Available Slot Banner (If not available right now) */}
           {availability.nextSlot && availability.status !== 'available_now' && (
-            <div className="flex items-center justify-between text-xs py-1.5 px-3 rounded-xl bg-[#F8FAFC] dark:bg-[#071521] border border-[#E5E7EB] dark:border-[#1E3A4D]">
-              <div className="flex items-center space-x-1.5 text-[#6B7280] dark:text-[#94A3B8]">
-                <Clock className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6] shrink-0" />
+            <div className="flex items-center justify-between text-xs py-1.5 px-3 rounded-xl bg-[#FFF9F4] dark:bg-[#105A60] border border-[#E2ECEB] dark:border-[#166D74]">
+              <div className="flex items-center space-x-1.5 text-[#5D7A7D] dark:text-[#B8D1D0]">
+                <Clock className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB] shrink-0" />
                 <span className="text-[11px] font-medium">Next Available:</span>
               </div>
-              <span className="font-bold text-xs text-[#111827] dark:text-[#F8FAFC]">
+              <span className="font-bold text-xs text-[#12383B] dark:text-[#FFFFFF]">
                 {availability.nextSlot.label}
               </span>
             </div>
@@ -238,37 +239,37 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
           {/* Core Amenities Badges */}
           <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
             {space.isVerified !== false && (
-              <div className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#0F766E]/10 dark:bg-[#0F766E]/20 border border-[#0F766E]/30 dark:border-[#14B8A6]/30 text-[10px] font-semibold text-[#0F766E] dark:text-[#14B8A6]">
-                <ShieldCheck className="w-3 h-3 text-[#0F766E] dark:text-[#14B8A6] shrink-0" />
+              <div className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#006B70]/10 dark:bg-[#14BEB8]/15 border border-[#006B70]/25 dark:border-[#14BEB8]/35 text-[10px] font-bold text-[#006B70] dark:text-[#28D2CB]">
+                <ShieldCheck className="w-3 h-3 text-[#14BEB8] shrink-0" />
                 <span>Verified</span>
               </div>
             )}
 
-            <div className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#071521] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[10px] font-medium text-[#4B5563] dark:text-[#94A3B8]">
-              <Wifi className="w-3 h-3 text-[#0F766E] dark:text-[#14B8A6] shrink-0" />
+            <div className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#F1F6F5] dark:bg-[#105A60] border border-[#E2ECEB] dark:border-[#166D74] text-[10px] font-medium text-[#12383B] dark:text-[#B8D1D0]">
+              <Wifi className="w-3 h-3 text-[#006B70] dark:text-[#28D2CB] shrink-0" />
               <span>{space.internetSpeedMbps ? `${space.internetSpeedMbps} Mbps` : 'Fast Internet'}</span>
             </div>
 
             {space.hasBackupPower && (
-              <div className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#071521] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[10px] font-medium text-[#4B5563] dark:text-[#94A3B8]">
-                <Zap className="w-3 h-3 text-[#0F766E] dark:text-[#14B8A6] shrink-0" />
+              <div className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#FFF4EE] dark:bg-[#105A60] border border-[#FFA987]/40 dark:border-[#FFA987]/30 text-[10px] font-semibold text-[#EA580C] dark:text-[#FFA987]">
+                <Zap className="w-3 h-3 text-[#FFA987] shrink-0" />
                 <span>24/7 Power</span>
               </div>
             )}
 
             {availability.occupancyLabel && (
-              <div className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#071521] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[10px] text-[#6B7280] dark:text-[#94A3B8]">
-                <Activity className={`w-3 h-3 ${availability.occupancyLevel === 'low' ? 'text-[#0F766E] dark:text-[#14B8A6]' : 'text-[#6B7280] dark:text-[#94A3B8]'}`} />
+              <div className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#F1F6F5] dark:bg-[#105A60] border border-[#E2ECEB] dark:border-[#166D74] text-[10px] text-[#5D7A7D] dark:text-[#B8D1D0]">
+                <Activity className={`w-3 h-3 ${availability.occupancyLevel === 'low' ? 'text-[#006B70] dark:text-[#28D2CB]' : 'text-[#5D7A7D] dark:text-[#B8D1D0]'}`} />
                 <span>{availability.occupancyLabel}</span>
               </div>
             )}
           </div>
 
           {/* Key Specs Row: Capacity & Rating */}
-          <div className="flex items-center justify-between text-xs text-[#6B7280] dark:text-[#94A3B8] pt-1">
+          <div className="flex items-center justify-between text-xs text-[#5D7A7D] dark:text-[#B8D1D0] pt-1">
             <div className="flex items-center space-x-1.5">
-              <Users className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
-              <span className="font-medium text-[#4B5563] dark:text-[#CBD5E1]">
+              <Users className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
+              <span className="font-semibold text-[#12383B] dark:text-[#FFFFFF]">
                 {space.category === 'meeting' 
                   ? `${space.capacity} Seats` 
                   : space.category === 'event' 
@@ -277,25 +278,25 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
               </span>
             </div>
 
-            <div className="flex items-center space-x-1 text-[#111827] dark:text-[#F8FAFC]">
-              <Star className="w-3.5 h-3.5 fill-[#F59E0B] text-[#F59E0B]" />
+            <div className="flex items-center space-x-1 text-[#12383B] dark:text-[#FFFFFF]">
+              <Star className="w-3.5 h-3.5 fill-[#FFA987] text-[#FFA987]" />
               <span className="font-bold text-xs">{space.rating}</span>
-              <span className="text-[#6B7280] dark:text-[#94A3B8] text-[11px]">({space.reviewsCount})</span>
+              <span className="text-[#5D7A7D] dark:text-[#B8D1D0] text-[11px]">({space.reviewsCount})</span>
             </div>
           </div>
         </div>
 
         {/* Price & Actions Row */}
-        <div className="pt-3 border-t border-[#E5E7EB] dark:border-[#1E3A4D] flex items-center justify-between gap-2">
+        <div className="pt-3 border-t border-[#E2ECEB] dark:border-[#166D74] flex items-center justify-between gap-2">
           <div>
-            <div className="text-[10px] text-[#6B7280] dark:text-[#94A3B8] uppercase tracking-wider font-semibold">
+            <div className="text-[10px] text-[#5D7A7D] dark:text-[#B8D1D0] uppercase tracking-wider font-semibold">
               {pricing.basis === 'person' ? 'Per Person' : 'Rate'}
             </div>
             <div className="flex items-baseline space-x-1">
-              <span className="text-base sm:text-lg font-bold text-[#0F766E] dark:text-[#14B8A6]">
+              <span className="text-base sm:text-lg font-extrabold text-[#006B70] dark:text-[#FFA987]">
                 {formatPrice(pricing.rate)}
               </span>
-              <span className="text-xs text-[#6B7280] dark:text-[#94A3B8]">/ {pricing.period}</span>
+              <span className="text-xs text-[#5D7A7D] dark:text-[#B8D1D0]">/ {pricing.period}</span>
             </div>
           </div>
 
@@ -303,7 +304,7 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
             <button
               type="button"
               onClick={handleCardClick}
-              className="px-3.5 py-2 rounded-xl bg-white dark:bg-[#0B1F33] hover:bg-[#F1F5F9] dark:hover:bg-[#102A3D] text-xs font-semibold text-[#111827] dark:text-[#F8FAFC] border border-[#E5E7EB] dark:border-[#1E3A4D] transition-all cursor-pointer shadow-2xs"
+              className="px-3.5 py-2 rounded-xl bg-white dark:bg-[#105A60] hover:bg-[#F1F6F5] dark:hover:bg-[#166D74] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] border border-[#E2ECEB] dark:border-[#166D74] transition-all cursor-pointer shadow-2xs"
             >
               Details
             </button>
@@ -313,7 +314,7 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
               <button
                 type="button"
                 onClick={handleQuickBookNextSlot}
-                className="px-3.5 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-xs font-bold text-white transition-all flex items-center space-x-1 active:scale-95 shadow-xs whitespace-nowrap cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-xs font-bold text-white transition-all flex items-center space-x-1 active:scale-95 shadow-[0_4px_14px_rgba(255,169,135,0.35)] whitespace-nowrap cursor-pointer"
                 title={`Quick book slot: ${availability.nextSlot.label}`}
               >
                 <span>Book Next</span>
@@ -323,7 +324,7 @@ export const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
               <button
                 type="button"
                 onClick={handleBookClick}
-                className="px-3.5 py-2 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-xs font-bold text-white transition-all flex items-center space-x-1 active:scale-95 shadow-xs cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-xs font-bold text-white transition-all flex items-center space-x-1 active:scale-95 shadow-[0_4px_14px_rgba(255,169,135,0.35)] cursor-pointer"
               >
                 <span>Book</span>
                 <ChevronRight className="w-3.5 h-3.5" />

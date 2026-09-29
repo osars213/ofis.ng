@@ -71,13 +71,13 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
     <div className="w-full max-w-6xl mx-auto my-12 sm:my-16 px-4 sm:px-6 lg:px-8">
       
       {/* Network Infrastructure Dashboard Card */}
-      <div className="rounded-3xl bg-[#0B1F33]/90 backdrop-blur-xl border border-[#1E3A4D] p-6 sm:p-8 shadow-[0_20px_50px_rgba(7,21,33,0.6)] relative overflow-hidden">
+      <div className="rounded-3xl bg-[#0B4A50]/90 backdrop-blur-xl border border-[#166D74] p-6 sm:p-8 shadow-[0_20px_50px_rgba(7,21,33,0.6)] relative overflow-hidden">
         
         {/* Subtle radial teal background accent inside card */}
-        <div className="absolute top-0 right-1/4 w-[500px] h-[300px] bg-[#0F766E]/15 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-[500px] h-[300px] bg-[#006B70]/15 blur-[120px] rounded-full pointer-events-none" />
 
         {/* Header Strip of Dashboard */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#1E3A4D]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#166D74]">
           <div>
             <div className="flex items-center space-x-2 mb-1.5">
               <span className="relative flex h-2 w-2">
@@ -94,11 +94,11 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
           </div>
 
           <div className="flex items-center space-x-3">
-            <div className="px-3.5 py-1.5 rounded-[12px] bg-[#071521] border border-[#1E3A4D] text-xs text-[#94A3B8] flex items-center space-x-2">
+            <div className="px-3.5 py-1.5 rounded-[12px] bg-[#07383D] border border-[#166D74] text-xs text-[#94A3B8] flex items-center space-x-2">
               <span className="h-1.5 w-1.5 rounded-full bg-[#14B8A6]" />
               <span>99.8% Power SLA Verified</span>
             </div>
-            <div className="hidden lg:flex px-3.5 py-1.5 rounded-[12px] bg-[#071521] border border-[#1E3A4D] text-xs text-[#94A3B8] items-center space-x-2">
+            <div className="hidden lg:flex px-3.5 py-1.5 rounded-[12px] bg-[#07383D] border border-[#166D74] text-xs text-[#94A3B8] items-center space-x-2">
               <Wifi className="w-3.5 h-3.5 text-[#14B8A6]" />
               <span>Fiber + Starlink</span>
             </div>
@@ -109,13 +109,13 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-center">
           
           {/* Left / Top: Interactive African Physical Space Network Map (5 cols) */}
-          <div className="lg:col-span-5 bg-[#071521] border border-[#1E3A4D] rounded-2xl p-5 relative overflow-hidden min-h-[300px] flex flex-col justify-between">
+          <div className="lg:col-span-5 bg-[#07383D] border border-[#166D74] rounded-2xl p-5 relative overflow-hidden min-h-[300px] flex flex-col justify-between">
             <div className="flex items-center justify-between z-10">
               <span className="text-xs font-semibold text-white flex items-center space-x-1.5">
                 <Radio className="w-3.5 h-3.5 text-[#14B8A6] animate-pulse" />
                 <span>Pan-African Network Nodes</span>
               </span>
-              <span className="text-[10px] font-mono text-[#14B8A6] bg-[#0F766E]/20 px-2 py-0.5 rounded border border-[#0F766E]/40">
+              <span className="text-[10px] font-mono text-[#14B8A6] bg-[#006B70]/20 px-2 py-0.5 rounded border border-[#006B70]/40">
                 Live Telemetry
               </span>
             </div>
@@ -126,23 +126,23 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
                 {/* Subtle map contour outline */}
                 <path 
                   d="M15 32 C20 28, 40 24, 60 22 C75 22, 85 30, 80 45 C75 55, 65 65, 55 80 C48 92, 40 95, 38 85 C35 72, 28 65, 20 55 C12 48, 10 38, 15 32 Z" 
-                  className="fill-[#0B1F33]/60 stroke-[#1E3A4D] stroke-[0.7] stroke-dasharray-[2,2]"
+                  className="fill-[#0B4A50]/60 stroke-[#166D74] stroke-[0.7] stroke-dasharray-[2,2]"
                 />
 
                 {/* Connecting Arcs between active nodes */}
                 <path 
                   d="M28 52 Q30 49 33 46" 
-                  className="stroke-[#0F766E]/80 stroke-[0.8]" 
+                  className="stroke-[#006B70]/80 stroke-[0.8]" 
                   strokeDasharray="1.5 1.5"
                 />
                 <path 
                   d="M28 52 Q30 55 31 58" 
-                  className="stroke-[#0F766E]/80 stroke-[0.8]" 
+                  className="stroke-[#006B70]/80 stroke-[0.8]" 
                   strokeDasharray="1.5 1.5"
                 />
                 <path 
                   d="M28 52 Q27 51 26 50" 
-                  className="stroke-[#0F766E]/80 stroke-[0.8]" 
+                  className="stroke-[#006B70]/80 stroke-[0.8]" 
                   strokeDasharray="1.5 1.5"
                 />
                 <path 
@@ -202,9 +202,9 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
             </div>
 
             {/* Selected Node Details Card */}
-            <div className="p-3 rounded-xl bg-[#0B1F33] border border-[#1E3A4D] flex items-center justify-between text-xs z-10">
+            <div className="p-3 rounded-xl bg-[#0B4A50] border border-[#166D74] flex items-center justify-between text-xs z-10">
               <div className="flex items-center space-x-2.5">
-                <div className="w-7 h-7 rounded-lg bg-[#0F766E]/20 border border-[#0F766E]/40 flex items-center justify-center text-[#14B8A6]">
+                <div className="w-7 h-7 rounded-lg bg-[#006B70]/20 border border-[#006B70]/40 flex items-center justify-center text-[#14B8A6]">
                   <MapPin className="w-3.5 h-3.5" />
                 </div>
                 <div>
@@ -218,8 +218,8 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
               </div>
               <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                 activeNode.status === 'active' 
-                  ? 'bg-[#0F766E]/20 text-[#14B8A6] border border-[#0F766E]/40' 
-                  : 'bg-[#1E3A4D] text-[#94A3B8]'
+                  ? 'bg-[#006B70]/20 text-[#14B8A6] border border-[#006B70]/40' 
+                  : 'bg-[#166D74] text-[#94A3B8]'
               }`}>
                 {activeNode.status === 'active' ? 'Operational' : 'Deploying'}
               </span>
@@ -231,7 +231,7 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
             {featuredSpaces.map((space, idx) => (
               <div 
                 key={idx}
-                className="group rounded-2xl bg-[#071521] border border-[#1E3A4D] hover:border-[#14B8A6]/50 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(7,21,33,0.5),0_0_20px_rgba(20,184,166,0.08)]"
+                className="group rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#14B8A6]/50 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(7,21,33,0.5),0_0_20px_rgba(20,184,166,0.08)]"
               >
                 {/* Space Image with Overlay & Verified Badge */}
                 <div className="relative h-32 w-full overflow-hidden bg-zinc-900">
@@ -240,9 +240,9 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
                     alt={space.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071521] via-transparent to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07383D] via-transparent to-black/30" />
                   
-                  <div className="absolute top-2.5 left-2.5 flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#071521]/80 backdrop-blur-md border border-[#1E3A4D] text-[9px] font-semibold text-[#14B8A6]">
+                  <div className="absolute top-2.5 left-2.5 flex items-center space-x-1 px-2 py-0.5 rounded-md bg-[#07383D]/80 backdrop-blur-md border border-[#166D74] text-[9px] font-semibold text-[#14B8A6]">
                     <ShieldCheck className="w-3 h-3 text-[#14B8A6]" />
                     <span>Verified Uptime</span>
                   </div>
@@ -276,7 +276,7 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
                     </div>
                   </div>
 
-                  <div className="mt-3 pt-2.5 border-t border-[#1E3A4D] flex items-center justify-between text-xs">
+                  <div className="mt-3 pt-2.5 border-t border-[#166D74] flex items-center justify-between text-xs">
                     <span className="font-semibold text-white text-[11px]">
                       {space.rate}
                     </span>
@@ -292,7 +292,7 @@ export const NetworkVisuals: React.FC<{ onExploreClick?: () => void }> = ({ onEx
         </div>
 
         {/* Live Status Ticker Bar Inside Infrastructure Card */}
-        <div className="mt-6 pt-4 border-t border-[#1E3A4D] flex flex-wrap items-center justify-between gap-3 text-xs text-[#94A3B8]">
+        <div className="mt-6 pt-4 border-t border-[#166D74] flex flex-wrap items-center justify-between gap-3 text-xs text-[#94A3B8]">
           <div className="flex items-center space-x-4">
             <span className="flex items-center space-x-1.5 text-white">
               <Zap className="w-3.5 h-3.5 text-[#14B8A6]" />

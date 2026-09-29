@@ -85,80 +85,88 @@ export const OfisHeroAiSection: React.FC = () => {
   };
 
   return (
-    <section className="relative pt-10 sm:pt-14 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 border-b border-[#D9E1E3] dark:border-[#1E3A4D] bg-[#F5F7F7] dark:bg-[#071521] overflow-hidden transition-colors duration-150">
-      {/* Subtle Teal Ambient Backdrop */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[520px] sm:h-[520px] md:w-[680px] md:h-[680px] pointer-events-none -z-0 opacity-25">
-        <div className="w-full h-full bg-gradient-to-br from-[#0F766E]/20 via-[#14B8A6]/10 to-transparent rounded-full blur-3xl" />
+    <section className="relative pt-10 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#E2ECEB] dark:border-[#166D74] bg-[#FFF9F4] dark:bg-[#07383D] overflow-hidden transition-colors duration-150">
+      {/* Radiant Multi-Color Ambient Backdrops with Warm Peach Highlight */}
+      <div className="absolute -top-24 -left-20 w-[420px] sm:w-[580px] h-[420px] sm:h-[580px] pointer-events-none -z-0 opacity-70">
+        <div className="w-full h-full bg-gradient-to-br from-[#006B70]/30 via-[#14BEB8]/25 to-transparent rounded-full blur-3xl" />
+      </div>
+      <div className="absolute -top-16 -right-10 w-[440px] sm:w-[600px] h-[440px] sm:h-[600px] pointer-events-none -z-0 opacity-85">
+        <div className="w-full h-full bg-gradient-to-bl from-[#FFA987]/45 via-[#FF8A65]/30 to-transparent rounded-full blur-3xl" />
+      </div>
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[220px] pointer-events-none -z-0 opacity-60">
+        <div className="w-full h-full bg-gradient-to-t from-[#FFA987]/25 via-[#14BEB8]/20 to-transparent rounded-full blur-2xl" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
         
         {/* Value Proposition Header */}
-        <div className="space-y-3 max-w-2xl mx-auto">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#0F766E]/10 dark:bg-[#14B8A6]/15 backdrop-blur-md border border-[#0F766E]/25 dark:border-[#14B8A6]/30 text-[#0F766E] dark:text-[#14B8A6] text-xs font-semibold tracking-wider uppercase">
-            <Sparkles className="w-3.5 h-3.5" />
+        <div className="space-y-3.5 max-w-2xl mx-auto">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#FFA987]/25 via-[#FF8A65]/20 to-[#14BEB8]/20 dark:from-[#FFA987]/35 dark:via-[#FF8A65]/25 dark:to-[#14BEB8]/30 backdrop-blur-md border border-[#FFA987]/60 dark:border-[#FFA987]/70 text-[#C85A32] dark:text-[#FFA987] text-xs font-bold tracking-wider uppercase shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#FFA987]" />
             <span>Nigeria’s Physical Space Network</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#111827] dark:text-[#F8FAFC]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#12383B] dark:text-[#FFFFFF] leading-[1.12]">
             Find the right space.{' '}
-            <span className="text-[#0F766E] dark:text-[#14B8A6]">Book it when you need it.</span>
+            <span className="bg-gradient-to-r from-[#006B70] via-[#FFA987] to-[#14BEB8] dark:from-[#28D2CB] dark:via-[#FFA987] dark:to-[#FF8A65] bg-clip-text text-transparent">
+              Book it when you need it.
+            </span>
           </h1>
 
-          <p className="text-sm sm:text-base font-normal text-[#4B5563] dark:text-[#94A3B8] max-w-xl mx-auto">
-            Verified desks, meeting rooms, and production studios across Nigeria with guaranteed 24/7 power and enterprise fiber.
+          <p className="text-sm sm:text-base font-medium text-[#5D7A7D] dark:text-[#B8D1D0] max-w-xl mx-auto leading-relaxed">
+            Verified desks, meeting rooms, podcast suites, and production sets across Nigeria with guaranteed 24/7 power and enterprise fiber.
           </p>
         </div>
 
-        {/* Conversational Search Input */}
+        {/* Conversational Search Input with Dual-Tone Glow */}
         <div className="max-w-2xl mx-auto">
           <form 
             onSubmit={handleAskOfis}
-            className="relative bg-white/95 dark:bg-[#0B1F33]/90 backdrop-blur-2xl p-2 rounded-2xl sm:rounded-3xl border border-[#D9E1E3] dark:border-[#1E3A4D] hover:border-[#0F766E]/60 focus-within:border-[#0F766E] shadow-[0_8px_30px_rgba(11,31,51,0.06)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.5)] focus-within:ring-2 focus-within:ring-[#0F766E]/20 transition-all duration-200"
+            className="relative bg-white/95 dark:bg-[#0B4A50]/95 backdrop-blur-2xl p-2 rounded-2xl sm:rounded-3xl border border-[#FFA987]/50 dark:border-[#FFA987]/40 hover:border-[#FFA987] focus-within:border-[#FFA987] shadow-[0_12px_36px_rgba(255,169,135,0.12)] dark:shadow-[0_16px_45px_rgba(0,0,0,0.5)] focus-within:ring-4 focus-within:ring-[#FFA987]/25 transition-all duration-200"
           >
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
               <div className="relative flex-1 flex items-center pl-3 sm:pl-4">
-                <Search className="w-4.5 h-4.5 text-[#0F766E] dark:text-[#14B8A6] shrink-0" />
+                <Search className="w-5 h-5 text-[#FFA987] dark:text-[#FFA987] shrink-0" />
                 <input
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder={ROTATING_PLACEHOLDERS[placeholderIndex]}
-                  className="w-full px-3 py-2.5 text-xs sm:text-sm text-[#111827] dark:text-[#F8FAFC] placeholder:text-[#64748B] dark:placeholder:text-[#94A3B8] bg-transparent outline-hidden font-normal"
+                  className="w-full px-3 py-2.5 text-xs sm:text-sm text-[#12383B] dark:text-[#FFFFFF] placeholder:text-[#5D7A7D] dark:placeholder:text-[#B8D1D0]/70 bg-transparent outline-hidden font-medium"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs sm:text-sm shadow-sm active:scale-[0.98] transition-all duration-150 flex items-center justify-center space-x-2 shrink-0 cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white font-bold text-xs sm:text-sm shadow-[0_4px_18px_rgba(255,169,135,0.4)] active:scale-[0.98] transition-all duration-150 flex items-center justify-center space-x-2 shrink-0 cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5 text-white" />
+                <Sparkles className="w-4 h-4 text-[#FFA987]" />
                 <span>ASK OFIS</span>
               </button>
             </div>
           </form>
 
-          {/* Guarantee Badges - Uncluttered and Compact */}
-          <div className="mt-3 flex items-center justify-center flex-wrap gap-x-4 gap-y-1 text-xs text-[#64748B] dark:text-[#94A3B8] font-medium">
-            <span className="flex items-center space-x-1.5 text-[#172B3A] dark:text-[#CBD5E1]">
-              <Zap className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+          {/* Guarantee Badges - Bright and High Contrast with Warm Peach Highlight */}
+          <div className="mt-3.5 flex items-center justify-center flex-wrap gap-x-4 gap-y-1.5 text-xs text-[#5D7A7D] dark:text-[#B8D1D0] font-semibold">
+            <span className="flex items-center space-x-1.5 text-[#C85A32] dark:text-[#FFA987] font-bold">
+              <Zap className="w-3.5 h-3.5 text-[#FFA987] fill-[#FFA987]/30" />
               <span>24/7 Power Guaranteed</span>
             </span>
-            <span className="text-[#D9E1E3] dark:text-[#1E3A4D]">•</span>
-            <span className="flex items-center space-x-1.5 text-[#172B3A] dark:text-[#CBD5E1]">
-              <MapPin className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+            <span className="text-[#FFA987]/50">•</span>
+            <span className="flex items-center space-x-1.5 text-[#12383B] dark:text-[#FFFFFF]">
+              <MapPin className="w-3.5 h-3.5 text-[#14BEB8] dark:text-[#28D2CB]" />
               <span>Physically Verified</span>
             </span>
-            <span className="text-[#D9E1E3] dark:text-[#1E3A4D]">•</span>
-            <span className="flex items-center space-x-1.5 text-[#172B3A] dark:text-[#CBD5E1]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+            <span className="text-[#FFA987]/50">•</span>
+            <span className="flex items-center space-x-1.5 text-[#12383B] dark:text-[#FFFFFF]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#28D2CB]" />
               <span>Instant Turnstile Pass</span>
             </span>
           </div>
         </div>
 
         {/* 4 CORE PILLARS WITH REFLECTIVE ICONS (WORK • MEET • CREATE • RECORD) */}
-        <div className="pt-2 max-w-3xl mx-auto">
+        <div className="pt-3 max-w-3xl mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             {HERO_PILLARS.map((pillar) => {
               const isActive = selectedPillar === pillar.id;
@@ -168,10 +176,10 @@ export const OfisHeroAiSection: React.FC = () => {
                   key={pillar.id}
                   type="button"
                   onClick={() => handleSelectPillar(pillar)}
-                  className={`group relative p-3 sm:p-4 rounded-2xl bg-white dark:bg-[#0B1F33] hover:bg-white dark:hover:bg-[#102A3D] border transition-all duration-300 text-center flex flex-col items-center justify-between cursor-pointer ${
+                  className={`group relative p-3 sm:p-4 rounded-2xl bg-white dark:bg-[#0B4A50] hover:bg-white dark:hover:bg-[#105A60] border transition-all duration-300 text-center flex flex-col items-center justify-between cursor-pointer ${
                     isActive
-                      ? 'border-[#0F766E] ring-2 ring-[#0F766E]/20 shadow-md scale-[1.02]'
-                      : 'border-[#D9E1E3] dark:border-[#1E3A4D] hover:border-[#0F766E]/50 shadow-xs hover:shadow-md hover:-translate-y-0.5'
+                      ? 'border-[#14BEB8] ring-2 ring-[#14BEB8]/30 shadow-[0_8px_24px_rgba(20,190,184,0.25)] scale-[1.03]'
+                      : 'border-[#E2ECEB] dark:border-[#166D74] hover:border-[#14BEB8]/70 shadow-xs hover:shadow-lg hover:-translate-y-0.5'
                   }`}
                 >
                   {/* Reflective Lustre Icon with Mirror Drop */}
@@ -186,10 +194,10 @@ export const OfisHeroAiSection: React.FC = () => {
 
                   {/* Pillar Label & Subtitle */}
                   <div className="mt-1">
-                    <span className="block text-xs sm:text-sm font-extrabold tracking-wider text-[#172B3A] dark:text-[#F8FAFC] group-hover:text-[#0F766E] dark:group-hover:text-[#14B8A6] transition-colors">
+                    <span className="block text-xs sm:text-sm font-extrabold tracking-wider text-[#12383B] dark:text-[#FFFFFF] group-hover:text-[#006B70] dark:group-hover:text-[#28D2CB] transition-colors">
                       {pillar.title}
                     </span>
-                    <p className="text-[11px] text-[#64748B] dark:text-[#94A3B8] font-medium line-clamp-1 mt-0.5">
+                    <p className="text-[11px] text-[#5D7A7D] dark:text-[#B8D1D0] font-medium line-clamp-1 mt-0.5">
                       {pillar.subtitle}
                     </p>
                   </div>
@@ -207,10 +215,10 @@ export const OfisHeroAiSection: React.FC = () => {
               setCurrentView('explore');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="inline-flex items-center space-x-1.5 text-xs font-semibold text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F766E] dark:hover:text-[#14B8A6] transition-colors cursor-pointer"
+            className="inline-flex items-center space-x-1.5 text-xs font-semibold text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#006B70] dark:hover:text-[#FFA987] transition-colors cursor-pointer group"
           >
             <span>Browse all workspaces with interactive map</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#FFA987] group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
 

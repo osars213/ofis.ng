@@ -58,74 +58,37 @@ export const AppSplashScreen: React.FC<AppSplashScreenProps> = ({
 
   return (
     <div 
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#F8FAFC] dark:bg-[#0B0F17] text-[#111827] dark:text-[#F9FAFB] transition-all duration-500 select-none overflow-hidden ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#07383D] text-[#FFFFFF] transition-all duration-500 select-none overflow-hidden ${
         isFadingOut ? 'opacity-0 pointer-events-none scale-105 filter blur-xs' : 'opacity-100'
       }`}
     >
       {/* Background Architectural Ambient Radial Orbs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-600/10 dark:bg-teal-600/15 rounded-full blur-3xl pointer-events-none animate-pulse duration-1000" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] bg-lime-400/10 dark:bg-lime-400/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,720px)] h-[min(90vw,720px)] bg-gradient-to-tr from-[#006B70]/35 via-[#14BEB8]/20 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      {/* Decorative Revolving Arcs */}
-      <div className="absolute w-[360px] h-[360px] sm:w-[460px] sm:h-[460px] rounded-full border border-teal-600/15 dark:border-teal-600/25 animate-[ofis-spin-slow_24s_linear_infinite] pointer-events-none" />
-      <div className="absolute w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] rounded-full border border-dashed border-lime-500/20 dark:border-lime-500/30 animate-[ofis-spin-reverse_30s_linear_infinite] pointer-events-none" />
+      {/* Main Logo Scaled to Fill Viewport Appropriately */}
+      <div className="relative z-10 flex flex-col items-center px-6 w-full max-w-4xl text-center">
+        <img 
+          src="/ofis-logo-dark.svg" 
+          alt="OFIS — Nigeria's Physical Space Network" 
+          className="w-[min(88vw,760px)] max-h-[42vh] object-contain drop-shadow-[0_0_24px_rgba(20,190,184,0.25)]"
+        />
 
-      {/* Main Logo & Breathing Centerpiece */}
-      <div className="relative z-10 flex flex-col items-center px-6 max-w-md w-full">
-        {/* Breathing Logo Icon Emblem with Light Rays */}
-        <div className="relative mb-6">
-          {/* Breathing Glow Halo */}
-          <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-teal-600/30 to-lime-400/30 blur-xl animate-pulse" />
-          
-          <div className="relative p-3 rounded-2xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-teal-600/20 dark:border-teal-600/30 shadow-2xl animate-bounce-subtle">
-            <OFISWordmark 
-              variant="mark-only" 
-              size="hero" 
-              isBreathing={true}
-              breathingSpeed="medium"
-            />
-          </div>
-        </div>
+        {/* Subtle, Minimal Loading Indicator */}
+        <div className="w-8 h-8 border-[2.5px] border-[#14BEB8]/30 border-t-[#14BEB8] rounded-full animate-spin mt-9 shadow-[0_0_12px_rgba(20,190,184,0.3)]" />
 
-        {/* Master Brand Wordmark */}
-        <div className="mb-4">
-          <OFISWordmark 
-            variant="compact" 
-            size="lg" 
-            isBreathing={true}
-            breathingSpeed="slow"
-          />
-        </div>
-
-        {/* Tagline */}
-        <div className="flex flex-col items-center text-center space-y-0.5 mb-8">
-          <span className="text-[11px] sm:text-xs font-black uppercase tracking-[0.22em] text-slate-800 dark:text-slate-200">
-            FIND THE RIGHT SPACE.
-          </span>
-          <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.25em] text-teal-700 dark:text-lime-400">
-            BOOK IT WHEN YOU NEED IT.
-          </span>
-        </div>
-
-        {/* Progress Bar & Status Text */}
-        <div className="w-full max-w-xs space-y-2.5">
-          <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-teal-600/20">
+        {/* Progress status */}
+        <div className="w-full max-w-xs mt-6 space-y-2">
+          <div className="h-1 w-full bg-[#166D74] rounded-full overflow-hidden border border-[#14BEB8]/30">
             <div 
-              className="h-full bg-gradient-to-r from-teal-700 via-teal-500 to-lime-400 rounded-full transition-all duration-300 ease-out shadow-[0_0_10px_rgba(74,222,128,0.5)]"
+              className="h-full bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] rounded-full transition-all duration-300 ease-out shadow-[0_0_12px_rgba(20,190,184,0.5)]"
               style={{ width: `${progress}%` }}
             />
           </div>
-
-          <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 px-1">
+          <div className="flex items-center justify-between text-[11px] font-mono text-[#B8D1D0] px-1">
             <span className="truncate pr-2">{statusMessage}</span>
-            <span className="font-bold text-teal-700 dark:text-teal-500">{progress}%</span>
+            <span className="font-bold text-[#28D2CB]">{progress}%</span>
           </div>
         </div>
-      </div>
-
-      {/* Bottom Footer Assurance */}
-      <div className="absolute bottom-6 text-center text-[10px] text-slate-400 dark:text-slate-500 font-medium tracking-wide">
-        Physical Workspaces, Studios & Offices Across Nigeria
       </div>
     </div>
   );

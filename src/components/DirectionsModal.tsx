@@ -17,27 +17,27 @@ export const DirectionsModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="relative w-full max-w-md bg-white dark:bg-[#071521] rounded-3xl border border-[#E5E7EB] dark:border-[#1E3A4D] shadow-2xl p-6 space-y-6">
+      <div className="relative w-full max-w-md bg-white dark:bg-[#07383D] rounded-3xl border border-[#E5E7EB] dark:border-[#166D74] shadow-2xl p-6 space-y-6">
         
-        <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#1E3A4D] pb-4">
+        <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#166D74] pb-4">
           <div className="flex items-center space-x-2">
-            <Navigation className="w-5 h-5 text-[#0F766E] dark:text-[#14B8A6]" />
+            <Navigation className="w-5 h-5 text-[#006B70] dark:text-[#28D2CB]" />
             <h3 className="text-lg font-bold text-[#111827] dark:text-[#F2F2F2]">Transit &amp; Navigation</h3>
           </div>
           <button
             type="button"
             onClick={() => setIsDirectionsOpen(false)}
-            className="p-2 rounded-xl text-[#6B7280] dark:text-[#718079] hover:text-[#111827] dark:hover:text-[#F2F2F2] hover:bg-[#F1F5F9] dark:hover:bg-[#0B1F33] cursor-pointer"
+            className="p-2 rounded-xl text-[#6B7280] dark:text-[#718079] hover:text-[#111827] dark:hover:text-[#F2F2F2] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <div className="space-y-4">
-          <div className="p-4 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] space-y-2">
+          <div className="p-4 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74] space-y-2">
             <h4 className="text-sm font-bold text-[#111827] dark:text-[#F2F2F2]">{directionsSpace.title}</h4>
             <div className="flex items-start space-x-2 text-xs text-[#6B7280] dark:text-[#94A3B8]">
-              <MapPin className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6] shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB] shrink-0 mt-0.5" />
               <span>{locationLabel}</span>
             </div>
           </div>
@@ -55,7 +55,7 @@ export const DirectionsModal: React.FC = () => {
             href={googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3.5 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-bold text-xs shadow-md flex items-center justify-center space-x-2 transition-all cursor-pointer"
+            className="w-full py-3.5 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-xs shadow-md flex items-center justify-center space-x-2 transition-all cursor-pointer"
           >
             <span>Open in Google Maps / Apple Maps</span>
             <ExternalLink className="w-4 h-4" />

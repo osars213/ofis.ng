@@ -117,12 +117,12 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="relative w-full max-w-lg bg-white dark:bg-[#071521] rounded-3xl border border-[#E5E7EB] dark:border-[#1E3A4D] shadow-2xl p-6 space-y-5">
+      <div className="relative w-full max-w-lg bg-white dark:bg-[#07383D] rounded-3xl border border-[#E5E7EB] dark:border-[#166D74] shadow-2xl p-6 space-y-5">
         
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#1E2522] pb-4">
+        <div className="flex items-center justify-between border-b border-[#E5E7EB] dark:border-[#166D74] pb-4">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#0F766E]/15 dark:bg-[#0F766E]/15 border border-[#0F766E]/30 flex items-center justify-center text-[#0F766E] dark:text-[#14B8A6]">
+            <div className="w-10 h-10 rounded-2xl bg-[#006B70]/15 dark:bg-[#006B70]/15 border border-[#006B70]/30 flex items-center justify-center text-[#006B70] dark:text-[#28D2CB]">
               <Bell className="w-5 h-5" />
             </div>
             <div>
@@ -133,14 +133,14 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-xl text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2] hover:bg-[#F1F5F9] dark:hover:bg-[#0B1F33] transition-colors cursor-pointer"
+            className="p-2 rounded-xl text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Space Preview */}
-        <div className="flex items-center space-x-3 p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D]">
+        <div className="flex items-center space-x-3 p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74]">
           <img
             src={targetSpace.featuredImage}
             alt={targetSpace.title}
@@ -149,7 +149,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
           <div className="flex-1 min-w-0">
             <h4 className="text-xs font-bold text-[#111827] dark:text-[#F2F2F2] truncate">{targetSpace.title}</h4>
             <p className="text-[11px] text-[#6B7280] dark:text-[#94A3B8] truncate">{targetSpace.neighborhood}, {targetSpace.city}</p>
-            <div className="flex items-center gap-2 mt-1 text-[11px] font-mono text-[#0F766E] dark:text-[#14B8A6]">
+            <div className="flex items-center gap-2 mt-1 text-[11px] font-mono text-[#006B70] dark:text-[#28D2CB]">
               <span>{formatPrice(targetSpace.pricePerHour)}/hr</span>
               <span className="text-[#9CA3AF] dark:text-[#94A3B8]">•</span>
               <span>{formatPrice(targetSpace.pricePerDay || targetSpace.pricePerHour * 8)}/day</span>
@@ -160,8 +160,8 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
         {createdAlertId ? (
           /* Confirmation State with 1-Tap Test Dispatch */
           <div className="space-y-4 animate-fadeIn">
-            <div className="p-4 rounded-2xl bg-[#0F766E]/15 dark:bg-[#0F766E]/10 border border-[#0F766E]/30 space-y-2 text-center">
-              <div className="w-10 h-10 rounded-full bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6] flex items-center justify-center mx-auto">
+            <div className="p-4 rounded-2xl bg-[#006B70]/15 dark:bg-[#006B70]/10 border border-[#006B70]/30 space-y-2 text-center">
+              <div className="w-10 h-10 rounded-full bg-[#006B70]/15 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB] flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
               <h4 className="text-sm font-bold text-[#111827] dark:text-[#F2F2F2]">Availability Alert Activated!</h4>
@@ -171,10 +171,10 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
             </div>
 
             {/* Test Simulation Trigger Button */}
-            <div className="p-4 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] space-y-3">
+            <div className="p-4 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74] space-y-3">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-bold text-[#111827] dark:text-[#F2F2F2] flex items-center gap-1.5">
-                  <Sparkles className="w-4 h-4 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <Sparkles className="w-4 h-4 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>Test Notification Dispatch</span>
                 </span>
                 <span className="text-[10px] font-mono text-[#6B7280] dark:text-[#94A3B8]">Simulation Ready</span>
@@ -185,7 +185,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
               <button
                 type="button"
                 onClick={handleTestDispatch}
-                className="w-full py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-extrabold text-xs flex items-center justify-center space-x-1.5 transition-all shadow-md cursor-pointer active:scale-95"
+                className="w-full py-2.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-extrabold text-xs flex items-center justify-center space-x-1.5 transition-all shadow-md cursor-pointer active:scale-95"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>Simulate Desk Release & Dispatch Alerts</span>
@@ -194,14 +194,14 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
 
             {/* Simulated Messages Feedback */}
             {simulatedDispatch && (
-              <div className="space-y-2.5 p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#071521] border border-[#0F766E]/40 text-xs">
-                <div className="text-[11px] font-mono font-bold text-[#0F766E] dark:text-[#14B8A6] uppercase flex items-center gap-1">
+              <div className="space-y-2.5 p-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#07383D] border border-[#006B70]/40 text-xs">
+                <div className="text-[11px] font-mono font-bold text-[#006B70] dark:text-[#28D2CB] uppercase flex items-center gap-1">
                   <Zap className="w-3.5 h-3.5" />
                   <span>Simulated Multi-Channel Delivery Logs:</span>
                 </div>
                 {smsEnabled && (
-                  <div className="p-2 rounded-xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[11px] space-y-1">
-                    <div className="text-[#0F766E] dark:text-[#14B8A6] font-bold flex items-center gap-1">
+                  <div className="p-2 rounded-xl bg-white dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74] text-[11px] space-y-1">
+                    <div className="text-[#006B70] dark:text-[#28D2CB] font-bold flex items-center gap-1">
                       <Phone className="w-3 h-3" />
                       <span>SMS Gateway (Delivered to {phone})</span>
                     </div>
@@ -209,8 +209,8 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                   </div>
                 )}
                 {emailEnabled && (
-                  <div className="p-2 rounded-xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] text-[11px] space-y-1">
-                    <div className="text-[#0F766E] dark:text-[#14B8A6] font-bold flex items-center gap-1">
+                  <div className="p-2 rounded-xl bg-white dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74] text-[11px] space-y-1">
+                    <div className="text-[#006B70] dark:text-[#28D2CB] font-bold flex items-center gap-1">
                       <Mail className="w-3 h-3" />
                       <span>Email Dispatch (Delivered to {email})</span>
                     </div>
@@ -223,7 +223,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="w-full py-3 rounded-2xl bg-white dark:bg-[#0B1F33] hover:bg-[#F1F5F9] dark:hover:bg-[#1E3A4D] text-xs font-bold text-[#111827] dark:text-[#F2F2F2] border border-[#E5E7EB] dark:border-[#1E3A4D] cursor-pointer shadow-2xs"
+              className="w-full py-3 rounded-2xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] text-xs font-bold text-[#111827] dark:text-[#F2F2F2] border border-[#E5E7EB] dark:border-[#166D74] cursor-pointer shadow-2xs"
             >
               Done & Close
             </button>
@@ -236,7 +236,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <label className="text-[11px] font-semibold text-[#6B7280] dark:text-[#94A3B8] flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-[#0F766E] dark:text-[#14B8A6]" />
+                  <Calendar className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
                   <span>Preferred Dates</span>
                 </label>
                 <div className="flex items-center gap-2 text-xs">
@@ -244,7 +244,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                     type="button"
                     onClick={() => setIsMultiDay(false)}
                     className={`px-2 py-0.5 rounded-lg text-[10px] font-semibold transition-all cursor-pointer ${
-                      !isMultiDay ? 'bg-[#0F766E] text-white' : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2]'
+                      !isMultiDay ? 'bg-[#006B70] text-white' : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2]'
                     }`}
                   >
                     Single Day
@@ -253,7 +253,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                     type="button"
                     onClick={() => setIsMultiDay(true)}
                     className={`px-2 py-0.5 rounded-lg text-[10px] font-semibold transition-all cursor-pointer ${
-                      isMultiDay ? 'bg-[#0F766E] text-white' : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2]'
+                      isMultiDay ? 'bg-[#006B70] text-white' : 'text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2]'
                     }`}
                   >
                     Extended Range
@@ -269,7 +269,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                     value={startDate}
                     min={todayStr}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#0F766E] font-mono cursor-pointer"
+                    className="w-full p-2.5 rounded-xl bg-white dark:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#006B70] font-mono cursor-pointer"
                     required
                   />
                 </div>
@@ -281,7 +281,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                       value={endDate}
                       min={startDate || todayStr}
                       onChange={(e) => setEndDate(e.target.value)}
-                      className="w-full p-2.5 rounded-xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#0F766E] font-mono cursor-pointer"
+                      className="w-full p-2.5 rounded-xl bg-white dark:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#006B70] font-mono cursor-pointer"
                       required
                     />
                   </div>
@@ -291,7 +291,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                     <select
                       value={timeSlot}
                       onChange={(e) => setTimeSlot(e.target.value)}
-                      className="w-full p-2.5 rounded-xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#0F766E] cursor-pointer"
+                      className="w-full p-2.5 rounded-xl bg-white dark:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#006B70] cursor-pointer"
                     >
                       <option value="full_day">All Day (Full Pass)</option>
                       <option value="morning">Morning (08:00 - 13:00)</option>
@@ -312,19 +312,19 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
               <div 
                 onClick={() => setSmsEnabled(!smsEnabled)}
                 className={`flex items-center justify-between p-3 rounded-2xl border transition-all cursor-pointer select-none ${
-                  smsEnabled ? 'bg-[#F8FAFC] dark:bg-[#0B1F33] border-[#0F766E]/40' : 'bg-white dark:bg-[#071521] border-[#E5E7EB] dark:border-[#1E3A4D]'
+                  smsEnabled ? 'bg-[#F8FAFC] dark:bg-[#0B4A50] border-[#006B70]/40' : 'bg-white dark:bg-[#07383D] border-[#E5E7EB] dark:border-[#166D74]'
                 }`}
               >
                 <div className="flex items-center space-x-3">
                   <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
-                    smsEnabled ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6]' : 'bg-[#F1F5F9] dark:bg-[#0B1F33] text-[#6B7280] dark:text-[#94A3B8]'
+                    smsEnabled ? 'bg-[#006B70]/15 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB]' : 'bg-[#F1F5F9] dark:bg-[#105A60] text-[#6B7280] dark:text-[#94A3B8]'
                   }`}>
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
                     <div className="text-xs font-bold text-[#111827] dark:text-[#F2F2F2] flex items-center gap-1.5">
                       <span>SMS Mobile Alert</span>
-                      <span className="text-[9px] font-mono text-[#0F766E] dark:text-[#14B8A6] bg-[#0F766E]/15 dark:bg-[#0F766E]/10 px-1.5 py-0.2 rounded">
+                      <span className="text-[9px] font-mono text-[#006B70] dark:text-[#28D2CB] bg-[#006B70]/15 dark:bg-[#006B70]/10 px-1.5 py-0.2 rounded">
                         Instant SMS
                       </span>
                     </div>
@@ -335,7 +335,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                   type="checkbox"
                   checked={smsEnabled}
                   onChange={() => {}}
-                  className="rounded text-[#0F766E] dark:text-[#14B8A6] focus:ring-0 cursor-pointer"
+                  className="rounded text-[#006B70] dark:text-[#28D2CB] focus:ring-0 cursor-pointer"
                 />
               </div>
 
@@ -346,7 +346,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+234 803 000 0000"
-                    className="w-full p-2.5 rounded-xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#0F766E] font-mono"
+                    className="w-full p-2.5 rounded-xl bg-white dark:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#006B70] font-mono"
                     required={smsEnabled}
                   />
                 </div>
@@ -356,19 +356,19 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
               <div 
                 onClick={() => setEmailEnabled(!emailEnabled)}
                 className={`flex items-center justify-between p-3 rounded-2xl border transition-all cursor-pointer select-none ${
-                  emailEnabled ? 'bg-[#F8FAFC] dark:bg-[#0B1F33] border-[#0F766E]/40' : 'bg-white dark:bg-[#071521] border-[#E5E7EB] dark:border-[#1E3A4D]'
+                  emailEnabled ? 'bg-[#F8FAFC] dark:bg-[#0B4A50] border-[#006B70]/40' : 'bg-white dark:bg-[#07383D] border-[#E5E7EB] dark:border-[#166D74]'
                 }`}
               >
                 <div className="flex items-center space-x-3">
                   <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
-                    emailEnabled ? 'bg-[#0F766E]/15 dark:bg-[#0F766E]/20 text-[#0F766E] dark:text-[#14B8A6]' : 'bg-[#F1F5F9] dark:bg-[#0B1F33] text-[#6B7280] dark:text-[#94A3B8]'
+                    emailEnabled ? 'bg-[#006B70]/15 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB]' : 'bg-[#F1F5F9] dark:bg-[#105A60] text-[#6B7280] dark:text-[#94A3B8]'
                   }`}>
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
                     <div className="text-xs font-bold text-[#111827] dark:text-[#F2F2F2] flex items-center gap-1.5">
                       <span>Email Notification</span>
-                      <span className="text-[9px] font-mono text-[#0F766E] dark:text-[#14B8A6] bg-[#0F766E]/15 dark:bg-[#0F766E]/10 px-1.5 py-0.2 rounded">
+                      <span className="text-[9px] font-mono text-[#006B70] dark:text-[#28D2CB] bg-[#006B70]/15 dark:bg-[#006B70]/10 px-1.5 py-0.2 rounded">
                         Direct Inbox
                       </span>
                     </div>
@@ -379,7 +379,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                   type="checkbox"
                   checked={emailEnabled}
                   onChange={() => {}}
-                  className="rounded text-[#0F766E] dark:text-[#14B8A6] focus:ring-0 cursor-pointer"
+                  className="rounded text-[#006B70] dark:text-[#28D2CB] focus:ring-0 cursor-pointer"
                 />
               </div>
 
@@ -390,7 +390,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your.email@company.ng"
-                    className="w-full p-2.5 rounded-xl bg-white dark:bg-[#0B1F33] border border-[#E5E7EB] dark:border-[#1E3A4D] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#0F766E] font-mono"
+                    className="w-full p-2.5 rounded-xl bg-white dark:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#006B70] font-mono"
                     required={emailEnabled}
                   />
                 </div>
@@ -402,7 +402,7 @@ export const AvailabilityAlertModal: React.FC<AvailabilityAlertModalProps> = ({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 rounded-2xl bg-[#0F766E] hover:bg-[#14B8A6] text-white font-extrabold text-sm shadow-md transition-all active:scale-95 flex items-center justify-center space-x-2 cursor-pointer"
+                className="w-full py-3.5 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-extrabold text-sm shadow-md transition-all active:scale-95 flex items-center justify-center space-x-2 cursor-pointer"
               >
                 <Bell className="w-4 h-4" />
                 <span>{isSubmitting ? 'Activating Alert...' : 'Activate Availability Alert'}</span>
