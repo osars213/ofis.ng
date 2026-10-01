@@ -9,6 +9,11 @@
     "start": "node dist/server.cjs",
     "lint": "tsc --noEmit"
   },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "packageManager": "npm@10.9.8",
   "dependencies": {
     "@google/genai": "^0.2.0",
     "@supabase/supabase-js": "^2.49.1",
