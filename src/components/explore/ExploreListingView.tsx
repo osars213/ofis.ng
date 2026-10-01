@@ -122,7 +122,7 @@ export const ExploreListingView: React.FC = () => {
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#07383D] text-[#111827] dark:text-[#F8FAFC] transition-colors duration-150">
       
       {/* Top Breadcrumb & Controls Bar */}
-      <div className="sticky top-16 z-30 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#166D74] px-4 sm:px-6 lg:px-8 py-3.5">
+      <div className="sticky top-16 sm:top-[70px] z-30 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#166D74] px-4 sm:px-6 lg:px-8 py-3 transition-all">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
           
           {/* Left: Summary & City / Category quick info */}
@@ -156,7 +156,7 @@ export const ExploreListingView: React.FC = () => {
           </div>
 
           {/* Right: Actions, Sorting & View Toggle */}
-          <div className="flex items-center space-x-2.5 self-end md:self-auto">
+          <div className="flex items-center justify-between sm:justify-end gap-2 w-full md:w-auto">
             
             {/* Mobile Filter Trigger Button */}
             <button
@@ -221,6 +221,35 @@ export const ExploreListingView: React.FC = () => {
 
           </div>
 
+        </div>
+
+        {/* Responsive Horizontal Category Submenu Bar */}
+        <div className="max-w-7xl mx-auto mt-2.5 pt-2.5 border-t border-[#E5E7EB]/80 dark:border-[#166D74]/80 flex items-center space-x-1.5 overflow-x-auto scrollbar-none snap-x touch-pan-x py-0.5">
+          {[
+            { id: 'all', label: 'All Spaces' },
+            { id: 'coworking', label: 'Coworking Desks' },
+            { id: 'private-office', label: 'Private Offices' },
+            { id: 'meeting-room', label: 'Meeting Rooms' },
+            { id: 'studio', label: 'Studios & Audio' },
+            { id: 'training-room', label: 'Training Rooms' },
+            { id: 'event-space', label: 'Event Venues' },
+          ].map((cat) => {
+            const isSelected = (!activeCategory && cat.id === 'all') || activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setActiveCategory(cat.id === 'all' ? null : (cat.id as any))}
+                className={`snap-start shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  isSelected
+                    ? 'bg-[#006B70] text-white shadow-xs'
+                    : 'bg-[#F1F6F5] dark:bg-[#0B4A50] hover:bg-[#E2ECEB] dark:hover:bg-[#105A60] text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
+                }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 

@@ -109,7 +109,7 @@ export const BookingDetailsModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 dark:bg-black/85 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
-      <div className="relative w-full max-w-lg bg-white dark:bg-[#07383D] rounded-3xl border border-[#E2ECEB] dark:border-[#166D74] shadow-2xl p-5 sm:p-6 space-y-5">
+      <div className="relative w-full max-w-lg md:max-w-xl bg-white dark:bg-[#07383D] rounded-3xl border border-[#E2ECEB] dark:border-[#166D74] shadow-2xl p-4 sm:p-5 space-y-3.5 max-h-[94vh] overflow-y-auto">
         
         {/* Header */}
         <div className="flex items-center justify-between border-b border-[#E2ECEB] dark:border-[#166D74] pb-4">

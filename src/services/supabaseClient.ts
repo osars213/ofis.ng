@@ -236,6 +236,7 @@ export function mapDbBookingToBooking(row: any): Booking {
     startTime: row.start_time,
     endTime: row.end_time,
     durationHours: Number(row.duration_hours) || 2,
+    pricingPeriod: (row.pricing_period as any) || 'hour',
     selectedSeatId: row.selected_seat_id,
     selectedSeatLabel: row.selected_seat_label,
     guestCount: Number(row.guest_count) || 1,
@@ -276,6 +277,7 @@ export function mapBookingToDbBooking(booking: Booking): Record<string, any> {
     start_time: booking.startTime,
     end_time: booking.endTime,
     duration_hours: booking.durationHours,
+    pricing_period: booking.pricingPeriod || 'hour',
     selected_seat_id: booking.selectedSeatId,
     selected_seat_label: booking.selectedSeatLabel,
     guest_count: booking.guestCount,
@@ -377,10 +379,8 @@ export function mapProfileToDbProfile(user: UserProfile | Partial<UserProfile>):
   if (user.email !== undefined) row.email = user.email;
   if (user.phone !== undefined) row.phone = user.phone;
   if (user.avatar !== undefined) row.avatar = user.avatar;
-  if (user.role !== undefined) row.role = user.role;
   if (user.company !== undefined) row.company = user.company;
   if (user.bio !== undefined) row.bio = user.bio;
-  if (user.walletBalanceNgn !== undefined) row.wallet_balance_ngn = user.walletBalanceNgn;
   if (user.savedSpaceIds !== undefined) row.saved_space_ids = user.savedSpaceIds;
   if (user.isEmailVerified !== undefined) row.is_email_verified = user.isEmailVerified;
   if (user.emailVerifiedAt !== undefined) row.email_verified_at = user.emailVerifiedAt;

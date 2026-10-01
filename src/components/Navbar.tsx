@@ -87,7 +87,7 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Center: Desktop Navigation Links (Clean, Uncramped, Typography-Focused) */}
-        <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2 text-xs font-semibold">
+        <nav className="hidden lg:flex items-center space-x-1 lg:space-x-1.5 xl:space-x-2 text-xs font-semibold">
           <button
             type="button"
             id="nav-home-btn"
@@ -95,7 +95,7 @@ export const Navbar: React.FC = () => {
               setCurrentView('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'home' 
                 ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
                 : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
@@ -111,7 +111,7 @@ export const Navbar: React.FC = () => {
               setCurrentView('explore');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'explore' || currentView === 'details'
                 ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
                 : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
@@ -127,7 +127,7 @@ export const Navbar: React.FC = () => {
               setCurrentView('map');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'map' 
                 ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
                 : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
@@ -146,7 +146,7 @@ export const Navbar: React.FC = () => {
                   setCurrentView('bookings');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
+                className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
                   currentView === 'bookings' 
                     ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
                     : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
@@ -162,7 +162,7 @@ export const Navbar: React.FC = () => {
                   setCurrentView('saved');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-3.5 py-1.5 rounded-xl transition-all flex items-center space-x-1.5 cursor-pointer ${
+                className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all flex items-center space-x-1.5 cursor-pointer ${
                   currentView === 'saved' 
                     ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
                     : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
@@ -185,7 +185,7 @@ export const Navbar: React.FC = () => {
               setCurrentView('contact');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'contact' 
                 ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
                 : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
@@ -272,7 +272,7 @@ export const Navbar: React.FC = () => {
 
             {/* Profile Dropdown Popover (Only for signed in user) */}
             {!isGuest && isUserMenuOpen && (
-              <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#166D74] shadow-xl p-2.5 space-y-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute right-0 mt-2 w-64 max-w-[calc(100vw-1.5rem)] rounded-2xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#166D74] shadow-xl p-2.5 space-y-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 
                 {/* User Info Header */}
                 <div className="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-[#07383D] border border-[#E5E7EB] dark:border-[#166D74] space-y-1">

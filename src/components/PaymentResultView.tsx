@@ -37,15 +37,13 @@ export const PaymentResultView: React.FC = () => {
 
     try {
       const urlParams = new URLSearchParams(window.location.search);
-      const ref = urlParams.get('reference') || urlParams.get('ref') || urlParams.get('trxref') || '';
+      const ref = urlParams.get('reference') || urlParams.get('ref') || urlParams.get('trxref') || urlParams.get('transaction_reference') || '';
       const bookingId = urlParams.get('booking_id') || urlParams.get('bookingId') || '';
       const isSandbox = urlParams.get('sandbox') === 'true';
+      const urlStatus = (urlParams.get('status') || '').toLowerCase();
+      const isCancelled = urlStatus === 'cancelled' || urlParams.get('cancelled') === 'true';
 
       setReference(ref);
-
-      if (!bookingId || !ref) {
-        throw new Error('Missing payment reference or booking identifier in verification callback.');
-      }
 
       // Obtain Supabase Auth Token if available
       const client = getSupabaseClient();
@@ -53,6 +51,26 @@ export const PaymentResultView: React.FC = () => {
       if (client) {
         const sessionRes = await client.auth.getSession();
         token = sessionRes.data.session?.access_token;
+      }
+
+      if (isCancelled) {
+        if (bookingId) {
+          fetch(`/api/bookings/${bookingId}/cancel`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+            body: JSON.stringify({ reason: 'User cancelled payment at checkout' }),
+          }).catch(() => {});
+        }
+        setErrorMessage('Payment was cancelled at checkout. No charges were made.');
+        setStatus('failed');
+        return;
+      }
+
+      if (!bookingId && !ref) {
+        throw new Error('Missing payment reference or booking identifier in verification callback.');
       }
 
       // Call authoritative backend verification endpoint
@@ -63,8 +81,8 @@ export const PaymentResultView: React.FC = () => {
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify({
-          bookingId,
-          reference: ref,
+          bookingId: bookingId || undefined,
+          reference: ref || undefined,
           sandbox: isSandbox,
         }),
       });
@@ -80,6 +98,16 @@ export const PaymentResultView: React.FC = () => {
 
       // Refresh global bookings state
       refreshBookings().catch(() => {});
+
+      // Instant UI refresh for calendars and listing cards
+      window.dispatchEvent(
+        new CustomEvent('ofis:booking_confirmed', {
+          detail: {
+            bookingId: data.booking?.id || bookingId,
+            spaceId: data.booking?.spaceId || data.booking?.space_id,
+          },
+        })
+      );
 
       // Trigger celebration confetti
       try {

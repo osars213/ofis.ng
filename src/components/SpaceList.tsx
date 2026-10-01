@@ -357,15 +357,15 @@ export const SpaceList: React.FC = () => {
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[340px] h-[340px] sm:w-[540px] sm:h-[540px] bg-[#14BEB8]/5 dark:bg-[#14BEB8]/10 rounded-full blur-3xl pointer-events-none -z-0" />
 
       {/* Main Container */}
-      <div className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-32 flex flex-col justify-start relative z-10">
+      <div className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 lg:pt-8 pb-24 sm:pb-28 flex flex-col justify-start relative z-10">
 
         {/* ========================================================================= */}
         {/* HEADER: GREETING, SUBTITLE, PILLARS & CORE ATTRIBUTES                     */}
         {/* ========================================================================= */}
-        <div className={`text-center transition-all duration-300 ${hasMessages ? 'py-4 border-b border-[#E5E7EB] dark:border-[#166D74] mb-6' : 'py-6 sm:py-10 space-y-6'}`}>
+        <div className={`text-center transition-all duration-300 ${hasMessages ? 'py-3 border-b border-[#E5E7EB] dark:border-[#166D74] mb-4 sm:mb-6' : 'py-3 sm:py-5 space-y-4 sm:space-y-5'}`}>
           
           {/* 1. Dynamic Indigenous Nigerian Greeting */}
-          <div className="flex items-center justify-center min-h-[38px] sm:min-h-[46px]">
+          <div className="flex items-center justify-center min-h-[34px] sm:min-h-[44px]">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={`${currentLocale.code}-${greetingText}-${cycleStep}`}
@@ -373,7 +373,7 @@ export const SpaceList: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -3 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
-                className={`${hasMessages ? 'text-xl sm:text-2xl font-bold' : 'text-3xl sm:text-4xl md:text-5xl font-extrabold'} tracking-tight text-[#111827] dark:text-[#F8FAFC]`}
+                className={`${hasMessages ? 'text-lg sm:text-xl md:text-2xl font-bold' : 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold'} tracking-tight text-[#111827] dark:text-[#F8FAFC]`}
               >
                 {greetingText}
               </motion.h1>
@@ -382,7 +382,7 @@ export const SpaceList: React.FC = () => {
 
           {/* Subtitle */}
           {!hasMessages && (
-            <p className="text-base sm:text-lg font-medium text-[#6B7280] dark:text-[#94A3B8] max-w-lg mx-auto">
+            <p className="text-sm sm:text-base md:text-lg font-medium text-[#6B7280] dark:text-[#94A3B8] max-w-lg mx-auto">
               What workspace do you need today?
             </p>
           )}
@@ -750,7 +750,7 @@ export const SpaceList: React.FC = () => {
       {/* STICKY BOTTOM INPUT BAR (DURING ACTIVE GEMINI CHAT)                       */}
       {/* ========================================================================= */}
       {hasMessages && (
-        <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#166D74] py-3 px-4 sm:px-6 shadow-xl">
+        <div className="fixed bottom-16 md:bottom-0 left-0 right-0 z-30 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#166D74] py-3 px-4 sm:px-6 shadow-xl">
           <div className="max-w-4xl mx-auto flex items-center space-x-2">
             
             {/* New Chat Reset Button */}

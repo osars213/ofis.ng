@@ -566,15 +566,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
                   Investor Deck
                 </button>
               </li>
-              <li>
-                <a 
-                  href="/api/download/ofis-logo-assets.zip" 
-                  download="ofis-logo-assets.zip"
-                  className="text-[#28D2CB] hover:underline font-semibold flex items-center gap-1.5 pt-1"
-                >
-                  <span>Download Logo Assets (.zip)</span>
-                </a>
-              </li>
             </ul>
           </div>
 

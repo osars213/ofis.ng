@@ -165,7 +165,7 @@ export const DigitalPassModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/70 dark:bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
-      <div className={`relative w-full max-w-lg rounded-3xl border shadow-2xl overflow-hidden transition-colors duration-300 ${
+      <div className={`relative w-full max-w-lg max-h-[95vh] overflow-y-auto rounded-3xl border shadow-2xl transition-colors duration-300 ${
         isLight ? 'bg-[#F8FAFC] border-[#E5E7EB] text-[#111827]' : 'bg-[#0B4A50] border-[#166D74] text-[#F2F2F2]'
       }`}>
         

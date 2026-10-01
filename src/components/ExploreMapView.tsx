@@ -101,7 +101,7 @@ export const ExploreMapView: React.FC = () => {
 
         {/* Selected Space Bottom Card Drawer */}
         {activeSpace && (
-          <div className="relative z-20 max-w-xl mx-auto w-full p-4">
+          <div className="relative z-20 max-w-xl mx-auto w-full p-4 pb-20 md:pb-4">
             <div className="p-4 rounded-3xl bg-white dark:bg-[#1F2937] border border-[#E5E7EB] dark:border-[#166D74] shadow-xl flex items-center gap-4 transition-all">
               <img
                 src={activeSpace.featuredImage}

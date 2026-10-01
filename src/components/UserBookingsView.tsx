@@ -77,17 +77,17 @@ export const UserBookingsView: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FFF9F4] dark:bg-[#07383D] pb-32 transition-colors">
       {/* Top Header */}
-      <div className="sticky top-16 z-30 bg-white/90 dark:bg-[#07383D]/90 backdrop-blur-md border-b border-[#E2ECEB] dark:border-[#166D74] py-4 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
+      <div className="sticky top-16 z-30 bg-white/90 dark:bg-[#07383D]/90 backdrop-blur-md border-b border-[#E2ECEB] dark:border-[#166D74] py-3.5 sm:py-4 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-[#12383B] dark:text-[#FFFFFF]">My Bookings & Access Passes</h1>
+            <h1 className="text-lg sm:text-2xl font-bold text-[#12383B] dark:text-[#FFFFFF]">My Bookings & Access Passes</h1>
             <p className="text-xs text-[#5D7A7D] dark:text-[#B8D1D0] mt-0.5">Manage turnstile passes, arrival check-in, duration extensions & reviews</p>
           </div>
 
           <button
             type="button"
             onClick={() => setCurrentView('explore')}
-            className="px-3.5 py-2 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white text-xs font-bold transition-all cursor-pointer shadow-sm"
+            className="self-start sm:self-auto px-3.5 py-2 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white text-xs font-bold transition-all cursor-pointer shadow-sm shrink-0"
           >
             Find New Space
           </button>

@@ -71,7 +71,7 @@ export class SzndClient {
       return this.explicitEnvironment;
     }
     const envVar = (process.env.SZND_ENV || 'production').toLowerCase().trim();
-    return envVar === 'test' || envVar === 'sandbox' ? 'test' : 'production';
+    return envVar === 'test' || envVar === 'sandbox' || envVar === 'staging' ? 'test' : 'production';
   }
 
   public getApiKey(): string {
@@ -84,14 +84,18 @@ export class SzndClient {
 
   /**
    * Resolves the API base URL based on environment variables.
-   * If SZND_API_BASE_URL is set, it is always preferred.
+   * If SZND_API_BASE_URL is set, it is always preferred and normalized to include /api/v1.
    * In production mode, defaults to SZND_PRODUCTION_DEFAULT_BASE_URL if unspecified.
    * In test mode, returns SZND_API_BASE_URL if provided, or empty string (requires configuration).
    */
   public getBaseUrl(): string {
     const customUrl = (this.explicitBaseUrl || process.env.SZND_API_BASE_URL || '').trim();
     if (customUrl) {
-      return customUrl.replace(/\/+$/, '');
+      let cleaned = customUrl.replace(/\/+$/, '');
+      if (!cleaned.endsWith('/api/v1')) {
+        cleaned = `${cleaned}/api/v1`;
+      }
+      return cleaned;
     }
 
     if (this.getEnvironment() === 'production') {
@@ -133,10 +137,11 @@ export class SzndClient {
 
   /**
    * Generates HMAC-SHA256 signature using body + "|" + timestamp as string to sign.
+   * Transfaar / SZND expects RFC3339 formatted ISO-8601 timestamp.
    * Computed server-side only; never exposed to browser.
    */
   public generateHeaders(bodyString: string = ''): Record<string, string> {
-    const timestamp = Date.now().toString();
+    const timestamp = new Date().toISOString();
     const stringToSign = `${bodyString}|${timestamp}`;
     const secret = this.getApiSecret();
     const key = this.getApiKey();
@@ -274,7 +279,11 @@ export class SzndClient {
 
     const cleanRef = reference.trim();
     const baseUrl = this.getBaseUrl();
-    const endpoint = `${baseUrl}/client/payment/verify?reference=${encodeURIComponent(cleanRef)}`;
+    const paramName =
+      cleanRef.startsWith('OFIS-') ? 'origin_reference' : 'reference';
+
+    const endpoint =
+      `${baseUrl}/client/payment/verify?${paramName}=${encodeURIComponent(cleanRef)}`;
     const headers = this.generateHeaders('');
 
     try {
@@ -299,8 +308,16 @@ export class SzndClient {
       const resData = data.data || data;
       const rawStatus = String(resData.status || resData.payment_status || '').toUpperCase();
 
+      const isCompleted =
+        resData.paymentCompleted === true ||
+        resData.payment_completed === true ||
+        String(resData.provider_transaction_status || '').toUpperCase() === 'COMPLETED' ||
+        rawStatus === 'COMPLETED' ||
+        rawStatus === 'SUCCESS' ||
+        rawStatus === 'PAID';
+
       let mappedStatus: SzndVerifyResponse['status'] = 'UNKNOWN';
-      if (rawStatus === 'COMPLETED' || rawStatus === 'SUCCESS' || rawStatus === 'PAID') {
+      if (isCompleted) {
         mappedStatus = 'COMPLETED';
       } else if (rawStatus === 'PENDING' || rawStatus === 'PROCESSING') {
         mappedStatus = 'PENDING';

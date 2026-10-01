@@ -142,11 +142,11 @@ export const UserDashboardView: React.FC = () => {
           </div>
         </div>
 
-        {/* Dashboard Layout: Left Tabs Sidebar + Right Tab View */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Dashboard Layout: Left Tabs Sidebar (horizontal on mobile/tab) + Right Tab View */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
-          {/* Navigation Sidebar (3 cols on lg) */}
-          <aside className="lg:col-span-3 space-y-2 p-3 rounded-3xl bg-white dark:bg-[#0B4A50] border border-[#E2ECEB] dark:border-[#166D74] shadow-sm">
+          {/* Navigation Tabs (Horizontal on mobile/tab, 3 cols sidebar on lg) */}
+          <aside className="lg:col-span-3 flex lg:flex-col overflow-x-auto lg:overflow-visible gap-1.5 lg:gap-2 p-2 sm:p-3 rounded-3xl bg-white dark:bg-[#0B4A50] border border-[#E2ECEB] dark:border-[#166D74] shadow-sm scrollbar-none snap-x touch-pan-x">
             {[
               { id: 'overview', label: 'Overview', icon: User },
               { id: 'bookings', label: `My Bookings (${userBookings.length})`, icon: Calendar },
@@ -164,7 +164,7 @@ export const UserDashboardView: React.FC = () => {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`w-full p-3 rounded-2xl text-xs font-bold flex items-center space-x-3 transition-all cursor-pointer text-left ${
+                  className={`snap-start w-auto lg:w-full shrink-0 px-3.5 py-2.5 lg:p-3 rounded-2xl text-xs font-bold flex items-center space-x-2.5 transition-all cursor-pointer whitespace-nowrap lg:whitespace-normal text-left ${
                     isActive
                       ? 'bg-[#006B70] text-white shadow-xs'
                       : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:bg-[#F1F6F5] dark:hover:bg-[#07383D] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
@@ -176,7 +176,7 @@ export const UserDashboardView: React.FC = () => {
               );
             })}
 
-            <div className="pt-3 border-t border-[#E2ECEB] dark:border-[#166D74]">
+            <div className="hidden lg:block pt-3 border-t border-[#E2ECEB] dark:border-[#166D74]">
               <button
                 type="button"
                 onClick={signOut}

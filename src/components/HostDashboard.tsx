@@ -111,80 +111,81 @@ export const HostDashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FFF9F4] dark:bg-[#07383D] pb-32 transition-colors">
       
-      {/* Sticky Top Header Bar */}
-      <div className="sticky top-16 z-30 bg-white/90 dark:bg-[#07383D]/90 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#166D74] py-3.5 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          
-          {/* Left Brand & Title */}
-          <div className="flex items-center space-x-3">
-            <button
-              type="button"
-              onClick={handleSwitchToGuestMode}
-              title="Switch to Guest Mode"
-              className="p-2 rounded-xl bg-white dark:bg-[#0B4A50] text-[#6B7280] dark:text-[#B8D1D0] hover:text-[#006B70] dark:text-[#28D2CB] dark:hover:text-[#006B70] dark:text-[#28D2CB] border border-[#E5E7EB] dark:border-[#166D74] cursor-pointer transition-colors shadow-xs"
-            >
-              <ArrowLeft className="w-4 h-4" />
-            </button>
-            <div>
-              <div className="flex items-center space-x-2">
-                <h1 className="text-lg sm:text-xl font-bold text-[#12383B] dark:text-[#FFFFFF]">Host Operations & Property Portal</h1>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#006B70]/15 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB] font-bold border border-[#006B70]/30">
-                  Host Mode Active
-                </span>
-              </div>
-              <p className="text-xs text-[#6B7280] dark:text-[#B8D1D0]">
-                Logged in as <span className="text-[#12383B] dark:text-[#FFFFFF] font-semibold">{currentUser.name}</span> ({hostSpaces.length} Workspaces)
-              </p>
-            </div>
-          </div>
-
-          {/* Right Header Actions */}
-          <div className="flex items-center space-x-2 sm:space-x-2.5 overflow-x-auto pb-1 sm:pb-0">
+      {/* Sticky Top Header Bar with Integrated Tabs */}
+      <div className="sticky top-16 sm:top-[70px] z-30 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#166D74] shadow-xs transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             
-            {/* Mode Switcher Button */}
-            <button
-              type="button"
-              onClick={handleSwitchToGuestMode}
-              className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs font-semibold text-[#6B7280] dark:text-[#B8D1D0] hover:text-[#111827] dark:hover:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap transition-colors shadow-xs"
-            >
-              <Repeat className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
-              <span>Switch to Guest View</span>
-            </button>
+            {/* Left Brand & Title */}
+            <div className="flex items-center space-x-3">
+              <button
+                type="button"
+                onClick={handleSwitchToGuestMode}
+                title="Switch to Guest Mode"
+                className="p-2 rounded-xl bg-white dark:bg-[#0B4A50] text-[#6B7280] dark:text-[#B8D1D0] hover:text-[#006B70] dark:text-[#28D2CB] dark:hover:text-[#006B70] dark:text-[#28D2CB] border border-[#E5E7EB] dark:border-[#166D74] cursor-pointer transition-colors shadow-xs"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              <div>
+                <div className="flex items-center space-x-2">
+                  <h1 className="text-lg sm:text-xl font-bold text-[#12383B] dark:text-[#FFFFFF]">Host Operations & Property Portal</h1>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#006B70]/15 dark:bg-[#006B70]/20 text-[#006B70] dark:text-[#28D2CB] font-bold border border-[#006B70]/30">
+                    Host Mode Active
+                  </span>
+                </div>
+                <p className="text-xs text-[#6B7280] dark:text-[#B8D1D0]">
+                  Logged in as <span className="text-[#12383B] dark:text-[#FFFFFF] font-semibold">{currentUser.name}</span> ({hostSpaces.length} Workspaces)
+                </p>
+              </div>
+            </div>
 
-            <button
-              type="button"
-              onClick={() => setIsDiagnosticsModalOpen(true)}
-              className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs font-semibold text-[#6B7280] dark:text-[#B8D1D0] hover:text-[#111827] dark:hover:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap shadow-xs"
-            >
-              <Activity className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
-              <span>Health</span>
-            </button>
+            {/* Right Header Actions */}
+            <div className="flex items-center space-x-2 sm:space-x-2.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+              
+              {/* Mode Switcher Button */}
+              <button
+                type="button"
+                onClick={handleSwitchToGuestMode}
+                className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs font-semibold text-[#6B7280] dark:text-[#B8D1D0] hover:text-[#111827] dark:hover:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap transition-colors shadow-xs shrink-0"
+              >
+                <Repeat className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
+                <span>Switch to Guest View</span>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => setIsHostPayoutModalOpen(true)}
-              className="px-3 py-1.5 rounded-xl bg-[#006B70]/15 dark:bg-[#006B70]/20 hover:bg-[#BBF7D0] dark:hover:bg-[#006B70]/30 border border-[#006B70]/30 text-xs font-bold text-[#006B70] dark:text-[#28D2CB] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap shadow-xs"
-            >
-              <Wallet className="w-3.5 h-3.5" />
-              <span>Withdraw ₦</span>
-            </button>
+              <button
+                type="button"
+                onClick={() => setIsDiagnosticsModalOpen(true)}
+                className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs font-semibold text-[#6B7280] dark:text-[#B8D1D0] hover:text-[#111827] dark:hover:text-[#F9FAFB] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap shadow-xs shrink-0"
+              >
+                <Activity className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
+                <span>Health</span>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => setIsListSpaceModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-xs flex items-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer whitespace-nowrap"
-            >
-              <PlusCircle className="w-4 h-4" />
-              <span>List Space</span>
-            </button>
+              <button
+                type="button"
+                onClick={() => setIsHostPayoutModalOpen(true)}
+                className="px-3 py-1.5 rounded-xl bg-[#006B70]/15 dark:bg-[#006B70]/20 hover:bg-[#BBF7D0] dark:hover:bg-[#006B70]/30 border border-[#006B70]/30 text-xs font-bold text-[#006B70] dark:text-[#28D2CB] flex items-center space-x-1.5 cursor-pointer whitespace-nowrap shadow-xs shrink-0"
+              >
+                <Wallet className="w-3.5 h-3.5" />
+                <span>Withdraw ₦</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsListSpaceModalOpen(true)}
+                className="px-3.5 py-1.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-xs flex items-center space-x-1.5 shadow-sm active:scale-95 cursor-pointer whitespace-nowrap shrink-0"
+              >
+                <PlusCircle className="w-4 h-4" />
+                <span>List Space</span>
+              </button>
+            </div>
+
           </div>
-
         </div>
-      </div>
 
-      {/* Navigation Sub-Tabs Bar */}
-      <div className="bg-white dark:bg-[#0B4A50] border-b border-[#E5E7EB] dark:border-[#166D74] sticky top-[125px] sm:top-[129px] z-20 px-4 sm:px-6 lg:px-8 shadow-xs">
-        <div className="max-w-7xl mx-auto flex items-center space-x-1 overflow-x-auto py-2 scrollbar-none">
+        {/* Navigation Sub-Tabs Bar */}
+        <div className="border-t border-[#E5E7EB]/80 dark:border-[#166D74]/80 px-4 sm:px-6 lg:px-8 bg-[#F8FAFC]/50 dark:bg-[#0B4A50]/50">
+          <div className="max-w-7xl mx-auto flex items-center space-x-1 overflow-x-auto py-2 scrollbar-none snap-x touch-pan-x">
           {[
             { id: 'home', label: 'Host Home', icon: LayoutDashboard },
             { id: 'spaces', label: 'My Spaces', icon: Building2 },
@@ -204,7 +205,7 @@ export const HostDashboard: React.FC = () => {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id as HostDashboardTab)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap flex items-center space-x-2 transition-all cursor-pointer ${
+                className={`snap-start shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap flex items-center space-x-2 transition-all cursor-pointer ${
                   isActive
                     ? 'bg-[#006B70] text-white shadow-sm'
                     : 'text-[#6B7280] dark:text-[#B8D1D0] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60]'
@@ -224,6 +225,7 @@ export const HostDashboard: React.FC = () => {
           })}
         </div>
       </div>
+    </div>
 
       {/* Main Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">

@@ -117,26 +117,44 @@ export const WorkspaceAvailabilityCalendar: React.FC<WorkspaceAvailabilityCalend
     }
   }, [space.id, monthFilter]);
 
-  // Real-time Supabase Subscription
+  // Real-time Supabase Subscription & Resilient Auto-Sync
   useEffect(() => {
     fetchAvailability();
 
     const client = getSupabaseClient();
-    if (!client) return;
+    let channel: any = null;
+    if (client) {
+      channel = client
+        .channel(`public:bookings:${space.id}`)
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'bookings', filter: `space_id=eq.${space.id}` },
+          () => {
+            fetchAvailability();
+          }
+        )
+        .subscribe();
+    }
 
-    const channel = client
-      .channel(`public:bookings:${space.id}`)
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'bookings', filter: `space_id=eq.${space.id}` },
-        () => {
-          fetchAvailability();
-        }
-      )
-      .subscribe();
+    // Resilient fallback: periodic re-check every 15 seconds to catch updates if WebSockets pause
+    const pollInterval = setInterval(() => {
+      fetchAvailability();
+    }, 15000);
+
+    // Instant local event listener when a booking confirms in this browser session
+    const handleBookingConfirmed = (e: any) => {
+      if (!e?.detail?.spaceId || e.detail.spaceId === space.id) {
+        fetchAvailability();
+      }
+    };
+    window.addEventListener('ofis:booking_confirmed', handleBookingConfirmed);
 
     return () => {
-      client.removeChannel(channel);
+      if (client && channel) {
+        client.removeChannel(channel);
+      }
+      clearInterval(pollInterval);
+      window.removeEventListener('ofis:booking_confirmed', handleBookingConfirmed);
     };
   }, [space.id, fetchAvailability]);
 

@@ -257,15 +257,6 @@ export const Footer: React.FC = () => {
                   </button>
                 </li>
                 <li>
-                  <a 
-                    href="/api/download/ofis-logo-assets.zip" 
-                    download="ofis-logo-assets.zip"
-                    className="text-[#28D2CB] hover:underline font-semibold flex items-center space-x-1.5 cursor-pointer text-left text-xs"
-                  >
-                    <span>Download Brand Assets (.zip)</span>
-                  </a>
-                </li>
-                <li>
                   <button 
                     type="button"
                     onClick={() => handleNavigate('privacy')}

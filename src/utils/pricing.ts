@@ -136,72 +136,81 @@ export function getSpacePricing(space?: Space | null): SpacePricingInfo {
 
   const cat = normalizeCategory(space.category);
 
+  // Normalize properties supporting both camelCase and database snake_case
+  const anySpace = space as any;
+  const pricePerHour = space.pricePerHour ?? anySpace.price_per_hour;
+  const pricePerDay = space.pricePerDay ?? anySpace.price_per_day;
+  const pricePerMonth = space.pricePerMonth ?? anySpace.price_per_month;
+  const pricePerSession = space.pricePerSession ?? anySpace.price_per_session;
+  const pricingBasis = space.pricingBasis ?? anySpace.pricing_basis;
+  const pricingPeriod = space.pricingPeriod ?? anySpace.pricing_period;
+
   // 1. Explicit model check
   if (space.pricingModel) {
-    const basis = space.pricingModel.basis || space.pricingBasis || 'person';
-    const period = space.pricingModel.period || space.pricingPeriod || 'hour';
-    const rawRate = space.pricingModel.rate || space.pricePerHour;
+    const basis = space.pricingModel.basis || pricingBasis || 'person';
+    const period = space.pricingModel.period || pricingPeriod || 'hour';
+    const rawRate = space.pricingModel.rate || pricePerHour;
     const rate = rawRate && rawRate > 0 ? rawRate : getDefaultRateForPeriod(period, cat);
     return buildPricingInfo(basis, period, rate, space.pricingModel.sessionDurationHours, cat);
   }
 
   // 2. Explicit direct attributes
-  if (space.pricingBasis && space.pricingPeriod) {
-    let rate = space.pricePerHour;
-    if (space.pricingPeriod === 'month' && space.pricePerMonth) {
-      rate = space.pricePerMonth;
-    } else if (space.pricingPeriod === 'day' && space.pricePerDay) {
-      rate = space.pricePerDay;
-    } else if (space.pricingPeriod === 'session' && space.pricePerSession) {
-      rate = space.pricePerSession;
+  if (pricingBasis && pricingPeriod) {
+    let rate = pricePerHour;
+    if (pricingPeriod === 'month' && pricePerMonth) {
+      rate = pricePerMonth;
+    } else if (pricingPeriod === 'day' && pricePerDay) {
+      rate = pricePerDay;
+    } else if (pricingPeriod === 'session' && pricePerSession) {
+      rate = pricePerSession;
     }
-    const finalRate = rate && rate > 0 ? rate : getDefaultRateForPeriod(space.pricingPeriod, cat);
-    return buildPricingInfo(space.pricingBasis, space.pricingPeriod, finalRate, undefined, cat);
+    const finalRate = rate && rate > 0 ? rate : getDefaultRateForPeriod(pricingPeriod, cat);
+    return buildPricingInfo(pricingBasis, pricingPeriod, finalRate, undefined, cat);
   }
 
   // 3. Fallback inference based on category & price attributes
-  if (space.pricePerMonth && space.pricePerMonth > 0 && (cat === 'private-office' || !space.pricePerHour)) {
-    return buildPricingInfo('space', 'month', space.pricePerMonth, undefined, cat);
+  if (pricePerMonth && pricePerMonth > 0 && (cat === 'private-office' || !pricePerHour)) {
+    return buildPricingInfo('space', 'month', pricePerMonth, undefined, cat);
   }
 
   if (cat === 'coworking') {
-    return buildPricingInfo('person', 'hour', space.pricePerHour || 3500, undefined, cat);
+    return buildPricingInfo('person', 'hour', pricePerHour || 3500, undefined, cat);
   }
 
   if (cat === 'meeting-room') {
-    return buildPricingInfo('space', 'hour', space.pricePerHour || 15000, undefined, cat);
+    return buildPricingInfo('space', 'hour', pricePerHour || 15000, undefined, cat);
   }
 
   if (cat === 'private-office') {
-    if (space.pricePerMonth && space.pricePerMonth > 0) {
-      return buildPricingInfo('space', 'month', space.pricePerMonth, undefined, cat);
+    if (pricePerMonth && pricePerMonth > 0) {
+      return buildPricingInfo('space', 'month', pricePerMonth, undefined, cat);
     }
-    return buildPricingInfo('space', 'day', space.pricePerDay || (space.pricePerHour ? space.pricePerHour * 8 : 45000), undefined, cat);
+    return buildPricingInfo('space', 'day', pricePerDay || (pricePerHour ? pricePerHour * 8 : 45000), undefined, cat);
   }
 
   if (cat === 'training-room') {
-    if (space.pricingBasis === 'person') {
-      return buildPricingInfo('person', space.pricingPeriod || 'day', space.pricePerDay || 12000, undefined, cat);
+    if (pricingBasis === 'person') {
+      return buildPricingInfo('person', pricingPeriod || 'day', pricePerDay || 12000, undefined, cat);
     }
-    return buildPricingInfo('space', 'hour', space.pricePerHour || 25000, undefined, cat);
+    return buildPricingInfo('space', 'hour', pricePerHour || 25000, undefined, cat);
   }
 
   if (cat === 'event-space') {
-    if (space.pricePerDay && space.pricePerDay > ((space.pricePerHour || 0) * 6)) {
-      return buildPricingInfo('space', 'day', space.pricePerDay, undefined, cat);
+    if (pricePerDay && pricePerDay > ((pricePerHour || 0) * 6)) {
+      return buildPricingInfo('space', 'day', pricePerDay, undefined, cat);
     }
-    return buildPricingInfo('space', 'hour', space.pricePerHour || 45000, undefined, cat);
+    return buildPricingInfo('space', 'hour', pricePerHour || 45000, undefined, cat);
   }
 
   if (cat === 'studio') {
-    if (space.pricePerSession && space.pricePerSession > 0) {
-      return buildPricingInfo('space', 'session', space.pricePerSession, undefined, cat);
+    if (pricePerSession && pricePerSession > 0) {
+      return buildPricingInfo('space', 'session', pricePerSession, undefined, cat);
     }
-    return buildPricingInfo('space', 'hour', space.pricePerHour || 20000, undefined, cat);
+    return buildPricingInfo('space', 'hour', pricePerHour || 20000, undefined, cat);
   }
 
   // Default fallback:
-  return buildPricingInfo('space', 'hour', space.pricePerHour || 5000, undefined, cat);
+  return buildPricingInfo('space', 'hour', pricePerHour || 5000, undefined, cat);
 }
 
 function buildPricingInfo(basis: PricingBasis, period: PricingPeriod, rate?: number | null, sessionDurationHours?: number, category?: string): SpacePricingInfo {

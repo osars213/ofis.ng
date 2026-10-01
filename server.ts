@@ -45,6 +45,26 @@ async function startServer() {
       })
     : null;
 
+  // Authoritative admin email whitelist - restricted strictly to verified account owner
+  const AUTHORIZED_ADMIN_EMAILS = new Set(
+    [
+      'jonesnathalie820@gmail.com',
+      (process.env.ADMIN_EMAIL || '').trim().toLowerCase(),
+    ].filter(Boolean)
+  );
+
+  // Robust Admin Verification: Requires role = 'admin' AND membership in authorized email whitelist AND verified email
+  const isUserAuthorizedAdmin = (
+    user: { email?: string; email_confirmed_at?: string } | null | undefined,
+    profile?: { role?: string } | null
+  ): boolean => {
+    if (!user || !user.email) return false;
+    if (profile?.role !== 'admin') return false;
+    // Require email to be confirmed (mandatory in production environments)
+    if (process.env.NODE_ENV === 'production' && !user.email_confirmed_at) return false;
+    return AUTHORIZED_ADMIN_EMAILS.has(user.email.toLowerCase());
+  };
+
   // Initialize Gemini AI client safely on server
   let ai: GoogleGenAI | null = null;
   if (process.env.GEMINI_API_KEY) {
@@ -253,6 +273,7 @@ async function startServer() {
     selectedSeatId: string | null;
     guestCount: number;
     confirmedAt: string;
+    payment_reference?: string;
   }
 
   // Active in-memory registry for concurrency collision tracking and demo/sandbox safety
@@ -590,11 +611,12 @@ async function startServer() {
         return res.status(400).json({ error: 'Invalid booking duration' });
       }
 
-      // 5. Date & Time Validation
+      // 5. Date & Time Validation (Anchored strictly to West Africa Time WAT / Nigeria UTC+1)
       const effectiveDate = booking?.date || date;
       const effectiveStartTime = booking?.start_time || startTime || '09:00';
       if (effectiveDate) {
-        const bookingDateTime = new Date(`${effectiveDate}T${effectiveStartTime}:00`);
+        // Nigeria is UTC+1 (WAT) year-round
+        const bookingDateTime = new Date(`${effectiveDate}T${effectiveStartTime}:00+01:00`);
         // Disallow bookings older than 2 hours in the past
         if (!isNaN(bookingDateTime.getTime()) && bookingDateTime.getTime() < Date.now() - 2 * 3600 * 1000) {
           return res.status(400).json({ error: 'Cannot book a workspace in the past' });
@@ -604,9 +626,9 @@ async function startServer() {
       // 6. User Ownership & Duplicate Booking Protection
       if (booking) {
         if (authenticatedUser) {
-          const isOwner = (booking.user_id === authenticatedUser.id || booking.client_id === authenticatedUser.id);
+          const isOwner = (booking.user_id === authenticatedUser.id);
           const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', authenticatedUser.id).single();
-          const isAdmin = profile?.role === 'admin';
+          const isAdmin = isUserAuthorizedAdmin(authenticatedUser, profile);
           if (!isOwner && !isAdmin) {
             return res.status(403).json({ error: 'Unauthorized: You do not own this booking' });
           }
@@ -662,9 +684,30 @@ async function startServer() {
       const ofisReference = `OFIS-SZND-${cleanSuffix}-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString('hex').toUpperCase()}`;
 
       // 9. Redirect URL
-      const hostHeader = req.get('host') || 'localhost:3000';
-      const defaultRedirectUrl = `${req.protocol}://${hostHeader}/payment/result?reference=${encodeURIComponent(ofisReference)}&booking_id=${encodeURIComponent(bookingId)}`;
-      const finalRedirectUrl = callbackUrl || defaultRedirectUrl;
+      const publicBaseUrl =
+        (
+          process.env.APP_URL ||
+          `${req.get('x-forwarded-proto') || req.protocol}://${req.get('x-forwarded-host') || req.get('host') || 'localhost:3000'}`
+        ).replace(/\/+$/, '');
+
+      const defaultRedirectUrl =
+        `${publicBaseUrl}/payment/result?reference=${encodeURIComponent(ofisReference)}&booking_id=${encodeURIComponent(bookingId)}`;
+
+      let finalRedirectUrl = defaultRedirectUrl;
+      if (callbackUrl) {
+        try {
+          const u = new URL(callbackUrl, publicBaseUrl);
+          if (!u.searchParams.has('reference')) {
+            u.searchParams.set('reference', ofisReference);
+          }
+          if (!u.searchParams.has('booking_id')) {
+            u.searchParams.set('booking_id', String(bookingId));
+          }
+          finalRedirectUrl = u.toString();
+        } catch (e) {
+          finalRedirectUrl = defaultRedirectUrl;
+        }
+      }
 
       // Customer identity details
       const customerEmail = (email || booking?.user_email || authenticatedUser?.email || 'member@ofis.ng').trim().toLowerCase();
@@ -790,22 +833,103 @@ async function startServer() {
   app.post('/api/payments/verify', async (req, res) => {
     try {
       const { bookingId, reference: reqRef, paymentReference: reqPaymentRef, sandbox } = req.body;
-      const paymentReference = reqPaymentRef || reqRef;
-      const reference = paymentReference;
+      let reference = reqPaymentRef || reqRef;
 
-      if (!bookingId || !paymentReference) {
+      if (!bookingId) {
+        return res.status(400).json({ error: 'bookingId is required' });
+      }
+
+      // If reference was omitted in the request body, look up the stored payment_reference on the booking
+      if (!reference && supabaseAdmin) {
+        const { data: bData } = await supabaseAdmin
+          .from('bookings')
+          .select('payment_reference')
+          .eq('id', bookingId)
+          .single();
+        if (bData?.payment_reference) {
+          reference = bData.payment_reference;
+        }
+      }
+
+      if (!reference && !sandbox) {
         return res.status(400).json({ error: 'Both bookingId and payment reference are required' });
       }
 
+      // Idempotency check: If already confirmed with this reference in memory, return idempotent success
+      const existingInMemory = activeConfirmedBookingsRegistry.get(bookingId);
+      if (existingInMemory && existingInMemory.payment_reference === reference) {
+        return res.json({
+          success: true,
+          booking: {
+            id: bookingId,
+            spaceId: existingInMemory.spaceId,
+            date: existingInMemory.date,
+            startTime: existingInMemory.startTime,
+            endTime: existingInMemory.endTime,
+            status: 'confirmed',
+            booking_status: 'confirmed',
+            payment_status: 'paid',
+            payment_reference: reference,
+            payment_method: 'sznd',
+          },
+          alreadyConfirmed: true,
+          message: 'Booking is already confirmed for this payment reference',
+        });
+      }
+
+      // If not in explicit sandbox mode, verify against authoritative SZND gateway
+      let szndVerifyResult: any = null;
+      if (!sandbox && szndClient.isConfigured()) {
+        const szndVerify = await szndClient.verifyPayment(reference);
+
+        if (!szndVerify.success || szndVerify.status !== 'COMPLETED') {
+          return res.status(400).json({
+            error: szndVerify.error || szndVerify.gateway_response || 'Payment verification failed at SZND gateway',
+            status: szndVerify.status,
+          });
+        }
+
+        // Verify currency
+        if (szndVerify.currency && szndVerify.currency !== 'NGN') {
+          return res.status(400).json({
+            error: `Currency mismatch: received ${szndVerify.currency}, expected NGN`,
+          });
+        }
+
+        // Capture gateway-verified amount (never trust client total)
+        if (szndVerify.amount === undefined || Number(szndVerify.amount) <= 0) {
+          return res.status(400).json({
+            error: 'Invalid gateway payload: Verified amount is missing or invalid',
+          });
+        }
+
+        // Authoritative Gateway Metadata Binding Check:
+        // Reject if metadata or metadata.booking_id is missing entirely, or does not match bookingId
+        const gatewayBookingId = szndVerify.metadata?.booking_id;
+        if (!szndVerify.metadata || !gatewayBookingId) {
+          return res.status(400).json({
+            error: 'Payment gateway verification rejected: Metadata or booking_id binding is missing from the gateway response.',
+          });
+        }
+
+        if (gatewayBookingId !== bookingId) {
+          return res.status(400).json({
+            error: `Payment transaction reference does not match this booking record (gateway booking_id '${gatewayBookingId}' !== expected '${bookingId}').`,
+          });
+        }
+
+        szndVerifyResult = szndVerify;
+      }
+
       if (!supabaseAdmin) {
-        if (process.env.NODE_ENV === 'production') {
+        if (process.env.NODE_ENV === 'production' && !szndVerifyResult) {
           return res.status(503).json({
             success: false,
             error: 'Database service is not configured (SUPABASE_SERVICE_ROLE_KEY is missing). Cannot verify payment in production.',
           });
         }
 
-        // Concurrency check in sandbox mode
+        // Concurrency check in local / test registry mode
         const sandboxDate = req.body.date || '2026-09-25';
         const sandboxStartTime = req.body.startTime || '09:00';
         const sandboxDuration = Number(req.body.durationHours || 2);
@@ -830,6 +954,8 @@ async function startServer() {
           });
         }
 
+        const verifiedAmount = szndVerifyResult?.amount || Number(req.body.amount || 0);
+
         // Record confirmed reservation in registry
         activeConfirmedBookingsRegistry.set(bookingId, {
           id: bookingId,
@@ -840,6 +966,7 @@ async function startServer() {
           durationHours: sandboxDuration,
           selectedSeatId: sandboxSeat,
           guestCount: Number(req.body.guestCount || 1),
+          payment_reference: reference,
           confirmedAt: new Date().toISOString(),
         });
 
@@ -847,13 +974,23 @@ async function startServer() {
           success: true,
           booking: {
             id: bookingId,
+            spaceId: sandboxSpaceId,
+            date: sandboxDate,
+            startTime: sandboxStartTime,
+            endTime: calculateEndTime(sandboxStartTime, sandboxDuration),
+            durationHours: sandboxDuration,
             payment_status: 'paid',
             booking_status: 'confirmed',
+            status: 'confirmed',
             payment_reference: reference,
             payment_method: 'sznd',
+            amount: verifiedAmount,
           },
-          sandbox: true,
-          message: 'Payment verified and booking confirmed in sandbox mode',
+          verifiedByGateway: !!szndVerifyResult,
+          sandbox: !szndVerifyResult,
+          message: szndVerifyResult
+            ? 'Payment verified with live SZND gateway and booking confirmed'
+            : 'Payment verified and booking confirmed in sandbox mode',
         });
       }
 
@@ -881,9 +1018,9 @@ async function startServer() {
 
       // Enforce caller ownership when user is authenticated
       if (authenticatedUser) {
-        const isOwner = (booking.client_id === authenticatedUser.id || booking.user_id === authenticatedUser.id);
+        const isOwner = (booking.user_id === authenticatedUser.id);
         const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', authenticatedUser.id).single();
-        const isAdmin = profile?.role === 'admin';
+        const isAdmin = isUserAuthorizedAdmin(authenticatedUser, profile);
         if (!isOwner && !isAdmin) {
           return res.status(403).json({ error: 'Unauthorized: You do not own this booking' });
         }
@@ -904,10 +1041,24 @@ async function startServer() {
         });
       }
 
-      let szndVerifyResult: any = null;
+      let verifiedAmount = 0;
+      if (sandbox) {
+        const clientAmount = req.body.amount !== undefined ? Number(req.body.amount) : Number(booking.total_amount);
+        if (isNaN(clientAmount) || clientAmount <= 0) {
+          return res.status(400).json({
+            error: 'Invalid amount: payment amount must be greater than zero',
+          });
+        }
+        verifiedAmount = clientAmount;
+      } else {
+        // Enforce SZND Gateway Configuration - Never fall back to trusting client or booking.total_amount
+        if (!szndClient.isConfigured()) {
+          return res.status(503).json({
+            success: false,
+            error: 'Payment verification failed: SZND payment gateway credentials (SZND_API_KEY / SZND_API_SECRET) are not configured on this server. Unverified payments cannot be confirmed.',
+          });
+        }
 
-      // Verify transaction strictly against SZND API if gateway is configured
-      if (szndClient.isConfigured()) {
         const szndVerify = await szndClient.verifyPayment(reference);
 
         if (!szndVerify.success || szndVerify.status !== 'COMPLETED') {
@@ -924,47 +1075,93 @@ async function startServer() {
           });
         }
 
-        // Verify amount
-        if (szndVerify.amount !== undefined) {
-          const verifiedAmount = Number(szndVerify.amount);
-          const expectedAmount = Number(booking.total_amount);
-          if (Math.abs(verifiedAmount - expectedAmount) > 1) {
-            return res.status(400).json({
-              error: `Payment amount mismatch: received ${verifiedAmount} NGN, expected ${expectedAmount} NGN`,
-            });
-          }
+        // Capture gateway-verified amount (never trust client total)
+        if (szndVerify.amount === undefined || Number(szndVerify.amount) <= 0) {
+          return res.status(400).json({
+            error: 'Invalid gateway payload: Verified amount is missing or invalid',
+          });
         }
 
-        // Verify booking metadata binding if present
-        if (szndVerify.metadata?.booking_id && szndVerify.metadata.booking_id !== booking.id) {
+        verifiedAmount = Number(szndVerify.amount);
+
+        // Authoritative Gateway Metadata Binding Check:
+        // Reject if metadata or metadata.booking_id is missing entirely, or does not match booking.id
+        const gatewayBookingId = szndVerify.metadata?.booking_id;
+        if (!szndVerify.metadata || !gatewayBookingId) {
           return res.status(400).json({
-            error: 'Payment transaction reference does not match this booking record',
+            error: 'Payment gateway verification rejected: Metadata or booking_id binding is missing from the gateway response.',
+          });
+        }
+
+        if (gatewayBookingId !== booking.id) {
+          return res.status(400).json({
+            error: `Payment transaction reference does not match this booking record (gateway booking_id '${gatewayBookingId}' !== expected '${booking.id}').`,
           });
         }
 
         szndVerifyResult = szndVerify;
-      } else if (process.env.NODE_ENV === 'production' && szndClient.getEnvironment() === 'production') {
-        return res.status(503).json({
+      }
+
+      // Authoritative Concurrency Collision Check before executing confirmation
+      const associatedSpace = Array.isArray(booking.spaces) ? booking.spaces[0] : booking.spaces;
+      const conflictCheck = await checkBookingConflict({
+        spaceId: booking.space_id,
+        date: booking.date,
+        startTime: booking.start_time,
+        durationHours: booking.duration_hours,
+        selectedSeatId: booking.selected_seat_id,
+        guestCount: booking.guest_count,
+        excludeBookingId: bookingId,
+        spaceCategory: associatedSpace?.category,
+        spaceCapacity: associatedSpace?.capacity,
+      });
+
+      if (conflictCheck.hasConflict) {
+        return res.status(409).json({
           success: false,
-          error: 'SZND payment gateway is not configured (SZND_API_KEY/SZND_API_SECRET missing). Cannot verify payment in production.',
+          conflict: true,
+          error: conflictCheck.message || 'Double-booking conflict: this slot or seat was already confirmed by another member.',
+          bookingId,
+          conflictingId: conflictCheck.conflictingId,
         });
-      } else if (!sandbox && !reference.includes('SANDBOX')) {
-        console.warn(`[SZND Verify Note] Verifying in ${szndClient.getEnvironment()} fallback mode without active credentials`);
       }
 
       // Invoke the hardened confirm_booking_payment RPC using service_role authority
+      const isDailyBooking = booking.pricing_period === 'day' 
+        || (associatedSpace as any)?.pricing_period === 'day' 
+        || (Number(booking.duration_hours) >= 24);
+
+      const bookingDuration = isDailyBooking
+        ? Math.max(1, Math.ceil(Number(booking.duration_hours || 24) / 24))
+        : Number(booking.duration_hours || 1);
+
+      const bookingPeriod = isDailyBooking ? 'day' : 'hour';
+      const guestMultiplier = (associatedSpace?.category === 'coworking') ? Math.max(1, Number(booking.guest_count || 1)) : 1;
+      const totalUnits = Math.max(1, bookingDuration * guestMultiplier);
+
+      const authoritativeRate = verifiedAmount > 0
+        ? Number((verifiedAmount / totalUnits).toFixed(2))
+        : (isDailyBooking
+          ? Number((associatedSpace as any)?.price_per_day || (Number((associatedSpace as any)?.price_per_hour || 0) * 8))
+          : Number((associatedSpace as any)?.price_per_hour || 0));
+
       const { data: confirmResult, error: rpcErr } = await supabaseAdmin.rpc('confirm_booking_payment', {
         p_booking_id: bookingId,
         p_transaction_reference: reference,
         p_provider: 'sznd',
-        p_amount: Number(booking.total_amount),
+        p_amount: verifiedAmount,
         p_metadata: {
+          booking_id: bookingId,
+          period: bookingPeriod,
           verified_at: new Date().toISOString(),
           verification_path: 'server_sznd_verify',
           gateway: 'sznd',
           environment: szndClient.getEnvironment(),
           sznd_transaction_reference: szndVerifyResult?.transaction_reference || null,
         },
+        p_authoritative_rate: authoritativeRate,
+        p_duration_units: bookingDuration,
+        p_period: bookingPeriod,
       });
 
       // Strict Concurrency-Safe Collision Detection
@@ -1006,7 +1203,7 @@ async function startServer() {
         await supabaseAdmin.from('bookings').update({
           status: 'confirmed',
           payment_status: 'paid',
-          payment_reference: paymentReference,
+          payment_reference: reference,
           updated_at: new Date().toISOString(),
         }).eq('id', bookingId);
       }
@@ -1063,15 +1260,17 @@ async function startServer() {
       }
 
       // Verify HMAC-SHA256 signature from X-Transfaar-Signature or X-Signature header
-      if (szndClient.isConfigured()) {
-        const signatureHeader = req.headers['x-transfaar-signature'] || req.headers['x-signature'];
-        const rawBody = (req as any).rawBody || JSON.stringify(req.body);
+      if (!szndClient.isConfigured()) {
+        return res.status(503).json({ error: 'SZND payment gateway is not configured on this server' });
+      }
 
-        const isValid = szndClient.verifyWebhookSignature(rawBody, signatureHeader as string);
-        if (!isValid) {
-          console.warn('[SZND Webhook] Invalid webhook signature received');
-          return res.status(401).json({ error: 'Invalid webhook signature' });
-        }
+      const signatureHeader = req.headers['x-transfaar-signature'] || req.headers['x-signature'];
+      const rawBody = (req as any).rawBody || JSON.stringify(req.body);
+
+      const isValid = szndClient.verifyWebhookSignature(rawBody, signatureHeader as string);
+      if (!isValid) {
+        console.warn('[SZND Webhook] Invalid webhook signature received');
+        return res.status(401).json({ error: 'Invalid webhook signature' });
       }
 
       const payload = req.body || {};
@@ -1089,10 +1288,10 @@ async function startServer() {
         rawStatus === 'TRANSACTION.SUCCESSFUL';
 
       if (isCompleted && bookingId && reference) {
-        // Fetch booking to verify existence and amount
+        // Fetch booking with authoritative space details
         const { data: booking } = await supabaseAdmin
           .from('bookings')
-          .select('id, total_amount, payment_status, payment_reference')
+          .select('id, total_amount, payment_status, payment_reference, duration_hours, guest_count, spaces(price_per_hour, price_per_day, category, title)')
           .eq('id', bookingId)
           .single();
 
@@ -1102,39 +1301,54 @@ async function startServer() {
             return res.status(200).json({ status: 'ok', message: 'Already processed' });
           }
 
-          // Verify amount if provided
-          if (amountVal !== undefined) {
-            const expected = Number(booking.total_amount);
-            if (Math.abs(amountVal - expected) > 1) {
-              console.warn(`[SZND Webhook] Amount mismatch: received ${amountVal}, expected ${expected}`);
-              return res.status(400).json({ error: 'Amount mismatch' });
-            }
+          // Authoritative confirmation via hardened confirm_booking_payment RPC
+          const paymentReference = reference;
+          const webhookSpace = Array.isArray(booking.spaces) ? booking.spaces[0] : booking.spaces;
+          const isDailyWebhook = (booking as any).pricing_period === 'day' 
+            || (webhookSpace as any)?.pricing_period === 'day' 
+            || (Number(booking.duration_hours) >= 24);
+
+          const bookingDuration = isDailyWebhook
+            ? Math.max(1, Math.ceil(Number(booking.duration_hours || 24) / 24))
+            : Number(booking.duration_hours || 1);
+
+          const bookingPeriod = isDailyWebhook ? 'day' : 'hour';
+          const guestMultiplier = (webhookSpace?.category === 'coworking') ? Math.max(1, Number(booking.guest_count || 1)) : 1;
+          const totalUnits = Math.max(1, bookingDuration * guestMultiplier);
+          const effectiveWebhookAmount = amountVal || Number(booking.total_amount) || 0;
+
+          const authoritativeRate = effectiveWebhookAmount > 0
+            ? Number((effectiveWebhookAmount / totalUnits).toFixed(2))
+            : (isDailyWebhook
+              ? Number((webhookSpace as any)?.price_per_day || (Number((webhookSpace as any)?.price_per_hour || 0) * 8))
+              : Number((webhookSpace as any)?.price_per_hour || 0));
+
+          const { data: rpcResult, error: rpcErr } = await supabaseAdmin.rpc('confirm_booking_payment', {
+            p_booking_id: bookingId,
+            p_transaction_reference: paymentReference,
+            p_provider: 'sznd',
+            p_amount: amountVal || Number(booking.total_amount),
+            p_metadata: {
+              booking_id: bookingId,
+              period: bookingPeriod,
+              webhook_event: payload.event || 'charge.completed',
+              gateway: 'sznd',
+              received_at: new Date().toISOString(),
+              sznd_transaction_reference: eventData.transaction_reference || null,
+            },
+            p_authoritative_rate: authoritativeRate,
+            p_duration_units: bookingDuration,
+            p_period: bookingPeriod,
+          });
+
+          if (rpcErr) {
+            console.error('[SZND Webhook] confirm_booking_payment RPC error:', rpcErr);
+            return res.status(400).json({ error: rpcErr.message || 'Payment confirmation failed' });
           }
 
-          // Authoritative confirmation via RPC with direct update fallback
-          const paymentReference = reference;
-          try {
-            const { error: rpcErr } = await supabaseAdmin.rpc('confirm_booking_payment', {
-              p_booking_id: bookingId,
-              p_transaction_reference: paymentReference,
-              p_provider: 'sznd',
-              p_amount: amountVal || Number(booking.total_amount),
-              p_metadata: {
-                webhook_event: payload.event || 'charge.completed',
-                gateway: 'sznd',
-                received_at: new Date().toISOString(),
-                sznd_transaction_reference: eventData.transaction_reference || null,
-              },
-            });
-            if (rpcErr) throw rpcErr;
-          } catch (rpcErr) {
-            console.warn('[SZND Webhook] RPC fallback to direct update:', rpcErr);
-            await supabaseAdmin.from('bookings').update({
-              status: 'confirmed',
-              payment_status: 'paid',
-              payment_reference: paymentReference,
-              updated_at: new Date().toISOString(),
-            }).eq('id', bookingId);
+          if (rpcResult && rpcResult.conflict === true) {
+            console.warn('[SZND Webhook] Concurrency conflict detected during webhook processing:', rpcResult);
+            return res.status(409).json({ error: 'Slot conflict', result: rpcResult });
           }
         }
       }
@@ -1179,21 +1393,21 @@ async function startServer() {
       if (bookingId) {
         const { data: b } = await supabaseAdmin
           .from('bookings')
-          .select('id, client_id, user_id, host_id, booking_status, status, space_id, start_datetime, end_datetime')
+          .select('id, user_id, booking_status, status, space_id, date, start_time, end_time')
           .eq('id', bookingId)
           .single();
 
         if (b) {
           targetSpaceId = b.space_id;
-          const isBooker = (b.client_id === user.id || b.user_id === user.id);
-          const isHost = (b.host_id === user.id);
+          const isBooker = (b.user_id === user.id);
 
           if (isBooker) {
             const currentStatus = b.booking_status || b.status;
             // Booker must have confirmed or checked_in booking
             if (currentStatus === 'confirmed' || currentStatus === 'checked_in') {
               // Check access window (active or up to 2 hours post-session)
-              const endEpoch = b.end_datetime ? new Date(b.end_datetime).getTime() : Date.now() + 3600000;
+              const bookingEndStr = b.date && b.end_time ? `${b.date}T${b.end_time}:00` : null;
+              const endEpoch = bookingEndStr ? new Date(bookingEndStr).getTime() : Date.now() + 3600000;
               const isSessionActive = endEpoch >= Date.now() - (2 * 60 * 60 * 1000);
 
               if (isSessionActive) {
@@ -1208,8 +1422,6 @@ async function startServer() {
                 error: `Access Denied: Booking is in ${currentStatus} status. Credentials require a confirmed payment.`,
               });
             }
-          } else if (isHost) {
-            userHasAccess = true;
           }
         }
       }
@@ -1235,7 +1447,7 @@ async function startServer() {
           .eq('id', user.id)
           .single();
 
-        if (p && p.role === 'admin') {
+        if (p && isUserAuthorizedAdmin(user, p)) {
           userHasAccess = true;
         }
       }
@@ -1277,37 +1489,84 @@ async function startServer() {
     }
   });
 
-  // 5. Booking Cancellation Endpoint (Releases occupied slot)
+  // 5. Booking Cancellation Endpoint (Restricted to unconfirmed pending reservations)
   app.post('/api/bookings/:id/cancel', async (req, res) => {
     try {
       const { id } = req.params;
       const { reason = 'User requested cancellation' } = req.body || {};
 
-      // Always remove from active in-memory registry so slot is immediately available
-      activeConfirmedBookingsRegistry.delete(id);
+      let authenticatedUser: any = null;
+      const authHeader = req.headers.authorization;
+      if (authHeader && authHeader.startsWith('Bearer ') && supabaseAdmin) {
+        const token = authHeader.split(' ')[1];
+        const { data: { user } } = await supabaseAdmin.auth.getUser(token);
+        authenticatedUser = user;
+      }
 
       if (supabaseAdmin) {
-        const { error } = await supabaseAdmin
+        // Fetch booking to verify ownership and current status
+        const { data: booking, error: fetchErr } = await supabaseAdmin
           .from('bookings')
-          .update({
-            status: 'cancelled',
-            booking_status: 'cancelled',
-            cancellation_reason: reason,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', id);
+          .select('id, user_id, status, booking_status, payment_status')
+          .eq('id', id)
+          .single();
 
-        if (error) {
-          console.error('Error cancelling booking in database:', error);
-          return res.status(500).json({ error: error.message });
+        if (fetchErr || !booking) {
+          return res.status(404).json({ error: `Booking "${id}" not found` });
+        }
+
+        // Verify ownership (or admin privileges)
+        if (authenticatedUser) {
+          const isOwner = (booking.user_id === authenticatedUser.id);
+          const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', authenticatedUser.id).single();
+          const isAdmin = isUserAuthorizedAdmin(authenticatedUser, profile);
+          if (!isOwner && !isAdmin) {
+            return res.status(403).json({ error: 'Unauthorized: You do not have permission to cancel this booking' });
+          }
+        }
+
+        // STRICT STATUS CHECK: Only allow cancelling if status is 'reserved' and payment_status is 'pending'
+        // Postgres schema check constraint enforces status IN ('reserved', 'confirmed', 'ready_for_checkin', 'checked_in', 'in_progress', 'completed', 'reviewed', 'cancelled', 'active')
+        const isPendingReservation = booking.status === 'reserved' && booking.payment_status === 'pending';
+        if (!isPendingReservation) {
+          return res.status(400).json({
+            error: `Cancellation rejected: Only unconfirmed pending reservations (status="reserved", payment="pending") can be cancelled. Current status: "${booking.status}", payment: "${booking.payment_status}". Confirmed or paid bookings cannot be cancelled through this path.`,
+          });
+        }
+
+        // Invoke dedicated cancel_pending_booking RPC or update
+        const { error: rpcErr } = await supabaseAdmin.rpc('cancel_pending_booking', {
+          p_booking_id: id,
+          p_reason: reason,
+        });
+
+        if (rpcErr) {
+          console.warn('[Cancel Endpoint] RPC fallback to direct update:', rpcErr);
+          const { error: updateErr } = await supabaseAdmin
+            .from('bookings')
+            .update({
+              status: 'cancelled',
+              booking_status: 'cancelled',
+              payment_status: 'failed',
+              cancellation_reason: reason,
+              updated_at: new Date().toISOString(),
+            })
+            .eq('id', id);
+
+          if (updateErr) {
+            return res.status(500).json({ error: updateErr.message });
+          }
         }
       }
+
+      // Always remove from active in-memory registry so slot is immediately available
+      activeConfirmedBookingsRegistry.delete(id);
 
       return res.json({
         success: true,
         bookingId: id,
         status: 'cancelled',
-        message: 'Booking cancelled and workspace slot released',
+        message: 'Pending reservation cancelled and workspace slot released',
       });
     } catch (err: any) {
       console.error('Error in /api/bookings/:id/cancel:', err);
@@ -1437,17 +1696,6 @@ Provide a JSON response with the following format:
       console.error('Error in /api/ai/optimize-listing:', error);
       res.status(500).json({ error: error.message || 'Failed to optimize listing' });
     }
-  });
-
-  // Explicit download endpoint for logo assets zip file
-  app.get('/api/download/ofis-logo-assets.zip', (req, res) => {
-    const zipPath = path.join(process.cwd(), 'public', 'ofis-logo-assets.zip');
-    if (fs.existsSync(zipPath)) {
-      res.setHeader('Content-Type', 'application/zip');
-      res.setHeader('Content-Disposition', 'attachment; filename="ofis-logo-assets.zip"');
-      return res.sendFile(zipPath);
-    }
-    return res.status(404).json({ error: 'Zip file not found' });
   });
 
   // Vite middleware for development

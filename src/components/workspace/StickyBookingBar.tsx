@@ -29,8 +29,8 @@ export const StickyBookingBar: React.FC<StickyBookingBarProps> = ({
   const pricing = getSpacePricing(space);
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#166D74] py-3.5 px-4 sm:px-8 shadow-lg dark:shadow-2xl transition-all">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E5E7EB] dark:border-[#166D74] pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] px-3.5 sm:px-8 shadow-lg dark:shadow-2xl transition-all">
+      <div className="max-w-6xl mx-auto flex items-center justify-between gap-2.5 sm:gap-4">
         
         {/* Left: Price & Selected Slot Indicator */}
         <div className="flex items-center space-x-4 min-w-0">
@@ -114,7 +114,7 @@ export const StickyBookingBar: React.FC<StickyBookingBarProps> = ({
           <button
             type="button"
             onClick={onBookNow}
-            className="px-5 sm:px-8 py-3.5 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-black text-xs sm:text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
+            className="px-4 sm:px-8 py-2.5 sm:py-3.5 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-black text-xs sm:text-sm shadow-md transition-all active:scale-95 flex items-center space-x-1.5 sm:space-x-2 cursor-pointer shrink-0"
           >
             <span>
               {selectedDate && selectedTime ? `Book Slot (${selectedTime})` : 'Book Instant Pass'}

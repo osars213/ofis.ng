@@ -72,6 +72,14 @@ export const SpaceDetails: React.FC = () => {
   const reviewsRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
+  const overviewRef = useRef<HTMLDivElement>(null);
+  const amenitiesRef = useRef<HTMLDivElement>(null);
+
+  const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   if (!selectedSpace) {
     return (
@@ -150,7 +158,7 @@ export const SpaceDetails: React.FC = () => {
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0D0D0D] pb-36">
       
       {/* Sticky Top Navigation Bar */}
-      <div className="sticky top-16 z-30 bg-white/90 dark:bg-[#0D0D0D]/90 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#1E2522] py-3 px-4 sm:px-6 lg:px-8">
+      <div className="sticky top-16 sm:top-[70px] z-30 bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-md border-b border-[#E5E7EB] dark:border-[#166D74] py-2.5 px-4 sm:px-6 lg:px-8 shadow-xs transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <button
             type="button"
@@ -166,7 +174,7 @@ export const SpaceDetails: React.FC = () => {
               type="button"
               id={`details-compare-btn-${selectedSpace.id}`}
               onClick={() => toggleSpaceCompare(selectedSpace.id)}
-              className={`px-3 py-2 rounded-xl border text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-xl border text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
                 comparedSpaceIds.includes(selectedSpace.id)
                   ? 'bg-[#006B70] text-white border-[#006B70] font-bold shadow-xs'
                   : 'bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border-[#E5E7EB] dark:border-[#166D74] text-[#6B7280] dark:text-[#94A3B8] hover:text-[#111827] dark:hover:text-[#F2F2F2]'
@@ -180,7 +188,7 @@ export const SpaceDetails: React.FC = () => {
             <button
               type="button"
               onClick={() => toggleSaveSpace(selectedSpace.id)}
-              className="p-2 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-[#111827] dark:text-[#F2F2F2] hover:text-[#006B70] dark:text-[#28D2CB] transition-all cursor-pointer shadow-2xs"
+              className="p-1.5 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-[#111827] dark:text-[#F2F2F2] hover:text-[#006B70] dark:text-[#28D2CB] transition-all cursor-pointer shadow-2xs"
               aria-label="Save to favorites"
             >
               <Heart className={`w-4 h-4 ${isSaved ? 'fill-[#14B8A6] text-[#14B8A6]' : ''}`} />
@@ -188,12 +196,51 @@ export const SpaceDetails: React.FC = () => {
             <button
               type="button"
               onClick={handleShare}
-              className="p-2 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-[#111827] dark:text-[#F2F2F2] hover:text-[#006B70] dark:text-[#28D2CB] transition-all cursor-pointer shadow-2xs"
+              className="p-1.5 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-[#111827] dark:text-[#F2F2F2] hover:text-[#006B70] dark:text-[#28D2CB] transition-all cursor-pointer shadow-2xs"
               aria-label="Share workspace"
             >
               <Share2 className="w-4 h-4" />
             </button>
           </div>
+        </div>
+
+        {/* In-page Sections Submenu Bar */}
+        <div className="max-w-7xl mx-auto mt-2 pt-2 border-t border-[#E5E7EB]/70 dark:border-[#166D74]/70 flex items-center space-x-1.5 overflow-x-auto scrollbar-none snap-x touch-pan-x text-[11px] font-semibold text-[#6B7280] dark:text-[#94A3B8]">
+          <button 
+            type="button" 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+            className="snap-start shrink-0 px-2.5 py-1 rounded-lg hover:text-[#006B70] dark:hover:text-[#28D2CB] hover:bg-[#F1F5F9] dark:hover:bg-[#0B4A50] transition-colors cursor-pointer"
+          >
+            Photos & Overview
+          </button>
+          <button 
+            type="button" 
+            onClick={() => scrollToSection(amenitiesRef)} 
+            className="snap-start shrink-0 px-2.5 py-1 rounded-lg hover:text-[#006B70] dark:hover:text-[#28D2CB] hover:bg-[#F1F5F9] dark:hover:bg-[#0B4A50] transition-colors cursor-pointer"
+          >
+            Amenities & Power
+          </button>
+          <button 
+            type="button" 
+            onClick={scrollToCalendar} 
+            className="snap-start shrink-0 px-2.5 py-1 rounded-lg hover:text-[#006B70] dark:hover:text-[#28D2CB] hover:bg-[#F1F5F9] dark:hover:bg-[#0B4A50] transition-colors cursor-pointer font-bold text-[#006B70] dark:text-[#28D2CB]"
+          >
+            Calendar & Booking
+          </button>
+          <button 
+            type="button" 
+            onClick={scrollToReviews} 
+            className="snap-start shrink-0 px-2.5 py-1 rounded-lg hover:text-[#006B70] dark:hover:text-[#28D2CB] hover:bg-[#F1F5F9] dark:hover:bg-[#0B4A50] transition-colors cursor-pointer"
+          >
+            Reviews ({reviews.length})
+          </button>
+          <button 
+            type="button" 
+            onClick={scrollToMap} 
+            className="snap-start shrink-0 px-2.5 py-1 rounded-lg hover:text-[#006B70] dark:hover:text-[#28D2CB] hover:bg-[#F1F5F9] dark:hover:bg-[#0B4A50] transition-colors cursor-pointer"
+          >
+            Map & Location
+          </button>
         </div>
       </div>
 
@@ -321,7 +368,7 @@ export const SpaceDetails: React.FC = () => {
             </div>
 
             {/* About this Workspace */}
-            <div className="space-y-3">
+            <div ref={overviewRef} className="space-y-3">
               <h2 className="text-lg font-bold text-[#111827] dark:text-[#F2F2F2]">About this Workspace</h2>
               <p className="text-sm text-[#4B5563] dark:text-[#94A3B8] leading-relaxed whitespace-pre-line">
                 {selectedSpace.description}
@@ -339,7 +386,9 @@ export const SpaceDetails: React.FC = () => {
             )}
 
             {/* 4. CATEGORIZED AMENITIES */}
-            <CategorizedAmenities space={selectedSpace} />
+            <div ref={amenitiesRef}>
+              <CategorizedAmenities space={selectedSpace} />
+            </div>
 
             {/* 7. AVAILABILITY CALENDAR */}
             <div ref={calendarRef}>

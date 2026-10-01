@@ -137,12 +137,12 @@ export const App: React.FC = () => {
   const showFooter = currentView !== 'map';
 
   return (
-    <div className="min-h-screen bg-[#FFF9F4] dark:bg-[#07383D] text-[#12383B] dark:text-[#FFFFFF] antialiased flex flex-col font-sans selection:bg-[#14BEB8] selection:text-white transition-colors duration-150">
+    <div className="min-h-[100dvh] w-full max-w-full overflow-x-clip bg-[#FFF9F4] dark:bg-[#07383D] text-[#12383B] dark:text-[#FFFFFF] antialiased flex flex-col font-sans selection:bg-[#14BEB8] selection:text-white transition-colors duration-150">
       {/* Top Navbar */}
       <Navbar />
 
       {/* Main View Router with Suspense */}
-      <main className="flex-1 pb-16 md:pb-0">
+      <main className={`flex-1 w-full max-w-full overflow-x-clip ${currentView === 'details' ? 'pb-0' : 'pb-[calc(76px+env(safe-area-inset-bottom,0px))] md:pb-0'}`}>
         <Suspense fallback={<ViewLoadingFallback />}>
           {renderCurrentView()}
         </Suspense>

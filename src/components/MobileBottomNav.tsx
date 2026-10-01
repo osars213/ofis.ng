@@ -26,9 +26,13 @@ export const MobileBottomNav: React.FC = () => {
     openAuthModal
   } = useApp();
 
+  if (currentView === 'details' || currentView === 'landing' || currentView === 'payment_result') {
+    return null;
+  }
+
   if (currentUser.role === 'host') {
     return (
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-[64px] bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E2ECEB] dark:border-[#166D74] px-3 flex items-center justify-around transition-colors shadow-lg">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-[calc(64px+env(safe-area-inset-bottom,0px))] pb-[env(safe-area-inset-bottom,0px)] bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E2ECEB] dark:border-[#166D74] px-3 flex items-center justify-around transition-colors shadow-lg">
         <div className="h-[2px] w-full absolute top-0 left-0 bg-gradient-to-r from-[#006B70] via-[#14BEB8] via-[#FFA987] to-[#006B70]" />
         <button
           type="button"
@@ -72,7 +76,7 @@ export const MobileBottomNav: React.FC = () => {
   }
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-[64px] bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E2ECEB] dark:border-[#166D74] px-3 flex items-center justify-around transition-colors shadow-lg">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-[calc(64px+env(safe-area-inset-bottom,0px))] pb-[env(safe-area-inset-bottom,0px)] bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-xl border-t border-[#E2ECEB] dark:border-[#166D74] px-3 flex items-center justify-around transition-colors shadow-lg">
       <div className="h-[2px] w-full absolute top-0 left-0 bg-gradient-to-r from-[#006B70] via-[#14BEB8] via-[#FFA987] to-[#006B70]" />
       <button
         type="button"
