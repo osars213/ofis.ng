@@ -371,6 +371,10 @@ BEGIN
         RAISE EXCEPTION 'Clients are not permitted to directly modify payment_status. Payment confirmation must execute via confirm_booking_payment RPC.';
     END IF;
 
+    IF NEW.payment_reference IS DISTINCT FROM OLD.payment_reference THEN
+        RAISE EXCEPTION 'Clients are not permitted to directly modify payment_reference. It is assigned authoritatively by the server.';
+    END IF;
+
     -- 2. Financial & Ownership Integrity
     IF NEW.total_amount IS DISTINCT FROM OLD.total_amount THEN
         RAISE EXCEPTION 'Clients are not permitted to directly modify booking total_amount.';
@@ -693,7 +697,26 @@ BEGIN
         );
     END IF;
 
-    -- 4. Payment Reference Reuse Protection: Reject if this reference was already used for a DIFFERENT booking
+    -- 4. Payment Reference Pre-Binding & Reuse Protection
+    -- Check A: The booking being confirmed MUST already have this exact reference assigned server-side at initialization
+    IF v_booking.payment_reference IS NULL OR v_booking.payment_reference <> p_transaction_reference THEN
+        RAISE EXCEPTION 'Security error: Payment reference "%" does not match the reference assigned to booking "%" ("%")',
+            p_transaction_reference, p_booking_id, COALESCE(v_booking.payment_reference, 'NULL');
+    END IF;
+
+    -- Check B: Reject if this reference is assigned to ANY OTHER booking (pending, reserved, or confirmed)
+    SELECT id INTO v_existing_booking_id
+    FROM public.bookings
+    WHERE payment_reference = p_transaction_reference
+      AND id <> p_booking_id
+    LIMIT 1;
+
+    IF v_existing_booking_id IS NOT NULL THEN
+        RAISE EXCEPTION 'Security error: Payment reference "%" is already assigned to a different booking ("%")',
+            p_transaction_reference, v_existing_booking_id;
+    END IF;
+
+    -- Check C: Reject if this reference was already logged in payments table for a different booking
     SELECT booking_id INTO v_existing_booking_id
     FROM public.payments
     WHERE reference = p_transaction_reference
@@ -703,18 +726,6 @@ BEGIN
 
     IF v_existing_booking_id IS NOT NULL THEN
         RAISE EXCEPTION 'Security error: Payment reference "%" has already been used to confirm a different booking ("%")',
-            p_transaction_reference, v_existing_booking_id;
-    END IF;
-
-    SELECT id INTO v_existing_booking_id
-    FROM public.bookings
-    WHERE payment_reference = p_transaction_reference
-      AND id <> p_booking_id
-      AND payment_status = 'paid'
-    LIMIT 1;
-
-    IF v_existing_booking_id IS NOT NULL THEN
-        RAISE EXCEPTION 'Security error: Payment reference "%" is already recorded for confirmed booking ("%")',
             p_transaction_reference, v_existing_booking_id;
     END IF;
 

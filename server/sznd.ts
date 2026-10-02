@@ -180,6 +180,7 @@ export class SzndClient {
       };
     }
 
+    const redirectTarget = params.redirectUrl.trim();
     const payload = {
       email: params.email.trim().toLowerCase(),
       first_name: params.firstName.trim() || 'OFIS',
@@ -187,13 +188,19 @@ export class SzndClient {
       amount: Number(params.amount).toFixed(2),
       currency: params.currency || 'NGN',
       reference: params.reference.trim(),
-      redirectUrl: params.redirectUrl.trim(),
+      redirect_url: redirectTarget,
+      redirectUrl: redirectTarget,
+      callback_url: redirectTarget,
+      callbackUrl: redirectTarget,
+      return_url: redirectTarget,
       description: params.description.trim() || 'OFIS Workspace Booking',
       checkout_display_name: 'OFIS',
       customer_phone_number: (params.phone || '+2348000000000').trim(),
       metadata: {
         ...(params.metadata || {}),
         sznd_env: env,
+        redirect_url: redirectTarget,
+        callback_url: redirectTarget,
       },
     };
 
@@ -279,20 +286,30 @@ export class SzndClient {
 
     const cleanRef = reference.trim();
     const baseUrl = this.getBaseUrl();
-    const paramName =
-      cleanRef.startsWith('OFIS-') ? 'origin_reference' : 'reference';
-
-    const endpoint =
-      `${baseUrl}/client/payment/verify?${paramName}=${encodeURIComponent(cleanRef)}`;
+    const primaryParam = cleanRef.startsWith('OFIS-') ? 'origin_reference' : 'reference';
     const headers = this.generateHeaders('');
 
     try {
-      const response = await fetch(endpoint, {
+      let response = await fetch(`${baseUrl}/client/payment/verify?${primaryParam}=${encodeURIComponent(cleanRef)}`, {
         method: 'GET',
         headers,
       });
 
-      const data = await response.json().catch(() => null);
+      let data = await response.json().catch(() => null);
+
+      // Fallback to alternate parameter if primary parameter returned not found
+      if (!response.ok || data?.error === 'payment not found') {
+        const altParam = primaryParam === 'origin_reference' ? 'reference' : 'origin_reference';
+        const altRes = await fetch(`${baseUrl}/client/payment/verify?${altParam}=${encodeURIComponent(cleanRef)}`, {
+          method: 'GET',
+          headers,
+        });
+        const altData = await altRes.json().catch(() => null);
+        if (altRes.ok && altData && !altData.error) {
+          response = altRes;
+          data = altData;
+        }
+      }
 
       if (!response.ok || !data) {
         const errMsg = data?.message || data?.error || `SZND (${env.toUpperCase()}) verification failed with HTTP ${response.status}`;
@@ -306,22 +323,36 @@ export class SzndClient {
       }
 
       const resData = data.data || data;
-      const rawStatus = String(resData.status || resData.payment_status || '').toUpperCase();
+      const rawStatus = String(resData.status || resData.transaction_status || resData.payment_status || '').toUpperCase();
+      const statusName = String(resData.status_name || resData.transaction_status_name || '').toUpperCase();
 
-      const isCompleted =
-        resData.paymentCompleted === true ||
-        resData.payment_completed === true ||
-        String(resData.provider_transaction_status || '').toUpperCase() === 'COMPLETED' ||
-        rawStatus === 'COMPLETED' ||
-        rawStatus === 'SUCCESS' ||
-        rawStatus === 'PAID';
+      const isPending =
+        rawStatus === 'PENDING' ||
+        rawStatus === 'PROCESSING' ||
+        rawStatus === 'CREATED' ||
+        statusName === 'PENDING' ||
+        statusName === 'CREATED';
+
+      const isFailed =
+        rawStatus === 'FAILED' ||
+        rawStatus === 'CANCELLED' ||
+        rawStatus === 'ABANDONED' ||
+        statusName === 'FAILED';
+
+      const isExplicitlyCompleted =
+        (rawStatus === 'COMPLETED' ||
+         rawStatus === 'SUCCESS' ||
+         rawStatus === 'PAID' ||
+         statusName === 'COMPLETED' ||
+         statusName === 'SUCCESS') &&
+        !isPending;
 
       let mappedStatus: SzndVerifyResponse['status'] = 'UNKNOWN';
-      if (isCompleted) {
+      if (isExplicitlyCompleted) {
         mappedStatus = 'COMPLETED';
-      } else if (rawStatus === 'PENDING' || rawStatus === 'PROCESSING') {
+      } else if (isPending) {
         mappedStatus = 'PENDING';
-      } else if (rawStatus === 'FAILED' || rawStatus === 'CANCELLED' || rawStatus === 'ABANDONED') {
+      } else if (isFailed) {
         mappedStatus = 'FAILED';
       }
 

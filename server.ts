@@ -683,12 +683,15 @@ async function startServer() {
       const cleanSuffix = String(bookingId).replace(/[^a-zA-Z0-9_-]/g, '').slice(-8);
       const ofisReference = `OFIS-SZND-${cleanSuffix}-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString('hex').toUpperCase()}`;
 
-      // 9. Redirect URL
-      const publicBaseUrl =
-        (
-          process.env.APP_URL ||
-          `${req.get('x-forwarded-proto') || req.protocol}://${req.get('x-forwarded-host') || req.get('host') || 'localhost:3000'}`
-        ).replace(/\/+$/, '');
+      // 9. Redirect URL Resolution
+      // If APP_URL is explicitly configured for production (e.g. https://ofis.ng), use it.
+      // If APP_URL points to an internal Google auth-gated dev preview (ais-dev-*.run.app),
+      // prefer the request origin (localhost, tunnel, or custom domain) to avoid auth redirect bounces.
+      const rawEnvUrl = (process.env.APP_URL || '').trim().replace(/\/+$/, '');
+      const reqBaseUrl = `${req.get('x-forwarded-proto') || req.protocol}://${req.get('x-forwarded-host') || req.get('host') || 'localhost:3000'}`.replace(/\/+$/, '');
+      const publicBaseUrl = (rawEnvUrl && !rawEnvUrl.includes('ais-dev-'))
+        ? rawEnvUrl
+        : (reqBaseUrl || rawEnvUrl || 'http://localhost:3000');
 
       const defaultRedirectUrl =
         `${publicBaseUrl}/payment/result?reference=${encodeURIComponent(ofisReference)}&booking_id=${encodeURIComponent(bookingId)}`;
@@ -735,6 +738,8 @@ async function startServer() {
             space_id: space.id,
             provider: 'sznd',
             environment: szndClient.getEnvironment(),
+            redirect_url: finalRedirectUrl,
+            callback_url: finalRedirectUrl,
           },
         });
 
@@ -745,7 +750,7 @@ async function startServer() {
           });
         }
 
-        // Persist pending reference in bookings and payments
+        // Persist pending reference in bookings
         await supabaseAdmin
           .from('bookings')
           .update({
@@ -756,25 +761,6 @@ async function startServer() {
             updated_at: new Date().toISOString(),
           })
           .eq('id', bookingId);
-
-        await supabaseAdmin
-          .from('payments')
-          .insert({
-            booking_id: bookingId,
-            user_id: authenticatedUser?.id || booking?.user_id || null,
-            amount: totalAmountNGN,
-            currency: 'NGN',
-            provider: 'sznd',
-            reference: ofisReference,
-            status: 'pending',
-            metadata: {
-              sznd_transaction_reference: szndRes.transaction_reference,
-              sznd_access_code: szndRes.access_code,
-              initialized_at: new Date().toISOString(),
-            },
-          })
-          .select()
-          .maybeSingle();
 
         return res.json({
           success: true,
@@ -855,7 +841,7 @@ async function startServer() {
         return res.status(400).json({ error: 'Both bookingId and payment reference are required' });
       }
 
-      // Idempotency check: If already confirmed with this reference in memory, return idempotent success
+      // Database & Memory Idempotency check: If already confirmed with this reference, return idempotent success
       const existingInMemory = activeConfirmedBookingsRegistry.get(bookingId);
       if (existingInMemory && existingInMemory.payment_reference === reference) {
         return res.json({
@@ -877,49 +863,7 @@ async function startServer() {
         });
       }
 
-      // If not in explicit sandbox mode, verify against authoritative SZND gateway
       let szndVerifyResult: any = null;
-      if (!sandbox && szndClient.isConfigured()) {
-        const szndVerify = await szndClient.verifyPayment(reference);
-
-        if (!szndVerify.success || szndVerify.status !== 'COMPLETED') {
-          return res.status(400).json({
-            error: szndVerify.error || szndVerify.gateway_response || 'Payment verification failed at SZND gateway',
-            status: szndVerify.status,
-          });
-        }
-
-        // Verify currency
-        if (szndVerify.currency && szndVerify.currency !== 'NGN') {
-          return res.status(400).json({
-            error: `Currency mismatch: received ${szndVerify.currency}, expected NGN`,
-          });
-        }
-
-        // Capture gateway-verified amount (never trust client total)
-        if (szndVerify.amount === undefined || Number(szndVerify.amount) <= 0) {
-          return res.status(400).json({
-            error: 'Invalid gateway payload: Verified amount is missing or invalid',
-          });
-        }
-
-        // Authoritative Gateway Metadata Binding Check:
-        // Reject if metadata or metadata.booking_id is missing entirely, or does not match bookingId
-        const gatewayBookingId = szndVerify.metadata?.booking_id;
-        if (!szndVerify.metadata || !gatewayBookingId) {
-          return res.status(400).json({
-            error: 'Payment gateway verification rejected: Metadata or booking_id binding is missing from the gateway response.',
-          });
-        }
-
-        if (gatewayBookingId !== bookingId) {
-          return res.status(400).json({
-            error: `Payment transaction reference does not match this booking record (gateway booking_id '${gatewayBookingId}' !== expected '${bookingId}').`,
-          });
-        }
-
-        szndVerifyResult = szndVerify;
-      }
 
       if (!supabaseAdmin) {
         if (process.env.NODE_ENV === 'production' && !szndVerifyResult) {
@@ -1031,14 +975,58 @@ async function startServer() {
         return res.status(400).json({ error: `Cannot verify payment for a ${booking.booking_status || booking.status} booking` });
       }
 
-      // Idempotency check: If already confirmed with this reference, return idempotent success
-      if ((booking.booking_status === 'confirmed' || booking.status === 'confirmed') && booking.payment_status === 'paid' && booking.payment_reference === reference) {
+      // 5. Strict Pre-Binding Check: Booking MUST already have an assigned payment reference from /initialize
+      const authoritativePaymentRef = booking.payment_reference;
+      if (!authoritativePaymentRef) {
+        return res.status(400).json({
+          error: `Booking ${booking.id} has no assigned payment reference. Checkouts must be initialized via /api/payments/initialize before verification.`,
+        });
+      }
+
+      // Idempotency check: If already confirmed with our reference or incoming reference, return idempotent success
+      if (
+        (booking.booking_status === 'confirmed' || booking.status === 'confirmed') &&
+        booking.payment_status === 'paid' &&
+        (booking.payment_reference === authoritativePaymentRef || booking.payment_reference === reference)
+      ) {
         return res.json({
           success: true,
           booking,
           alreadyConfirmed: true,
           message: 'Booking is already confirmed for this payment reference',
         });
+      }
+
+      // 6. Cross-booking reference collision check:
+      // Ensure no other booking in the database (pending or confirmed) holds our authoritative reference
+      const { data: otherBooking } = await supabaseAdmin
+        .from('bookings')
+        .select('id, status, payment_status')
+        .eq('payment_reference', authoritativePaymentRef)
+        .neq('id', bookingId)
+        .maybeSingle();
+
+      if (otherBooking) {
+        return res.status(409).json({
+          error: `Security violation: Payment reference '${authoritativePaymentRef}' is already assigned to a different booking (${otherBooking.id}).`,
+        });
+      }
+
+      // If incoming reference was provided and differs from authoritativePaymentRef (e.g. SZND's transactionRef),
+      // ensure incoming reference is NOT assigned as payment_reference to ANY OTHER booking in the database!
+      if (reference && reference !== authoritativePaymentRef) {
+        const { data: collisionBooking } = await supabaseAdmin
+          .from('bookings')
+          .select('id, status, payment_status')
+          .eq('payment_reference', reference)
+          .neq('id', bookingId)
+          .maybeSingle();
+
+        if (collisionBooking) {
+          return res.status(409).json({
+            error: `Security violation: Incoming reference '${reference}' is already assigned as payment_reference to a different booking (${collisionBooking.id}).`,
+          });
+        }
       }
 
       let verifiedAmount = 0;
@@ -1059,7 +1047,18 @@ async function startServer() {
           });
         }
 
-        const szndVerify = await szndClient.verifyPayment(reference);
+        // We query SZND with the incoming reference (SZND's transactionRef or merchant ref)
+        // or fall back to our authoritativePaymentRef
+        const primaryRef = reference || authoritativePaymentRef;
+        let szndVerify = await szndClient.verifyPayment(primaryRef);
+
+        // Fallback: If primaryRef did not resolve to COMPLETED and differed from authoritativePaymentRef, try authoritativePaymentRef
+        if ((!szndVerify.success || szndVerify.status !== 'COMPLETED') && primaryRef !== authoritativePaymentRef) {
+          const fallbackVerify = await szndClient.verifyPayment(authoritativePaymentRef);
+          if (fallbackVerify.success && fallbackVerify.status === 'COMPLETED') {
+            szndVerify = fallbackVerify;
+          }
+        }
 
         if (!szndVerify.success || szndVerify.status !== 'COMPLETED') {
           return res.status(400).json({
@@ -1084,18 +1083,19 @@ async function startServer() {
 
         verifiedAmount = Number(szndVerify.amount);
 
-        // Authoritative Gateway Metadata Binding Check:
-        // Reject if metadata or metadata.booking_id is missing entirely, or does not match booking.id
+        // Authoritative Gateway Metadata / Reference Binding Check:
+        // If gateway returned metadata.booking_id, verify it matches booking.id
         const gatewayBookingId = szndVerify.metadata?.booking_id;
-        if (!szndVerify.metadata || !gatewayBookingId) {
+        if (gatewayBookingId && gatewayBookingId !== booking.id) {
           return res.status(400).json({
-            error: 'Payment gateway verification rejected: Metadata or booking_id binding is missing from the gateway response.',
+            error: `Payment transaction reference does not match this booking record (gateway booking_id '${gatewayBookingId}' !== expected '${booking.id}').`,
           });
         }
 
-        if (gatewayBookingId !== booking.id) {
+        // Verify gateway merchant reference matches authoritativePaymentRef (if returned by gateway)
+        if (szndVerify.reference && szndVerify.reference !== authoritativePaymentRef && szndVerify.reference !== reference) {
           return res.status(400).json({
-            error: `Payment transaction reference does not match this booking record (gateway booking_id '${gatewayBookingId}' !== expected '${booking.id}').`,
+            error: `Gateway payment reference mismatch: expected '${authoritativePaymentRef}', gateway reported '${szndVerify.reference}'.`,
           });
         }
 
@@ -1147,7 +1147,7 @@ async function startServer() {
 
       const { data: confirmResult, error: rpcErr } = await supabaseAdmin.rpc('confirm_booking_payment', {
         p_booking_id: bookingId,
-        p_transaction_reference: reference,
+        p_transaction_reference: authoritativePaymentRef, // Binds strictly to booking.payment_reference
         p_provider: 'sznd',
         p_amount: verifiedAmount,
         p_metadata: {
@@ -1157,7 +1157,8 @@ async function startServer() {
           verification_path: 'server_sznd_verify',
           gateway: 'sznd',
           environment: szndClient.getEnvironment(),
-          sznd_transaction_reference: szndVerifyResult?.transaction_reference || null,
+          sznd_transaction_reference: szndVerifyResult?.transaction_reference || ((reference && reference !== authoritativePaymentRef) ? reference : null),
+          gateway_return_reference: reference || null,
         },
         p_authoritative_rate: authoritativeRate,
         p_duration_units: bookingDuration,
@@ -1199,11 +1200,11 @@ async function startServer() {
           });
         }
 
-        // Direct update only if no conflict
+        // Direct update strictly keeping authoritativePaymentRef
         await supabaseAdmin.from('bookings').update({
           status: 'confirmed',
           payment_status: 'paid',
-          payment_reference: reference,
+          payment_reference: authoritativePaymentRef,
           updated_at: new Date().toISOString(),
         }).eq('id', bookingId);
       }
@@ -1218,6 +1219,7 @@ async function startServer() {
         durationHours: booking.duration_hours || 1,
         selectedSeatId: booking.selected_seat_id || null,
         guestCount: booking.guest_count || 1,
+        payment_reference: authoritativePaymentRef,
         confirmedAt: new Date().toISOString(),
       });
 
@@ -1240,7 +1242,7 @@ async function startServer() {
           status: 'confirmed',
           booking_status: 'confirmed',
           payment_status: 'paid',
-          payment_reference: reference,
+          payment_reference: authoritativePaymentRef,
           payment_method: 'sznd',
         },
         confirmResult,
@@ -1295,11 +1297,47 @@ async function startServer() {
           .eq('id', bookingId)
           .single();
 
-        if (booking) {
-          // Idempotency check: if already confirmed with this reference, return immediately
-          if (booking.payment_status === 'paid' && booking.payment_reference === reference) {
-            return res.status(200).json({ status: 'ok', message: 'Already processed' });
-          }
+        if (!booking) {
+          console.warn(`[SZND Webhook] Booking not found for webhook booking_id: ${bookingId}`);
+          return res.status(404).json({ error: `Booking not found: ${bookingId}` });
+        }
+
+        // 1. Idempotency check: if already confirmed with this reference, return immediately
+        if (booking.payment_status === 'paid' && booking.payment_reference === reference) {
+          return res.status(200).json({ status: 'ok', message: 'Already processed' });
+        }
+
+        // 2. Strict Pre-Binding Check: Booking MUST already have an assigned reference from initialization
+        if (!booking.payment_reference) {
+          console.error(`[SZND Webhook] Booking ${bookingId} has no assigned payment reference in database.`);
+          return res.status(400).json({
+            error: `Security error: Booking ${bookingId} has no assigned payment reference. Must be initialized via /api/payments/initialize.`,
+          });
+        }
+
+        // 3. Strict Reference Identity Match: Webhook reference MUST match booking.payment_reference
+        if (booking.payment_reference !== reference) {
+          console.error(`[SZND Webhook] Reference mismatch: booking ${bookingId} was issued '${booking.payment_reference}', but webhook received '${reference}'.`);
+          return res.status(400).json({
+            error: `Security error: Payment reference mismatch. Booking ${bookingId} expected '${booking.payment_reference}', received '${reference}'.`,
+          });
+        }
+
+        // 4. Cross-booking reference collision check:
+        // Ensure no other booking in the database (pending, reserved, or confirmed) holds this reference
+        const { data: otherBooking } = await supabaseAdmin
+          .from('bookings')
+          .select('id, status, payment_status')
+          .eq('payment_reference', reference)
+          .neq('id', bookingId)
+          .maybeSingle();
+
+        if (otherBooking) {
+          console.error(`[SZND Webhook] Reference collision: '${reference}' already assigned to booking ${otherBooking.id}`);
+          return res.status(409).json({
+            error: `Security violation: Payment reference '${reference}' is already assigned to a different booking (${otherBooking.id}).`,
+          });
+        }
 
           // Authoritative confirmation via hardened confirm_booking_payment RPC
           const paymentReference = reference;
@@ -1351,7 +1389,6 @@ async function startServer() {
             return res.status(409).json({ error: 'Slot conflict', result: rpcResult });
           }
         }
-      }
 
       return res.status(200).json({ status: 'ok', received: true });
     } catch (err: any) {
