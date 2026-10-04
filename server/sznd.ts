@@ -76,18 +76,51 @@ export class SzndClient {
 
   public getApiKey(): string {
     if (this.explicitApiKey) return this.explicitApiKey.trim();
-    if (this.getEnvironment() === 'test') {
-      return (process.env.SZND_TEST_API_KEY || process.env.SZND_API_KEY || '').trim();
+
+    const candidate1 = (process.env.SZND_API_KEY || '').trim();
+    const candidate2 = (process.env.SZND_TEST_API_KEY || '').trim();
+    const testSecret = (process.env.SZND_TEST_API_SECRET || '').trim();
+
+    // 1. If candidate1 is the full valid key (starts with tf_ and >= 60 chars)
+    if (candidate1.startsWith('tf_') && candidate1.length >= 60) {
+      return candidate1;
     }
-    return (process.env.SZND_API_KEY || process.env.SZND_TEST_API_KEY || '').trim();
+
+    // 2. If candidate2 is full (>= 60 chars)
+    if (candidate2.startsWith('tf_') && candidate2.length >= 60) {
+      return candidate2;
+    }
+
+    // 3. If someone accidentally split the key across SZND_TEST_API_KEY and SZND_TEST_API_SECRET
+    if (candidate2.startsWith('tf_') && testSecret && !testSecret.startsWith('sk_')) {
+      const combined = (candidate2 + testSecret).trim();
+      if (combined.length >= 60) {
+        return combined;
+      }
+    }
+
+    // 4. Default fallback: longest key or available candidate
+    if (candidate1.length >= candidate2.length && candidate1) {
+      return candidate1;
+    }
+    return candidate2 || candidate1 || '';
   }
 
   public getApiSecret(): string {
     if (this.explicitApiSecret) return this.explicitApiSecret.trim();
-    if (this.getEnvironment() === 'test') {
-      return (process.env.SZND_TEST_API_SECRET || process.env.SZND_API_SECRET || '').trim();
+
+    const candidate1 = (process.env.SZND_API_SECRET || '').trim();
+    const candidate2 = (process.env.SZND_TEST_API_SECRET || '').trim();
+
+    // Real API secrets must start with 'sk_'
+    if (candidate1.startsWith('sk_')) {
+      return candidate1;
     }
-    return (process.env.SZND_API_SECRET || process.env.SZND_TEST_API_SECRET || '').trim();
+    if (candidate2.startsWith('sk_')) {
+      return candidate2;
+    }
+
+    return candidate1 || candidate2 || '';
   }
 
   /**
