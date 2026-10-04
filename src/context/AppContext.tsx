@@ -834,7 +834,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setIsLoadingBookings(true);
     setBookingsError(null);
     try {
-      const res = await bookingsService.fetchBookingsAsync(currentUser.id);
+      const res = await bookingsService.fetchBookingsAsync(currentUser.id, currentUser.email);
       setBookings(res.bookings);
     } catch (err: any) {
       setBookingsError(err.message || 'Failed to refresh bookings');

@@ -125,7 +125,40 @@ export const bookingsService = {
     return storage.get<Booking[]>(BOOKINGS_KEY, defaultBookings);
   },
 
-  fetchBookingsAsync: async (userId?: string): Promise<{ bookings: Booking[]; source: 'supabase' | 'cache' }> => {
+  fetchBookingsAsync: async (userId?: string, userEmail?: string): Promise<{ bookings: Booking[]; source: 'supabase' | 'cache' }> => {
+    // 1. Authoritative Backend Proxy (bypasses RLS constraints and matches by user_id OR email)
+    try {
+      const client = getSupabaseClient();
+      let token: string | undefined;
+      if (client) {
+        const sessionRes = await client.auth.getSession();
+        token = sessionRes.data.session?.access_token;
+      }
+
+      const params = new URLSearchParams();
+      if (userId && !userId.startsWith('guest')) params.set('userId', userId);
+      if (userEmail && !userEmail.includes('@guest')) params.set('email', userEmail);
+
+      const res = await fetch(`/api/bookings?${params.toString()}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data.bookings)) {
+          const mapped: Booking[] = data.bookings.map(mapDbBookingToBooking);
+          storage.set(BOOKINGS_KEY, mapped);
+          return { bookings: mapped, source: 'supabase' };
+        }
+      }
+    } catch (err) {
+      console.warn('[bookingsService] Error fetching bookings via API proxy:', err);
+    }
+
+    // 2. Direct Supabase Client Fallback
     const client = getSupabaseClient();
     if (client) {
       try {
@@ -140,11 +173,6 @@ export const bookingsService = {
             const mapped: Booking[] = data.map(mapDbBookingToBooking);
             storage.set(BOOKINGS_KEY, mapped);
             return { bookings: mapped, source: 'supabase' };
-          } else {
-            // Live Supabase query returned 0 bookings for this user.
-            // Do NOT inject mock bookings into production view.
-            storage.set(BOOKINGS_KEY, []);
-            return { bookings: [], source: 'supabase' };
           }
         }
       } catch (err) {

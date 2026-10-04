@@ -246,6 +246,7 @@ export const CheckoutModal: React.FC = () => {
         body: JSON.stringify({
           bookingId: newBooking.id,
           spaceId: checkoutSpace.id,
+          userId: (currentUser.id && !currentUser.id.startsWith('guest')) ? currentUser.id : undefined,
           email: currentUser.email,
           callbackUrl,
           paymentMethod: 'sznd',

@@ -556,6 +556,21 @@ async function startServer() {
         authenticatedUser = user;
       }
 
+      // Strictly validate userId: only resolve if authenticated via Bearer token
+      // If req.body.userId is provided, it MUST match the authenticated token's own uid
+      let resolvedUserId: string | null = null;
+      if (authenticatedUser?.id) {
+        if (req.body.userId && req.body.userId !== authenticatedUser.id) {
+          return res.status(403).json({
+            error: 'Security violation: Client userId does not match authenticated session token',
+          });
+        }
+        resolvedUserId = authenticatedUser.id;
+      } else {
+        // Genuine guest checkout: no authenticated token present, user_id strictly remains null
+        resolvedUserId = null;
+      }
+
       if (authenticatedUser) {
         const { data: profile } = await supabaseAdmin
           .from('profiles')
@@ -740,7 +755,7 @@ async function startServer() {
           phone: customerPhone,
           metadata: {
             booking_id: bookingId,
-            user_id: authenticatedUser?.id || booking?.user_id || 'guest',
+            user_id: resolvedUserId || 'guest',
             space_id: space.id,
             provider: 'sznd',
             environment: szndClient.getEnvironment(),
@@ -766,7 +781,7 @@ async function startServer() {
           space_image: space?.featured_image || (Array.isArray(space?.images) ? space?.images[0] : '') || '',
           space_address: space?.address || '',
           space_city: space?.city || 'Lagos',
-          user_id: authenticatedUser?.id || booking?.user_id || null,
+          user_id: resolvedUserId,
           user_name: rawFullName,
           user_email: customerEmail,
           user_phone: customerPhone,
@@ -1432,6 +1447,50 @@ async function startServer() {
   // Dedicated SZND Webhook Endpoint and Legacy Fallback Alias
   app.post('/api/payments/sznd/webhook', handleSzndWebhook);
   app.post('/api/payments/webhook', handleSzndWebhook);
+
+  // Authoritative User Bookings Retrieval Endpoint (bypasses RLS to match by user_id OR email)
+  app.get('/api/bookings', async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      let authenticatedUser: any = null;
+      if (authHeader) {
+        const token = authHeader.replace(/^Bearer\s+/i, '');
+        const { data: { user } } = await supabaseAdmin.auth.getUser(token);
+        if (user) authenticatedUser = user;
+      }
+
+      const email = ((req.query.email as string) || authenticatedUser?.email || '').trim().toLowerCase();
+      const userId = ((req.query.userId as string) || authenticatedUser?.id || '').trim();
+
+      if (!email && !userId) {
+        return res.json({ bookings: [] });
+      }
+
+      let query = supabaseAdmin
+        .from('bookings')
+        .select('*, spaces(*)')
+        .order('created_at', { ascending: false });
+
+      if (userId && email) {
+        query = query.or(`user_id.eq.${userId},user_email.ilike.${email}`);
+      } else if (userId) {
+        query = query.eq('user_id', userId);
+      } else {
+        query = query.ilike('user_email', email);
+      }
+
+      const { data: bookings, error } = await query;
+      if (error) {
+        console.error('[GET /api/bookings] Supabase error:', error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      return res.json({ bookings: bookings || [] });
+    } catch (err: any) {
+      console.error('[GET /api/bookings] Internal error:', err);
+      return res.status(500).json({ error: err.message });
+    }
+  });
 
   // 4. Secure Access Credentials RPC Proxy
   app.post('/api/bookings/credentials', async (req, res) => {
