@@ -75,21 +75,35 @@ export class SzndClient {
   }
 
   public getApiKey(): string {
-    return (this.explicitApiKey || process.env.SZND_API_KEY || '').trim();
+    if (this.explicitApiKey) return this.explicitApiKey.trim();
+    if (this.getEnvironment() === 'test') {
+      return (process.env.SZND_TEST_API_KEY || process.env.SZND_API_KEY || '').trim();
+    }
+    return (process.env.SZND_API_KEY || process.env.SZND_TEST_API_KEY || '').trim();
   }
 
   public getApiSecret(): string {
-    return (this.explicitApiSecret || process.env.SZND_API_SECRET || '').trim();
+    if (this.explicitApiSecret) return this.explicitApiSecret.trim();
+    if (this.getEnvironment() === 'test') {
+      return (process.env.SZND_TEST_API_SECRET || process.env.SZND_API_SECRET || '').trim();
+    }
+    return (process.env.SZND_API_SECRET || process.env.SZND_TEST_API_SECRET || '').trim();
   }
 
   /**
    * Resolves the API base URL based on environment variables.
-   * If SZND_API_BASE_URL is set, it is always preferred and normalized to include /api/v1.
+   * If SZND_API_BASE_URL (or SZND_TEST_API_BASE_URL) is set, it is normalized to include /api/v1.
+   * In test mode, defaults to https://transfaar-test-a8d2cb980af2.herokuapp.com/api/v1 if unspecified.
    * In production mode, defaults to SZND_PRODUCTION_DEFAULT_BASE_URL if unspecified.
-   * In test mode, returns SZND_API_BASE_URL if provided, or empty string (requires configuration).
    */
   public getBaseUrl(): string {
-    const customUrl = (this.explicitBaseUrl || process.env.SZND_API_BASE_URL || '').trim();
+    const isTest = this.getEnvironment() === 'test';
+    const customUrl = (
+      this.explicitBaseUrl ||
+      (isTest ? (process.env.SZND_TEST_API_BASE_URL || process.env.SZND_API_BASE_URL) : process.env.SZND_API_BASE_URL) ||
+      (isTest ? 'https://transfaar-test-a8d2cb980af2.herokuapp.com' : '')
+    )?.trim();
+
     if (customUrl) {
       let cleaned = customUrl.replace(/\/+$/, '');
       if (!cleaned.endsWith('/api/v1')) {
@@ -98,11 +112,10 @@ export class SzndClient {
       return cleaned;
     }
 
-    if (this.getEnvironment() === 'production') {
+    if (!isTest) {
       return SZND_PRODUCTION_DEFAULT_BASE_URL;
     }
 
-    // In test environment, do not invent an unconfirmed URL
     return '';
   }
 
