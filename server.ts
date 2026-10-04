@@ -96,7 +96,10 @@ async function startServer() {
       szndDiagnostics: {
         environment: diag.environment,
         apiKeyConfigured: diag.apiKeyConfigured,
+        apiKeyLength: diag.apiKeyLength,
         apiSecretConfigured: diag.apiSecretConfigured,
+        apiSecretLength: diag.apiSecretLength,
+        apiSecretValidPrefix: diag.apiSecretValidPrefix,
         baseUrlConfigured: diag.baseUrlConfigured,
       },
     });
@@ -110,7 +113,10 @@ async function startServer() {
       provider: 'sznd',
       'SZND environment': diag.environment,
       'SZND API key configured': diag.apiKeyConfigured,
+      'SZND API key length': diag.apiKeyLength,
       'SZND API secret configured': diag.apiSecretConfigured,
+      'SZND API secret length': diag.apiSecretLength,
+      'SZND API secret valid prefix (sk_)': diag.apiSecretValidPrefix,
       'SZND base URL configured': diag.baseUrlConfigured,
     });
   });
@@ -750,17 +756,43 @@ async function startServer() {
           });
         }
 
-        // Persist pending reference in bookings
-        await supabaseAdmin
+        // Persist pending reference in bookings (upsert guarantees record exists in database)
+        const passSuffix = String(bookingId).replace(/[^a-zA-Z0-9]/g, '').slice(-6).toUpperCase() || 'PASS01';
+        const cleanNamePart = rawFullName.replace(/\s+/g, '').toUpperCase().slice(0, 10) || 'GUEST';
+        const bookingPayload = {
+          id: bookingId,
+          space_id: targetSpaceId,
+          space_title: space?.title || space?.name || 'Workspace',
+          space_image: space?.featured_image || (Array.isArray(space?.images) ? space?.images[0] : '') || '',
+          space_address: space?.address || '',
+          space_city: space?.city || 'Lagos',
+          user_id: authenticatedUser?.id || booking?.user_id || null,
+          user_name: rawFullName,
+          user_email: customerEmail,
+          user_phone: customerPhone,
+          date: effectiveDate,
+          start_time: effectiveStartTime,
+          duration_hours: effectiveDuration,
+          guest_count: guestCount,
+          total_amount: totalAmountNGN,
+          currency: 'NGN',
+          status: 'reserved',
+          booking_status: 'reserved',
+          qr_code_value: `OFIS-PASS-${passSuffix}-${cleanNamePart}`,
+          digital_pass_code: `OFIS-${passSuffix}`,
+          payment_reference: ofisReference,
+          payment_method: 'sznd',
+          payment_status: 'pending',
+          updated_at: new Date().toISOString(),
+        };
+
+        const { error: upsertErr } = await supabaseAdmin
           .from('bookings')
-          .update({
-            payment_reference: ofisReference,
-            payment_method: 'sznd',
-            payment_status: 'pending',
-            total_amount: totalAmountNGN,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', bookingId);
+          .upsert(bookingPayload, { onConflict: 'id' });
+
+        if (upsertErr) {
+          console.warn('[SZND Init] Warning upserting booking in Supabase:', upsertErr.message);
+        }
 
         return res.json({
           success: true,

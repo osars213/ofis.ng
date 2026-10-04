@@ -43,7 +43,10 @@ export interface SzndVerifyResponse {
 export interface SzndDiagnostics {
   environment: 'TEST' | 'PRODUCTION';
   apiKeyConfigured: 'YES' | 'NO';
+  apiKeyLength?: number;
   apiSecretConfigured: 'YES' | 'NO';
+  apiSecretLength?: number;
+  apiSecretValidPrefix?: boolean;
   baseUrlConfigured: 'YES' | 'NO';
 }
 
@@ -173,10 +176,15 @@ export class SzndClient {
    */
   public getDiagnostics(): SzndDiagnostics {
     const env = this.getEnvironment();
+    const key = this.getApiKey();
+    const secret = this.getApiSecret();
     return {
       environment: env === 'test' ? 'TEST' : 'PRODUCTION',
       apiKeyConfigured: this.hasApiKey() ? 'YES' : 'NO',
+      apiKeyLength: key.length,
       apiSecretConfigured: this.hasApiSecret() ? 'YES' : 'NO',
+      apiSecretLength: secret.length,
+      apiSecretValidPrefix: secret.startsWith('sk_'),
       baseUrlConfigured: this.hasBaseUrl() ? 'YES' : 'NO',
     };
   }
