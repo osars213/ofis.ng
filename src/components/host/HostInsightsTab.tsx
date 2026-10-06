@@ -205,7 +205,7 @@ export const HostInsightsTab: React.FC<HostInsightsTabProps> = ({ hostSpaces }) 
           <div className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] text-center space-y-1">
             <div className="text-xs text-[#718079]">Staff & Hospitality</div>
             <div className="text-xl font-bold font-mono text-[#00C878]">4.96 ★</div>
-            <p className="text-[10px] text-[#9EABA3]">Fast concierge check-in</p>
+            <p className="text-[10px] text-[#9EABA3]">Fast automated check-in</p>
           </div>
         </div>
       </div>

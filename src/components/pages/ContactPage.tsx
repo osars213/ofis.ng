@@ -66,45 +66,37 @@ export const ContactPage: React.FC = () => {
             <div className="space-y-3">
               <h3 className="text-xl font-bold">Direct Channels</h3>
               <p className="text-xs text-[#5D7A7D] dark:text-[#B8D1D0] leading-relaxed">
-                Connect with our concierge operations desk for instant assistance with check-in turnstile passes, host onboarding, or group corporate billing.
+                Connect with our team for assistance with reservations, turnstile entry passes, space host onboarding, or group corporate billing.
               </p>
             </div>
 
             <div className="space-y-6 text-xs">
               <div className="flex items-start space-x-3.5 p-4 rounded-2xl bg-white dark:bg-[#0B4A50] border border-[#E2ECEB] dark:border-[#166D74] shadow-sm">
                 <Mail className="w-5 h-5 text-[#006B70] dark:text-[#28D2CB] shrink-0 mt-0.5" />
-                <div className="space-y-1">
-                  <h4 className="font-bold text-sm text-[#12383B] dark:text-[#FFFFFF]">Email Support</h4>
+                <div className="space-y-1.5">
+                  <h4 className="font-bold text-sm text-[#12383B] dark:text-[#FFFFFF]">Contact Channels</h4>
                   <p className="text-[#5D7A7D] dark:text-[#B8D1D0]">
-                    <a href="mailto:hello@ofis.ng" className="text-[#006B70] dark:text-[#28D2CB] hover:underline font-semibold">
+                    <span className="font-semibold text-[#12383B] dark:text-white">General Inquiries: </span>
+                    <a href="mailto:hello@ofis.ng" className="text-[#006B70] dark:text-[#28D2CB] hover:underline font-bold">
                       hello@ofis.ng
                     </a>
-                    {' '}• support@ofis.ng
                   </p>
-                  <p className="text-[11px] text-[#006B70] dark:text-[#28D2CB] font-medium">Average response time: &lt; 2 hours</p>
+                  <p className="text-[#5D7A7D] dark:text-[#B8D1D0]">
+                    <span className="font-semibold text-[#12383B] dark:text-white">Customer Support: </span>
+                    <a href="mailto:support@ofis.ng" className="text-[#006B70] dark:text-[#28D2CB] hover:underline font-bold">
+                      support@ofis.ng
+                    </a>
+                  </p>
+                  <p className="text-[11px] text-[#006B70] dark:text-[#28D2CB] font-medium pt-1">Average response time: &lt; 2 hours</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3.5 p-4 rounded-2xl bg-white dark:bg-[#0B4A50] border border-[#E2ECEB] dark:border-[#166D74] shadow-sm">
                 <Phone className="w-5 h-5 text-[#006B70] dark:text-[#28D2CB] shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <h4 className="font-bold text-sm text-[#12383B] dark:text-[#FFFFFF]">Phone & WhatsApp Hotline</h4>
-                  <p className="text-[#5D7A7D] dark:text-[#B8D1D0]">+234 (0) 802 345 6789</p>
-                  <p className="text-[#5D7A7D] dark:text-[#B8D1D0]">+234 (0) 1 456 7890</p>
-                  <p className="text-[11px] text-[#006B70] dark:text-[#28D2CB] font-medium">Monday – Saturday: 7:00 AM – 9:00 PM WAT</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-3.5 p-4 rounded-2xl bg-white dark:bg-[#0B4A50] border border-[#E2ECEB] dark:border-[#166D74] shadow-sm">
-                <MapPin className="w-5 h-5 text-[#006B70] dark:text-[#28D2CB] shrink-0 mt-0.5" />
-                <div className="space-y-1">
-                  <h4 className="font-bold text-sm text-[#12383B] dark:text-[#FFFFFF]">Headquarters & Hubs</h4>
-                  <p className="text-[#5D7A7D] dark:text-[#B8D1D0]">
-                    <strong>Lagos:</strong> 14B Bishop Anyogu Street, Victoria Island, Lagos, Nigeria
-                  </p>
-                  <p className="text-[#5D7A7D] dark:text-[#B8D1D0]">
-                    <strong>Abuja:</strong> 22 Aguiyi Ironsi Way, Maitama, Abuja (FCT)
-                  </p>
+                  <h4 className="font-bold text-sm text-[#12383B] dark:text-[#FFFFFF]">Support Hours</h4>
+                  <p className="text-[#5D7A7D] dark:text-[#B8D1D0]">Monday – Sunday: 7:00 AM – 9:00 PM WAT</p>
+                  <p className="text-[11px] text-[#006B70] dark:text-[#28D2CB] font-medium">Real-time turnstile verification & booking support</p>
                 </div>
               </div>
             </div>

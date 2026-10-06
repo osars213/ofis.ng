@@ -74,15 +74,12 @@ export const Navbar: React.FC = () => {
           <div 
             className="flex items-center cursor-pointer transition-opacity hover:opacity-90 py-1" 
             onClick={() => {
-              const url = new URL(window.location.href);
-              url.searchParams.delete('app');
-              window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
-              window.dispatchEvent(new PopStateEvent('popstate'));
+              setCurrentView('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             title="OFIS Home"
           >
-            <OFISWordmark size="md" />
+            <OFISWordmark size="lg" className="scale-105 origin-left" />
           </div>
         </div>
 
@@ -247,7 +244,7 @@ export const Navbar: React.FC = () => {
                 type="button"
                 id="navbar-guest-direct-login-btn"
                 onClick={() => openAuthModal('login')}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white text-xs font-bold shadow-[0_4px_16px_rgba(255,169,135,0.35)] active:scale-95 transition-all cursor-pointer"
+                className="hidden md:inline-flex px-4 py-2 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white text-xs font-bold shadow-[0_4px_16px_rgba(255,169,135,0.35)] active:scale-95 transition-all cursor-pointer"
               >
                 Sign In
               </button>

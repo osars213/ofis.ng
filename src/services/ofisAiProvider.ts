@@ -3,7 +3,7 @@ import {
   parseUserQueryIntent, 
   executeStructuredSearch, 
   StructuredSearchIntent, 
-  AiConciergeResponse 
+  OfisAssistantResponse 
 } from './ofisIntentParser';
 import { calculateBookingPrice, formatPriceNGN } from '../utils/pricing';
 
@@ -51,20 +51,63 @@ export class OfisAiProvider {
     // 2. Informational / Knowledge Base Query Handling
     if (intent.isKnowledgeQuery && intent.knowledgeArticle) {
       const article = intent.knowledgeArticle;
-      const followUps = [
-        'Find a creative studio in Lekki',
-        'Find a meeting room in Victoria Island',
-        'How does OFIS verify spaces?',
-        'How do I list my space?'
-      ].filter(f => f.toLowerCase() !== rawTrimmed.toLowerCase()).slice(0, 3);
+      
+      let followUps: string[] = [];
+      let sampleSpaces: Space[] | undefined = undefined;
+
+      if (article.id === 'cancellation-and-refunds') {
+        followUps = [
+          'How do bookings work on OFIS?',
+          'How does the OFIS Wallet work?',
+          'Contact support: support@ofis.ng',
+          'Find a workspace in Lagos'
+        ];
+      } else if (article.id === 'contact-info') {
+        followUps = [
+          'What is OFIS and how does it work?',
+          'What is the cancellation & refund policy?',
+          'How does pricing work?',
+          'Browse verified spaces in Explore'
+        ];
+      } else if (article.id === 'available-spaces') {
+        sampleSpaces = allSpaces.slice(0, 6);
+        followUps = [
+          'Show coworking desks in Lekki',
+          'Show meeting rooms in Victoria Island',
+          'Show creative studios in Lagos',
+          'How does booking work?'
+        ];
+      } else if (article.id === 'pricing-and-payment' || article.id === 'how-payments-work') {
+        followUps = [
+          'What is the cancellation and refund policy?',
+          'How do bookings work?',
+          'What spaces are available?',
+          'Contact hello@ofis.ng'
+        ];
+      } else if (article.id === 'what-is-ofis') {
+        followUps = [
+          'How do bookings work on OFIS?',
+          'What spaces are available?',
+          'What is your cancellation and refund policy?',
+          'How does OFIS verify 24/7 power?'
+        ];
+      } else {
+        followUps = [
+          'Find a creative studio in Lekki',
+          'Find a meeting room in Victoria Island',
+          'What is the cancellation & refund policy?',
+          'Contact support: support@ofis.ng'
+        ];
+      }
 
       return {
         id: `msg-${Date.now()}`,
         sender: 'ofis',
         text: `${article.summary}\n\n${article.details}`,
         intent,
+        matchingSpaces: sampleSpaces,
         knowledgeLink: article.linkAction,
-        suggestedFollowUps: followUps,
+        suggestedFollowUps: followUps.slice(0, 4),
         timestamp: new Date().toISOString(),
       };
     }

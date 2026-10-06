@@ -36,7 +36,7 @@ export interface StructuredSearchIntent {
   confidenceScore: number;
 }
 
-export interface AiConciergeResponse {
+export interface OfisAssistantResponse {
   intent: StructuredSearchIntent;
   message: string;
   matchingSpaces: Space[];
@@ -53,6 +53,7 @@ export interface AiConciergeResponse {
   };
   suggestedFollowUps: string[];
 }
+export type AiConciergeResponse = OfisAssistantResponse;
 
 const NIGERIAN_LOCATIONS = [
   // Lagos Neighborhoods
@@ -81,12 +82,12 @@ export function parseUserQueryIntent(
 ): StructuredSearchIntent {
   const q = query.toLowerCase().trim();
 
-  // 1. Check if it's an informational / about / FAQ query
+  // 1. Check if it's an informational / about / FAQ / policy query
   const knowledgeMatch = findMatchingKnowledgeArticle(q);
-  const isExplicitQuestion = /^(what|how|who|why|where|can i|is ofis|tell me about|how do i|how does)\b/i.test(q) || 
-    q.includes('what is') || q.includes('how to') || q.includes('verify') || q.includes('cost') || q.includes('refund');
+  // Specific inventory query filter (e.g., "desk in lekki under 20k")
+  const isDirectInventoryFilter = /(desk|office|studio|boardroom|meeting room|event|training)\s+(in|at|under|near)\s+([a-z\s]+)/i.test(q);
 
-  if (knowledgeMatch && isExplicitQuestion) {
+  if (knowledgeMatch && !isDirectInventoryFilter) {
     return {
       rawQuery: query,
       isKnowledgeQuery: true,

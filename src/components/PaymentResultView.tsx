@@ -155,7 +155,7 @@ export const PaymentResultView: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-[85vh] flex items-center justify-center px-4 py-12 sm:py-16 bg-[#FFFDFB] dark:bg-[#06292D] transition-colors overflow-hidden">
+    <div className="relative min-h-[85vh] flex items-center justify-center px-4 py-12 sm:py-16 bg-[#FFF9F4] dark:bg-[#07383D] transition-colors overflow-hidden">
       {/* Radiant OFIS Brand Ambient Peach & Teal Lighting */}
       <div 
         aria-hidden="true" 
@@ -166,7 +166,7 @@ export const PaymentResultView: React.FC = () => {
         className="absolute bottom-10 -right-20 w-80 h-80 bg-[#006B70]/15 dark:bg-[#14BEB8]/15 rounded-full blur-3xl pointer-events-none"
       />
 
-      <div className="relative w-full max-w-lg bg-white/95 dark:bg-[#07383D]/95 backdrop-blur-md rounded-3xl border border-[#FFA987]/40 dark:border-[#FFA987]/30 shadow-2xl shadow-[#FFA987]/10 p-6 sm:p-8 text-center space-y-6">
+      <div className="relative w-full max-w-lg bg-white/95 dark:bg-[#0B4A50]/95 backdrop-blur-md rounded-3xl border border-[#FFA987]/40 dark:border-[#FFA987]/30 shadow-2xl shadow-[#FFA987]/10 p-6 sm:p-8 text-center space-y-6">
         
         {/* State: Verifying */}
         {status === 'verifying' && (
@@ -182,14 +182,14 @@ export const PaymentResultView: React.FC = () => {
               <h2 className="text-2xl font-black text-[#12383B] dark:text-[#FFFFFF] tracking-tight">
                 Verifying Payment...
               </h2>
-              <p className="text-xs text-[#5D7A7D] dark:text-[#94A3B8] max-w-sm mx-auto leading-relaxed">
+              <p className="text-xs text-[#5D7A7D] dark:text-[#B8D1D0] max-w-sm mx-auto leading-relaxed">
                 Confirming your transaction with SZND hosted gateway and generating your encrypted turnstile pass credentials.
               </p>
             </div>
 
             {reference && (
               <div className="pt-2">
-                <span className="text-[11px] font-mono text-[#5D7A7D] dark:text-[#B8D1D0] bg-[#FFF9F4] dark:bg-[#0A4146] px-3.5 py-1.5 rounded-full border border-[#FFA987]/35 dark:border-[#FFA987]/25 shadow-2xs">
+                <span className="text-[11px] font-mono text-[#5D7A7D] dark:text-[#B8D1D0] bg-[#FFF9F4] dark:bg-[#07383D] px-3.5 py-1.5 rounded-full border border-[#FFA987]/35 dark:border-[#FFA987]/25 shadow-2xs">
                   Ref: {reference}
                 </span>
               </div>
@@ -211,7 +211,7 @@ export const PaymentResultView: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black bg-[#FFF2EB] dark:bg-[#0D444A] text-[#C85A32] dark:text-[#FFA987] border-2 border-[#FFA987]/60 shadow-xs">
+              <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black bg-[#FFF0E8] dark:bg-[#07383D] text-[#C85A32] dark:text-[#FFA987] border-2 border-[#FFA987]/60 shadow-xs">
                 <ShieldCheck className="w-4 h-4 text-[#C85A32] dark:text-[#FFA987]" />
                 <span>Verified & Confirmed via SZND</span>
               </div>
@@ -225,7 +225,7 @@ export const PaymentResultView: React.FC = () => {
 
             {/* Elevated Ticket Pass Card with Signature Peach Accents */}
             {booking && (
-              <div className="relative text-left rounded-3xl bg-gradient-to-b from-[#FFFDFB] via-[#FFF5EE] to-[#FFF0E8] dark:from-[#0B4A50] dark:via-[#094147] dark:to-[#07383D] border-2 border-[#FFA987]/60 dark:border-[#FFA987]/45 shadow-lg shadow-[#FFA987]/10 p-5 space-y-4">
+              <div className="relative text-left rounded-3xl bg-gradient-to-b from-[#FFF9F4] via-[#FFF5EE] to-[#FFF0E8] dark:from-[#07383D] dark:via-[#094147] dark:to-[#0B4A50] border-2 border-[#FFA987]/60 dark:border-[#FFA987]/45 shadow-lg shadow-[#FFA987]/10 p-5 space-y-4">
                 {/* Space Title & Paid Amount Header */}
                 <div className="flex items-start justify-between gap-3 pb-3 border-b-2 border-dashed border-[#FFA987]/35 dark:border-[#FFA987]/30">
                   <div>
@@ -244,7 +244,7 @@ export const PaymentResultView: React.FC = () => {
                     )}
                   </div>
                   <div className="text-right shrink-0">
-                    <span className="text-[10px] font-semibold text-[#5D7A7D] dark:text-[#94A3B8] block">Total Paid</span>
+                    <span className="text-[10px] font-semibold text-[#5D7A7D] dark:text-[#B8D1D0] block">Total Paid</span>
                     <span className="font-mono text-lg font-black text-[#C85A32] dark:text-[#FFA987]">
                       {formatPrice(booking.totalAmount)}
                     </span>
@@ -254,7 +254,7 @@ export const PaymentResultView: React.FC = () => {
                 {/* Schedule Details Grid */}
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div className="p-3 rounded-2xl bg-white/90 dark:bg-[#07383D]/90 border border-[#FFA987]/35 dark:border-[#FFA987]/25 shadow-2xs">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#5D7A7D] dark:text-[#94A3B8] mb-0.5">
+                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#5D7A7D] dark:text-[#B8D1D0] mb-0.5">
                       <Calendar className="w-3.5 h-3.5 text-[#FFA987]" />
                       <span>Date</span>
                     </div>
@@ -264,7 +264,7 @@ export const PaymentResultView: React.FC = () => {
                   </div>
 
                   <div className="p-3 rounded-2xl bg-white/90 dark:bg-[#07383D]/90 border border-[#FFA987]/35 dark:border-[#FFA987]/25 shadow-2xs">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#5D7A7D] dark:text-[#94A3B8] mb-0.5">
+                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-[#5D7A7D] dark:text-[#B8D1D0] mb-0.5">
                       <Clock className="w-3.5 h-3.5 text-[#FFA987]" />
                       <span>Time & Duration</span>
                     </div>
@@ -323,7 +323,7 @@ export const PaymentResultView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCurrentView('bookings')}
-                  className="w-full py-3 rounded-2xl bg-[#FFF9F4] dark:bg-[#0B4A50] hover:bg-[#FFF0E8] dark:hover:bg-[#105A60] text-[#12383B] dark:text-[#FFA987] font-bold text-xs border-2 border-[#FFA987]/50 dark:border-[#FFA987]/40 transition-colors cursor-pointer shadow-2xs"
+                  className="w-full py-3 rounded-2xl bg-[#FFF9F4] dark:bg-[#07383D] hover:bg-[#FFF0E8] dark:hover:bg-[#105A60] text-[#12383B] dark:text-[#FFA987] font-bold text-xs border-2 border-[#FFA987]/50 dark:border-[#FFA987]/40 transition-colors cursor-pointer shadow-2xs"
                 >
                   Go to My Bookings
                 </button>
@@ -331,7 +331,7 @@ export const PaymentResultView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setCurrentView('explore')}
-                  className="w-full py-3 rounded-2xl bg-white dark:bg-[#07383D] hover:bg-[#F8FAFC] dark:hover:bg-[#0A4146] text-[#5D7A7D] dark:text-[#B8D1D0] font-bold text-xs border border-[#E2ECEB] dark:border-[#166D74] transition-colors cursor-pointer"
+                  className="w-full py-3 rounded-2xl bg-white dark:bg-[#07383D] hover:bg-[#F8FAF9] dark:hover:bg-[#0B4A50] text-[#5D7A7D] dark:text-[#B8D1D0] font-bold text-xs border border-[#E2ECEB] dark:border-[#166D74] transition-colors cursor-pointer"
                 >
                   Explore Directory
                 </button>

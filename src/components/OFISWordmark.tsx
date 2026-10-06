@@ -41,41 +41,40 @@ export const OFISWordmark: React.FC<OFISWordmarkProps> = ({
     }
   };
 
-  // Height rules calibrated for prominent, crisp brand visibility
+  // Height rules calibrated for prominent, bold, crisp brand visibility
   const getHeightClass = () => {
     switch (size) {
       case 'sm':
-        return 'h-7 sm:h-8';
+        return 'h-7.5 sm:h-8.5';
       case 'lg':
-        return 'h-11 sm:h-14';
+        return 'h-12.5 sm:h-15.5';
       case 'hero':
-        return 'h-14 sm:h-20';
+        return 'h-16 sm:h-22';
       case 'md':
       default:
-        return 'h-9 sm:h-10.5';
+        return 'h-10 sm:h-12';
     }
   };
 
   const getIconClass = () => {
     switch (size) {
       case 'sm':
-        return 'w-7.5 h-7.5 sm:w-8.5 sm:h-8.5';
+        return 'w-8 h-8 sm:w-9 sm:h-9';
       case 'lg':
-        return 'w-12 h-12 sm:w-14 sm:h-14';
+        return 'w-13 h-13 sm:w-16 sm:h-16';
       case 'hero':
-        return 'w-16 h-16 sm:w-20 sm:h-20';
+        return 'w-18 h-18 sm:w-22 sm:h-22';
       case 'md':
       default:
-        return 'w-9 h-9 sm:w-11 sm:h-11';
+        return 'w-10 h-10 sm:w-12 sm:h-12';
     }
   };
 
   // Harmonized Mode Filtering & Glow:
-  // In Dark Mode: subtle teal portal luminescence and crisp white letters
-  // In Light Mode: crisp contrast
+  // Enhances boldness, contrast, and clean vector definition across dark and light themes
   const filterStyleClass = isDark
-    ? 'filter brightness-[1.02] drop-shadow-[0_0_8px_rgba(20,190,184,0.25)]'
-    : 'filter brightness-[1.0] drop-shadow-[0_1px_2px_rgba(7,56,61,0.08)]';
+    ? 'filter brightness-[1.06] contrast-[1.15] drop-shadow-[0_0_1.2px_rgba(255,255,255,0.85)] drop-shadow-[0_0_12px_rgba(20,190,184,0.35)]'
+    : 'filter brightness-[0.93] contrast-[1.22] drop-shadow-[0_0_1.2px_rgba(7,56,61,0.9)] drop-shadow-[0_1.5px_3px_rgba(7,56,61,0.18)]';
 
   if (variant === 'mark-only') {
     return (

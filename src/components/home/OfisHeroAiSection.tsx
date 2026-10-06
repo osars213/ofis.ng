@@ -141,7 +141,7 @@ export const OfisHeroAiSection: React.FC = () => {
                 className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white font-bold text-xs sm:text-sm shadow-[0_4px_18px_rgba(255,169,135,0.4)] active:scale-[0.98] transition-all duration-150 flex items-center justify-center space-x-2 shrink-0 cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-[#FFA987]" />
-                <span>ASK OFIS</span>
+                <span>Ofis Assistant</span>
               </button>
             </div>
           </form>

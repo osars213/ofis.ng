@@ -56,12 +56,12 @@ export const AiAssistantModal: React.FC = () => {
           {
             id: 'init-1',
             sender: 'ofis',
-            text: "Welcome to OFIS. Tell me what space you need (e.g., 'I need a creative studio in Lekki tomorrow for 6 people under ₦80,000' or 'Find me a boardroom in Victoria Island for 12 people'). You can also ask us anything about how OFIS verifies spaces and guarantees 24/7 power.",
+            text: "Welcome to Ofis Assistant. I can help you find and book verified workspaces across Nigeria, or answer any question about OFIS—how bookings work, pricing, our cancellation and refund policy (wallet credit with no expiry), available spaces, and how payments work.",
             suggestedFollowUps: [
-              'Creative studio in Lekki for 6 people',
-              'Boardroom in Victoria Island for 12 people',
-              'Quiet place to work in Ikeja today',
-              'How does OFIS verify power & internet?'
+              'What is the cancellation and refund policy?',
+              'How does booking work on OFIS?',
+              'What spaces are available in Lagos?',
+              'How do pricing and payments work?'
             ],
             timestamp: new Date().toISOString(),
           }
@@ -183,19 +183,13 @@ export const AiAssistantModal: React.FC = () => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="px-5 py-4 border-b border-[#E2E8F0] dark:border-[#166D74] flex items-center justify-between bg-white dark:bg-[#0B4A50] shrink-0">
+        <div className="px-5 py-4 border-b border-[#E2E8F0] dark:border-[#166D74] flex items-center justify-between bg-white dark:bg-[#07383D] shrink-0">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#006B70]/15 text-[#006B70] dark:text-[#28D2CB] border border-[#006B70]/30 flex items-center justify-center shadow-xs">
-              <Sparkles className="w-5 h-5" />
-            </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h3 className="text-base font-bold text-[#12383B] dark:text-[#FFFFFF]">Ofis Assistant</h3>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wider bg-[#006B70]/15 text-[#006B70] dark:text-[#28D2CB] border border-[#006B70]/25 uppercase">
-                  AI Concierge
-                </span>
+                <h3 className="text-base sm:text-lg font-bold text-[#12383B] dark:text-[#FFFFFF]">Ofis Assistant</h3>
               </div>
-              <p className="text-xs text-[#6B7280] dark:text-[#B8D1D0]">
+              <p className="text-xs text-[#5D7A7D] dark:text-[#B8D1D0]">
                 Real Nigerian Physical Space Network • Guaranteed Power & Fiber
               </p>
             </div>
@@ -205,7 +199,7 @@ export const AiAssistantModal: React.FC = () => {
             <button
               type="button"
               onClick={handleResetConversation}
-              className="p-2 rounded-xl text-[#6B7280] dark:text-[#B8D1D0] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#FFF9F4] dark:hover:bg-[#105A60] transition-colors cursor-pointer"
               title="Reset conversation"
             >
               <RotateCcw className="w-4 h-4" />
@@ -213,7 +207,7 @@ export const AiAssistantModal: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsAiModalOpen(false)}
-              className="p-2 rounded-xl text-[#6B7280] dark:text-[#B8D1D0] hover:text-[#111827] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#FFF9F4] dark:hover:bg-[#105A60] transition-colors cursor-pointer"
               title="Close modal"
             >
               <X className="w-5 h-5" />
@@ -274,23 +268,23 @@ export const AiAssistantModal: React.FC = () => {
                 <div
                   className={`p-4 rounded-2xl text-sm leading-relaxed max-w-[92%] sm:max-w-[85%] ${
                     isUser
-                      ? 'bg-[#006B70] text-white font-medium rounded-tr-xs shadow-md'
-                      : 'bg-[#F1F5F9] dark:bg-[#0B4A50] border border-[#E2E8F0] dark:border-[#166D74] text-[#1E293B] dark:text-[#F8FAFC] rounded-tl-xs shadow-xs'
+                      ? 'bg-gradient-to-r from-[#006B70] via-[#087E85] to-[#C85A32] text-white font-medium rounded-tr-xs shadow-md'
+                      : 'bg-[#FFF9F4] dark:bg-[#07383D] border border-[#FFA987]/35 dark:border-[#FFA987]/25 text-[#12383B] dark:text-[#FFFFFF] rounded-tl-xs shadow-xs'
                   }`}
                 >
                   <div className="whitespace-pre-line">{msg.text}</div>
 
                   {/* Knowledge Action Link if available */}
                   {msg.knowledgeLink && (
-                    <div className="mt-3 pt-3 border-t border-[#CBD5E1] dark:border-[#28354E] flex items-center justify-between">
-                      <span className="text-xs text-[#64748B] dark:text-[#B8D1D0]">Approved OFIS Information</span>
+                    <div className="mt-3 pt-3 border-t border-[#FFA987]/25 flex items-center justify-between">
+                      <span className="text-xs text-[#5D7A7D] dark:text-[#B8D1D0]">Approved OFIS Information</span>
                       <button
                         type="button"
                         onClick={() => handleKnowledgeNavigation(msg.knowledgeLink!.view)}
-                        className="inline-flex items-center space-x-1.5 text-xs font-semibold text-[#006B70] dark:text-[#28D2CB] hover:underline cursor-pointer"
+                        className="inline-flex items-center space-x-1.5 text-xs font-bold text-[#C85A32] dark:text-[#FFA987] hover:underline cursor-pointer"
                       >
                         <span>{msg.knowledgeLink.label}</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <ArrowRight className="w-3.5 h-3.5 text-[#FFA987]" />
                       </button>
                     </div>
                   )}
@@ -298,17 +292,17 @@ export const AiAssistantModal: React.FC = () => {
 
                 {/* Booking Handoff Card */}
                 {msg.bookingHandoff && (
-                  <div className="w-full max-w-md p-4 rounded-2xl bg-[#006B70]/10 border border-[#006B70]/30 shadow-md space-y-3">
+                  <div className="w-full max-w-md p-4 rounded-2xl bg-gradient-to-r from-[#FFF5EE] to-[#FFF0E8] dark:from-[#084248] dark:to-[#07383D] border-2 border-[#FFA987] shadow-md space-y-3">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2 text-xs font-bold text-[#006B70] dark:text-[#28D2CB] uppercase tracking-wider">
-                        <CheckCircle2 className="w-4 h-4" />
+                      <div className="flex items-center space-x-2 text-xs font-bold text-[#C85A32] dark:text-[#FFA987] uppercase tracking-wider">
+                        <CheckCircle2 className="w-4 h-4 text-[#FFA987]" />
                         <span>Ready to Book</span>
                       </div>
-                      <span className="text-xs font-bold text-[#12383B] dark:text-[#FFFFFF]">
+                      <span className="text-xs font-black text-[#C85A32] dark:text-[#FFA987]">
                         {formatPriceNGN(msg.bookingHandoff.pricingBreakdown.totalAmount)}
                       </span>
                     </div>
-                    <div className="text-xs text-[#475569] dark:text-[#B8D1D0] space-y-1">
+                    <div className="text-xs text-[#5D7A7D] dark:text-[#B8D1D0] space-y-1">
                       <p><strong className="text-[#12383B] dark:text-[#FFFFFF]">{msg.bookingHandoff.space.title}</strong></p>
                       <p>Date: {msg.bookingHandoff.date} • Time: {msg.bookingHandoff.startTime} ({msg.bookingHandoff.durationHours} hrs)</p>
                       <p>Guests: {msg.bookingHandoff.guests} • {msg.bookingHandoff.pricingBreakdown.rateDescription}</p>
@@ -316,7 +310,7 @@ export const AiAssistantModal: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => handleBookingHandoff(msg.bookingHandoff!)}
-                      className="w-full py-2.5 px-4 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white text-xs font-bold transition-all flex items-center justify-center space-x-2 shadow-sm cursor-pointer"
+                      className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#FFA987] via-[#FF8A65] to-[#E05626] hover:from-[#FF9E79] hover:to-[#C85A32] text-[#12383B] hover:text-white text-xs font-black transition-all flex items-center justify-center space-x-2 shadow-sm cursor-pointer"
                     >
                       <CreditCard className="w-4 h-4" />
                       <span>Proceed to Complete Booking</span>
@@ -383,9 +377,9 @@ export const AiAssistantModal: React.FC = () => {
                         key={pIdx}
                         type="button"
                         onClick={() => handleSendMessage(prompt)}
-                        className="px-3 py-1.5 rounded-xl text-xs font-medium text-[#475569] dark:text-[#B8D1D0] bg-[#F1F5F9] dark:bg-[#0B4A50] hover:bg-[#E2E8F0] dark:hover:bg-[#105A60] border border-[#CBD5E1] dark:border-[#28354E] hover:border-[#006B70]/40 transition-all cursor-pointer flex items-center space-x-1.5"
+                        className="px-3 py-1.5 rounded-xl text-xs font-semibold text-[#12383B] dark:text-[#FFA987] bg-[#FFF9F4] dark:bg-[#07383D] hover:bg-[#FFF0E8] dark:hover:bg-[#0B4A50] border border-[#FFA987]/40 dark:border-[#FFA987]/30 hover:border-[#FFA987] transition-all cursor-pointer flex items-center space-x-1.5 shadow-2xs"
                       >
-                        <Sparkles className="w-3 h-3 text-[#006B70] dark:text-[#28D2CB]" />
+                        <Sparkles className="w-3 h-3 text-[#FFA987]" />
                         <span>{prompt}</span>
                       </button>
                     ))}
@@ -396,9 +390,9 @@ export const AiAssistantModal: React.FC = () => {
           })}
 
           {loading && (
-            <div className="flex items-center space-x-3 p-4 rounded-2xl bg-[#F1F5F9] dark:bg-[#0B4A50] border border-[#E2E8F0] dark:border-[#166D74] max-w-sm">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#006B70] animate-ping" />
-              <div className="text-xs text-[#006B70] dark:text-[#28D2CB] font-mono">
+            <div className="flex items-center space-x-3 p-4 rounded-2xl bg-[#FFF9F4] dark:bg-[#07383D] border border-[#FFA987]/40 max-w-sm">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FFA987] animate-ping" />
+              <div className="text-xs text-[#C85A32] dark:text-[#FFA987] font-mono">
                 Searching real OFIS physical inventory & auditing availability...
               </div>
             </div>
@@ -408,7 +402,7 @@ export const AiAssistantModal: React.FC = () => {
         </div>
 
         {/* Input Bar */}
-        <div className="p-3 sm:p-4 bg-white dark:bg-[#0B4A50] border-t border-[#E2E8F0] dark:border-[#166D74] shrink-0">
+        <div className="p-3 sm:p-4 bg-white dark:bg-[#07383D] border-t border-[#E2E8F0] dark:border-[#166D74] shrink-0">
           <form 
             onSubmit={(e) => {
               e.preventDefault();
@@ -423,7 +417,7 @@ export const AiAssistantModal: React.FC = () => {
                 value={inputQuery}
                 onChange={(e) => setInputQuery(e.target.value)}
                 placeholder="Tell OFIS what you need (e.g. 'Studio in Lekki tomorrow for 6 people under ₦80k')..."
-                className="w-full pl-4 pr-10 py-3 rounded-2xl bg-[#F8FAFC] dark:bg-[#0B4A50] border border-[#E2E8F0] dark:border-[#166D74] focus:border-[#006B70] focus:ring-1 focus:ring-[#006B70] text-sm text-[#12383B] dark:text-[#FFFFFF] placeholder:text-[#94A3B8] outline-hidden transition-all"
+                className="w-full pl-4 pr-10 py-3 rounded-2xl bg-[#FFF9F4] dark:bg-[#07383D] border border-[#FFA987]/40 dark:border-[#FFA987]/30 focus:border-[#FFA987] focus:ring-1 focus:ring-[#FFA987] text-sm text-[#12383B] dark:text-[#FFFFFF] placeholder:text-[#94A3B8] outline-hidden transition-all"
                 disabled={loading}
               />
             </div>
@@ -431,9 +425,9 @@ export const AiAssistantModal: React.FC = () => {
             <button
               type="submit"
               disabled={!inputQuery.trim() || loading}
-              className="px-5 py-3 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] disabled:bg-[#CBD5E1] dark:disabled:bg-[#0B4A50] text-white disabled:text-[#94A3B8] text-sm font-bold transition-all flex items-center space-x-2 shrink-0 cursor-pointer shadow-sm"
+              className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#FFA987] via-[#FF8A65] to-[#E05626] hover:from-[#FF9E79] hover:to-[#C85A32] disabled:opacity-40 text-[#12383B] hover:text-white text-sm font-black transition-all flex items-center space-x-2 shrink-0 cursor-pointer shadow-md shadow-[#FFA987]/20"
             >
-              <span>Ask OFIS</span>
+              <span>Ofis Assistant</span>
               <Send className="w-4 h-4" />
             </button>
           </form>
@@ -446,7 +440,7 @@ export const AiAssistantModal: React.FC = () => {
                 setIsAiModalOpen(false);
                 setCurrentView('explore');
               }}
-              className="hover:underline text-[#006B70] dark:text-[#28D2CB] font-medium"
+              className="hover:underline text-[#C85A32] dark:text-[#FFA987] font-semibold"
             >
               Browse all spaces in Explore →
             </button>

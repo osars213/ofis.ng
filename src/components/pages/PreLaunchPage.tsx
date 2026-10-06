@@ -1,10 +1,10 @@
 import React from 'react';
-import { LandingPage } from '../landing/LandingPage';
+import { SpaceList } from '../SpaceList';
 
 export interface PreLaunchPageProps {
   onEnterApp?: () => void;
 }
 
-export const PreLaunchPage: React.FC<PreLaunchPageProps> = ({ onEnterApp }) => {
-  return <LandingPage onEnterApp={onEnterApp} />;
+export const PreLaunchPage: React.FC<PreLaunchPageProps> = () => {
+  return <SpaceList />;
 };

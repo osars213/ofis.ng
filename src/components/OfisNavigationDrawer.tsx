@@ -82,7 +82,7 @@ export const OfisNavigationDrawer: React.FC = () => {
             onClick={() => handleNavigate('home')}
             title="OFIS Home"
           >
-            <OFISWordmark size="md" />
+            <OFISWordmark size="lg" className="scale-105 origin-left" />
           </div>
           <button
             type="button"
@@ -106,20 +106,13 @@ export const OfisNavigationDrawer: React.FC = () => {
 
             <button
               type="button"
-              id="drawer-landing-overview-btn"
-              onClick={() => {
-                setIsDrawerOpen(false);
-                const url = new URL(window.location.href);
-                url.searchParams.delete('app');
-                window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
-                window.dispatchEvent(new PopStateEvent('popstate'));
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              id="drawer-home-spaces-btn"
+              onClick={() => handleNavigate('home')}
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
                 <Sparkles className="w-4 h-4 text-[#FFA987]" />
-                <span className="font-bold">Landing Page & Overview</span>
+                <span className="font-bold">Home Workspace Network</span>
               </div>
               <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
             </button>
@@ -127,12 +120,12 @@ export const OfisNavigationDrawer: React.FC = () => {
             <button
               type="button"
               id="drawer-explore-spaces-btn"
-              onClick={() => handleNavigate('home')}
+              onClick={() => handleNavigate('explore')}
               className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
                 <Compass className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
-                <span className="font-bold">Explore Spaces</span>
+                <span className="font-bold">Catalog & Direct Booking</span>
               </div>
               <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
             </button>

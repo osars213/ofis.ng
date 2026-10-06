@@ -157,6 +157,16 @@ const PILLARS_IN_ORDER: PillarConfig[] = [
   }
 ];
 
+// Curated Workspace Categories Row for Home Page (Every icon on this line is vibrant signature peach)
+const WORKSPACE_CATEGORIES_ROW = [
+  { id: 'coworking', label: 'Hot Desks', icon: Laptop, query: 'Find quiet coworking hot desks and ergonomic hubs with 24/7 power' },
+  { id: 'meeting-room', label: 'Meeting Rooms', icon: Presentation, query: 'Find executive meeting rooms and boardrooms with 4K displays' },
+  { id: 'private-office', label: 'Private Offices', icon: Building2, query: 'Find furnished private team office suites with backup power' },
+  { id: 'photography', label: 'Photo & Video', icon: Camera, query: 'Find photography studios with lighting and cyclorama walls' },
+  { id: 'studio', label: 'Podcast Booths', icon: Mic, query: 'Find soundproof podcast studios with Shure microphones' },
+  { id: 'event-space', label: 'Event Halls', icon: Users, query: 'Find event venues and conference auditoriums' },
+];
+
 // Core Platform Attributes in right order of priority
 const CORE_ATTRIBUTES = [
   { id: 'power', icon: Zap, label: '24/7 Guaranteed Power', detail: 'Dual Generators + Solar & Inverter Backup' },
@@ -217,6 +227,8 @@ export const SpaceList: React.FC = () => {
     openInfoModal,
     aiInitialQuery,
     setAiInitialQuery,
+    activeCategory,
+    setActiveCategory,
   } = useApp();
 
   // Greeting cycling state
@@ -399,8 +411,8 @@ export const SpaceList: React.FC = () => {
                   onClick={() => handlePillarClick(pillar)}
                   className={`inline-flex items-center space-x-2 pl-2 pr-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer select-none group ${
                     isSelected
-                      ? 'bg-[#14BEB8] text-white shadow-md ring-2 ring-[#14BEB8]/25'
-                      : 'bg-white text-[#12383B] border border-[#E2ECEB] hover:border-[#14BEB8]/50 hover:text-[#006B70] dark:bg-[#0B4A50] dark:text-[#B8D1D0] dark:border-[#166D74] dark:hover:border-[#14BEB8]/50 dark:hover:text-white shadow-2xs hover:shadow-xs'
+                      ? 'bg-gradient-to-r from-[#FFA987] via-[#FF8A65] to-[#E05626] text-[#12383B] font-black shadow-md shadow-[#FFA987]/30 ring-2 ring-[#FFA987]/60 scale-102'
+                      : 'bg-white text-[#12383B] border border-[#FFA987]/40 hover:border-[#FFA987] hover:text-[#C85A32] dark:bg-[#0B4A50] dark:text-[#FFFFFF] dark:border-[#FFA987]/30 dark:hover:border-[#FFA987] shadow-2xs hover:shadow-xs'
                   }`}
                 >
                   <ReflectivePillarIcon
@@ -417,37 +429,66 @@ export const SpaceList: React.FC = () => {
 
           {/* 3. Core Attributes in Exact Right Order */}
           {!hasMessages && (
-            <div className="pt-2">
+            <div className="pt-2 space-y-3">
               {/* Selected Pillar Specific Attributes if active */}
               {selectedPillar !== 'all' ? (
-                <div className="inline-flex items-center flex-wrap justify-center gap-2 px-4 py-2 rounded-2xl bg-white dark:bg-[#0B4A50] border border-[#E2ECEB] dark:border-[#166D74] text-xs font-medium text-[#5D7A7D] dark:text-[#B8D1D0] shadow-2xs">
-                  <span className="font-bold text-[#006B70] dark:text-[#28D2CB] uppercase tracking-wider text-[11px]">
+                <div className="inline-flex items-center flex-wrap justify-center gap-2 px-4 py-2 rounded-2xl bg-white dark:bg-[#0B4A50] border border-[#FFA987]/40 dark:border-[#FFA987]/30 text-xs font-medium text-[#5D7A7D] dark:text-[#B8D1D0] shadow-2xs">
+                  <span className="font-bold text-[#C85A32] dark:text-[#FFA987] uppercase tracking-wider text-[11px]">
                     {selectedPillar.toUpperCase()} SPACES:
                   </span>
                   {PILLARS_IN_ORDER.find(p => p.id === selectedPillar)?.attributes.map((attr, idx, arr) => (
                     <React.Fragment key={attr}>
-                      <span className="text-[#12383B] dark:text-[#FFFFFF]">{attr}</span>
-                      {idx < arr.length - 1 && <span className="text-[#5D7A7D] dark:text-[#B8D1D0]">•</span>}
+                      <span className="text-[#12383B] dark:text-[#FFFFFF] font-semibold">{attr}</span>
+                      {idx < arr.length - 1 && <span className="text-[#FFA987]">•</span>}
                     </React.Fragment>
                   ))}
                 </div>
               ) : (
-                /* Platform Core Attributes: Power, Fiber, Verified, Instant, Hubs */
+                /* Platform Core Attributes: Power, Fiber, Verified, Instant, Hubs - All Icons Peach */
                 <div className="flex items-center justify-center flex-wrap gap-x-4 gap-y-1.5 text-xs text-[#5D7A7D] dark:text-[#B8D1D0] font-medium">
                   {CORE_ATTRIBUTES.map((attr, idx) => {
                     const AttrIcon = attr.icon;
                     return (
                       <div key={attr.id} className="inline-flex items-center space-x-1.5" title={attr.detail}>
-                        <AttrIcon className="w-3.5 h-3.5 text-[#006B70] dark:text-[#28D2CB]" />
-                        <span>{attr.label}</span>
+                        <AttrIcon className="w-3.5 h-3.5 text-[#FFA987]" />
+                        <span className="text-[#12383B] dark:text-[#FFFFFF]">{attr.label}</span>
                         {idx < CORE_ATTRIBUTES.length - 1 && (
-                          <span className="text-[#CBD5E1] dark:text-[#166D74] pl-2 hidden sm:inline">•</span>
+                          <span className="text-[#FFA987]/40 pl-2 hidden sm:inline">•</span>
                         )}
                       </div>
                     );
                   })}
                 </div>
               )}
+
+              {/* 4. Curated Workspace Categories Row (Hot Desk/Home Desk and every icon on that line is vibrant peach) */}
+              <div className="pt-1 flex items-center justify-center flex-wrap gap-2">
+                {WORKSPACE_CATEGORIES_ROW.map((item) => {
+                  const Icon = item.icon;
+                  const isCatSelected = activeCategory === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => {
+                        setActiveCategory(item.id as any);
+                        handleSendMessage(item.query);
+                      }}
+                      className={`inline-flex items-center space-x-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-2xs group ${
+                        isCatSelected
+                          ? 'bg-gradient-to-r from-[#FFA987] via-[#FF8A65] to-[#E05626] text-[#12383B] font-black border border-[#FFA987] shadow-sm'
+                          : 'bg-white dark:bg-[#0B4A50] text-[#12383B] dark:text-[#FFFFFF] border border-[#FFA987]/40 hover:border-[#FFA987] hover:bg-[#FFF9F4] dark:hover:bg-[#105A60]'
+                      }`}
+                      title={item.query}
+                    >
+                      <div className="p-1 rounded-lg bg-[#FFA987]/20 dark:bg-[#FFA987]/25 border border-[#FFA987]/40 flex items-center justify-center">
+                        <Icon className="w-3.5 h-3.5 text-[#FFA987] group-hover:scale-110 transition-transform" />
+                      </div>
+                      <span className="text-[11px] sm:text-xs">{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
 
@@ -699,7 +740,7 @@ export const SpaceList: React.FC = () => {
                     }`}
                   >
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span>Ask OFIS</span>
+                    <span>Ofis Assistant</span>
                   </button>
                 </div>
               </div>

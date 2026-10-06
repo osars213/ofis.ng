@@ -27,29 +27,29 @@ const PILLAR_CONFIG: Record<
   work: {
     label: 'WORK',
     icon: Laptop,
-    badgeColor: 'from-[#006B70]/40 via-[#14BEB8]/25 to-transparent',
-    glowColor: 'rgba(20, 190, 184, 0.6)',
-    activeGradient: 'from-[#006B70] via-[#14BEB8] to-[#FFA987]',
-    tintHex: '#14BEB8',
-    textClass: 'text-[#006B70] dark:text-[#28D2CB]',
+    badgeColor: 'from-[#FFA987]/40 via-[#FFD0BD]/25 to-transparent',
+    glowColor: 'rgba(255, 169, 135, 0.85)',
+    activeGradient: 'from-[#FFA987] via-[#FF8A65] to-[#E05626]',
+    tintHex: '#FFA987',
+    textClass: 'text-[#C85A32] dark:text-[#FFA987]',
     description: 'Desks & Private Offices',
   },
   meet: {
     label: 'MEET',
     icon: Presentation,
-    badgeColor: 'from-[#006B70]/40 via-[#28D2CB]/30 to-transparent',
-    glowColor: 'rgba(40, 210, 203, 0.65)',
-    activeGradient: 'from-[#006B70] via-[#14BEB8] to-[#28D2CB]',
-    tintHex: '#28D2CB',
-    textClass: 'text-[#006B70] dark:text-[#28D2CB]',
+    badgeColor: 'from-[#FFA987]/40 via-[#FFD0BD]/25 to-transparent',
+    glowColor: 'rgba(255, 169, 135, 0.85)',
+    activeGradient: 'from-[#FFA987] via-[#FF8A65] to-[#E05626]',
+    tintHex: '#FFA987',
+    textClass: 'text-[#C85A32] dark:text-[#FFA987]',
     description: 'Boardrooms & Conference',
   },
   create: {
     label: 'CREATE',
     icon: Camera,
-    badgeColor: 'from-[#FFA987]/50 via-[#FF8A65]/35 to-transparent',
+    badgeColor: 'from-[#FFA987]/40 via-[#FFD0BD]/25 to-transparent',
     glowColor: 'rgba(255, 169, 135, 0.85)',
-    activeGradient: 'from-[#FFA987] via-[#FF8A65] to-[#FFD0BD]',
+    activeGradient: 'from-[#FFA987] via-[#FF8A65] to-[#E05626]',
     tintHex: '#FFA987',
     textClass: 'text-[#C85A32] dark:text-[#FFA987]',
     description: 'Photo & Video Sets',
@@ -57,9 +57,9 @@ const PILLAR_CONFIG: Record<
   record: {
     label: 'RECORD',
     icon: Mic,
-    badgeColor: 'from-[#FFA987]/45 via-[#14BEB8]/30 to-transparent',
-    glowColor: 'rgba(255, 169, 135, 0.75)',
-    activeGradient: 'from-[#FF8A65] via-[#FFA987] to-[#14BEB8]',
+    badgeColor: 'from-[#FFA987]/40 via-[#FFD0BD]/25 to-transparent',
+    glowColor: 'rgba(255, 169, 135, 0.85)',
+    activeGradient: 'from-[#FFA987] via-[#FF8A65] to-[#E05626]',
     tintHex: '#FFA987',
     textClass: 'text-[#C85A32] dark:text-[#FFA987]',
     description: 'Soundproof Podcast Suites',
@@ -105,8 +105,8 @@ export const ReflectivePillarIcon: React.FC<ReflectivePillarIconProps> = ({
       <div
         className={`relative ${sizeClasses.container} flex items-center justify-center transition-all duration-300 overflow-hidden cursor-pointer ${
           isActive
-            ? `bg-gradient-to-br ${config.activeGradient} text-white shadow-[0_8px_24px_${config.glowColor},inset_0_1.5px_1px_rgba(255,255,255,0.5)] scale-105 ring-2 ring-white/40`
-            : `bg-gradient-to-br from-white via-[#FFF9F4] to-[#F1F6F5] dark:from-[#0B4A50] dark:via-[#07383D] dark:to-[#07383D] ${config.textClass} border border-[#E2ECEB] dark:border-[#166D74] hover:border-[${config.tintHex}]/70 shadow-[0_4px_16px_rgba(7,56,61,0.08),inset_0_1.5px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_6px_20px_rgba(0,0,0,0.4),inset_0_1.5px_1px_rgba(255,255,255,0.2)] hover:shadow-[0_8px_24px_${config.glowColor},inset_0_1.5px_1px_rgba(255,255,255,0.9)] hover:scale-105`
+            ? `bg-gradient-to-br from-[#FFA987] via-[#FF8A65] to-[#E05626] text-white shadow-[0_8px_24px_rgba(255,169,135,0.7),inset_0_1.5px_1px_rgba(255,255,255,0.5)] scale-105 ring-2 ring-white/50`
+            : `bg-white dark:bg-[#0B4A50] text-[#FFA987] border border-[#FFA987]/50 dark:border-[#FFA987]/40 shadow-[0_4px_16px_rgba(255,169,135,0.15)] dark:shadow-[0_6px_20px_rgba(0,0,0,0.4)] hover:border-[#FFA987] hover:scale-105`
         }`}
       >
         {/* Optical Specular Glare (Top 45% Curved Bevel Highlight) */}
@@ -124,9 +124,9 @@ export const ReflectivePillarIcon: React.FC<ReflectivePillarIconProps> = ({
         {/* Secondary Inner Lustre Tint */}
         <div className={`absolute inset-0 bg-gradient-to-tr ${config.badgeColor} pointer-events-none`} />
 
-        {/* Crisp Central Icon with Optical Depth */}
+        {/* Crisp Central Icon with Optical Depth - Signature Peach */}
         <div className="relative z-10 drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)] group-hover:scale-110 transition-transform duration-200">
-          <Icon className={`${sizeClasses.icon}`} strokeWidth={2.25} />
+          <Icon className={`${sizeClasses.icon} ${isActive ? 'text-white' : 'text-[#FFA987] group-hover:text-[#E05626] dark:group-hover:text-[#FFA987]'} transition-colors`} strokeWidth={2.25} />
         </div>
       </div>
 

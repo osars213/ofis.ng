@@ -242,8 +242,8 @@ export const ExploreListingView: React.FC = () => {
                 onClick={() => setActiveCategory(cat.id === 'all' ? null : (cat.id as any))}
                 className={`snap-start shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   isSelected
-                    ? 'bg-[#006B70] text-white shadow-xs'
-                    : 'bg-[#F1F6F5] dark:bg-[#0B4A50] hover:bg-[#E2ECEB] dark:hover:bg-[#105A60] text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
+                    ? 'bg-gradient-to-r from-[#FFA987] via-[#FF8A65] to-[#E05626] text-[#12383B] font-black shadow-sm ring-1 ring-[#FFA987]/60'
+                    : 'bg-[#F1F6F5] dark:bg-[#0B4A50] hover:bg-[#FFF9F4] dark:hover:bg-[#105A60] text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#C85A32] dark:hover:text-[#FFA987]'
                 }`}
               >
                 {cat.label}

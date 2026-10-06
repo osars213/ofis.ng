@@ -221,7 +221,7 @@ export const HelpCenterPage: React.FC = () => {
         <div className="p-8 rounded-3xl bg-[#0B4A50] border border-[#166D74] text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="space-y-1 text-center sm:text-left">
             <h4 className="text-base font-bold">Still need personalized assistance?</h4>
-            <p className="text-xs text-[#B8D1D0]">Our Lagos & Abuja concierge support team is online 7 days a week.</p>
+            <p className="text-xs text-[#B8D1D0]">Our dedicated support team is online 7 days a week (support@ofis.ng).</p>
           </div>
 
           <button

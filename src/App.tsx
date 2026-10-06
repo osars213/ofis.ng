@@ -5,9 +5,9 @@ import { MobileBottomNav } from './components/MobileBottomNav';
 import { Footer } from './components/Footer';
 import { OfisNavigationDrawer } from './components/OfisNavigationDrawer';
 import { CompareFloatingBar } from './components/compare/CompareFloatingBar';
+import { AiFloatingButton } from './components/AiFloatingButton';
 
 // Lazy-load view components so bundle sizes are minimal and load on demand
-const LandingPage = React.lazy(() => import('./components/landing/LandingPage').then(m => ({ default: m.LandingPage })));
 const SpaceList = React.lazy(() => import('./components/SpaceList').then(m => ({ default: m.SpaceList })));
 const ExploreListingView = React.lazy(() => import('./components/explore/ExploreListingView').then(m => ({ default: m.ExploreListingView })));
 const SpaceDetails = React.lazy(() => import('./components/SpaceDetails').then(m => ({ default: m.SpaceDetails })));
@@ -43,6 +43,7 @@ const EmailVerificationModal = React.lazy(() => import('./components/EmailVerifi
 const InfoModal = React.lazy(() => import('./components/InfoModal').then(m => ({ default: m.InfoModal })));
 const WorkspaceCompareModal = React.lazy(() => import('./components/compare/WorkspaceCompareModal').then(m => ({ default: m.WorkspaceCompareModal })));
 const DownloadAppModal = React.lazy(() => import('./components/DownloadAppModal').then(m => ({ default: m.DownloadAppModal })));
+const AiAssistantModal = React.lazy(() => import('./components/AiAssistantModal').then(m => ({ default: m.AiAssistantModal })));
 
 const ViewLoadingFallback = () => (
   <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#07383D] text-[#FFFFFF] px-6 select-none overflow-hidden">
@@ -73,22 +74,6 @@ export const App: React.FC = () => {
     infoModalTab, 
     setIsListSpaceModalOpen
   } = useApp();
-
-  if (currentView === 'landing') {
-    return (
-      <div className="min-h-screen bg-[#FFF9F4] dark:bg-[#07383D] text-[#12383B] dark:text-[#FFFFFF] antialiased selection:bg-[#14BEB8] selection:text-white font-sans transition-colors duration-150">
-        <Suspense fallback={<ViewLoadingFallback />}>
-          <LandingPage onEnterApp={() => {
-            setCurrentView('home');
-            const url = new URL(window.location.href);
-            url.searchParams.set('app', 'true');
-            window.history.pushState({}, '', url.pathname + '?' + url.searchParams.toString());
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }} />
-        </Suspense>
-      </div>
-    );
-  }
 
   const renderCurrentView = () => {
     if (currentUser.role === 'host' && currentView === 'host_dashboard') {
@@ -154,6 +139,9 @@ export const App: React.FC = () => {
       {/* Comparison Floating Bar */}
       {currentUser.role !== 'host' && <CompareFloatingBar />}
 
+      {/* Floating OFIS Assistant Button */}
+      <AiFloatingButton />
+
       {/* Mobile Bottom Navigation */}
       <MobileBottomNav />
 
@@ -182,6 +170,7 @@ export const App: React.FC = () => {
         <ContactHostModal />
         <WriteReviewModal />
         <DownloadAppModal />
+        <AiAssistantModal />
       </Suspense>
     </div>
   );

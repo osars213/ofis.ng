@@ -281,10 +281,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [allSpaces, setAllSpaces] = useState<Space[]>(spacesService.getSpaces());
   const [filters, setFilters] = useState<SearchFilters>(DEFAULT_FILTERS);
   const [activeCategory, setActiveCategoryState] = useState<SpaceCategory | 'all'>('all');
-  const [currentView, setCurrentView] = useState<AppView>(() => {
+  const [currentView, setCurrentViewState] = useState<AppView>(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname;
-      const params = new URLSearchParams(window.location.search);
       if (path.includes('/payment/result') || path.includes('/payment-result')) {
         return 'payment_result';
       }
@@ -294,29 +293,31 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       if (path.startsWith('/explore')) {
         return 'explore';
       }
-      if (params.get('app') === 'true' || params.has('space')) {
-        return 'home';
-      }
-      return 'landing';
+      return 'home';
     }
-    return 'landing';
+    return 'home';
   });
+
+  const setCurrentView = (view: AppView) => {
+    if ((view as string) === 'landing') {
+      setCurrentViewState('home');
+      return;
+    }
+    setCurrentViewState(view);
+  };
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const handlePopState = () => {
       const path = window.location.pathname;
-      const params = new URLSearchParams(window.location.search);
       if (path.includes('/payment/result') || path.includes('/payment-result')) {
         setCurrentView('payment_result');
-      } else if (params.get('app') === 'true') {
-        setCurrentView('home');
       } else if (path.startsWith('/space/')) {
         setCurrentView('details');
       } else if (path.startsWith('/explore')) {
         setCurrentView('explore');
-      } else if (path === '/' && !params.get('app')) {
-        setCurrentView('landing');
+      } else {
+        setCurrentView('home');
       }
     };
     window.addEventListener('popstate', handlePopState);
