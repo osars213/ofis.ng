@@ -21,7 +21,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center space-x-3">
           <div className="flex items-center space-x-1.5 text-xl sm:text-2xl font-bold text-[#F2F2F2]">
-            <Star className="w-6 h-6 fill-[#00C878] text-[#00C878]" />
+            <Star className="w-6 h-6 fill-[#14BEB8] text-[#14BEB8]" />
             <span>{overallRating}</span>
           </div>
           <span className="text-sm text-[#718079]">•</span>
@@ -31,7 +31,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
         <button
           type="button"
           onClick={onWriteReviewClick}
-          className="px-4 py-2 rounded-xl bg-[#18201B] hover:bg-[#232D28] border border-[#232D28] text-xs font-semibold text-[#00C878] flex items-center space-x-1.5 transition-all"
+          className="px-4 py-2 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] border border-[#166D74] text-xs font-semibold text-[#14BEB8] flex items-center space-x-1.5 transition-all"
         >
           <Plus className="w-4 h-4" />
           <span>Write a Review</span>
@@ -39,9 +39,9 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
       </div>
 
       {/* Review Metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-[#141816] border border-[#1E2522]">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-[#07383D] border border-[#1E2522]">
         <div className="flex items-center space-x-3">
-          <div className="p-2 rounded-xl bg-[#00C878]/10 text-[#00C878]">
+          <div className="p-2 rounded-xl bg-[#14BEB8]/10 text-[#14BEB8]">
             <Zap className="w-4 h-4" />
           </div>
           <div>
@@ -51,7 +51,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
         </div>
 
         <div className="flex items-center space-x-3">
-          <div className="p-2 rounded-xl bg-[#00C878]/10 text-[#00C878]">
+          <div className="p-2 rounded-xl bg-[#14BEB8]/10 text-[#14BEB8]">
             <Wifi className="w-4 h-4" />
           </div>
           <div>
@@ -61,7 +61,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
         </div>
 
         <div className="flex items-center space-x-3">
-          <div className="p-2 rounded-xl bg-[#00C878]/10 text-[#00C878]">
+          <div className="p-2 rounded-xl bg-[#14BEB8]/10 text-[#14BEB8]">
             <Volume2 className="w-4 h-4" />
           </div>
           <div>
@@ -73,8 +73,8 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
 
       {/* Reviews List */}
       {reviews.length === 0 ? (
-        <div className="p-8 rounded-2xl bg-[#141816] border border-[#1E2522] text-center space-y-3">
-          <div className="w-12 h-12 rounded-2xl bg-[#18201B] border border-[#232D28] flex items-center justify-center mx-auto text-[#00C878]">
+        <div className="p-8 rounded-2xl bg-[#07383D] border border-[#1E2522] text-center space-y-3">
+          <div className="w-12 h-12 rounded-2xl bg-[#0B4A50] border border-[#166D74] flex items-center justify-center mx-auto text-[#14BEB8]">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div className="space-y-1">
@@ -86,7 +86,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
           <button
             type="button"
             onClick={onWriteReviewClick}
-            className="px-4 py-2 rounded-xl bg-[#00C878]/10 text-[#00C878] text-xs font-semibold hover:bg-[#00C878]/20 border border-[#00C878]/30 transition-all cursor-pointer inline-flex items-center space-x-1.5"
+            className="px-4 py-2 rounded-xl bg-[#14BEB8]/10 text-[#14BEB8] text-xs font-semibold hover:bg-[#14BEB8]/20 border border-[#14BEB8]/30 transition-all cursor-pointer inline-flex items-center space-x-1.5"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Write the First Review</span>
@@ -95,17 +95,17 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
       ) : (
         <div className="space-y-4">
           {reviews.map((r) => (
-            <div key={r.id} className="p-4 rounded-2xl bg-[#141816] border border-[#1E2522] space-y-3">
+            <div key={r.id} className="p-4 rounded-2xl bg-[#07383D] border border-[#1E2522] space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-9 h-9 rounded-full bg-[#18201B] border border-[#232D28] flex items-center justify-center font-bold text-xs text-[#00C878]">
+                  <div className="w-9 h-9 rounded-full bg-[#0B4A50] border border-[#166D74] flex items-center justify-center font-bold text-xs text-[#14BEB8]">
                     {r.userName.charAt(0)}
                   </div>
                   <div>
                     <div className="flex items-center space-x-2">
                       <span className="text-xs font-bold text-[#F2F2F2]">{r.userName}</span>
                       {r.verifiedBooking && (
-                        <span className="flex items-center space-x-1 text-[10px] text-[#00C878]">
+                        <span className="flex items-center space-x-1 text-[10px] text-[#14BEB8]">
                           <ShieldCheck className="w-3 h-3" />
                           <span>Verified Pass</span>
                         </span>
@@ -115,8 +115,8 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-1 text-[#00C878]">
-                  <Star className="w-3.5 h-3.5 fill-[#00C878]" />
+                <div className="flex items-center space-x-1 text-[#14BEB8]">
+                  <Star className="w-3.5 h-3.5 fill-[#14BEB8]" />
                   <span className="text-xs font-bold">{r.rating}</span>
                 </div>
               </div>

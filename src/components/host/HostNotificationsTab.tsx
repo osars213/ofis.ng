@@ -43,7 +43,7 @@ export const HostNotificationsTab: React.FC = () => {
           <button
             type="button"
             onClick={markAllNotificationsRead}
-            className="px-4 py-2 rounded-2xl bg-[#18201B] hover:bg-[#232D28] text-xs font-bold text-[#00C878] border border-[#232D28] flex items-center space-x-1.5 cursor-pointer transition-colors"
+            className="px-4 py-2 rounded-2xl bg-[#0B4A50] hover:bg-[#166D74] text-xs font-bold text-[#14BEB8] border border-[#166D74] flex items-center space-x-1.5 cursor-pointer transition-colors"
           >
             <CheckCheck className="w-4 h-4" />
             <span>Mark All as Read</span>
@@ -65,8 +65,8 @@ export const HostNotificationsTab: React.FC = () => {
             onClick={() => setActiveFilter(f.id as any)}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
               activeFilter === f.id
-                ? 'bg-[#00C878] text-[#0D0D0D]'
-                : 'bg-[#141816] text-[#718079] hover:text-[#F2F2F2] border border-[#1E2522]'
+                ? 'bg-[#14BEB8] text-[#0D0D0D]'
+                : 'bg-[#07383D] text-[#718079] hover:text-[#F2F2F2] border border-[#1E2522]'
             }`}
           >
             {f.label}
@@ -76,8 +76,8 @@ export const HostNotificationsTab: React.FC = () => {
 
       {/* Notifications List */}
       {filtered.length === 0 ? (
-        <div className="p-12 text-center rounded-3xl bg-[#141816] border border-[#1E2522] space-y-3">
-          <Bell className="w-10 h-10 text-[#232D28] mx-auto" />
+        <div className="p-12 text-center rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-3">
+          <Bell className="w-10 h-10 text-[#166D74] mx-auto" />
           <h3 className="text-base font-bold text-[#F2F2F2]">No Notifications</h3>
           <p className="text-xs text-[#718079]">
             You're all caught up! New alerts and guest requests will appear here in real-time.
@@ -92,13 +92,13 @@ export const HostNotificationsTab: React.FC = () => {
                 onClick={() => markNotificationRead(item.id)}
                 className={`p-4 rounded-2xl border transition-all flex items-start space-x-3.5 cursor-pointer ${
                   item.read
-                    ? 'bg-[#141816] border-[#1E2522] text-[#718079]'
-                    : 'bg-[#18201B] border-[#00C878]/30 text-[#F2F2F2] shadow-sm'
+                    ? 'bg-[#07383D] border-[#1E2522] text-[#718079]'
+                    : 'bg-[#0B4A50] border-[#14BEB8]/30 text-[#F2F2F2] shadow-sm'
                 }`}
               >
                 <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
                   item.type === 'booking'
-                    ? 'bg-[#00C878]/15 text-[#00C878]'
+                    ? 'bg-[#14BEB8]/15 text-[#14BEB8]'
                     : item.type === 'payment'
                     ? 'bg-[#E0A82E]/15 text-[#E0A82E]'
                     : 'bg-[#1E2522] text-[#9EABA3]'
@@ -123,7 +123,7 @@ export const HostNotificationsTab: React.FC = () => {
                 </div>
 
                 {!item.read && (
-                  <div className="w-2 h-2 rounded-full bg-[#00C878] shrink-0 mt-1.5" />
+                  <div className="w-2 h-2 rounded-full bg-[#14BEB8] shrink-0 mt-1.5" />
                 )}
               </div>
             );

@@ -82,11 +82,11 @@ export const HostCalendarTab: React.FC<HostCalendarTabProps> = ({
         {/* Space Selector Dropdown */}
         {hostSpaces.length > 1 && (
           <div className="flex items-center space-x-2">
-            <Building2 className="w-4 h-4 text-[#00C878]" />
+            <Building2 className="w-4 h-4 text-[#14BEB8]" />
             <select
               value={activeSpaceId}
               onChange={(e) => setActiveSpaceId(e.target.value)}
-              className="px-3.5 py-2 rounded-2xl bg-[#141816] border border-[#1E2522] text-xs font-bold text-[#F2F2F2] focus:outline-none focus:border-[#00C878] cursor-pointer"
+              className="px-3.5 py-2 rounded-2xl bg-[#07383D] border border-[#1E2522] text-xs font-bold text-[#F2F2F2] focus:outline-none focus:border-[#14BEB8] cursor-pointer"
             >
               {hostSpaces.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -99,7 +99,7 @@ export const HostCalendarTab: React.FC<HostCalendarTabProps> = ({
       </div>
 
       {/* Calendar Card */}
-      <div className="p-6 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-6">
+      <div className="p-6 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-6">
         
         {/* Month Navigation & Legend */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1E2522] pb-4">
@@ -111,14 +111,14 @@ export const HostCalendarTab: React.FC<HostCalendarTabProps> = ({
               <button
                 type="button"
                 onClick={handlePrevMonth}
-                className="p-1.5 rounded-xl bg-[#18201B] hover:bg-[#232D28] text-[#F2F2F2] cursor-pointer"
+                className="p-1.5 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] text-[#F2F2F2] cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 type="button"
                 onClick={handleNextMonth}
-                className="p-1.5 rounded-xl bg-[#18201B] hover:bg-[#232D28] text-[#F2F2F2] cursor-pointer"
+                className="p-1.5 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] text-[#F2F2F2] cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -128,7 +128,7 @@ export const HostCalendarTab: React.FC<HostCalendarTabProps> = ({
           {/* Status Legend */}
           <div className="flex items-center space-x-4 text-xs">
             <div className="flex items-center space-x-1.5">
-              <div className="w-3 h-3 rounded-md bg-[#00C878]" />
+              <div className="w-3 h-3 rounded-md bg-[#14BEB8]" />
               <span className="text-[#9EABA3]">Available</span>
             </div>
             <div className="flex items-center space-x-1.5">
@@ -176,13 +176,13 @@ export const HostCalendarTab: React.FC<HostCalendarTabProps> = ({
                     ? 'bg-[#FF5C5C]/10 border-[#FF5C5C]/40 hover:border-[#FF5C5C]'
                     : dayBookings.length > 0
                     ? 'bg-[#E0A82E]/10 border-[#E0A82E]/40 hover:border-[#E0A82E]'
-                    : 'bg-[#18201B] border-[#232D28] hover:border-[#00C878]/50'
+                    : 'bg-[#0B4A50] border-[#166D74] hover:border-[#14BEB8]/50'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className={`text-xs font-bold ${
                     isToday 
-                      ? 'w-5 h-5 rounded-full bg-[#00C878] text-[#0D0D0D] flex items-center justify-center' 
+                      ? 'w-5 h-5 rounded-full bg-[#14BEB8] text-[#0D0D0D] flex items-center justify-center' 
                       : 'text-[#F2F2F2]'
                   }`}>
                     {day}
@@ -203,7 +203,7 @@ export const HostCalendarTab: React.FC<HostCalendarTabProps> = ({
                   ) : dayBookings.length > 0 ? (
                     <span className="text-[#E0A82E] font-semibold">{dayBookings.length} Booked</span>
                   ) : (
-                    <span className="text-[#718079] group-hover:text-[#00C878] transition-colors">Open</span>
+                    <span className="text-[#718079] group-hover:text-[#14BEB8] transition-colors">Open</span>
                   )}
                 </div>
               </div>
@@ -212,8 +212,8 @@ export const HostCalendarTab: React.FC<HostCalendarTabProps> = ({
         </div>
 
         {/* Info Banner */}
-        <div className="p-4 rounded-2xl bg-[#0D0D0D] border border-[#232D28] flex items-start space-x-3 text-xs text-[#718079]">
-          <Info className="w-4 h-4 text-[#00C878] shrink-0 mt-0.5" />
+        <div className="p-4 rounded-2xl bg-[#0D0D0D] border border-[#166D74] flex items-start space-x-3 text-xs text-[#718079]">
+          <Info className="w-4 h-4 text-[#14BEB8] shrink-0 mt-0.5" />
           <p>
             <strong className="text-[#F2F2F2]">Host Pro-Tip:</strong> Blocked dates immediately hide this workspace from customer search and quick-booking flows, preventing scheduling conflicts during private events.
           </p>

@@ -5,7 +5,6 @@ import {
   Bookmark, 
   CalendarCheck, 
   Sparkles, 
-  PlusCircle, 
   Menu, 
   Bell, 
   Settings, 
@@ -33,7 +32,6 @@ export const Navbar: React.FC = () => {
     savedSpaceIds,
     unreadNotificationsCount,
     openAuthModal,
-    setIsListSpaceModalOpen,
     setIsAiModalOpen,
     setIsDrawerOpen,
     setIsSettingsOpen,
@@ -72,35 +70,19 @@ export const Navbar: React.FC = () => {
         {/* Left: Brand Logo */}
         <div className="flex items-center shrink-0">
           <div 
-            className="flex items-center cursor-pointer transition-opacity hover:opacity-90 py-1" 
+            className="flex items-center cursor-pointer transition-opacity hover:opacity-95 py-1" 
             onClick={() => {
               setCurrentView('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             title="OFIS Home"
           >
-            <OFISWordmark size="lg" className="scale-105 origin-left" />
+            <OFISWordmark size="lg" className="scale-110 origin-left" />
           </div>
         </div>
 
-        {/* Center: Desktop Navigation Links (Clean, Uncramped, Typography-Focused) */}
-        <nav className="hidden lg:flex items-center space-x-1 lg:space-x-1.5 xl:space-x-2 text-xs font-semibold">
-          <button
-            type="button"
-            id="nav-home-btn"
-            onClick={() => {
-              setCurrentView('home');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
-              currentView === 'home' 
-                ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
-                : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
-            }`}
-          >
-            Home
-          </button>
-
+        {/* Center: Desktop Navigation Links (Primary paths: Explore, Map, My Bookings, Host Platform) */}
+        <nav className="hidden lg:flex items-center space-x-1 lg:space-x-2 text-xs font-semibold">
           <button
             type="button"
             id="nav-explore-btn"
@@ -108,7 +90,7 @@ export const Navbar: React.FC = () => {
               setCurrentView('explore');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'explore' || currentView === 'details'
                 ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
                 : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
@@ -124,7 +106,7 @@ export const Navbar: React.FC = () => {
               setCurrentView('map');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
               currentView === 'map' 
                 ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
                 : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
@@ -133,78 +115,41 @@ export const Navbar: React.FC = () => {
             Map
           </button>
 
-          {/* User-Only Navigation: Bookings & Saved (Displayed when signed in) */}
-          {!isGuest && (
-            <>
-              <button
-                type="button"
-                id="nav-bookings-btn"
-                onClick={() => {
-                  setCurrentView('bookings');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
-                  currentView === 'bookings' 
-                    ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
-                    : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
-                }`}
-              >
-                Bookings
-              </button>
-
-              <button
-                type="button"
-                id="nav-saved-btn"
-                onClick={() => {
-                  setCurrentView('saved');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all flex items-center space-x-1.5 cursor-pointer ${
-                  currentView === 'saved' 
-                    ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
-                    : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
-                }`}
-              >
-                <span>Saved</span>
-                {savedSpaceIds.length > 0 && (
-                  <span className="px-1.5 py-0.5 rounded-full bg-gradient-to-r from-[#FFA987] to-[#FF8A65] text-[#07383D] font-black text-[10px] flex items-center justify-center shadow-xs">
-                    {savedSpaceIds.length}
-                  </span>
-                )}
-              </button>
-            </>
-          )}
-
           <button
             type="button"
-            id="nav-contact-btn"
+            id="nav-bookings-btn"
             onClick={() => {
-              setCurrentView('contact');
+              setCurrentView('bookings');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className={`px-2.5 lg:px-3.5 py-1.5 rounded-xl transition-all cursor-pointer ${
-              currentView === 'contact' 
+            className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+              currentView === 'bookings' 
                 ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
                 : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
             }`}
           >
-            Contact
+            My Bookings
+          </button>
+
+          <button
+            type="button"
+            id="nav-host-btn"
+            onClick={() => {
+              setCurrentView('become_host');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer ${
+              currentView === 'become_host' || currentView === 'host_dashboard'
+                ? 'bg-gradient-to-r from-[#006B70]/15 via-[#14BEB8]/20 to-[#FFA987]/15 dark:from-[#006B70]/30 dark:via-[#14BEB8]/30 dark:to-[#FFA987]/25 text-[#006B70] dark:text-[#28D2CB] font-bold shadow-xs border border-[#14BEB8]/30' 
+                : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50]'
+            }`}
+          >
+            Host Platform
           </button>
         </nav>
 
-        {/* Right Side: List Space CTA, Notifications, Avatar, Mobile Menu */}
+        {/* Right Side: Account, Notifications, Mobile Menu */}
         <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
-
-          {/* List Space CTA (Responsive) with Warm Peach Accent */}
-          <button
-            type="button"
-            id="navbar-list-space-btn"
-            onClick={() => setIsListSpaceModalOpen(true)}
-            className="hidden sm:flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-white dark:bg-[#0B4A50] hover:bg-[#FFF9F4] dark:hover:bg-[#105A60] border border-[#FFA987]/60 dark:border-[#FFA987]/50 text-xs font-bold text-[#12383B] dark:text-[#FFFFFF] hover:text-[#C85A32] dark:hover:text-[#FFA987] hover:border-[#FFA987] transition-all cursor-pointer shadow-2xs group"
-          >
-            <PlusCircle className="w-3.5 h-3.5 text-[#FFA987] group-hover:scale-110 transition-transform" />
-            <span>List Space</span>
-          </button>
 
           {/* Header Notification Center Bell (Shown when signed in) */}
           {!isGuest && (
@@ -244,9 +189,11 @@ export const Navbar: React.FC = () => {
                 type="button"
                 id="navbar-guest-direct-login-btn"
                 onClick={() => openAuthModal('login')}
-                className="hidden md:inline-flex px-4 py-2 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white text-xs font-bold shadow-[0_4px_16px_rgba(255,169,135,0.35)] active:scale-95 transition-all cursor-pointer"
+                className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white text-xs font-bold shadow-[0_4px_16px_rgba(255,169,135,0.35)] active:scale-95 transition-all cursor-pointer"
+                title="Sign In"
               >
-                Sign In
+                <User className="w-3.5 h-3.5" />
+                <span>Sign In</span>
               </button>
             ) : (
               <button

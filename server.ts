@@ -1725,7 +1725,7 @@ async function startServer() {
         });
       }
 
-      const prompt = `You are OFIS's intelligent Nigerian workspace concierge. 
+      const prompt = `You are Ofis Assistant, OFIS's intelligent Nigerian workspace assistant. 
 A coworker or team is looking for their ideal physical workspace, desk, or creator studio in Nigeria.
 User prompt: "${userQuery || 'A quiet, well-lit desk for software development with fast WiFi and dual monitors'}"
 

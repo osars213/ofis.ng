@@ -190,7 +190,7 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
       <div className="flex items-center justify-between">
         <div>
           <label className="text-xs font-bold text-[#F2F2F2] flex items-center space-x-1.5">
-            <Camera className="w-4 h-4 text-[#00C878]" />
+            <Camera className="w-4 h-4 text-[#14BEB8]" />
             <span>Workspace Photos &amp; Facility Proof</span>
             <span className="text-[#FF5C5C] font-bold">*</span>
           </label>
@@ -201,7 +201,7 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
         <div className="text-right">
           <span className={`text-xs font-bold font-mono px-2 py-0.5 rounded-md ${
             images.length >= minPhotos 
-              ? 'bg-[#00C878]/15 text-[#00C878]' 
+              ? 'bg-[#14BEB8]/15 text-[#14BEB8]' 
               : 'bg-[#FF5C5C]/15 text-[#FF5C5C]'
           }`}>
             {images.length} / {minPhotos} min photo{minPhotos > 1 ? 's' : ''}
@@ -225,8 +225,8 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
         onClick={() => fileInputRef.current?.click()}
         className={`relative border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all ${
           isDragging 
-            ? 'border-[#00C878] bg-[#00C878]/10 scale-[1.01]' 
-            : 'border-[#232D28] hover:border-[#00C878]/60 bg-[#18201B]/70 hover:bg-[#18201B]'
+            ? 'border-[#14BEB8] bg-[#14BEB8]/10 scale-[1.01]' 
+            : 'border-[#166D74] hover:border-[#14BEB8]/60 bg-[#0B4A50]/70 hover:bg-[#0B4A50]'
         }`}
       >
         <input
@@ -239,12 +239,12 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
         />
         
         <div className="flex flex-col items-center justify-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-[#141816] border border-[#232D28] flex items-center justify-center text-[#00C878] shadow-inner">
+          <div className="w-12 h-12 rounded-2xl bg-[#07383D] border border-[#166D74] flex items-center justify-center text-[#14BEB8] shadow-inner">
             <Upload className="w-6 h-6 animate-pulse" />
           </div>
           <div>
             <p className="text-xs font-bold text-[#F2F2F2]">
-              Drag &amp; drop photos here, or <span className="text-[#00C878] underline">browse files</span>
+              Drag &amp; drop photos here, or <span className="text-[#14BEB8] underline">browse files</span>
             </p>
             <p className="text-[11px] text-[#718079] mt-0.5">
               Supports JPEG, PNG, WebP up to 10MB per photo
@@ -261,9 +261,9 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
             setShowUrlInput(!showUrlInput);
             setShowPresets(false);
           }}
-          className="px-3 py-1.5 rounded-xl bg-[#18201B] hover:bg-[#232D28] border border-[#232D28] text-xs font-semibold text-[#9EABA3] hover:text-[#F2F2F2] flex items-center space-x-1.5 transition-colors cursor-pointer"
+          className="px-3 py-1.5 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] border border-[#166D74] text-xs font-semibold text-[#9EABA3] hover:text-[#F2F2F2] flex items-center space-x-1.5 transition-colors cursor-pointer"
         >
-          <LinkIcon className="w-3.5 h-3.5 text-[#00C878]" />
+          <LinkIcon className="w-3.5 h-3.5 text-[#14BEB8]" />
           <span>Add Photo by URL</span>
         </button>
 
@@ -273,16 +273,16 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
             setShowPresets(!showPresets);
             setShowUrlInput(false);
           }}
-          className="px-3 py-1.5 rounded-xl bg-[#18201B] hover:bg-[#232D28] border border-[#232D28] text-xs font-semibold text-[#9EABA3] hover:text-[#F2F2F2] flex items-center space-x-1.5 transition-colors cursor-pointer"
+          className="px-3 py-1.5 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] border border-[#166D74] text-xs font-semibold text-[#9EABA3] hover:text-[#F2F2F2] flex items-center space-x-1.5 transition-colors cursor-pointer"
         >
-          <Sparkles className="w-3.5 h-3.5 text-[#00C878]" />
+          <Sparkles className="w-3.5 h-3.5 text-[#14BEB8]" />
           <span>Choose Sample Workspace Photos</span>
         </button>
       </div>
 
       {/* Add by URL input drawer */}
       {showUrlInput && (
-        <div className="p-3.5 rounded-2xl bg-[#18201B] border border-[#232D28] space-y-2">
+        <div className="p-3.5 rounded-2xl bg-[#0B4A50] border border-[#166D74] space-y-2">
           <label className="text-[11px] font-bold text-[#9EABA3]">Direct Image URL</label>
           <div className="flex items-center space-x-2">
             <input
@@ -290,12 +290,12 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
               placeholder="https://images.unsplash.com/photo-..."
-              className="flex-1 px-3 py-2 rounded-xl bg-[#141816] border border-[#232D28] text-xs text-[#F2F2F2] focus:outline-none focus:border-[#00C878]"
+              className="flex-1 px-3 py-2 rounded-xl bg-[#07383D] border border-[#166D74] text-xs text-[#F2F2F2] focus:outline-none focus:border-[#14BEB8]"
             />
             <button
               type="button"
               onClick={handleAddUrl}
-              className="px-4 py-2 rounded-xl bg-[#00C878] hover:bg-[#00B069] text-[#0D0D0D] text-xs font-bold transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-[#14BEB8] hover:bg-[#00B069] text-[#0D0D0D] text-xs font-bold transition-colors cursor-pointer"
             >
               Add
             </button>
@@ -305,7 +305,7 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
 
       {/* Sample Workspace Presets Grid */}
       {showPresets && (
-        <div className="p-3.5 rounded-2xl bg-[#18201B] border border-[#232D28] space-y-2.5">
+        <div className="p-3.5 rounded-2xl bg-[#0B4A50] border border-[#166D74] space-y-2.5">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-bold text-[#F2F2F2]">Instant Workspace Photo Presets</span>
             <span className="text-[10px] text-[#718079]">Click to attach</span>
@@ -321,8 +321,8 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
                   disabled={isSelected}
                   className={`relative rounded-xl overflow-hidden border text-left transition-all group ${
                     isSelected 
-                      ? 'border-[#00C878] opacity-50 cursor-not-allowed' 
-                      : 'border-[#232D28] hover:border-[#00C878] cursor-pointer'
+                      ? 'border-[#14BEB8] opacity-50 cursor-not-allowed' 
+                      : 'border-[#166D74] hover:border-[#14BEB8] cursor-pointer'
                   }`}
                 >
                   <img
@@ -330,11 +330,11 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
                     alt={preset.label}
                     className="w-full h-20 object-cover group-hover:scale-105 transition-transform duration-200"
                   />
-                  <div className="p-1.5 bg-[#141816]/90 backdrop-blur-sm">
+                  <div className="p-1.5 bg-[#07383D]/90 backdrop-blur-sm">
                     <p className="text-[10px] font-medium text-[#F2F2F2] truncate">{preset.label}</p>
                   </div>
                   {isSelected && (
-                    <div className="absolute top-1 right-1 p-1 rounded-full bg-[#00C878] text-[#0D0D0D]">
+                    <div className="absolute top-1 right-1 p-1 rounded-full bg-[#14BEB8] text-[#0D0D0D]">
                       <Check className="w-3 h-3" />
                     </div>
                   )}
@@ -359,11 +359,11 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
               return (
                 <div
                   key={idx}
-                  className={`relative rounded-2xl overflow-hidden border bg-[#141816] group transition-all ${
-                    isCover ? 'border-[#00C878] ring-2 ring-[#00C878]/30 shadow-lg' : 'border-[#232D28] hover:border-[#33423B]'
+                  className={`relative rounded-2xl overflow-hidden border bg-[#07383D] group transition-all ${
+                    isCover ? 'border-[#14BEB8] ring-2 ring-[#14BEB8]/30 shadow-lg' : 'border-[#166D74] hover:border-[#33423B]'
                   }`}
                 >
-                  <div className="relative h-28 w-full bg-[#18201B]">
+                  <div className="relative h-28 w-full bg-[#0B4A50]">
                     <img
                       src={imgUrl}
                       alt={`Workspace photo ${idx + 1}`}
@@ -372,7 +372,7 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
 
                     {/* Cover Photo Badge */}
                     {isCover && (
-                      <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-[#00C878] text-[#0D0D0D] text-[10px] font-bold flex items-center space-x-1 shadow-md">
+                      <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-[#14BEB8] text-[#0D0D0D] text-[10px] font-bold flex items-center space-x-1 shadow-md">
                         <Star className="w-2.5 h-2.5 fill-[#0D0D0D]" />
                         <span>Cover Photo</span>
                       </div>
@@ -385,7 +385,7 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
                           type="button"
                           onClick={() => handleSetCover(idx)}
                           title="Set as featured cover photo"
-                          className="p-1.5 rounded-xl bg-[#00C878] hover:bg-[#00B069] text-[#0D0D0D] text-[10px] font-bold flex items-center space-x-1 transition-colors"
+                          className="p-1.5 rounded-xl bg-[#14BEB8] hover:bg-[#00B069] text-[#0D0D0D] text-[10px] font-bold flex items-center space-x-1 transition-colors"
                         >
                           <Star className="w-3 h-3" />
                           <span>Make Cover</span>
@@ -402,7 +402,7 @@ export const PhotoUploadManager: React.FC<PhotoUploadManagerProps> = ({
                       </button>
                     </div>
                   </div>
-                  <div className="p-1.5 text-center bg-[#18201B]">
+                  <div className="p-1.5 text-center bg-[#0B4A50]">
                     <span className="text-[10px] text-[#718079] font-mono">Photo {idx + 1}</span>
                   </div>
                 </div>

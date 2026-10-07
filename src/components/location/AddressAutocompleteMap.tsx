@@ -195,7 +195,7 @@ export const AddressAutocompleteMap: React.FC<AddressAutocompleteMapProps> = ({
       <div className="space-y-1 relative">
         <label className="text-xs font-semibold text-[#F2F2F2] flex items-center justify-between">
           <span className="flex items-center space-x-1.5">
-            <MapPin className="w-3.5 h-3.5 text-[#00C878]" />
+            <MapPin className="w-3.5 h-3.5 text-[#14BEB8]" />
             <span>Address Autocomplete &amp; Map Pin</span>
           </span>
           <span className="text-[10px] text-[#718079] font-mono">OpenStreetMap Verified</span>
@@ -210,18 +210,18 @@ export const AddressAutocompleteMap: React.FC<AddressAutocompleteMapProps> = ({
               if (results.length > 0) setIsDropdownOpen(true);
             }}
             placeholder="Type street, landmark, or area (e.g. 14 Adeola Odeku, Victoria Island)"
-            className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] placeholder-[#718079] focus:outline-none focus:border-[#00C878] transition-colors"
+            className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74] text-xs text-[#F2F2F2] placeholder-[#718079] focus:outline-none focus:border-[#14BEB8] transition-colors"
           />
           <Search className="w-4 h-4 text-[#718079] absolute left-3 top-3" />
           
           {isLoading && (
-            <Loader2 className="w-4 h-4 text-[#00C878] animate-spin absolute right-3 top-3" />
+            <Loader2 className="w-4 h-4 text-[#14BEB8] animate-spin absolute right-3 top-3" />
           )}
         </div>
 
         {/* Autocomplete Dropdown */}
         {isDropdownOpen && results.length > 0 && (
-          <div className="absolute z-30 left-0 right-0 top-full mt-1 bg-[#141816] border border-[#232D28] rounded-2xl shadow-2xl overflow-hidden max-h-56 overflow-y-auto divide-y divide-[#1E2522]">
+          <div className="absolute z-30 left-0 right-0 top-full mt-1 bg-[#07383D] border border-[#166D74] rounded-2xl shadow-2xl overflow-hidden max-h-56 overflow-y-auto divide-y divide-[#1E2522]">
             {results.map((item) => (
               <button
                 key={item.place_id}
@@ -229,7 +229,7 @@ export const AddressAutocompleteMap: React.FC<AddressAutocompleteMapProps> = ({
                 onClick={() => handleSelectResult(item)}
                 className="w-full text-left p-3 hover:bg-[#1E2522] transition-colors flex items-start space-x-2.5 text-xs text-[#F2F2F2] cursor-pointer"
               >
-                <MapPin className="w-4 h-4 text-[#00C878] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#14BEB8] shrink-0 mt-0.5" />
                 <div className="flex-1 min-w-0">
                   <div className="font-semibold truncate text-[#F2F2F2]">
                     {item.display_name.split(',')[0]}
@@ -246,9 +246,9 @@ export const AddressAutocompleteMap: React.FC<AddressAutocompleteMapProps> = ({
 
       {/* Structured Location Information Card */}
       {selectedLocation && (
-        <div className="p-3.5 rounded-2xl bg-[#18201B] border border-[#232D28] space-y-2.5">
+        <div className="p-3.5 rounded-2xl bg-[#0B4A50] border border-[#166D74] space-y-2.5">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono font-bold text-[#00C878] uppercase flex items-center space-x-1">
+            <span className="text-[11px] font-mono font-bold text-[#14BEB8] uppercase flex items-center space-x-1">
               <CheckCircle2 className="w-3.5 h-3.5" />
               <span>Location Captured</span>
             </span>
@@ -260,13 +260,13 @@ export const AddressAutocompleteMap: React.FC<AddressAutocompleteMapProps> = ({
           </div>
 
           <div className="grid grid-cols-2 gap-2 text-xs">
-            <div className="p-2 rounded-xl bg-[#141816] border border-[#232D28]">
+            <div className="p-2 rounded-xl bg-[#07383D] border border-[#166D74]">
               <span className="text-[10px] text-[#718079] block">Area / Neighborhood</span>
               <span className="font-semibold text-[#F2F2F2] truncate block">
                 {selectedLocation.neighborhood || selectedLocation.city}
               </span>
             </div>
-            <div className="p-2 rounded-xl bg-[#141816] border border-[#232D28]">
+            <div className="p-2 rounded-xl bg-[#07383D] border border-[#166D74]">
               <span className="text-[10px] text-[#718079] block">City &amp; State</span>
               <span className="font-semibold text-[#F2F2F2] truncate block">
                 {selectedLocation.city}, {selectedLocation.state}
@@ -276,7 +276,7 @@ export const AddressAutocompleteMap: React.FC<AddressAutocompleteMapProps> = ({
 
           {/* Interactive Live Map Marker Preview */}
           {selectedLocation.latitude && selectedLocation.longitude ? (
-            <div className="relative rounded-xl overflow-hidden border border-[#232D28] h-36 bg-[#0D0D0D]">
+            <div className="relative rounded-xl overflow-hidden border border-[#166D74] h-36 bg-[#0D0D0D]">
               <iframe
                 title="Workspace Location Preview"
                 width="100%"
@@ -293,7 +293,7 @@ export const AddressAutocompleteMap: React.FC<AddressAutocompleteMapProps> = ({
                   href={`https://www.openstreetmap.org/?mlat=${selectedLocation.latitude}&mlon=${selectedLocation.longitude}#map=16/${selectedLocation.latitude}/${selectedLocation.longitude}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-2 py-1 rounded-lg bg-[#0D0D0D]/90 text-[10px] text-[#00C878] font-mono border border-[#232D28] flex items-center space-x-1 hover:border-[#00C878] transition-colors"
+                  className="px-2 py-1 rounded-lg bg-[#0D0D0D]/90 text-[10px] text-[#14BEB8] font-mono border border-[#166D74] flex items-center space-x-1 hover:border-[#14BEB8] transition-colors"
                 >
                   <span>Open Map</span>
                   <ExternalLink className="w-2.5 h-2.5" />
@@ -301,7 +301,7 @@ export const AddressAutocompleteMap: React.FC<AddressAutocompleteMapProps> = ({
               </div>
             </div>
           ) : (
-            <div className="p-3 rounded-xl bg-[#141816] border border-[#232D28] text-center text-xs text-[#718079]">
+            <div className="p-3 rounded-xl bg-[#07383D] border border-[#166D74] text-center text-xs text-[#718079]">
               <span>Address captured for navigation routing.</span>
             </div>
           )}

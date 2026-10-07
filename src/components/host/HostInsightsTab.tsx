@@ -62,43 +62,43 @@ export const HostInsightsTab: React.FC<HostInsightsTabProps> = ({ hostSpaces }) 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         
         {/* Total Impressions */}
-        <div className="p-5 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-2">
+        <div className="p-5 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-2">
           <div className="flex items-center justify-between text-xs text-[#718079]">
             <span>Monthly Views</span>
-            <Eye className="w-4 h-4 text-[#00C878]" />
+            <Eye className="w-4 h-4 text-[#14BEB8]" />
           </div>
           <div className="text-2xl font-extrabold text-[#F2F2F2]">12,480</div>
-          <p className="text-[10px] text-[#00C878] font-bold">+38% vs last month</p>
+          <p className="text-[10px] text-[#14BEB8] font-bold">+38% vs last month</p>
         </div>
 
         {/* Unique Visitors */}
-        <div className="p-5 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-2">
+        <div className="p-5 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-2">
           <div className="flex items-center justify-between text-xs text-[#718079]">
             <span>Unique Searchers</span>
-            <Users className="w-4 h-4 text-[#00C878]" />
+            <Users className="w-4 h-4 text-[#14BEB8]" />
           </div>
           <div className="text-2xl font-extrabold text-[#F2F2F2]">3,820</div>
-          <p className="text-[10px] text-[#00C878] font-bold">+24% new professionals</p>
+          <p className="text-[10px] text-[#14BEB8] font-bold">+24% new professionals</p>
         </div>
 
         {/* Booking Conversion Rate */}
-        <div className="p-5 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-2">
+        <div className="p-5 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-2">
           <div className="flex items-center justify-between text-xs text-[#718079]">
             <span>Conversion Rate</span>
-            <Percent className="w-4 h-4 text-[#00C878]" />
+            <Percent className="w-4 h-4 text-[#14BEB8]" />
           </div>
-          <div className="text-2xl font-extrabold text-[#00C878] font-mono">14.8%</div>
+          <div className="text-2xl font-extrabold text-[#14BEB8] font-mono">14.8%</div>
           <p className="text-[10px] text-[#9EABA3]">Top 5% among Lagos Hubs</p>
         </div>
 
         {/* Average Guest Rating */}
-        <div className="p-5 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-2">
+        <div className="p-5 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-2">
           <div className="flex items-center justify-between text-xs text-[#718079]">
             <span>Satisfaction</span>
-            <Star className="w-4 h-4 fill-[#00C878] text-[#00C878]" />
+            <Star className="w-4 h-4 fill-[#14BEB8] text-[#14BEB8]" />
           </div>
           <div className="text-2xl font-extrabold text-[#F2F2F2] font-mono">4.96 ★</div>
-          <p className="text-[10px] text-[#00C878] font-bold">142 verified reviews</p>
+          <p className="text-[10px] text-[#14BEB8] font-bold">142 verified reviews</p>
         </div>
 
       </div>
@@ -107,10 +107,10 @@ export const HostInsightsTab: React.FC<HostInsightsTabProps> = ({ hostSpaces }) 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Peak Hourly Occupancy Chart */}
-        <div className="p-6 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-4">
+        <div className="p-6 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-4">
           <div className="flex items-center justify-between border-b border-[#1E2522] pb-3">
             <div className="flex items-center space-x-2">
-              <Clock className="w-4 h-4 text-[#00C878]" />
+              <Clock className="w-4 h-4 text-[#14BEB8]" />
               <h3 className="text-sm font-bold text-[#F2F2F2]">Peak Hourly Demand Distribution</h3>
             </div>
             <span className="text-xs text-[#718079]">Peak: 10:00 - 15:00</span>
@@ -125,10 +125,10 @@ export const HostInsightsTab: React.FC<HostInsightsTabProps> = ({ hostSpaces }) 
                 <div 
                   className={`w-full rounded-t-lg transition-all ${
                     item.percent >= 90
-                      ? 'bg-[#00C878]'
+                      ? 'bg-[#14BEB8]'
                       : item.percent >= 70
-                      ? 'bg-[#00C878]/70'
-                      : 'bg-[#18201B] border border-[#232D28]'
+                      ? 'bg-[#14BEB8]/70'
+                      : 'bg-[#0B4A50] border border-[#166D74]'
                   }`}
                   style={{ height: `${item.percent}%` }}
                 />
@@ -139,15 +139,15 @@ export const HostInsightsTab: React.FC<HostInsightsTabProps> = ({ hostSpaces }) 
           
           <div className="text-[11px] text-[#718079] flex items-center justify-between pt-2 border-t border-[#1E2522]">
             <span>Peak capacity utilization: 10:00 - 15:00</span>
-            <span className="text-[#00C878] font-bold">96% Utilization</span>
+            <span className="text-[#14BEB8] font-bold">96% Utilization</span>
           </div>
         </div>
 
         {/* Most Demanded Amenities */}
-        <div className="p-6 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-4">
+        <div className="p-6 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-4">
           <div className="flex items-center justify-between border-b border-[#1E2522] pb-3">
             <div className="flex items-center space-x-2">
-              <Sparkles className="w-4 h-4 text-[#00C878]" />
+              <Sparkles className="w-4 h-4 text-[#14BEB8]" />
               <h3 className="text-sm font-bold text-[#F2F2F2]">Most Searched Amenities by Guests</h3>
             </div>
             <span className="text-xs text-[#718079]">Based on OFIS Search queries</span>
@@ -158,13 +158,13 @@ export const HostInsightsTab: React.FC<HostInsightsTabProps> = ({ hostSpaces }) 
               <div key={idx} className="space-y-1">
                 <div className="flex justify-between items-center text-xs">
                   <div className="flex items-center space-x-1.5 text-[#F2F2F2]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00C878]" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#14BEB8]" />
                     <span className="truncate max-w-[240px]">{amenity.name}</span>
                   </div>
-                  <span className="font-mono text-[#00C878] font-bold">{amenity.demandScore}%</span>
+                  <span className="font-mono text-[#14BEB8] font-bold">{amenity.demandScore}%</span>
                 </div>
-                <div className="w-full bg-[#18201B] h-1.5 rounded-full overflow-hidden">
-                  <div className="bg-[#00C878] h-full" style={{ width: `${amenity.demandScore}%` }} />
+                <div className="w-full bg-[#0B4A50] h-1.5 rounded-full overflow-hidden">
+                  <div className="bg-[#14BEB8] h-full" style={{ width: `${amenity.demandScore}%` }} />
                 </div>
               </div>
             ))}
@@ -174,37 +174,37 @@ export const HostInsightsTab: React.FC<HostInsightsTabProps> = ({ hostSpaces }) 
       </div>
 
       {/* Guest Ratings Breakdown Scorecard */}
-      <div className="p-6 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-4">
+      <div className="p-6 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-4">
         <div className="flex items-center justify-between border-b border-[#1E2522] pb-3">
           <div className="flex items-center space-x-2">
-            <Award className="w-4 h-4 text-[#00C878]" />
+            <Award className="w-4 h-4 text-[#14BEB8]" />
             <h3 className="text-sm font-bold text-[#F2F2F2]">Verified Guest Feedback Scorecard</h3>
           </div>
-          <span className="text-xs text-[#00C878] font-bold">100% Verified Reservations</span>
+          <span className="text-xs text-[#14BEB8] font-bold">100% Verified Reservations</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-          <div className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] text-center space-y-1">
+          <div className="p-4 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-center space-y-1">
             <div className="text-xs text-[#718079]">Power Reliability</div>
-            <div className="text-xl font-bold font-mono text-[#00C878]">4.98 ★</div>
+            <div className="text-xl font-bold font-mono text-[#14BEB8]">4.98 ★</div>
             <p className="text-[10px] text-[#9EABA3]">Zero blackout downtime</p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] text-center space-y-1">
+          <div className="p-4 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-center space-y-1">
             <div className="text-xs text-[#718079]">Internet Speed</div>
-            <div className="text-xl font-bold font-mono text-[#00C878]">4.95 ★</div>
+            <div className="text-xl font-bold font-mono text-[#14BEB8]">4.95 ★</div>
             <p className="text-[10px] text-[#9EABA3]">Avg: 480 Mbps download</p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] text-center space-y-1">
+          <div className="p-4 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-center space-y-1">
             <div className="text-xs text-[#718079]">Noise / Quiet Zones</div>
-            <div className="text-xl font-bold font-mono text-[#00C878]">4.88 ★</div>
+            <div className="text-xl font-bold font-mono text-[#14BEB8]">4.88 ★</div>
             <p className="text-[10px] text-[#9EABA3]">Acoustics rating</p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] text-center space-y-1">
+          <div className="p-4 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-center space-y-1">
             <div className="text-xs text-[#718079]">Staff & Hospitality</div>
-            <div className="text-xl font-bold font-mono text-[#00C878]">4.96 ★</div>
+            <div className="text-xl font-bold font-mono text-[#14BEB8]">4.96 ★</div>
             <p className="text-[10px] text-[#9EABA3]">Fast automated check-in</p>
           </div>
         </div>

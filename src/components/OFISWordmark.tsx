@@ -45,14 +45,14 @@ export const OFISWordmark: React.FC<OFISWordmarkProps> = ({
   const getHeightClass = () => {
     switch (size) {
       case 'sm':
-        return 'h-7.5 sm:h-8.5';
+        return 'h-8 sm:h-9';
       case 'lg':
-        return 'h-12.5 sm:h-15.5';
+        return 'h-13 sm:h-16';
       case 'hero':
-        return 'h-16 sm:h-22';
+        return 'h-18 sm:h-24';
       case 'md':
       default:
-        return 'h-10 sm:h-12';
+        return 'h-11 sm:h-13';
     }
   };
 
@@ -61,20 +61,20 @@ export const OFISWordmark: React.FC<OFISWordmarkProps> = ({
       case 'sm':
         return 'w-8 h-8 sm:w-9 sm:h-9';
       case 'lg':
-        return 'w-13 h-13 sm:w-16 sm:h-16';
+        return 'w-14 h-14 sm:w-17 sm:h-17';
       case 'hero':
-        return 'w-18 h-18 sm:w-22 sm:h-22';
+        return 'w-19 h-19 sm:w-24 sm:h-24';
       case 'md':
       default:
-        return 'w-10 h-10 sm:w-12 sm:h-12';
+        return 'w-11 h-11 sm:w-13 sm:h-13';
     }
   };
 
   // Harmonized Mode Filtering & Glow:
   // Enhances boldness, contrast, and clean vector definition across dark and light themes
   const filterStyleClass = isDark
-    ? 'filter brightness-[1.06] contrast-[1.15] drop-shadow-[0_0_1.2px_rgba(255,255,255,0.85)] drop-shadow-[0_0_12px_rgba(20,190,184,0.35)]'
-    : 'filter brightness-[0.93] contrast-[1.22] drop-shadow-[0_0_1.2px_rgba(7,56,61,0.9)] drop-shadow-[0_1.5px_3px_rgba(7,56,61,0.18)]';
+    ? 'filter brightness-[1.08] contrast-[1.25] drop-shadow-[0_0_1.5px_rgba(255,255,255,0.92)] drop-shadow-[0_0_14px_rgba(20,190,184,0.42)]'
+    : 'filter brightness-[0.9] contrast-[1.3] drop-shadow-[0_0_1.5px_rgba(7,56,61,0.95)] drop-shadow-[0_2px_4px_rgba(7,56,61,0.24)]';
 
   if (variant === 'mark-only') {
     return (

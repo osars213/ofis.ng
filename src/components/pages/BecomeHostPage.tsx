@@ -56,9 +56,9 @@ export const BecomeHostPage: React.FC = () => {
       {/* Hero Section */}
       <section className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b border-[#E2ECEB] dark:border-[#166D74] text-center bg-gradient-to-b from-white via-[#FFF9F4] to-[#F1F5F9] dark:from-[#07383D] dark:via-[#0B4A50] dark:to-[#07383D] overflow-hidden">
         <div className="max-w-3xl mx-auto space-y-6">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#006B70]/15 dark:bg-[#006B70]/20 border border-[#006B70]/30 text-xs font-bold text-[#006B70] dark:text-[#28D2CB]">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Monetize Commercial Real Estate in Nigeria</span>
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#14BEB8]/15 dark:bg-[#14BEB8]/20 border border-[#14BEB8]/30 text-xs font-bold text-[#006B70] dark:text-[#28D2CB]">
+            <Building2 className="w-3.5 h-3.5 text-[#FFA987]" />
+            <span>OFIS Host Platform</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#12383B] dark:text-[#FFFFFF]">
@@ -66,7 +66,7 @@ export const BecomeHostPage: React.FC = () => {
           </h1>
 
           <p className="text-base sm:text-lg text-[#5D7A7D] dark:text-[#B8D1D0] leading-relaxed">
-            List your coworking desks, executive meeting rooms, private suites, or creator studios on OFIS. Connect with thousands of verified Nigerian founders, tech workers, and enterprise teams.
+            List your coworking desks, executive meeting rooms, private suites, or creator studios on the OFIS Host Platform. Connect with thousands of verified Nigerian founders, tech workers, and enterprise teams.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
@@ -74,9 +74,9 @@ export const BecomeHostPage: React.FC = () => {
               type="button"
               id="become-host-list-now-btn"
               onClick={() => setIsListSpaceModalOpen(true)}
-              className="px-6 py-3.5 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] text-white font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
+              className="min-h-[44px] px-6 py-3 rounded-2xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white font-bold text-sm shadow-md transition-all active:scale-95 flex items-center space-x-2 cursor-pointer"
             >
-              <span>List Your Space for Free</span>
+              <span>List Your Space on OFIS</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
@@ -86,7 +86,7 @@ export const BecomeHostPage: React.FC = () => {
                 const calcEl = document.getElementById('earnings-calculator-section');
                 if (calcEl) calcEl.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-6 py-3.5 rounded-2xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F5F9] dark:hover:bg-[#105A60] border border-[#E2ECEB] dark:border-[#166D74] text-xs font-bold text-[#12383B] dark:text-[#FFFFFF] cursor-pointer"
+              className="min-h-[44px] px-6 py-3 rounded-2xl bg-white dark:bg-[#0B4A50] hover:bg-[#F1F6F5] dark:hover:bg-[#105A60] border border-[#E2ECEB] dark:border-[#166D74] text-xs font-bold text-[#12383B] dark:text-[#FFFFFF] cursor-pointer"
             >
               Calculate Your Earnings
             </button>
@@ -98,7 +98,7 @@ export const BecomeHostPage: React.FC = () => {
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto space-y-2 mb-14">
           <span className="text-xs font-bold font-mono uppercase tracking-widest text-[#006B70] dark:text-[#28D2CB]">
-            Why Partner With OFIS
+            Why Host on OFIS
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             Built for Commercial Property Owners

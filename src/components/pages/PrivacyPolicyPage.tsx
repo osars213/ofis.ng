@@ -14,7 +14,7 @@ export const PrivacyPolicyPage: React.FC = () => {
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#12383B] dark:text-[#FFFFFF]">Privacy Policy</h1>
           <p className="text-xs text-[#5D7A7D] dark:text-[#B8D1D0]">
-            Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} • OFIS Technologies Ltd.
+            Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} • OFIS
           </p>
         </div>
 
@@ -24,7 +24,7 @@ export const PrivacyPolicyPage: React.FC = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-[#12383B] dark:text-[#FFFFFF]">1. Introduction & Scope</h2>
             <p>
-              OFIS Technologies Ltd (&ldquo;OFIS&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates a physical space discovery and booking platform accessible via web and mobile interfaces. We are committed to protecting the privacy of our guests, hosts, and platform visitors in full compliance with the Nigeria Data Protection Act (NDPA), Nigeria Data Protection Regulation (NDPR), and applicable global data privacy frameworks.
+              OFIS (&ldquo;OFIS&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) operates a physical space discovery and booking platform accessible via web and mobile interfaces. We are committed to protecting the privacy of our guests, hosts, and platform visitors in full compliance with the Nigeria Data Protection Act (NDPA), Nigeria Data Protection Regulation (NDPR), and applicable global data privacy frameworks.
             </p>
           </section>
 

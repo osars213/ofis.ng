@@ -14,7 +14,7 @@ export const TermsOfServicePage: React.FC = () => {
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#12383B] dark:text-[#FFFFFF]">Terms of Service</h1>
           <p className="text-xs text-[#5D7A7D] dark:text-[#B8D1D0]">
-            Effective Date: January 1, 2024 • OFIS Technologies Ltd.
+            Effective Date: January 1, 2024 • OFIS
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export const TermsOfServicePage: React.FC = () => {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-[#12383B] dark:text-[#FFFFFF]">5. Limitation of Liability</h2>
             <p>
-              OFIS serves as a marketplace facilitator connecting guests and commercial space providers. While we rigorously audit partner venues, OFIS Technologies Ltd shall not be liable for incidental property loss, personal injury, or external third-party telecommunication disruptions beyond reasonable commercial control.
+              OFIS serves as a marketplace facilitator connecting guests and commercial space providers. While we rigorously audit partner venues, OFIS shall not be liable for incidental property loss, personal injury, or external third-party telecommunication disruptions beyond reasonable commercial control.
             </p>
           </section>
 

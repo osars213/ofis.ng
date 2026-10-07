@@ -125,7 +125,7 @@ export const AboutPage: React.FC = () => {
                 setCurrentView('explore');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="px-5 py-3 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] text-white text-xs font-bold shadow-md cursor-pointer transition-all"
+              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white text-xs font-bold shadow-md cursor-pointer transition-all active:scale-95"
             >
               Explore Spaces
             </button>
@@ -137,7 +137,7 @@ export const AboutPage: React.FC = () => {
               }}
               className="px-5 py-3 rounded-2xl bg-[#07383D] hover:bg-[#105A60] text-white text-xs font-bold cursor-pointer transition-all border border-[#166D74]"
             >
-              Become a Host
+              Host Platform
             </button>
           </div>
         </div>

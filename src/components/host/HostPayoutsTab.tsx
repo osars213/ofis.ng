@@ -46,7 +46,7 @@ export const HostPayoutsTab: React.FC = () => {
         <button
           type="button"
           onClick={() => setIsHostPayoutModalOpen(true)}
-          className="px-5 py-2.5 rounded-2xl bg-[#00C878] hover:bg-[#00E58B] text-[#0D0D0D] font-bold text-xs flex items-center justify-center space-x-2 shadow-lg shadow-[#00C878]/15 cursor-pointer active:scale-95 transition-all"
+          className="px-5 py-2.5 rounded-2xl bg-[#14BEB8] hover:bg-[#28D2CB] text-[#0D0D0D] font-bold text-xs flex items-center justify-center space-x-2 shadow-lg shadow-[#14BEB8]/15 cursor-pointer active:scale-95 transition-all"
         >
           <ArrowUpRight className="w-4 h-4" />
           <span>Request Payout (₦)</span>
@@ -57,19 +57,19 @@ export const HostPayoutsTab: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         
         {/* Available for Withdrawal */}
-        <div className="p-5 rounded-3xl bg-[#141816] border border-[#00C878]/40 space-y-2 relative overflow-hidden">
+        <div className="p-5 rounded-3xl bg-[#07383D] border border-[#14BEB8]/40 space-y-2 relative overflow-hidden">
           <div className="flex items-center justify-between text-xs text-[#718079]">
             <span>Available Balance</span>
-            <Wallet className="w-4 h-4 text-[#00C878]" />
+            <Wallet className="w-4 h-4 text-[#14BEB8]" />
           </div>
-          <div className="text-2xl font-mono font-extrabold text-[#00C878]">
+          <div className="text-2xl font-mono font-extrabold text-[#14BEB8]">
             ₦{(availableBalance || 0).toLocaleString()}
           </div>
           <p className="text-[10px] text-[#9EABA3]">Cleared & ready for instant bank transfer</p>
         </div>
 
         {/* Pending Settlement */}
-        <div className="p-5 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-2">
+        <div className="p-5 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-2">
           <div className="flex items-center justify-between text-xs text-[#718079]">
             <span>In Escrow (Active Bookings)</span>
             <Clock className="w-4 h-4 text-[#E0A82E]" />
@@ -81,24 +81,24 @@ export const HostPayoutsTab: React.FC = () => {
         </div>
 
         {/* Lifetime Earnings */}
-        <div className="p-5 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-2">
+        <div className="p-5 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-2">
           <div className="flex items-center justify-between text-xs text-[#718079]">
             <span>Lifetime Payouts</span>
-            <ShieldCheck className="w-4 h-4 text-[#00C878]" />
+            <ShieldCheck className="w-4 h-4 text-[#14BEB8]" />
           </div>
           <div className="text-2xl font-mono font-extrabold text-[#F2F2F2]">
             ₦{(lifetimeCompleted || 0).toLocaleString()}
           </div>
-          <p className="text-[10px] text-[#00C878] font-semibold">100% On-time NIP clearance</p>
+          <p className="text-[10px] text-[#14BEB8] font-semibold">100% On-time NIP clearance</p>
         </div>
 
       </div>
 
       {/* Payout Ledger & Invoices Table */}
-      <div className="p-6 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-4">
+      <div className="p-6 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-4">
         <div className="flex items-center justify-between border-b border-[#1E2522] pb-3">
           <div className="flex items-center space-x-2">
-            <History className="w-4 h-4 text-[#00C878]" />
+            <History className="w-4 h-4 text-[#14BEB8]" />
             <h3 className="text-sm font-bold text-[#F2F2F2]">Disbursement History & Receipts</h3>
           </div>
           <span className="text-xs text-[#718079]">{hostPayouts.length} recorded settlements</span>
@@ -113,10 +113,10 @@ export const HostPayoutsTab: React.FC = () => {
             {hostPayouts.map((payout) => (
               <div
                 key={payout.id}
-                className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] hover:border-[#2A3630] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                className="p-4 rounded-2xl bg-[#0B4A50] border border-[#166D74] hover:border-[#2A3630] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
               >
                 <div className="flex items-center space-x-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#00C878]/15 text-[#00C878] flex items-center justify-center font-mono font-bold shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#14BEB8]/15 text-[#14BEB8] flex items-center justify-center font-mono font-bold shrink-0">
                     ₦
                   </div>
 
@@ -127,7 +127,7 @@ export const HostPayoutsTab: React.FC = () => {
                       </span>
                       <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold uppercase ${
                         payout.status === 'completed'
-                          ? 'bg-[#00C878]/15 text-[#00C878] border border-[#00C878]/30'
+                          ? 'bg-[#14BEB8]/15 text-[#14BEB8] border border-[#14BEB8]/30'
                           : 'bg-[#E0A82E]/15 text-[#E0A82E] border border-[#E0A82E]/30'
                       }`}>
                         {payout.status}
@@ -147,7 +147,7 @@ export const HostPayoutsTab: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setSelectedReceiptPayout(payout)}
-                    className="px-3 py-1.5 rounded-xl bg-[#141816] hover:bg-[#232D28] text-xs font-semibold text-[#00C878] border border-[#232D28] flex items-center space-x-1.5 cursor-pointer transition-colors"
+                    className="px-3 py-1.5 rounded-xl bg-[#07383D] hover:bg-[#166D74] text-xs font-semibold text-[#14BEB8] border border-[#166D74] flex items-center space-x-1.5 cursor-pointer transition-colors"
                   >
                     <FileText className="w-3.5 h-3.5" />
                     <span>View Receipt</span>

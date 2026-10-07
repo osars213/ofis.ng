@@ -40,7 +40,7 @@ export const HostProfileCard: React.FC<HostProfileCardProps> = ({
 
   return (
     <>
-      <div className="p-6 rounded-3xl bg-[#141816] border border-[#1E2522] space-y-5">
+      <div className="p-6 rounded-3xl bg-[#07383D] border border-[#1E2522] space-y-5">
         
         {/* Top Host Intro */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -49,9 +49,9 @@ export const HostProfileCard: React.FC<HostProfileCardProps> = ({
               <img
                 src={host.avatar}
                 alt={host.name}
-                className="w-14 h-14 rounded-2xl object-cover border-2 border-[#00C878] shadow-lg"
+                className="w-14 h-14 rounded-2xl object-cover border-2 border-[#14BEB8] shadow-lg"
               />
-              <div className="absolute -bottom-1.5 -right-1.5 p-1 rounded-full bg-[#00C878] text-[#0D0D0D] shadow-md">
+              <div className="absolute -bottom-1.5 -right-1.5 p-1 rounded-full bg-[#14BEB8] text-[#0D0D0D] shadow-md">
                 <ShieldCheck className="w-3.5 h-3.5 stroke-[2.5]" />
               </div>
             </div>
@@ -59,7 +59,7 @@ export const HostProfileCard: React.FC<HostProfileCardProps> = ({
             <div>
               <div className="flex items-center space-x-2">
                 <h3 className="text-base font-bold text-[#F2F2F2]">{host.name}</h3>
-                <span className="px-2 py-0.5 rounded-full bg-[#00C878]/15 border border-[#00C878]/30 text-[10px] font-mono font-bold text-[#00C878]">
+                <span className="px-2 py-0.5 rounded-full bg-[#14BEB8]/15 border border-[#14BEB8]/30 text-[10px] font-mono font-bold text-[#14BEB8]">
                   Verified Host
                 </span>
               </div>
@@ -77,7 +77,7 @@ export const HostProfileCard: React.FC<HostProfileCardProps> = ({
             <button
               type="button"
               onClick={onContactHost}
-              className="px-4 py-2.5 rounded-xl bg-[#00C878] hover:bg-[#00E58B] text-[#0D0D0D] text-xs font-bold flex items-center space-x-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-[#14BEB8] hover:bg-[#28D2CB] text-[#0D0D0D] text-xs font-bold flex items-center space-x-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
             >
               <MessageSquare className="w-3.5 h-3.5 fill-[#0D0D0D]" />
               <span>Message Host</span>
@@ -86,7 +86,7 @@ export const HostProfileCard: React.FC<HostProfileCardProps> = ({
             <button
               type="button"
               onClick={() => setIsProfileModalOpen(true)}
-              className="px-3.5 py-2.5 rounded-xl bg-[#18201B] hover:bg-[#232D28] border border-[#232D28] text-xs font-semibold text-[#9EABA3] hover:text-[#F2F2F2] transition-colors cursor-pointer"
+              className="px-3.5 py-2.5 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] border border-[#166D74] text-xs font-semibold text-[#9EABA3] hover:text-[#F2F2F2] transition-colors cursor-pointer"
             >
               Profile
             </button>
@@ -96,9 +96,9 @@ export const HostProfileCard: React.FC<HostProfileCardProps> = ({
         {/* Host Credentials Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2 border-t border-[#1E2522]">
           
-          <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28]">
+          <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74]">
             <div className="flex items-center space-x-1.5 text-xs text-[#718079] mb-1">
-              <Star className="w-3.5 h-3.5 text-[#00C878] fill-[#00C878]" />
+              <Star className="w-3.5 h-3.5 text-[#14BEB8] fill-[#14BEB8]" />
               <span>Host Rating</span>
             </div>
             <div className="text-sm font-bold text-[#F2F2F2] font-mono">
@@ -106,9 +106,9 @@ export const HostProfileCard: React.FC<HostProfileCardProps> = ({
             </div>
           </div>
 
-          <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28]">
+          <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74]">
             <div className="flex items-center space-x-1.5 text-xs text-[#718079] mb-1">
-              <Clock className="w-3.5 h-3.5 text-[#00C878]" />
+              <Clock className="w-3.5 h-3.5 text-[#14BEB8]" />
               <span>Response Time</span>
             </div>
             <div className="text-sm font-bold text-[#F2F2F2] font-mono">
@@ -116,19 +116,19 @@ export const HostProfileCard: React.FC<HostProfileCardProps> = ({
             </div>
           </div>
 
-          <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28]">
+          <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74]">
             <div className="flex items-center space-x-1.5 text-xs text-[#718079] mb-1">
-              <Award className="w-3.5 h-3.5 text-[#00C878]" />
+              <Award className="w-3.5 h-3.5 text-[#14BEB8]" />
               <span>Response Rate</span>
             </div>
-            <div className="text-sm font-bold text-[#00C878] font-mono">
+            <div className="text-sm font-bold text-[#14BEB8] font-mono">
               {responseRate}%
             </div>
           </div>
 
-          <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28]">
+          <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74]">
             <div className="flex items-center space-x-1.5 text-xs text-[#718079] mb-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#00C878]" />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#14BEB8]" />
               <span>Identity Audit</span>
             </div>
             <div className="text-xs font-bold text-[#F2F2F2]">
@@ -139,8 +139,8 @@ export const HostProfileCard: React.FC<HostProfileCardProps> = ({
         </div>
 
         {/* Verification Guarantee Reassurance Note */}
-        <div className="flex items-center space-x-2 text-xs text-[#9EABA3] p-3 rounded-2xl bg-[#18201B]/50 border border-[#232D28]">
-          <CheckCircle2 className="w-4 h-4 text-[#00C878] shrink-0" />
+        <div className="flex items-center space-x-2 text-xs text-[#9EABA3] p-3 rounded-2xl bg-[#0B4A50]/50 border border-[#166D74]">
+          <CheckCircle2 className="w-4 h-4 text-[#14BEB8] shrink-0" />
           <span>
             This host is an OFIS Certified Workspace Partner. Instant digital access pass guaranteed.
           </span>

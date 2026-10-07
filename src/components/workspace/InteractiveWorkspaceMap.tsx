@@ -89,7 +89,7 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
             <button
               type="button"
               onClick={onOpenDirections}
-              className="px-3.5 py-2 rounded-xl bg-[#00C878] hover:bg-[#00E58B] text-[#0D0D0D] text-xs font-bold flex items-center space-x-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
+              className="px-3.5 py-2 rounded-xl bg-[#14BEB8] hover:bg-[#28D2CB] text-[#0D0D0D] text-xs font-bold flex items-center space-x-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
             >
               <Navigation className="w-3.5 h-3.5 fill-[#0D0D0D]" />
               <span>In-App Directions</span>
@@ -100,7 +100,7 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
             href={googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3 py-2 rounded-xl bg-[#141816] hover:bg-[#1E2522] border border-[#1E2522] text-xs font-semibold text-[#9EABA3] hover:text-[#F2F2F2] flex items-center space-x-1 transition-all"
+            className="px-3 py-2 rounded-xl bg-[#07383D] hover:bg-[#1E2522] border border-[#1E2522] text-xs font-semibold text-[#9EABA3] hover:text-[#F2F2F2] flex items-center space-x-1 transition-all"
           >
             <span>Google Maps</span>
             <ExternalLink className="w-3 h-3 text-[#718079]" />
@@ -109,7 +109,7 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
       </div>
 
       {/* Interactive Map Visual Container */}
-      <div className="relative w-full h-72 sm:h-80 rounded-3xl overflow-hidden bg-[#141816] border border-[#1E2522] shadow-xl select-none group">
+      <div className="relative w-full h-72 sm:h-80 rounded-3xl overflow-hidden bg-[#07383D] border border-[#1E2522] shadow-xl select-none group">
         
         {/* Map Background Canvas (Styled Dark Carto / Satellite) */}
         <div 
@@ -122,7 +122,7 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
         >
           {/* Simulated Cartographic Street Grid & Transit Roads */}
           <div className="absolute inset-0 opacity-25 pointer-events-none" style={{
-            backgroundImage: 'linear-gradient(#232D28 1px, transparent 1px), linear-gradient(90deg, #232D28 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(#166D74 1px, transparent 1px), linear-gradient(90deg, #166D74 1px, transparent 1px)',
             backgroundSize: `${20 * (zoomLevel / 14)}px ${20 * (zoomLevel / 14)}px`
           }} />
 
@@ -130,24 +130,24 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
           <div className="absolute inset-0 pointer-events-none opacity-40">
             <div className="absolute top-1/3 left-0 right-0 h-2 bg-[#2a3830] transform -rotate-3" />
             <div className="absolute top-0 bottom-0 left-1/2 w-3 bg-[#2a3830] transform rotate-12" />
-            <div className="absolute bottom-1/4 left-0 right-0 h-1.5 bg-[#00C878]/30 transform rotate-6" />
+            <div className="absolute bottom-1/4 left-0 right-0 h-1.5 bg-[#14BEB8]/30 transform rotate-6" />
           </div>
 
           {/* Interactive Workspace Pin with Ripple Halo */}
           <div className="relative z-10 flex flex-col items-center">
             {/* Animated Pulse Waves */}
-            <div className="absolute -inset-4 rounded-full bg-[#00C878]/25 animate-ping" />
-            <div className="absolute -inset-8 rounded-full bg-[#00C878]/10 animate-pulse" />
+            <div className="absolute -inset-4 rounded-full bg-[#14BEB8]/25 animate-ping" />
+            <div className="absolute -inset-8 rounded-full bg-[#14BEB8]/10 animate-pulse" />
 
             {/* Central Pin Marker */}
-            <div className="p-3 rounded-2xl bg-[#00C878] text-[#0D0D0D] shadow-2xl ring-4 ring-[#00C878]/30 flex items-center justify-center transform hover:scale-110 transition-transform cursor-pointer">
+            <div className="p-3 rounded-2xl bg-[#14BEB8] text-[#0D0D0D] shadow-2xl ring-4 ring-[#14BEB8]/30 flex items-center justify-center transform hover:scale-110 transition-transform cursor-pointer">
               <MapPin className="w-6 h-6 fill-[#0D0D0D] stroke-[2.5]" />
             </div>
 
             {/* Floating Space Label Card */}
-            <div className="mt-2 px-3 py-1.5 rounded-xl bg-[#0D0D0D]/90 backdrop-blur-md border border-[#232D28] text-center shadow-xl">
+            <div className="mt-2 px-3 py-1.5 rounded-xl bg-[#0D0D0D]/90 backdrop-blur-md border border-[#166D74] text-center shadow-xl">
               <div className="text-xs font-bold text-[#F2F2F2] max-w-[200px] truncate">{space.title}</div>
-              <div className="text-[10px] text-[#00C878] font-mono font-semibold">{space.neighborhood}</div>
+              <div className="text-[10px] text-[#14BEB8] font-mono font-semibold">{space.neighborhood}</div>
             </div>
           </div>
 
@@ -155,13 +155,13 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
           {landmarks.slice(0, 2).map((lm, idx) => (
             <div
               key={lm.name}
-              className={`absolute z-10 flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-[#141816]/90 backdrop-blur-md border border-[#232D28] text-[10px] text-[#9EABA3] shadow-md ${
+              className={`absolute z-10 flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-[#07383D]/90 backdrop-blur-md border border-[#166D74] text-[10px] text-[#9EABA3] shadow-md ${
                 idx === 0 ? 'top-10 left-10' : 'bottom-12 right-12'
               }`}
             >
               <Building className="w-3 h-3 text-[#718079]" />
               <span className="truncate max-w-[120px]">{lm.name}</span>
-              <span className="text-[#00C878] font-mono">({lm.distance})</span>
+              <span className="text-[#14BEB8] font-mono">({lm.distance})</span>
             </div>
           ))}
 
@@ -169,11 +169,11 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
 
         {/* Top-Right Map Controls (Zoom & Style) */}
         <div className="absolute top-3 right-3 flex flex-col space-y-1.5 z-20">
-          <div className="bg-[#141816]/90 backdrop-blur-md border border-[#232D28] rounded-xl p-1 flex flex-col space-y-1 shadow-lg">
+          <div className="bg-[#07383D]/90 backdrop-blur-md border border-[#166D74] rounded-xl p-1 flex flex-col space-y-1 shadow-lg">
             <button
               type="button"
               onClick={() => setZoomLevel((z) => Math.min(z + 1, 18))}
-              className="p-1.5 rounded-lg hover:bg-[#232D28] text-[#F2F2F2] hover:text-[#00C878] transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg hover:bg-[#166D74] text-[#F2F2F2] hover:text-[#14BEB8] transition-colors cursor-pointer"
               title="Zoom in"
             >
               <ZoomIn className="w-4 h-4" />
@@ -181,7 +181,7 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
             <button
               type="button"
               onClick={() => setZoomLevel((z) => Math.max(z - 1, 12))}
-              className="p-1.5 rounded-lg hover:bg-[#232D28] text-[#F2F2F2] hover:text-[#00C878] transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg hover:bg-[#166D74] text-[#F2F2F2] hover:text-[#14BEB8] transition-colors cursor-pointer"
               title="Zoom out"
             >
               <ZoomOut className="w-4 h-4" />
@@ -191,7 +191,7 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
           <button
             type="button"
             onClick={() => setMapStyle((s) => (s === 'dark' ? 'satellite' : 'dark'))}
-            className="p-2 rounded-xl bg-[#141816]/90 backdrop-blur-md border border-[#232D28] text-[#9EABA3] hover:text-[#00C878] shadow-lg transition-colors cursor-pointer"
+            className="p-2 rounded-xl bg-[#07383D]/90 backdrop-blur-md border border-[#166D74] text-[#9EABA3] hover:text-[#14BEB8] shadow-lg transition-colors cursor-pointer"
             title="Toggle Map Style"
           >
             <Layers className="w-4 h-4" />
@@ -199,8 +199,8 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
         </div>
 
         {/* Bottom-Left Quick Travel Estimate Badge */}
-        <div className="absolute bottom-3 left-3 z-20 flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#0D0D0D]/90 backdrop-blur-md border border-[#232D28] text-xs text-[#F2F2F2] shadow-lg">
-          <div className="flex items-center space-x-1 text-[#00C878]">
+        <div className="absolute bottom-3 left-3 z-20 flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#0D0D0D]/90 backdrop-blur-md border border-[#166D74] text-xs text-[#F2F2F2] shadow-lg">
+          <div className="flex items-center space-x-1 text-[#14BEB8]">
             <Car className="w-3.5 h-3.5" />
             <span className="font-mono font-bold">4m</span>
           </div>
@@ -216,9 +216,9 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
       {/* Nearby Key Landmarks & Transit Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {/* Landmarks Card */}
-        <div className="p-4 rounded-2xl bg-[#141816] border border-[#1E2522] space-y-3">
+        <div className="p-4 rounded-2xl bg-[#07383D] border border-[#1E2522] space-y-3">
           <div className="flex items-center space-x-2 text-xs font-bold text-[#F2F2F2]">
-            <Building className="w-4 h-4 text-[#00C878]" />
+            <Building className="w-4 h-4 text-[#14BEB8]" />
             <span>Notable Landmarks Nearby</span>
           </div>
           <div className="space-y-2">
@@ -229,7 +229,7 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
                   <div className="text-[10px] text-[#718079]">{lm.type}</div>
                 </div>
                 <div className="text-right">
-                  <div className="font-mono text-[#00C878] font-bold text-[11px]">{lm.distance}</div>
+                  <div className="font-mono text-[#14BEB8] font-bold text-[11px]">{lm.distance}</div>
                   <div className="text-[10px] text-[#718079]">{lm.travelTime}</div>
                 </div>
               </div>
@@ -238,28 +238,28 @@ export const InteractiveWorkspaceMap: React.FC<InteractiveWorkspaceMapProps> = (
         </div>
 
         {/* Transport & Access Card */}
-        <div className="p-4 rounded-2xl bg-[#141816] border border-[#1E2522] space-y-3">
+        <div className="p-4 rounded-2xl bg-[#07383D] border border-[#1E2522] space-y-3">
           <div className="flex items-center space-x-2 text-xs font-bold text-[#F2F2F2]">
-            <Car className="w-4 h-4 text-[#00C878]" />
+            <Car className="w-4 h-4 text-[#14BEB8]" />
             <span>Transport & Arrival Access</span>
           </div>
           <div className="space-y-2.5 text-xs text-[#9EABA3]">
-            <div className="flex items-start space-x-2.5 p-2 rounded-xl bg-[#18201B] border border-[#232D28]">
-              <Car className="w-4 h-4 text-[#00C878] shrink-0 mt-0.5" />
+            <div className="flex items-start space-x-2.5 p-2 rounded-xl bg-[#0B4A50] border border-[#166D74]">
+              <Car className="w-4 h-4 text-[#14BEB8] shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold text-[#F2F2F2]">Ride-Hailing Drop-Off:</span> Dedicated Uber / Bolt curb zone directly in front of main entrance gate.
               </div>
             </div>
 
-            <div className="flex items-start space-x-2.5 p-2 rounded-xl bg-[#18201B] border border-[#232D28]">
-              <ShieldCheck className="w-4 h-4 text-[#00C878] shrink-0 mt-0.5" />
+            <div className="flex items-start space-x-2.5 p-2 rounded-xl bg-[#0B4A50] border border-[#166D74]">
+              <ShieldCheck className="w-4 h-4 text-[#14BEB8] shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold text-[#F2F2F2]">Secure On-Site Parking:</span> 24/7 gated parking with dedicated security guards and valet assist.
               </div>
             </div>
 
-            <div className="flex items-start space-x-2.5 p-2 rounded-xl bg-[#18201B] border border-[#232D28]">
-              <Bus className="w-4 h-4 text-[#00C878] shrink-0 mt-0.5" />
+            <div className="flex items-start space-x-2.5 p-2 rounded-xl bg-[#0B4A50] border border-[#166D74]">
+              <Bus className="w-4 h-4 text-[#14BEB8] shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold text-[#F2F2F2]">Public Transit:</span> 5-minute walk to major bus corridor and commercial junction.
               </div>

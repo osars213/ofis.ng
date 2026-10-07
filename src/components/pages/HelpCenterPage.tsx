@@ -227,7 +227,7 @@ export const HelpCenterPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('contact')}
-            className="px-5 py-3 rounded-2xl bg-[#006B70] hover:bg-[#0EA8A2] text-white text-xs font-bold shadow-md cursor-pointer transition-all flex items-center space-x-2 shrink-0"
+            className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white text-xs font-bold shadow-md cursor-pointer transition-all flex items-center space-x-2 shrink-0 active:scale-95"
           >
             <MessageCircle className="w-4 h-4" />
             <span>Contact Support Desk</span>

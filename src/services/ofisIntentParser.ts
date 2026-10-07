@@ -53,7 +53,6 @@ export interface OfisAssistantResponse {
   };
   suggestedFollowUps: string[];
 }
-export type AiConciergeResponse = OfisAssistantResponse;
 
 const NIGERIAN_LOCATIONS = [
   // Lagos Neighborhoods

@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Mail, MapPin, Sparkles, Building2, ShieldCheck, ArrowRight } from 'lucide-react';
+import { X, Mail, Sparkles, Building2, ShieldCheck, ArrowRight } from 'lucide-react';
 
 interface AboutModalProps {
   isOpen: boolean;
@@ -105,10 +105,16 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
             <ArrowRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#14B8A6] group-hover:translate-x-1 transition-all" />
           </a>
 
-          <div className="flex items-center space-x-3 p-3.5 rounded-2xl bg-[#105A60] border border-[#166D74] text-sm text-[#94A3B8]">
-            <MapPin className="w-4 h-4 text-[#14B8A6] shrink-0" />
-            <span>Victoria Island, Lagos, Nigeria</span>
-          </div>
+          <a
+            href="mailto:support@ofis.ng"
+            className="flex items-center justify-between p-3.5 rounded-2xl bg-[#105A60] border border-[#166D74] hover:border-[#14B8A6]/50 text-sm font-semibold transition-all group text-white"
+          >
+            <div className="flex items-center space-x-3">
+              <Mail className="w-4 h-4 text-[#14B8A6]" />
+              <span>support@ofis.ng</span>
+            </div>
+            <ArrowRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#14B8A6] group-hover:translate-x-1 transition-all" />
+          </a>
         </div>
 
         <button

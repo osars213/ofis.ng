@@ -65,7 +65,7 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
         <div>
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-1.5 text-2xl font-extrabold text-[#F2F2F2]">
-              <Star className="w-6 h-6 fill-[#00C878] text-[#00C878]" />
+              <Star className="w-6 h-6 fill-[#14BEB8] text-[#14BEB8]" />
               <span className="font-mono">{overallRating}</span>
             </div>
             <span className="text-sm text-[#718079]">•</span>
@@ -81,7 +81,7 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
         <button
           type="button"
           onClick={onWriteReviewClick}
-          className="px-4 py-2.5 rounded-xl bg-[#18201B] hover:bg-[#232D28] border border-[#232D28] text-xs font-semibold text-[#00C878] flex items-center space-x-1.5 transition-all self-start sm:self-center active:scale-95 cursor-pointer"
+          className="px-4 py-2.5 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] border border-[#166D74] text-xs font-semibold text-[#14BEB8] flex items-center space-x-1.5 transition-all self-start sm:self-center active:scale-95 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>Write a Review</span>
@@ -89,43 +89,43 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
       </div>
 
       {/* 5-Pillar Verified Quality Breakdown */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 p-4 rounded-2xl bg-[#141816] border border-[#1E2522]">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 p-4 rounded-2xl bg-[#07383D] border border-[#1E2522]">
         
-        <div className="p-2.5 rounded-xl bg-[#18201B] border border-[#232D28]">
+        <div className="p-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74]">
           <div className="flex items-center space-x-1 text-[11px] text-[#718079] mb-1">
-            <Zap className="w-3.5 h-3.5 text-[#00C878]" />
+            <Zap className="w-3.5 h-3.5 text-[#14BEB8]" />
             <span>Power Uptime</span>
           </div>
           <div className="text-sm font-bold text-[#F2F2F2] font-mono">5.0 / 5.0</div>
         </div>
 
-        <div className="p-2.5 rounded-xl bg-[#18201B] border border-[#232D28]">
+        <div className="p-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74]">
           <div className="flex items-center space-x-1 text-[11px] text-[#718079] mb-1">
-            <Wifi className="w-3.5 h-3.5 text-[#00C878]" />
+            <Wifi className="w-3.5 h-3.5 text-[#14BEB8]" />
             <span>Internet Speed</span>
           </div>
           <div className="text-sm font-bold text-[#F2F2F2] font-mono">4.95 / 5.0</div>
         </div>
 
-        <div className="p-2.5 rounded-xl bg-[#18201B] border border-[#232D28]">
+        <div className="p-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74]">
           <div className="flex items-center space-x-1 text-[11px] text-[#718079] mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-[#00C878]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#14BEB8]" />
             <span>Cleanliness</span>
           </div>
           <div className="text-sm font-bold text-[#F2F2F2] font-mono">4.92 / 5.0</div>
         </div>
 
-        <div className="p-2.5 rounded-xl bg-[#18201B] border border-[#232D28]">
+        <div className="p-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74]">
           <div className="flex items-center space-x-1 text-[11px] text-[#718079] mb-1">
-            <Volume2 className="w-3.5 h-3.5 text-[#00C878]" />
+            <Volume2 className="w-3.5 h-3.5 text-[#14BEB8]" />
             <span>Acoustics</span>
           </div>
           <div className="text-sm font-bold text-[#F2F2F2] font-mono">4.88 / 5.0</div>
         </div>
 
-        <div className="p-2.5 rounded-xl bg-[#18201B] border border-[#232D28] col-span-2 sm:col-span-1">
+        <div className="p-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74] col-span-2 sm:col-span-1">
           <div className="flex items-center space-x-1 text-[11px] text-[#718079] mb-1">
-            <Banknote className="w-3.5 h-3.5 text-[#00C878]" />
+            <Banknote className="w-3.5 h-3.5 text-[#14BEB8]" />
             <span>Value</span>
           </div>
           <div className="text-sm font-bold text-[#F2F2F2] font-mono">4.90 / 5.0</div>
@@ -149,8 +149,8 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
             onClick={() => setActiveFilter(f.id as any)}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
               activeFilter === f.id
-                ? 'bg-[#00C878] text-[#0D0D0D]'
-                : 'bg-[#141816] text-[#9EABA3] hover:text-[#F2F2F2] border border-[#1E2522]'
+                ? 'bg-[#14BEB8] text-[#0D0D0D]'
+                : 'bg-[#07383D] text-[#9EABA3] hover:text-[#F2F2F2] border border-[#1E2522]'
             }`}
           >
             {f.label}
@@ -169,12 +169,12 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
           return (
             <div
               key={r.id}
-              className="p-5 rounded-2xl bg-[#141816] border border-[#1E2522] space-y-3.5"
+              className="p-5 rounded-2xl bg-[#07383D] border border-[#1E2522] space-y-3.5"
             >
               {/* User Header */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-[#18201B] border border-[#232D28] flex items-center justify-center font-bold text-sm text-[#00C878]">
+                  <div className="w-10 h-10 rounded-full bg-[#0B4A50] border border-[#166D74] flex items-center justify-center font-bold text-sm text-[#14BEB8]">
                     {r.userName.charAt(0)}
                   </div>
 
@@ -182,7 +182,7 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
                     <div className="flex items-center space-x-2">
                       <span className="text-xs font-bold text-[#F2F2F2]">{r.userName}</span>
                       {r.verifiedBooking && (
-                        <span className="flex items-center space-x-1 text-[10px] text-[#00C878] font-semibold">
+                        <span className="flex items-center space-x-1 text-[10px] text-[#14BEB8] font-semibold">
                           <ShieldCheck className="w-3.5 h-3.5" />
                           <span>Verified Guest</span>
                         </span>
@@ -194,8 +194,8 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-1 text-[#00C878]">
-                  <Star className="w-4 h-4 fill-[#00C878]" />
+                <div className="flex items-center space-x-1 text-[#14BEB8]">
+                  <Star className="w-4 h-4 fill-[#14BEB8]" />
                   <span className="text-xs font-bold font-mono">{r.rating}</span>
                 </div>
               </div>
@@ -203,7 +203,7 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
               {/* Visit Date & Type */}
               {r.visitDate && (
                 <div className="flex items-center space-x-1.5 text-[11px] text-[#718079]">
-                  <Clock className="w-3 h-3 text-[#00C878]" />
+                  <Clock className="w-3 h-3 text-[#14BEB8]" />
                   <span>{r.visitDate}</span>
                 </div>
               )}
@@ -219,9 +219,9 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
                   {r.verifiedAmenities.map((amenity, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-0.5 rounded-lg bg-[#18201B] border border-[#232D28] text-[10px] text-[#9EABA3] flex items-center space-x-1"
+                      className="px-2 py-0.5 rounded-lg bg-[#0B4A50] border border-[#166D74] text-[10px] text-[#9EABA3] flex items-center space-x-1"
                     >
-                      <CheckCircle2 className="w-2.5 h-2.5 text-[#00C878]" />
+                      <CheckCircle2 className="w-2.5 h-2.5 text-[#14BEB8]" />
                       <span>{amenity}</span>
                     </span>
                   ))}
@@ -236,7 +236,7 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
                       key={idx}
                       type="button"
                       onClick={() => setPreviewPhoto(photo)}
-                      className="relative w-16 h-16 rounded-xl overflow-hidden border border-[#232D28] hover:border-[#00C878] transition-all cursor-pointer group"
+                      className="relative w-16 h-16 rounded-xl overflow-hidden border border-[#166D74] hover:border-[#14BEB8] transition-all cursor-pointer group"
                     >
                       <img
                         src={optimizeImageUrl(photo, { width: 160, quality: 75 })}
@@ -259,11 +259,11 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
                   onClick={() => handleToggleHelpful(r.id)}
                   className={`flex items-center space-x-1.5 px-3 py-1 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     helpful.isHelpful
-                      ? 'bg-[#00C878]/15 border border-[#00C878]/40 text-[#00C878]'
-                      : 'bg-[#18201B] hover:bg-[#232D28] border border-[#232D28] text-[#718079] hover:text-[#F2F2F2]'
+                      ? 'bg-[#14BEB8]/15 border border-[#14BEB8]/40 text-[#14BEB8]'
+                      : 'bg-[#0B4A50] hover:bg-[#166D74] border border-[#166D74] text-[#718079] hover:text-[#F2F2F2]'
                   }`}
                 >
-                  <ThumbsUp className={`w-3.5 h-3.5 ${helpful.isHelpful ? 'fill-[#00C878]' : ''}`} />
+                  <ThumbsUp className={`w-3.5 h-3.5 ${helpful.isHelpful ? 'fill-[#14BEB8]' : ''}`} />
                   <span>Helpful {helpful.count > 0 ? `(${helpful.count})` : ''}</span>
                 </button>
 
@@ -287,11 +287,11 @@ export const EnhancedReviewsSection: React.FC<EnhancedReviewsSectionProps> = ({
           className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
           onClick={() => setPreviewPhoto(null)}
         >
-          <div className="relative max-w-2xl max-h-[85vh] rounded-2xl overflow-hidden border border-[#232D28]">
+          <div className="relative max-w-2xl max-h-[85vh] rounded-2xl overflow-hidden border border-[#166D74]">
             <button
               type="button"
               onClick={() => setPreviewPhoto(null)}
-              className="absolute top-3 right-3 p-2 rounded-full bg-black/60 text-white hover:text-[#00C878] transition-colors"
+              className="absolute top-3 right-3 p-2 rounded-full bg-black/60 text-white hover:text-[#14BEB8] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>

@@ -101,7 +101,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
     <div className="space-y-3">
       {/* Main Full-Width Hero Container */}
       <div 
-        className="relative w-full aspect-[16/10] sm:aspect-[21/9] md:aspect-[2.4/1] rounded-3xl overflow-hidden bg-[#141816] border border-[#1E2522] shadow-2xl group select-none cursor-pointer"
+        className="relative w-full aspect-[16/10] sm:aspect-[21/9] md:aspect-[2.4/1] rounded-3xl overflow-hidden bg-[#07383D] border border-[#1E2522] shadow-2xl group select-none cursor-pointer"
         onClick={() => setIsFullscreen(true)}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -125,7 +125,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
         {/* Top Badges & Actions */}
         <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-auto">
           {/* Verified Photos Pill */}
-          <div className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-[#0D0D0D]/80 backdrop-blur-md border border-[#232D28] text-xs font-semibold text-[#00C878] shadow-lg">
+          <div className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-[#0D0D0D]/80 backdrop-blur-md border border-[#166D74] text-xs font-semibold text-[#14BEB8] shadow-lg">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span className="font-mono text-[11px] font-bold tracking-wide">Verified Photos</span>
             <span className="text-[#718079] text-[10px] hidden sm:inline">• On-Site Audit</span>
@@ -139,10 +139,10 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                 e.stopPropagation();
                 onToggleSave();
               }}
-              className="p-2.5 rounded-2xl bg-[#0D0D0D]/80 hover:bg-[#141816] backdrop-blur-md border border-[#232D28] text-[#F2F2F2] hover:text-[#00C878] transition-all shadow-lg active:scale-95"
+              className="p-2.5 rounded-2xl bg-[#0D0D0D]/80 hover:bg-[#07383D] backdrop-blur-md border border-[#166D74] text-[#F2F2F2] hover:text-[#14BEB8] transition-all shadow-lg active:scale-95"
               aria-label="Save to favorites"
             >
-              <Heart className={`w-4 h-4 ${isSaved ? 'fill-[#00C878] text-[#00C878]' : ''}`} />
+              <Heart className={`w-4 h-4 ${isSaved ? 'fill-[#14BEB8] text-[#14BEB8]' : ''}`} />
             </button>
 
             <button
@@ -151,7 +151,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                 e.stopPropagation();
                 onShare();
               }}
-              className="p-2.5 rounded-2xl bg-[#0D0D0D]/80 hover:bg-[#141816] backdrop-blur-md border border-[#232D28] text-[#F2F2F2] hover:text-[#00C878] transition-all shadow-lg active:scale-95"
+              className="p-2.5 rounded-2xl bg-[#0D0D0D]/80 hover:bg-[#07383D] backdrop-blur-md border border-[#166D74] text-[#F2F2F2] hover:text-[#14BEB8] transition-all shadow-lg active:scale-95"
               aria-label="Share workspace"
             >
               <Share2 className="w-4 h-4" />
@@ -163,7 +163,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                 e.stopPropagation();
                 setIsFullscreen(true);
               }}
-              className="p-2.5 rounded-2xl bg-[#0D0D0D]/80 hover:bg-[#141816] backdrop-blur-md border border-[#232D28] text-[#F2F2F2] hover:text-[#00C878] transition-all shadow-lg active:scale-95 hidden sm:flex items-center space-x-1.5"
+              className="p-2.5 rounded-2xl bg-[#0D0D0D]/80 hover:bg-[#07383D] backdrop-blur-md border border-[#166D74] text-[#F2F2F2] hover:text-[#14BEB8] transition-all shadow-lg active:scale-95 hidden sm:flex items-center space-x-1.5"
               aria-label="Full screen gallery"
             >
               <Maximize2 className="w-4 h-4" />
@@ -178,7 +178,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
             <button
               type="button"
               onClick={handlePrev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#0D0D0D]/80 hover:bg-[#00C878] hover:text-[#0D0D0D] text-[#F2F2F2] backdrop-blur-md border border-[#232D28] transition-all opacity-0 group-hover:opacity-100 sm:opacity-90 shadow-xl active:scale-95 z-10"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#0D0D0D]/80 hover:bg-[#14BEB8] hover:text-[#0D0D0D] text-[#F2F2F2] backdrop-blur-md border border-[#166D74] transition-all opacity-0 group-hover:opacity-100 sm:opacity-90 shadow-xl active:scale-95 z-10"
               aria-label="Previous photo"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -186,7 +186,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
             <button
               type="button"
               onClick={handleNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#0D0D0D]/80 hover:bg-[#00C878] hover:text-[#0D0D0D] text-[#F2F2F2] backdrop-blur-md border border-[#232D28] transition-all opacity-0 group-hover:opacity-100 sm:opacity-90 shadow-xl active:scale-95 z-10"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#0D0D0D]/80 hover:bg-[#14BEB8] hover:text-[#0D0D0D] text-[#F2F2F2] backdrop-blur-md border border-[#166D74] transition-all opacity-0 group-hover:opacity-100 sm:opacity-90 shadow-xl active:scale-95 z-10"
               aria-label="Next photo"
             >
               <ChevronRight className="w-5 h-5" />
@@ -198,11 +198,11 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
         <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-auto">
           {/* Category & Verified Tag */}
           <div className="flex items-center space-x-2">
-            <span className="px-3 py-1 rounded-xl bg-[#00C878]/20 border border-[#00C878]/40 text-[#00C878] text-xs font-mono font-bold uppercase tracking-wider backdrop-blur-md">
+            <span className="px-3 py-1 rounded-xl bg-[#14BEB8]/20 border border-[#14BEB8]/40 text-[#14BEB8] text-xs font-mono font-bold uppercase tracking-wider backdrop-blur-md">
               {String(space.category || '').replace(/_/g, ' ')}
             </span>
             {space.isSuperhost && (
-              <span className="px-2.5 py-1 rounded-xl bg-[#00C878] text-[#0D0D0D] text-xs font-mono font-black uppercase tracking-wider shadow-md">
+              <span className="px-2.5 py-1 rounded-xl bg-[#14BEB8] text-[#0D0D0D] text-xs font-mono font-black uppercase tracking-wider shadow-md">
                 Superhost
               </span>
             )}
@@ -215,9 +215,9 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
               e.stopPropagation();
               setIsFullscreen(true);
             }}
-            className="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#0D0D0D]/85 backdrop-blur-md border border-[#232D28] text-xs font-mono font-bold text-[#F2F2F2] hover:border-[#00C878] transition-colors shadow-lg"
+            className="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#0D0D0D]/85 backdrop-blur-md border border-[#166D74] text-xs font-mono font-bold text-[#F2F2F2] hover:border-[#14BEB8] transition-colors shadow-lg"
           >
-            <Grid className="w-3.5 h-3.5 text-[#00C878]" />
+            <Grid className="w-3.5 h-3.5 text-[#14BEB8]" />
             <span>
               {currentIndex + 1} / {images.length}
             </span>
@@ -235,13 +235,13 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
               onClick={() => setCurrentIndex(idx)}
               className={`relative h-16 w-24 sm:h-20 sm:w-28 rounded-2xl overflow-hidden border-2 shrink-0 transition-all cursor-pointer ${
                 currentIndex === idx 
-                  ? 'border-[#00C878] scale-100 shadow-md ring-2 ring-[#00C878]/20' 
+                  ? 'border-[#14BEB8] scale-100 shadow-md ring-2 ring-[#14BEB8]/20' 
                   : 'border-[#1E2522] opacity-60 hover:opacity-100 hover:border-[#2E3B34]'
               }`}
             >
               <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" loading="lazy" />
               {currentIndex === idx && (
-                <div className="absolute inset-0 bg-[#00C878]/10 pointer-events-none" />
+                <div className="absolute inset-0 bg-[#14BEB8]/10 pointer-events-none" />
               )}
             </button>
           ))}
@@ -253,9 +253,9 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
         <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl flex flex-col justify-between p-4 sm:p-6 animate-in fade-in duration-200">
           
           {/* Fullscreen Header */}
-          <div className="flex items-center justify-between text-[#F2F2F2] pb-4 border-b border-[#232D28]">
+          <div className="flex items-center justify-between text-[#F2F2F2] pb-4 border-b border-[#166D74]">
             <div className="flex items-center space-x-3">
-              <span className="text-sm sm:text-base font-bold font-mono text-[#00C878]">
+              <span className="text-sm sm:text-base font-bold font-mono text-[#14BEB8]">
                 {currentIndex + 1} of {images.length}
               </span>
               <span className="text-xs text-[#718079] hidden sm:inline">•</span>
@@ -269,7 +269,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
               <button
                 type="button"
                 onClick={toggleZoom}
-                className="p-2 rounded-xl bg-[#141816] border border-[#232D28] hover:border-[#00C878] text-[#F2F2F2] hover:text-[#00C878] transition-colors cursor-pointer flex items-center space-x-1"
+                className="p-2 rounded-xl bg-[#07383D] border border-[#166D74] hover:border-[#14BEB8] text-[#F2F2F2] hover:text-[#14BEB8] transition-colors cursor-pointer flex items-center space-x-1"
                 title="Toggle Zoom"
               >
                 {zoomLevel > 1 ? <ZoomOut className="w-4 h-4" /> : <ZoomIn className="w-4 h-4" />}
@@ -280,7 +280,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                 <button
                   type="button"
                   onClick={() => setZoomLevel(1)}
-                  className="p-2 rounded-xl bg-[#141816] border border-[#232D28] text-[#718079] hover:text-[#F2F2F2] transition-colors cursor-pointer"
+                  className="p-2 rounded-xl bg-[#07383D] border border-[#166D74] text-[#718079] hover:text-[#F2F2F2] transition-colors cursor-pointer"
                   title="Reset Zoom"
                 >
                   <RotateCcw className="w-4 h-4" />
@@ -293,7 +293,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                   setIsFullscreen(false);
                   setZoomLevel(1);
                 }}
-                className="p-2 rounded-xl bg-[#18201B] hover:bg-[#232D28] border border-[#232D28] text-[#F2F2F2] hover:text-[#FF5C5C] transition-colors cursor-pointer"
+                className="p-2 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] border border-[#166D74] text-[#F2F2F2] hover:text-[#FF5C5C] transition-colors cursor-pointer"
                 aria-label="Close fullscreen gallery"
               >
                 <X className="w-5 h-5" />
@@ -312,7 +312,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
               <button
                 type="button"
                 onClick={handlePrev}
-                className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-[#141816]/90 hover:bg-[#00C878] hover:text-[#0D0D0D] text-[#F2F2F2] border border-[#232D28] transition-all shadow-2xl z-20 cursor-pointer"
+                className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-[#07383D]/90 hover:bg-[#14BEB8] hover:text-[#0D0D0D] text-[#F2F2F2] border border-[#166D74] transition-all shadow-2xl z-20 cursor-pointer"
                 aria-label="Previous"
               >
                 <ChevronLeft className="w-6 h-6" />
@@ -335,7 +335,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
               <button
                 type="button"
                 onClick={handleNext}
-                className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-[#141816]/90 hover:bg-[#00C878] hover:text-[#0D0D0D] text-[#F2F2F2] border border-[#232D28] transition-all shadow-2xl z-20 cursor-pointer"
+                className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 p-3.5 rounded-full bg-[#07383D]/90 hover:bg-[#14BEB8] hover:text-[#0D0D0D] text-[#F2F2F2] border border-[#166D74] transition-all shadow-2xl z-20 cursor-pointer"
                 aria-label="Next"
               >
                 <ChevronRight className="w-6 h-6" />
@@ -344,7 +344,7 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
           </div>
 
           {/* Fullscreen Bottom Strip */}
-          <div className="pt-3 border-t border-[#232D28] flex items-center justify-center space-x-2 overflow-x-auto">
+          <div className="pt-3 border-t border-[#166D74] flex items-center justify-center space-x-2 overflow-x-auto">
             {images.map((img, idx) => (
               <button
                 key={`modal-thumb-${idx}`}
@@ -355,8 +355,8 @@ export const HeroGallery: React.FC<HeroGalleryProps> = ({
                 }}
                 className={`relative h-14 w-20 rounded-xl overflow-hidden border-2 shrink-0 transition-all cursor-pointer ${
                   currentIndex === idx 
-                    ? 'border-[#00C878] ring-2 ring-[#00C878]/30 scale-105' 
-                    : 'border-[#232D28] opacity-50 hover:opacity-100'
+                    ? 'border-[#14BEB8] ring-2 ring-[#14BEB8]/30 scale-105' 
+                    : 'border-[#166D74] opacity-50 hover:opacity-100'
                 }`}
               >
                 <img src={img} alt="" className="w-full h-full object-cover" />

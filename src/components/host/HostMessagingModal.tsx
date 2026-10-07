@@ -57,18 +57,18 @@ export const HostMessagingModal: React.FC<HostMessagingModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="relative w-full max-w-xl bg-[#141816] rounded-3xl border border-[#232D28] shadow-2xl p-5 sm:p-6 space-y-4 animate-in fade-in zoom-in-95 duration-150 flex flex-col max-h-[85vh]">
+      <div className="relative w-full max-w-xl bg-[#07383D] rounded-3xl border border-[#166D74] shadow-2xl p-5 sm:p-6 space-y-4 animate-in fade-in zoom-in-95 duration-150 flex flex-col max-h-[85vh]">
         
         {/* Header */}
         <div className="flex items-center justify-between border-b border-[#1E2522] pb-3">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#00C878]/15 text-[#00C878] flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-2xl bg-[#14BEB8]/15 text-[#14BEB8] flex items-center justify-center font-bold">
               <MessageSquare className="w-5 h-5" />
             </div>
             <div>
               <h3 className="text-base font-bold text-[#F2F2F2] flex items-center space-x-2">
                 <span>Message {booking.userName}</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#00C878]/15 text-[#00C878]">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#14BEB8]/15 text-[#14BEB8]">
                   {booking.id}
                 </span>
               </h3>
@@ -78,19 +78,19 @@ export const HostMessagingModal: React.FC<HostMessagingModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-xl text-[#718079] hover:text-[#F2F2F2] hover:bg-[#18201B] cursor-pointer"
+            className="p-2 rounded-xl text-[#718079] hover:text-[#F2F2F2] hover:bg-[#0B4A50] cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Message Thread Box */}
-        <div className="flex-1 overflow-y-auto space-y-3 p-3 rounded-2xl bg-[#0D0D0D] border border-[#232D28] min-h-[220px] max-h-[300px]">
+        <div className="flex-1 overflow-y-auto space-y-3 p-3 rounded-2xl bg-[#0D0D0D] border border-[#166D74] min-h-[220px] max-h-[300px]">
           {bookingMessages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center py-8 text-[#718079] space-y-2">
-              <MessageSquare className="w-8 h-8 text-[#232D28]" />
+              <MessageSquare className="w-8 h-8 text-[#166D74]" />
               <p className="text-xs">No previous messages with this guest.</p>
-              <span className="text-[11px] text-[#00C878]">Send a welcome message or quick instructions below!</span>
+              <span className="text-[11px] text-[#14BEB8]">Send a welcome message or quick instructions below!</span>
             </div>
           ) : (
             bookingMessages.map((m) => {
@@ -108,8 +108,8 @@ export const HostMessagingModal: React.FC<HostMessagingModalProps> = ({
                   <div
                     className={`p-3 rounded-2xl max-w-[85%] text-xs leading-relaxed ${
                       isHost
-                        ? 'bg-[#00C878] text-[#0D0D0D] font-medium rounded-tr-none'
-                        : 'bg-[#18201B] text-[#F2F2F2] border border-[#232D28] rounded-tl-none'
+                        ? 'bg-[#14BEB8] text-[#0D0D0D] font-medium rounded-tr-none'
+                        : 'bg-[#0B4A50] text-[#F2F2F2] border border-[#166D74] rounded-tl-none'
                     }`}
                   >
                     {m.content}
@@ -123,7 +123,7 @@ export const HostMessagingModal: React.FC<HostMessagingModalProps> = ({
         {/* Quick Response Templates */}
         <div className="space-y-1.5">
           <div className="flex items-center space-x-1.5 text-[11px] text-[#718079] font-medium">
-            <Sparkles className="w-3 h-3 text-[#00C878]" />
+            <Sparkles className="w-3 h-3 text-[#14BEB8]" />
             <span>Instant Host Quick Replies:</span>
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -132,7 +132,7 @@ export const HostMessagingModal: React.FC<HostMessagingModalProps> = ({
                 key={idx}
                 type="button"
                 onClick={() => handleQuickReply(qr)}
-                className="text-[11px] px-2.5 py-1 rounded-xl bg-[#18201B] hover:bg-[#232D28] text-[#9EABA3] hover:text-[#00C878] border border-[#232D28] text-left transition-colors cursor-pointer"
+                className="text-[11px] px-2.5 py-1 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] text-[#9EABA3] hover:text-[#14BEB8] border border-[#166D74] text-left transition-colors cursor-pointer"
               >
                 {qr.slice(0, 35)}...
               </button>
@@ -147,12 +147,12 @@ export const HostMessagingModal: React.FC<HostMessagingModalProps> = ({
             placeholder={`Message ${booking.userName.split(' ')[0]}...`}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            className="flex-1 px-4 py-2.5 rounded-2xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] placeholder-[#718079] focus:outline-none focus:border-[#00C878]"
+            className="flex-1 px-4 py-2.5 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-xs text-[#F2F2F2] placeholder-[#718079] focus:outline-none focus:border-[#14BEB8]"
           />
           <button
             type="submit"
             disabled={!inputText.trim()}
-            className="px-4 py-2.5 rounded-2xl bg-[#00C878] hover:bg-[#00E58B] disabled:opacity-40 text-[#0D0D0D] font-bold text-xs flex items-center space-x-1.5 cursor-pointer shadow-md transition-all shrink-0"
+            className="px-4 py-2.5 rounded-2xl bg-[#14BEB8] hover:bg-[#28D2CB] disabled:opacity-40 text-[#0D0D0D] font-bold text-xs flex items-center space-x-1.5 cursor-pointer shadow-md transition-all shrink-0"
           >
             <Send className="w-3.5 h-3.5" />
             <span>Send</span>

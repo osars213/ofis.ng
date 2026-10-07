@@ -59,7 +59,7 @@ export const RelatedSpacesSection: React.FC<RelatedSpacesSectionProps> = ({
         <div>
           <div className="flex items-center space-x-2">
             <h2 className="text-lg font-bold text-[#F2F2F2]">You May Also Like</h2>
-            <span className="px-2 py-0.5 rounded-full bg-[#00C878]/10 text-[10px] font-mono font-bold text-[#00C878] border border-[#00C878]/20 flex items-center space-x-1">
+            <span className="px-2 py-0.5 rounded-full bg-[#14BEB8]/10 text-[10px] font-mono font-bold text-[#14BEB8] border border-[#14BEB8]/20 flex items-center space-x-1">
               <Sparkles className="w-2.5 h-2.5" />
               <span>Smart Match</span>
             </span>

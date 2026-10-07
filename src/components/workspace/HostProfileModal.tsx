@@ -33,13 +33,13 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
 }) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[#141816] border border-[#232D28] rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-2xl bg-[#07383D] border border-[#166D74] rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 animate-in fade-in zoom-in-95 duration-200">
         
         {/* Close Button */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl bg-[#18201B] hover:bg-[#232D28] text-[#9EABA3] hover:text-[#F2F2F2] transition-colors cursor-pointer"
+          className="absolute top-5 right-5 p-2 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] text-[#9EABA3] hover:text-[#F2F2F2] transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
@@ -50,9 +50,9 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
             <img
               src={host.avatar}
               alt={host.name}
-              className="w-20 h-20 rounded-3xl object-cover border-2 border-[#00C878] shadow-xl"
+              className="w-20 h-20 rounded-3xl object-cover border-2 border-[#14BEB8] shadow-xl"
             />
-            <div className="absolute -bottom-1 -right-1 p-1.5 rounded-full bg-[#00C878] text-[#0D0D0D] shadow-md">
+            <div className="absolute -bottom-1 -right-1 p-1.5 rounded-full bg-[#14BEB8] text-[#0D0D0D] shadow-md">
               <ShieldCheck className="w-4 h-4 stroke-[3]" />
             </div>
           </div>
@@ -60,7 +60,7 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
           <div>
             <div className="flex items-center space-x-2">
               <h2 className="text-xl font-bold text-[#F2F2F2]">{host.name}</h2>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#00C878]/15 border border-[#00C878]/30 text-xs font-mono font-bold text-[#00C878]">
+              <span className="px-2.5 py-0.5 rounded-full bg-[#14BEB8]/15 border border-[#14BEB8]/30 text-xs font-mono font-bold text-[#14BEB8]">
                 Superhost
               </span>
             </div>
@@ -73,7 +73,7 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
         </div>
 
         {/* Host Bio */}
-        <div className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] space-y-2">
+        <div className="p-4 rounded-2xl bg-[#0B4A50] border border-[#166D74] space-y-2">
           <h3 className="text-xs font-bold uppercase tracking-wider text-[#718079]">About the Host</h3>
           <p className="text-xs sm:text-sm text-[#9EABA3] leading-relaxed">
             {host.bio || 
@@ -83,28 +83,28 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28] text-center">
+          <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-center">
             <div className="text-[11px] text-[#718079]">Guest Rating</div>
-            <div className="text-base font-bold text-[#00C878] font-mono mt-0.5">
+            <div className="text-base font-bold text-[#14BEB8] font-mono mt-0.5">
               {host.rating || 4.95} ★
             </div>
           </div>
 
-          <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28] text-center">
+          <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-center">
             <div className="text-[11px] text-[#718079]">Response Rate</div>
             <div className="text-base font-bold text-[#F2F2F2] font-mono mt-0.5">
               {host.responseRatePercent || 98}%
             </div>
           </div>
 
-          <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28] text-center">
+          <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-center">
             <div className="text-[11px] text-[#718079]">Response Time</div>
             <div className="text-base font-bold text-[#F2F2F2] font-mono mt-0.5">
               ~{host.responseTimeMinutes || 10} mins
             </div>
           </div>
 
-          <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28] text-center">
+          <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-center">
             <div className="text-[11px] text-[#718079]">Active Hubs</div>
             <div className="text-base font-bold text-[#F2F2F2] font-mono mt-0.5">
               {hostSpaces.length || 1}
@@ -122,7 +122,7 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
               <div
                 key={s.id}
                 onClick={() => onSelectSpace(s.id)}
-                className="flex items-center justify-between p-3 rounded-2xl bg-[#18201B] hover:bg-[#232D28] border border-[#232D28] hover:border-[#00C878]/50 transition-all cursor-pointer group"
+                className="flex items-center justify-between p-3 rounded-2xl bg-[#0B4A50] hover:bg-[#166D74] border border-[#166D74] hover:border-[#14BEB8]/50 transition-all cursor-pointer group"
               >
                 <div className="flex items-center space-x-3">
                   <img
@@ -131,7 +131,7 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
                     className="w-12 h-12 rounded-xl object-cover"
                   />
                   <div>
-                    <div className="text-xs font-bold text-[#F2F2F2] group-hover:text-[#00C878] transition-colors">
+                    <div className="text-xs font-bold text-[#F2F2F2] group-hover:text-[#14BEB8] transition-colors">
                       {s.title}
                     </div>
                     <div className="text-[10px] text-[#718079]">
@@ -141,7 +141,7 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
                 </div>
 
                 <div className="text-right">
-                  <div className="text-xs font-mono font-bold text-[#00C878]">
+                  <div className="text-xs font-mono font-bold text-[#14BEB8]">
                     ₦{(s.pricePerHour || 0).toLocaleString()} / hr
                   </div>
                   <div className="text-[10px] text-[#718079]">{s.rating} ★</div>
@@ -152,11 +152,11 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
         </div>
 
         {/* Bottom Actions */}
-        <div className="flex items-center justify-end space-x-3 pt-3 border-t border-[#232D28]">
+        <div className="flex items-center justify-end space-x-3 pt-3 border-t border-[#166D74]">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2.5 rounded-xl bg-[#18201B] hover:bg-[#232D28] text-xs font-semibold text-[#9EABA3] transition-colors"
+            className="px-4 py-2.5 rounded-xl bg-[#0B4A50] hover:bg-[#166D74] text-xs font-semibold text-[#9EABA3] transition-colors"
           >
             Close
           </button>
@@ -164,7 +164,7 @@ export const HostProfileModal: React.FC<HostProfileModalProps> = ({
           <button
             type="button"
             onClick={onContact}
-            className="px-5 py-2.5 rounded-xl bg-[#00C878] hover:bg-[#00E58B] text-[#0D0D0D] text-xs font-bold flex items-center space-x-1.5 shadow-md active:scale-95 transition-all"
+            className="px-5 py-2.5 rounded-xl bg-[#14BEB8] hover:bg-[#28D2CB] text-[#0D0D0D] text-xs font-bold flex items-center space-x-1.5 shadow-md active:scale-95 transition-all"
           >
             <MessageSquare className="w-4 h-4 fill-[#0D0D0D]" />
             <span>Send Direct Message</span>

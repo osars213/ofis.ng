@@ -121,7 +121,7 @@ export const PaymentResultView: React.FC = () => {
           particleCount: 110,
           spread: 80,
           origin: { y: 0.55 },
-          colors: ['#FFA987', '#FFD0BD', '#006B70', '#14BEB8', '#00C878', '#FFFFFF'],
+          colors: ['#FFA987', '#FFD0BD', '#006B70', '#14BEB8', '#14BEB8', '#FFFFFF'],
         });
       } catch (e) {
         // Fallback if canvas is not initialized

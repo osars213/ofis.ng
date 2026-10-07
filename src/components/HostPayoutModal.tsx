@@ -72,12 +72,12 @@ export const HostPayoutModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="relative w-full max-w-lg bg-[#141816] rounded-3xl border border-[#232D28] shadow-2xl p-6 sm:p-7 space-y-6">
+      <div className="relative w-full max-w-lg bg-[#07383D] rounded-3xl border border-[#166D74] shadow-2xl p-6 sm:p-7 space-y-6">
         
         {/* Header */}
         <div className="flex items-center justify-between border-b border-[#1E2522] pb-4">
           <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-2xl bg-[#00C878]/15 text-[#00C878] flex items-center justify-center font-bold">
+            <div className="w-9 h-9 rounded-2xl bg-[#14BEB8]/15 text-[#14BEB8] flex items-center justify-center font-bold">
               <Wallet className="w-5 h-5" />
             </div>
             <div>
@@ -88,7 +88,7 @@ export const HostPayoutModal: React.FC = () => {
           <button
             type="button"
             onClick={handleClose}
-            className="p-2 rounded-xl text-[#718079] hover:text-[#F2F2F2] hover:bg-[#18201B]"
+            className="p-2 rounded-xl text-[#718079] hover:text-[#F2F2F2] hover:bg-[#0B4A50]"
           >
             <X className="w-5 h-5" />
           </button>
@@ -96,7 +96,7 @@ export const HostPayoutModal: React.FC = () => {
 
         {isSuccess ? (
           <div className="py-8 text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-[#00C878]/15 text-[#00C878] flex items-center justify-center mx-auto ring-4 ring-[#00C878]/20">
+            <div className="w-14 h-14 rounded-full bg-[#14BEB8]/15 text-[#14BEB8] flex items-center justify-center mx-auto ring-4 ring-[#14BEB8]/20">
               <Check className="w-7 h-7" />
             </div>
             <div className="space-y-1">
@@ -106,15 +106,15 @@ export const HostPayoutModal: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28] text-xs font-mono text-[#718079] inline-block">
-              Settlement Reference: <span className="text-[#00C878] font-bold">{payoutRef}</span>
+            <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74] text-xs font-mono text-[#718079] inline-block">
+              Settlement Reference: <span className="text-[#14BEB8] font-bold">{payoutRef}</span>
             </div>
 
             <div className="pt-2">
               <button
                 type="button"
                 onClick={handleClose}
-                className="px-6 py-2.5 rounded-xl bg-[#00C878] text-[#0D0D0D] font-bold text-xs shadow-md cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-[#14BEB8] text-[#0D0D0D] font-bold text-xs shadow-md cursor-pointer"
               >
                 Done
               </button>
@@ -124,15 +124,15 @@ export const HostPayoutModal: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             
             {/* Balance Overview */}
-            <div className="p-4 rounded-2xl bg-[#18201B] border border-[#232D28] flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-[#0B4A50] border border-[#166D74] flex items-center justify-between">
               <div>
                 <span className="text-[11px] text-[#718079]">Available Host Balance</span>
-                <div className="text-2xl font-extrabold text-[#00C878] font-mono">
+                <div className="text-2xl font-extrabold text-[#14BEB8] font-mono">
                   ₦{(availableBalance || 0).toLocaleString()}
                 </div>
               </div>
               <div className="text-right">
-                <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#00C878]/15 text-[#00C878] font-semibold">
+                <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#14BEB8]/15 text-[#14BEB8] font-semibold">
                   Zero Fee NIP Transfer
                 </span>
               </div>
@@ -149,7 +149,7 @@ export const HostPayoutModal: React.FC = () => {
             <div className="space-y-1">
               <label className="text-xs font-semibold text-[#F2F2F2]">Withdrawal Amount (₦)</label>
               <div className="relative">
-                <span className="absolute left-3 top-2.5 text-[#00C878] font-bold text-xs">₦</span>
+                <span className="absolute left-3 top-2.5 text-[#14BEB8] font-bold text-xs">₦</span>
                 <input
                   type="number"
                   min="5000"
@@ -158,7 +158,7 @@ export const HostPayoutModal: React.FC = () => {
                   value={amount}
                   onChange={(e) => setAmount(Number(e.target.value))}
                   required
-                  className="w-full pl-8 pr-3 py-2.5 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] font-mono focus:outline-none focus:border-[#00C878]"
+                  className="w-full pl-8 pr-3 py-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74] text-xs text-[#F2F2F2] font-mono focus:outline-none focus:border-[#14BEB8]"
                 />
               </div>
             </div>
@@ -169,7 +169,7 @@ export const HostPayoutModal: React.FC = () => {
               <select
                 value={bankName}
                 onChange={(e) => setBankName(e.target.value)}
-                className="w-full p-2.5 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] focus:outline-none focus:border-[#00C878]"
+                className="w-full p-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74] text-xs text-[#F2F2F2] focus:outline-none focus:border-[#14BEB8]"
               >
                 {NIGERIAN_BANKS.map((b) => (
                   <option key={b} value={b}>{b}</option>
@@ -188,7 +188,7 @@ export const HostPayoutModal: React.FC = () => {
                   value={accountNumber}
                   onChange={(e) => setAccountNumber(e.target.value.replace(/\D/g, ''))}
                   required
-                  className="w-full p-2.5 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] font-mono focus:outline-none focus:border-[#00C878]"
+                  className="w-full p-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74] text-xs text-[#F2F2F2] font-mono focus:outline-none focus:border-[#14BEB8]"
                 />
               </div>
 
@@ -199,13 +199,13 @@ export const HostPayoutModal: React.FC = () => {
                   value={accountName}
                   onChange={(e) => setAccountName(e.target.value)}
                   required
-                  className="w-full p-2.5 rounded-xl bg-[#18201B] border border-[#232D28] text-xs text-[#F2F2F2] focus:outline-none focus:border-[#00C878]"
+                  className="w-full p-2.5 rounded-xl bg-[#0B4A50] border border-[#166D74] text-xs text-[#F2F2F2] focus:outline-none focus:border-[#14BEB8]"
                 />
               </div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-[#18201B] border border-[#232D28] flex items-center space-x-2 text-[11px] text-[#718079]">
-              <ShieldCheck className="w-4 h-4 text-[#00C878] shrink-0" />
+            <div className="p-3 rounded-2xl bg-[#0B4A50] border border-[#166D74] flex items-center space-x-2 text-[11px] text-[#718079]">
+              <ShieldCheck className="w-4 h-4 text-[#14BEB8] shrink-0" />
               <span>Instant direct deposit via CBN NIP settlement switch. Typically arrives in 60 seconds.</span>
             </div>
 
@@ -220,7 +220,7 @@ export const HostPayoutModal: React.FC = () => {
 
               <button
                 type="submit"
-                className="px-6 py-2.5 rounded-xl bg-[#00C878] hover:bg-[#00E58B] text-[#0D0D0D] font-bold text-xs flex items-center space-x-2 shadow-lg cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-[#14BEB8] hover:bg-[#28D2CB] text-[#0D0D0D] font-bold text-xs flex items-center space-x-2 shadow-lg cursor-pointer"
               >
                 <Wallet className="w-4 h-4" />
                 <span>Confirm Payout of ₦{(amount || 0).toLocaleString()}</span>

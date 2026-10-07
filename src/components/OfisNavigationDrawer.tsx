@@ -3,20 +3,18 @@ import {
   X, 
   Info, 
   HelpCircle, 
-  Headphones, 
   Mail, 
-  AlertTriangle, 
   ShieldCheck, 
-  FileText, 
   Building2, 
-  Handshake, 
-  Star, 
-  Smartphone,
   ChevronRight,
   Settings,
   Compass,
   MapPin,
-  Sparkles
+  CalendarCheck,
+  Bookmark,
+  User,
+  LogIn,
+  LogOut
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { OFISWordmark } from './OFISWordmark';
@@ -25,11 +23,14 @@ export const OfisNavigationDrawer: React.FC = () => {
   const {
     isDrawerOpen,
     setIsDrawerOpen,
-    openInfoModal,
-    setIsDownloadAppModalOpen,
     setIsSettingsOpen,
     setCurrentView,
     theme,
+    isGuest,
+    currentUser,
+    openAuthModal,
+    signOut,
+    savedSpaceIds
   } = useApp();
 
   if (!isDrawerOpen) return null;
@@ -40,28 +41,19 @@ export const OfisNavigationDrawer: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleOpenInfo = (tab: 'about' | 'faq' | 'help' | 'support' | 'report' | 'privacy' | 'terms' | 'partner' | 'rate' | 'share' | 'download') => {
-    setIsDrawerOpen(false);
-    if (tab === 'download') {
-      setIsDownloadAppModalOpen(true);
-    } else if (tab === 'about') handleNavigate('about');
-    else if (tab === 'faq') handleNavigate('faq');
-    else if (tab === 'help') handleNavigate('help');
-    else if (tab === 'support') handleNavigate('contact');
-    else if (tab === 'privacy') handleNavigate('privacy');
-    else if (tab === 'terms') handleNavigate('terms');
-    else openInfoModal(tab);
-  };
-
-  const handleBecomeHost = () => {
-    setIsDrawerOpen(false);
-    setCurrentView('become_host');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const handleOpenSettings = () => {
     setIsDrawerOpen(false);
     setIsSettingsOpen(true);
+  };
+
+  const handleSignIn = () => {
+    setIsDrawerOpen(false);
+    openAuthModal('login');
+  };
+
+  const handleSignOut = () => {
+    setIsDrawerOpen(false);
+    signOut();
   };
 
   return (
@@ -73,293 +65,277 @@ export const OfisNavigationDrawer: React.FC = () => {
       />
 
       {/* Drawer on the LEFT side */}
-      <div className="fixed inset-y-0 left-0 max-w-sm w-full bg-white dark:bg-[#07383D] border-r border-[#E5E7EB] dark:border-[#166D74] shadow-2xl flex flex-col justify-between z-10 animate-in slide-in-from-left duration-250 ease-out transition-colors">
+      <aside 
+        aria-label="Site navigation menu"
+        className="fixed inset-y-0 left-0 max-w-sm w-full bg-white dark:bg-[#07383D] border-r border-[#E2ECEB] dark:border-[#166D74] shadow-2xl flex flex-col justify-between z-10 animate-in slide-in-from-left duration-250 ease-out transition-colors"
+      >
         
         {/* Header */}
-        <div className="p-4 sm:p-5 border-b border-[#E5E7EB] dark:border-[#166D74] flex items-center justify-between bg-[#F8FAFC] dark:bg-[#1F2937]">
+        <div className="p-4 sm:p-5 border-b border-[#E2ECEB] dark:border-[#166D74] flex items-center justify-between bg-[#FFF9F4] dark:bg-[#07383D]/90">
           <div 
-            className="cursor-pointer transition-transform hover:opacity-90"
-            onClick={() => handleNavigate('home')}
-            title="OFIS Home"
+            className="cursor-pointer transition-transform hover:opacity-95 py-0.5"
+            onClick={() => handleNavigate('explore')}
+            title="OFIS Workspaces"
           >
-            <OFISWordmark size="lg" className="scale-105 origin-left" />
+            <OFISWordmark size="lg" className="scale-110 origin-left" />
           </div>
           <button
             type="button"
             id="drawer-close-btn"
             onClick={() => setIsDrawerOpen(false)}
-            className="p-2 rounded-xl text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] hover:bg-[#E2E8F0] dark:hover:bg-[#374151] transition-colors cursor-pointer"
-            aria-label="Close menu"
+            className="min-w-[44px] min-h-[44px] p-2.5 rounded-xl text-[#5D7A7D] dark:text-[#B8D1D0] hover:text-[#12383B] dark:hover:text-[#FFFFFF] hover:bg-[#E2ECEB] dark:hover:bg-[#105A60] transition-colors cursor-pointer flex items-center justify-center"
+            aria-label="Close navigation menu"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Informational & Secondary Navigation Content */}
-        <div className="p-5 overflow-y-auto space-y-6 flex-1 text-sm">
+        {/* Scrollable Navigation Body */}
+        <div className="p-4 sm:p-5 overflow-y-auto space-y-5 flex-1 text-sm">
           
-          {/* Section: Core Platform */}
+          {/* Primary Paths: Workspaces & Bookings */}
           <div className="space-y-1">
-            <p className="text-[11px] font-mono font-bold uppercase text-[#6B7280] dark:text-[#9CA3AF] tracking-wider px-2 pb-1">
-              Core Platform
+            <p className="text-[11px] font-mono font-bold uppercase text-[#5D7A7D] dark:text-[#B8D1D0] tracking-wider px-2 pb-1">
+              Workspaces & Bookings
             </p>
-
-            <button
-              type="button"
-              id="drawer-home-spaces-btn"
-              onClick={() => handleNavigate('home')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
-            >
-              <div className="flex items-center space-x-3">
-                <Sparkles className="w-4 h-4 text-[#FFA987]" />
-                <span className="font-bold">Home Workspace Network</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-            </button>
 
             <button
               type="button"
               id="drawer-explore-spaces-btn"
               onClick={() => handleNavigate('explore')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
+              className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer group"
             >
               <div className="flex items-center space-x-3">
-                <Compass className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
-                <span className="font-bold">Catalog & Direct Booking</span>
+                <Compass className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB] group-hover:scale-110 transition-transform" />
+                <span className="font-bold">Explore Workspaces</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
+              <ChevronRight className="w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0]" />
             </button>
 
             <button
               type="button"
               id="drawer-interactive-map-btn"
               onClick={() => handleNavigate('map')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
+              className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer group"
             >
               <div className="flex items-center space-x-3">
-                <MapPin className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
-                <span className="font-bold">Around Me Interactive Map</span>
+                <MapPin className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB] group-hover:scale-110 transition-transform" />
+                <span className="font-bold">Interactive Map</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
+              <ChevronRight className="w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0]" />
+            </button>
+
+            <button
+              type="button"
+              id="drawer-my-bookings-btn"
+              onClick={() => handleNavigate('bookings')}
+              className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer group"
+            >
+              <div className="flex items-center space-x-3">
+                <CalendarCheck className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB] group-hover:scale-110 transition-transform" />
+                <span className="font-bold">My Bookings & Passes</span>
+              </div>
+              <ChevronRight className="w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0]" />
             </button>
           </div>
 
-          {/* Section 0: Preferences & Theme */}
+          {/* Primary Path: Host Platform */}
           <div className="space-y-1">
-            <p className="text-[11px] font-mono font-bold uppercase text-[#6B7280] dark:text-[#9CA3AF] tracking-wider px-2 pb-1">
-              Preferences & System
+            <p className="text-[11px] font-mono font-bold uppercase text-[#5D7A7D] dark:text-[#B8D1D0] tracking-wider px-2 pb-1">
+              For Space Hosts
             </p>
 
             <button
               type="button"
-              id="drawer-settings-btn"
-              onClick={handleOpenSettings}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer border border-[#E5E7EB] dark:border-[#166D74] bg-[#F8FAFC] dark:bg-[#1F2937]/50"
+              id="drawer-host-platform-btn"
+              onClick={() => handleNavigate('become_host')}
+              className="w-full min-h-[44px] flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-[#14BEB8]/15 via-[#14BEB8]/10 to-transparent dark:from-[#0B4A50] dark:to-[#07383D] border border-[#14BEB8]/30 hover:border-[#14BEB8] text-xs font-bold text-[#006B70] dark:text-[#28D2CB] transition-all cursor-pointer group"
             >
               <div className="flex items-center space-x-3">
-                <div className="p-1 rounded-lg bg-[#14BEB8]/15 dark:bg-[#14BEB8]/20 text-[#006B70] dark:text-[#14BEB8]">
-                  <Settings className="w-4 h-4" />
+                <div className="p-1.5 rounded-xl bg-[#14BEB8]/20 dark:bg-[#14BEB8]/30 text-[#006B70] dark:text-[#28D2CB]">
+                  <Building2 className="w-4 h-4" />
                 </div>
                 <div className="text-left">
-                  <div className="font-bold">Settings & Appearance</div>
-                  <div className="text-[10px] text-[#6B7280] dark:text-[#9CA3AF] font-normal">
-                    Theme: {theme === 'system' ? 'System Default' : theme === 'dark' ? 'Dark Mode' : 'Light Mode'} • Currency
+                  <div className="font-extrabold text-[#12383B] dark:text-white">Host Platform</div>
+                  <div className="text-[10px] text-[#5D7A7D] dark:text-[#B8D1D0] font-normal">
+                    List space & host verified hubs
                   </div>
                 </div>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
+              <ChevronRight className="w-4 h-4 text-[#14BEB8] group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
 
-          {/* Section 1: Overview & Community */}
+          {/* Primary Path: User Account & Saved */}
           <div className="space-y-1">
-            <p className="text-[11px] font-mono font-bold uppercase text-[#6B7280] dark:text-[#9CA3AF] tracking-wider px-2 pb-1">
-              About & Community
+            <p className="text-[11px] font-mono font-bold uppercase text-[#5D7A7D] dark:text-[#B8D1D0] tracking-wider px-2 pb-1">
+              Account
+            </p>
+
+            {!isGuest ? (
+              <>
+                <button
+                  type="button"
+                  id="drawer-wallet-dashboard-btn"
+                  onClick={() => handleNavigate('user_dashboard')}
+                  className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center space-x-3">
+                    <User className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
+                    <span className="font-bold">My Account ({currentUser.name.split(' ')[0]})</span>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0]" />
+                </button>
+
+                <button
+                  type="button"
+                  id="drawer-saved-spaces-btn"
+                  onClick={() => handleNavigate('saved')}
+                  className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Bookmark className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
+                    <span>Saved Workspaces</span>
+                  </div>
+                  {savedSpaceIds.length > 0 && (
+                    <span className="px-2 py-0.5 rounded-full bg-[#FFA987] text-[#07383D] font-black text-[10px]">
+                      {savedSpaceIds.length}
+                    </span>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  id="drawer-signout-btn"
+                  onClick={handleSignOut}
+                  className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/20 text-xs font-semibold text-rose-600 dark:text-rose-400 transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center space-x-3">
+                    <LogOut className="w-4 h-4" />
+                    <span>Sign Out</span>
+                  </div>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  id="drawer-signin-btn"
+                  onClick={handleSignIn}
+                  className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-[#006B70]/15 to-[#FFA987]/15 border border-[#14BEB8]/30 hover:border-[#14BEB8] text-xs font-bold text-[#006B70] dark:text-[#28D2CB] transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center space-x-3">
+                    <LogIn className="w-4 h-4 text-[#FFA987]" />
+                    <span>Sign In / Create Account</span>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0]" />
+                </button>
+
+                <button
+                  type="button"
+                  id="drawer-saved-spaces-guest-btn"
+                  onClick={() => handleNavigate('saved')}
+                  className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Bookmark className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
+                    <span>Saved Workspaces</span>
+                  </div>
+                  {savedSpaceIds.length > 0 && (
+                    <span className="px-2 py-0.5 rounded-full bg-[#FFA987] text-[#07383D] font-black text-[10px]">
+                      {savedSpaceIds.length}
+                    </span>
+                  )}
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Group 4: Support & Legal */}
+          <div className="space-y-1">
+            <p className="text-[11px] font-mono font-bold uppercase text-[#5D7A7D] dark:text-[#B8D1D0] tracking-wider px-2 pb-1">
+              Support & Legal
             </p>
 
             <button
               type="button"
               id="drawer-about-btn"
-              onClick={() => handleOpenInfo('about')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
+              onClick={() => handleNavigate('about')}
+              className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <Info className="w-4 h-4 text-[#006B70] dark:text-[#14BEB8]" />
+                <Info className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
                 <span>About OFIS</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
+              <ChevronRight className="w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0]" />
             </button>
 
             <button
               type="button"
               id="drawer-faq-btn"
-              onClick={() => handleOpenInfo('faq')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
+              onClick={() => handleNavigate('faq')}
+              className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <HelpCircle className="w-4 h-4 text-[#006B70] dark:text-[#14BEB8]" />
-                <span>Frequently Asked Questions (FAQ)</span>
+                <HelpCircle className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
+                <span>Help & FAQ</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
+              <ChevronRight className="w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0]" />
             </button>
-
-            <button
-              type="button"
-              id="drawer-help-centre-btn"
-              onClick={() => handleOpenInfo('help')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
-            >
-              <div className="flex items-center space-x-3">
-                <Headphones className="w-4 h-4 text-[#006B70] dark:text-[#14BEB8]" />
-                <span>Help Centre</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-            </button>
-          </div>
-
-          {/* Section 2: Support & Assistance */}
-          <div className="space-y-1">
-            <p className="text-[11px] font-mono font-bold uppercase text-[#6B7280] dark:text-[#9CA3AF] tracking-wider px-2 pb-1">
-              Support & Inquiries
-            </p>
 
             <button
               type="button"
               id="drawer-contact-support-btn"
               onClick={() => handleNavigate('contact')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
+              className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <Mail className="w-4 h-4 text-[#006B70] dark:text-[#14BEB8]" />
-                <span>Contact Support</span>
+                <Mail className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
+                <span>Contact Us</span>
               </div>
               <span className="text-[11px] text-[#006B70] dark:text-[#28D2CB] font-mono">hello@ofis.ng</span>
             </button>
 
             <button
               type="button"
-              id="drawer-report-problem-btn"
-              onClick={() => handleOpenInfo('report')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#FFA987] dark:text-[#FFA987] transition-colors cursor-pointer"
+              id="drawer-settings-btn"
+              onClick={handleOpenSettings}
+              className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#12383B] dark:text-[#FFFFFF] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <AlertTriangle className="w-4 h-4 text-[#FFA987] dark:text-[#FFA987]" />
-                <span>Report a Problem</span>
+                <Settings className="w-4 h-4 text-[#14BEB8] dark:text-[#28D2CB]" />
+                <span>Appearance & Currency</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
+              <span className="text-[10px] text-[#5D7A7D] dark:text-[#B8D1D0] capitalize">
+                {theme}
+              </span>
             </button>
-          </div>
-
-          {/* Section 3: Host & Partner Network */}
-          <div className="space-y-1">
-            <p className="text-[11px] font-mono font-bold uppercase text-[#6B7280] dark:text-[#9CA3AF] tracking-wider px-2 pb-1">
-              Hosts & Partnerships
-            </p>
-
-            <button
-              type="button"
-              id="drawer-become-host-btn"
-              onClick={handleBecomeHost}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#14BEB8]/15 dark:hover:bg-[#14BEB8]/20 text-xs font-bold text-[#006B70] dark:text-[#14BEB8] transition-colors cursor-pointer"
-            >
-              <div className="flex items-center space-x-3">
-                <Building2 className="w-4 h-4 text-[#006B70] dark:text-[#14BEB8]" />
-                <span>Become a Host</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-[#006B70] dark:text-[#14BEB8]" />
-            </button>
-
-            <button
-              type="button"
-              id="drawer-partner-btn"
-              onClick={() => handleOpenInfo('partner')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
-            >
-              <div className="flex items-center space-x-3">
-                <Handshake className="w-4 h-4 text-[#006B70] dark:text-[#14BEB8]" />
-                <span>Partner With OFIS</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-            </button>
-          </div>
-
-          {/* Section 4: Engagement & Feedback */}
-          <div className="space-y-1">
-            <p className="text-[11px] font-mono font-bold uppercase text-[#6B7280] dark:text-[#9CA3AF] tracking-wider px-2 pb-1">
-              Community & Growth
-            </p>
-
-            <button
-              type="button"
-              id="drawer-rate-app-btn"
-              onClick={() => handleOpenInfo('rate')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
-            >
-              <div className="flex items-center space-x-3">
-                <Star className="w-4 h-4 text-[#FFA987]" />
-                <span>Rate & Feedback</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-            </button>
-
-            <button
-              type="button"
-              id="drawer-download-app-btn"
-              onClick={() => handleOpenInfo('download')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#111827] dark:text-[#F9FAFB] transition-colors cursor-pointer"
-            >
-              <div className="flex items-center space-x-3">
-                <Smartphone className="w-4 h-4 text-[#006B70] dark:text-[#14BEB8]" />
-                <span>Download App</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-            </button>
-          </div>
-
-          {/* Section 5: Legal & Policy */}
-          <div className="space-y-1">
-            <p className="text-[11px] font-mono font-bold uppercase text-[#6B7280] dark:text-[#9CA3AF] tracking-wider px-2 pb-1">
-              Legal & Trust
-            </p>
 
             <button
               type="button"
               id="drawer-privacy-policy-btn"
-              onClick={() => handleOpenInfo('privacy')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] transition-colors cursor-pointer"
+              onClick={() => handleNavigate('privacy')}
+              className="w-full min-h-[44px] flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F6F5] dark:hover:bg-[#0B4A50] text-xs font-semibold text-[#5D7A7D] dark:text-[#B8D1D0] transition-colors cursor-pointer"
             >
               <div className="flex items-center space-x-3">
-                <ShieldCheck className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-                <span>Privacy Policy</span>
+                <ShieldCheck className="w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0]" />
+                <span>Privacy Policy & Terms</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-            </button>
-
-            <button
-              type="button"
-              id="drawer-terms-btn"
-              onClick={() => handleOpenInfo('terms')}
-              className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#F1F5F9] dark:hover:bg-[#1F2937] text-xs font-semibold text-[#6B7280] dark:text-[#9CA3AF] hover:text-[#111827] dark:hover:text-[#F9FAFB] transition-colors cursor-pointer"
-            >
-              <div className="flex items-center space-x-3">
-                <FileText className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
-                <span>Terms of Service</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-[#6B7280] dark:text-[#9CA3AF]" />
+              <ChevronRight className="w-4 h-4 text-[#5D7A7D] dark:text-[#B8D1D0]" />
             </button>
           </div>
 
         </div>
 
         {/* Footer */}
-        <div className="p-5 border-t border-[#E5E7EB] dark:border-[#166D74] bg-[#F8FAFC] dark:bg-[#1F2937]">
-          <div className="text-[11px] text-[#6B7280] dark:text-[#9CA3AF] font-mono flex items-center justify-between">
-            <span>OFIS Nigeria</span>
-            <span className="text-[#006B70] dark:text-[#14BEB8] font-bold">● Verified Workspaces</span>
+        <div className="p-4 sm:p-5 border-t border-[#E2ECEB] dark:border-[#166D74] bg-[#FFF9F4] dark:bg-[#07383D]">
+          <div className="text-[11px] text-[#5D7A7D] dark:text-[#B8D1D0] font-mono flex items-center justify-between">
+            <span>Powered by OFIS</span>
+            <span className="text-[#006B70] dark:text-[#14BEB8] font-bold">● Nigeria</span>
           </div>
         </div>
 
-      </div>
+      </aside>
     </div>
   );
 };

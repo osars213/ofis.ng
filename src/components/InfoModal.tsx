@@ -119,7 +119,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
     },
     {
       q: "How can space owners and hubs list on OFIS?",
-      a: "Click 'Become a Host' or 'Partner With OFIS'. Complete the simple onboarding form with your location, amenities, and hourly rates. Our local operations team inspects and approves hubs within 24 hours."
+      a: "Click 'Host Platform' or 'List Your Space'. Complete the simple onboarding form with your location, amenities, and hourly rates. Our local operations team inspects and approves hubs within 24 hours."
     }
   ];
 
@@ -147,7 +147,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({
               {activeTab === 'report' && 'Report a Problem'}
               {activeTab === 'privacy' && 'Privacy Policy'}
               {activeTab === 'terms' && 'Terms of Service'}
-              {activeTab === 'partner' && 'Partner With OFIS'}
+              {activeTab === 'partner' && 'Host Platform'}
               {activeTab === 'rate' && 'Rate & Review OFIS'}
               {(activeTab === 'download' || activeTab === 'share') && 'Download OFIS App'}
             </span>
@@ -389,13 +389,13 @@ export const InfoModal: React.FC<InfoModalProps> = ({
             </div>
           )}
 
-          {/* 5. PARTNER WITH OFIS / BECOME A HOST */}
+          {/* 5. HOST PLATFORM / BECOME A HOST */}
           {activeTab === 'partner' && (
             <div className="space-y-4">
               <div className="p-5 rounded-2xl bg-[#0B4A50] border border-[#166D74] space-y-3">
                 <div className="flex items-center space-x-2 text-[#14B8A6]">
-                  <Handshake className="w-5 h-5" />
-                  <h3 className="text-sm font-bold text-[#F8FAFC]">Monetize Your Extra Desk & Office Capacity</h3>
+                  <Building2 className="w-5 h-5" />
+                  <h3 className="text-sm font-bold text-[#F8FAFC]">Host Platform — Monetize Your Extra Desk & Office Capacity</h3>
                 </div>
                 <p className="text-xs">
                   Join over 120+ leading coworking hubs, corporate incubators, and creative studios in Nigeria. List your spaces with automated access control, instant daily settlements, and verified professional guests.

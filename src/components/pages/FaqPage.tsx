@@ -23,7 +23,7 @@ const FAQ_SECTIONS: { id: string; title: string; icon: any; faqs: FaqItem[] }[] 
     icon: Users,
     faqs: [
       {
-        question: 'Do I need a monthly contract to work at an OFIS partner space?',
+        question: 'Do I need a monthly contract to work at an OFIS space?',
         answer: 'No! OFIS is designed for complete flexibility. You can book a hot desk or meeting room for 1 hour, a full day, or purchase multi-day pass bundles without any security deposit or long-term lease.'
       },
       {
@@ -89,7 +89,7 @@ const FAQ_SECTIONS: { id: string; title: string; icon: any; faqs: FaqItem[] }[] 
       },
       {
         question: 'What is the booking cancellation and refund policy?',
-        answer: 'You can cancel up to 2 hours before your scheduled check-in time for an instant 100% refund credited back to your OFIS wallet or original payment method.'
+        answer: 'You can cancel up to 24 hours prior to scheduled check-in for a 100% refund credited directly to your OFIS wallet balance. OFIS wallet credits have NO expiry date and can be applied anytime toward any future booking on the network.'
       }
     ]
   }

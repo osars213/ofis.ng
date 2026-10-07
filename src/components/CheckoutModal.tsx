@@ -185,7 +185,7 @@ export const CheckoutModal: React.FC = () => {
           particleCount: 80,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#00C878', '#FFFFFF', '#07383D'],
+          colors: ['#14BEB8', '#FFFFFF', '#07383D'],
         });
       } catch (e) {
         // Safe fallback if confetti canvas not ready

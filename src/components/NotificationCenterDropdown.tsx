@@ -125,12 +125,12 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
     <div
       ref={dropdownRef}
       id="header-notification-dropdown"
-      className="absolute right-0 top-full mt-3 w-80 sm:w-96 max-w-[calc(100vw-1.5rem)] bg-[#141816] rounded-3xl border border-[#232D28] shadow-2xl z-50 overflow-hidden flex flex-col max-h-[85vh] animate-fadeIn"
+      className="absolute right-0 top-full mt-3 w-80 sm:w-96 max-w-[calc(100vw-1.5rem)] bg-[#07383D] rounded-3xl border border-[#166D74] shadow-2xl z-50 overflow-hidden flex flex-col max-h-[85vh] animate-fadeIn"
     >
       {/* Top Header */}
-      <div className="p-4 border-b border-[#1E2522] bg-[#18201B]/80 flex items-center justify-between">
+      <div className="p-4 border-b border-[#1E2522] bg-[#0B4A50]/80 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-xl bg-[#00C878]/15 border border-[#00C878]/30 flex items-center justify-center text-[#00C878]">
+          <div className="w-8 h-8 rounded-xl bg-[#14BEB8]/15 border border-[#14BEB8]/30 flex items-center justify-center text-[#14BEB8]">
             <Bell className="w-4 h-4" />
           </div>
           <div>
@@ -147,7 +147,7 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
               type="button"
               id="notif-mark-all-read-btn"
               onClick={markAllNotificationsRead}
-              className="p-1.5 rounded-lg text-[#00C878] hover:bg-[#00C878]/10 text-[11px] font-semibold flex items-center space-x-1 cursor-pointer"
+              className="p-1.5 rounded-lg text-[#14BEB8] hover:bg-[#14BEB8]/10 text-[11px] font-semibold flex items-center space-x-1 cursor-pointer"
               title="Mark all as read"
             >
               <CheckCheck className="w-3.5 h-3.5" />
@@ -170,14 +170,14 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center px-3 pt-2 pb-1 border-b border-[#1E2522] gap-1 overflow-x-auto no-scrollbar bg-[#141816]">
+      <div className="flex items-center px-3 pt-2 pb-1 border-b border-[#1E2522] gap-1 overflow-x-auto no-scrollbar bg-[#07383D]">
         <button
           type="button"
           onClick={() => setActiveTab('all')}
           className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold whitespace-nowrap transition-all cursor-pointer ${
             activeTab === 'all'
-              ? 'bg-[#00C878] text-[#0D0D0D] font-bold shadow-sm'
-              : 'text-[#9EABA3] hover:text-[#F2F2F2] hover:bg-[#18201B]'
+              ? 'bg-[#14BEB8] text-[#0D0D0D] font-bold shadow-sm'
+              : 'text-[#9EABA3] hover:text-[#F2F2F2] hover:bg-[#0B4A50]'
           }`}
         >
           All ({notifications.length})
@@ -188,8 +188,8 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
           onClick={() => setActiveTab('availability')}
           className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1 ${
             activeTab === 'availability'
-              ? 'bg-[#00C878] text-[#0D0D0D] font-bold shadow-sm'
-              : 'text-[#9EABA3] hover:text-[#F2F2F2] hover:bg-[#18201B]'
+              ? 'bg-[#14BEB8] text-[#0D0D0D] font-bold shadow-sm'
+              : 'text-[#9EABA3] hover:text-[#F2F2F2] hover:bg-[#0B4A50]'
           }`}
         >
           <span>🟢 Availability Alerts</span>
@@ -200,8 +200,8 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
           onClick={() => setActiveTab('bookings')}
           className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold whitespace-nowrap transition-all cursor-pointer ${
             activeTab === 'bookings'
-              ? 'bg-[#00C878] text-[#0D0D0D] font-bold shadow-sm'
-              : 'text-[#9EABA3] hover:text-[#F2F2F2] hover:bg-[#18201B]'
+              ? 'bg-[#14BEB8] text-[#0D0D0D] font-bold shadow-sm'
+              : 'text-[#9EABA3] hover:text-[#F2F2F2] hover:bg-[#0B4A50]'
           }`}
         >
           Passes
@@ -212,8 +212,8 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
           onClick={() => setActiveTab('reminders')}
           className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold whitespace-nowrap transition-all cursor-pointer ${
             activeTab === 'reminders'
-              ? 'bg-[#00C878] text-[#0D0D0D] font-bold shadow-sm'
-              : 'text-[#9EABA3] hover:text-[#F2F2F2] hover:bg-[#18201B]'
+              ? 'bg-[#14BEB8] text-[#0D0D0D] font-bold shadow-sm'
+              : 'text-[#9EABA3] hover:text-[#F2F2F2] hover:bg-[#0B4A50]'
           }`}
         >
           Reminders
@@ -224,7 +224,7 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
       <div className="flex-1 overflow-y-auto divide-y divide-[#1E2522] p-2 space-y-1">
         {filteredNotifications.length === 0 ? (
           <div className="p-8 text-center space-y-2">
-            <div className="w-10 h-10 rounded-full bg-[#18201B] border border-[#232D28] text-[#718079] flex items-center justify-center mx-auto">
+            <div className="w-10 h-10 rounded-full bg-[#0B4A50] border border-[#166D74] text-[#718079] flex items-center justify-center mx-auto">
               <Bell className="w-5 h-5" />
             </div>
             <p className="text-xs font-semibold text-[#9EABA3]">No notifications in this tab</p>
@@ -244,24 +244,24 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
                 onClick={() => markNotificationRead(n.id)}
                 className={`p-3 rounded-2xl transition-all relative ${
                   !n.read
-                    ? 'bg-[#18201B] border border-[#00C878]/25 shadow-sm'
-                    : 'bg-[#141816] hover:bg-[#18201B]/60 border border-transparent'
+                    ? 'bg-[#0B4A50] border border-[#14BEB8]/25 shadow-sm'
+                    : 'bg-[#07383D] hover:bg-[#0B4A50]/60 border border-transparent'
                 }`}
               >
                 {!n.read && (
-                  <span className="absolute top-3 right-3 w-2 h-2 rounded-full bg-[#00C878]" />
+                  <span className="absolute top-3 right-3 w-2 h-2 rounded-full bg-[#14BEB8]" />
                 )}
 
                 <div className="flex items-start gap-2.5">
                   <div
                     className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 mt-0.5 ${
                       isAvailability
-                        ? 'bg-[#00C878]/20 text-[#00C878]'
+                        ? 'bg-[#14BEB8]/20 text-[#14BEB8]'
                         : isBooking
                         ? 'bg-blue-500/20 text-blue-400'
                         : isReminder
                         ? 'bg-amber-500/20 text-amber-400'
-                        : 'bg-[#232D28] text-[#9EABA3]'
+                        : 'bg-[#166D74] text-[#9EABA3]'
                     }`}
                   >
                     {isAvailability ? (
@@ -298,7 +298,7 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
                             e.stopPropagation();
                             handleBookFromAlert(n);
                           }}
-                          className="px-2.5 py-1 rounded-lg bg-[#00C878] hover:bg-[#00E58B] text-[#0D0D0D] font-extrabold text-[10px] flex items-center space-x-1 shadow cursor-pointer active:scale-95"
+                          className="px-2.5 py-1 rounded-lg bg-[#14BEB8] hover:bg-[#28D2CB] text-[#0D0D0D] font-extrabold text-[10px] flex items-center space-x-1 shadow cursor-pointer active:scale-95"
                         >
                           <span>Book Dates Now</span>
                           <ChevronRight className="w-3 h-3 stroke-[3]" />
@@ -313,7 +313,7 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
                             e.stopPropagation();
                             handleViewBookingPass(n.bookingId);
                           }}
-                          className="px-2.5 py-1 rounded-lg bg-[#18201B] hover:bg-[#232D28] border border-[#00C878]/30 text-[#00C878] font-bold text-[10px] flex items-center space-x-1 cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg bg-[#0B4A50] hover:bg-[#166D74] border border-[#14BEB8]/30 text-[#14BEB8] font-bold text-[10px] flex items-center space-x-1 cursor-pointer"
                         >
                           <QrCode className="w-3 h-3" />
                           <span>View Pass</span>
@@ -329,11 +329,11 @@ export const NotificationCenterDropdown: React.FC<NotificationCenterDropdownProp
       </div>
 
       {/* Footer / Quick Actions Bar */}
-      <div className="p-3 border-t border-[#1E2522] bg-[#18201B]/90 flex items-center justify-between text-xs">
+      <div className="p-3 border-t border-[#1E2522] bg-[#0B4A50]/90 flex items-center justify-between text-xs">
         <button
           type="button"
           onClick={handleTriggerSimTest}
-          className="text-[11px] font-semibold text-[#00C878] hover:underline flex items-center space-x-1 cursor-pointer"
+          className="text-[11px] font-semibold text-[#14BEB8] hover:underline flex items-center space-x-1 cursor-pointer"
           title="Simulate a real-time availability alert"
         >
           <Sparkles className="w-3.5 h-3.5" />

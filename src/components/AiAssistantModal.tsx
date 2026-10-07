@@ -427,7 +427,7 @@ export const AiAssistantModal: React.FC = () => {
               disabled={!inputQuery.trim() || loading}
               className="px-5 py-3 rounded-2xl bg-gradient-to-r from-[#FFA987] via-[#FF8A65] to-[#E05626] hover:from-[#FF9E79] hover:to-[#C85A32] disabled:opacity-40 text-[#12383B] hover:text-white text-sm font-black transition-all flex items-center space-x-2 shrink-0 cursor-pointer shadow-md shadow-[#FFA987]/20"
             >
-              <span>Ofis Assistant</span>
+              <span>Ask</span>
               <Send className="w-4 h-4" />
             </button>
           </form>

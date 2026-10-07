@@ -476,8 +476,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
             <p className="text-sm text-[#94A3B8] leading-relaxed">
               Discover, book, and manage flexible workspaces, boardrooms, and creative studios across Nigeria with guaranteed power and internet.
             </p>
-            <p className="text-xs font-mono text-[#64748B]">
-              Victoria Island, Lagos, Nigeria
+            <p className="text-xs font-mono text-[#FFA987]">
+              hello@ofis.ng
             </p>
           </div>
 
@@ -604,7 +604,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
         </div>
 
         <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-[#166D74]/50 flex flex-col sm:flex-row items-center justify-between text-xs text-[#64748B]">
-          <p>© 2026 OFIS Technologies Ltd. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} OFIS. All rights reserved.</p>
           <div className="flex items-center space-x-2 mt-4 sm:mt-0 font-medium text-[#94A3B8]">
             <span>Inspected Spaces</span>
             <span>•</span>

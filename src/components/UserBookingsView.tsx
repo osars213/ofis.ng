@@ -87,7 +87,7 @@ export const UserBookingsView: React.FC = () => {
           <button
             type="button"
             onClick={() => setCurrentView('explore')}
-            className="self-start sm:self-auto px-3.5 py-2 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white text-xs font-bold transition-all cursor-pointer shadow-sm shrink-0"
+            className="self-start sm:self-auto px-4 py-2 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white text-xs font-bold transition-all cursor-pointer shadow-sm shrink-0"
           >
             Find New Space
           </button>
@@ -138,7 +138,7 @@ export const UserBookingsView: React.FC = () => {
             <button
               type="button"
               onClick={() => setCurrentView('explore')}
-              className="px-5 py-2.5 rounded-xl bg-[#006B70] hover:bg-[#0EA8A2] text-white text-xs font-bold shadow-md cursor-pointer transition-colors"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#006B70] via-[#14BEB8] to-[#FFA987] hover:opacity-95 text-white text-xs font-bold shadow-md cursor-pointer transition-all active:scale-95"
             >
               Explore Spaces
             </button>

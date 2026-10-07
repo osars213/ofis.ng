@@ -34,7 +34,7 @@ export const OFIS_KNOWLEDGE_ARTICLES: OfisKnowledgeArticle[] = [
     category: 'booking',
     title: 'How do bookings work on OFIS?',
     summary: 'You can book physical spaces instantly or by request with automated check-in and digital QR entry passes.',
-    details: 'Booking a verified workspace on OFIS is simple and seamless:\n\n1. Search or Ask Ofis Assistant: Browse verified spaces by location, capacity, or space type (hot desk, private office, meeting room, creative studio).\n2. Choose Date & Time: Select your date, start time, and duration (hours, full days, months, or creative sessions).\n3. Secure Checkout: Complete payment in Nigerian Naira (₦) via debit card (Mastercard, Visa, Verve), bank transfer, USSD via Paystack, or instant OFIS Wallet balance.\n4. Instant Digital Entry Pass: You receive a digital pass with a unique QR check-in code, venue host direct contact, and arrival directions.\n5. Front Desk Check-in: Show your QR pass upon arrival at the hub turnstile/reception for instant access.',
+    details: 'Booking a verified workspace on OFIS is simple and seamless:\n\n1. Search or use Ofis Assistant: Browse verified spaces by location, capacity, or space type (hot desk, private office, meeting room, creative studio).\n2. Choose Date & Time: Select your date, start time, and duration (hours, full days, months, or creative sessions).\n3. Secure Checkout: Complete payment in Nigerian Naira (₦) via debit card (Mastercard, Visa, Verve), bank transfer, USSD via Paystack, or instant OFIS Wallet balance.\n4. Instant Digital Entry Pass: You receive a digital pass with a unique QR check-in code, venue host direct contact, and arrival directions.\n5. Front Desk Check-in: Show your QR pass upon arrival at the hub turnstile/reception for instant access.',
     keywords: [
       'how to book', 'booking process', 'reserve space', 'how do bookings work', 'digital pass', 
       'check in', 'make reservation', 'how does booking work', 'how to reserve', 'step by step booking',
@@ -160,9 +160,9 @@ export const OFIS_KNOWLEDGE_ARTICLES: OfisKnowledgeArticle[] = [
   {
     id: 'list-your-space',
     category: 'hosts',
-    title: 'How do I list my space on OFIS? (Host Partner)',
+    title: 'How do I list my space on OFIS? (Host Platform)',
     summary: 'Monetize your physical space by listing on Nigeria’s premier network with zero upfront fees.',
-    details: 'Commercial hub operators, private office managers, and creative studio owners can partner with OFIS:\n\n1. Free Submission: Submit your space specifications, photos, and power setup.\n2. Physical Audit: Our verification team schedules an on-site inspection for power SLA and connectivity.\n3. Go Live: Once approved, your space is instantly bookable by thousands of verified professionals and enterprise teams.\n4. Automated Payouts: Retain 88% to 92% of booking revenue with automated direct bank settlements to any Nigerian bank.',
+    details: 'Commercial hub operators, private office managers, and creative studio owners can list on the OFIS Host Platform:\n\n1. Free Submission: Submit your space specifications, photos, and power setup.\n2. Physical Audit: Our verification team schedules an on-site inspection for power SLA and connectivity.\n3. Go Live: Once approved, your space is instantly bookable by thousands of verified professionals and enterprise teams.\n4. Automated Payouts: Retain 88% to 92% of booking revenue with automated direct bank settlements to any Nigerian bank.',
     keywords: [
       'list space', 'host', 'become a host', 'earn money', 'list your space', 'partner', 
       'property owner', 'monetize space', 'host standards', 'payouts'
@@ -209,34 +209,37 @@ export function findMatchingKnowledgeArticle(query: string): OfisKnowledgeArticl
   if (!q) return null;
 
   // Direct fast-path triggers for core policy & business questions
-  if (/(support@ofis|support contact|customer support|support email|help desk)/i.test(q)) {
+  if (/(support@ofis|support contact|customer support|support email|customer service|help desk|technical support)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'contact-info') || null;
   }
-  if (/(hello@ofis|general contact|contact us|contact info|reach out|email address|phone number)/i.test(q)) {
+  if (/(hello@ofis|general contact|contact us|contact info|contact ofis|reach out|how do i contact|how to contact|email address|phone number)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'contact-info') || null;
   }
-  if (/(cancel|cancellation|refund|wallet credit|no expiry|money back|reschedule)/i.test(q)) {
+  if (/(cancel|cancellation|refund|refunds|wallet credit|no expiry|do credits expire|expire|money back|reschedule|can i cancel)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'cancellation-and-refunds') || null;
   }
-  if (/(what is ofis|about ofis|who is ofis|tell me about ofis|about the company)/i.test(q)) {
+  if (/(what is ofis|about ofis|who is ofis|tell me about ofis|about the company|what do you do|what is this website|about us)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'what-is-ofis') || null;
   }
-  if (/(how does booking work|how to book|booking process|how do i reserve|step by step booking)/i.test(q)) {
+  if (/(how does booking work|how to book|booking process|how do i reserve|step by step booking|how do bookings work|how to make a booking|can i book)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'how-to-book') || null;
   }
-  if (/(pricing|how much does it cost|pricing model|hidden fees|rates|cost of|hourly rate)/i.test(q)) {
+  if (/(pricing|how much does it cost|pricing model|hidden fees|rates|cost of|hourly rate|daily rate|how does pricing work|what are the prices)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'pricing-and-payment') || null;
   }
-  if (/(how payments work|payment method|paystack|debit card|bank transfer|ussd|how do i pay)/i.test(q)) {
+  if (/(how payments work|payment method|paystack|debit card|bank transfer|ussd|how do i pay|how does payment work|payment options)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'how-payments-work') || null;
   }
-  if (/(what spaces are available|what spaces do you have|available spaces|space types|categories of spaces)/i.test(q)) {
+  if (/(what spaces are available|what spaces do you have|available spaces|space types|categories of spaces|what kind of spaces|spaces available)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'available-spaces') || null;
   }
-  if (/(power sla|generator|solar|inverter|24\/7 power|electricity|uptime guarantee)/i.test(q)) {
+  if (/(power sla|generator|solar|inverter|24\/7 power|electricity|uptime guarantee|backup power|verified spaces|how do you verify)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'verification-power-uptime') || null;
   }
-  if (/(list your space|become a host|list my space|host standards|earn money as host)/i.test(q)) {
+  if (/(where do you operate|locations|where is ofis|which cities|what cities)/i.test(q)) {
+    return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'locations-and-cities') || null;
+  }
+  if (/(list your space|become a host|list my space|host standards|earn money as host|how to host)/i.test(q)) {
     return OFIS_KNOWLEDGE_ARTICLES.find(a => a.id === 'list-your-space') || null;
   }
   if (/(ofis wallet|wallet balance|fund wallet|wallet credit)/i.test(q)) {

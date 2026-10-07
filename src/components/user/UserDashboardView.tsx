@@ -92,7 +92,7 @@ export const UserDashboardView: React.FC = () => {
             <img
               src={currentUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'}
               alt={currentUser.name}
-              className="w-16 h-16 rounded-2xl object-cover border-2 border-[#006B70]"
+              className="w-16 h-16 rounded-2xl object-cover border-2 border-[#FFA987]"
             />
             <div className="space-y-1">
               <div className="flex items-center space-x-2">
@@ -166,7 +166,7 @@ export const UserDashboardView: React.FC = () => {
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`snap-start w-auto lg:w-full shrink-0 px-3.5 py-2.5 lg:p-3 rounded-2xl text-xs font-bold flex items-center space-x-2.5 transition-all cursor-pointer whitespace-nowrap lg:whitespace-normal text-left ${
                     isActive
-                      ? 'bg-[#006B70] text-white shadow-xs'
+                      ? 'bg-gradient-to-r from-[#006B70] to-[#14BEB8] text-white shadow-xs'
                       : 'text-[#5D7A7D] dark:text-[#B8D1D0] hover:bg-[#F1F6F5] dark:hover:bg-[#07383D] hover:text-[#12383B] dark:hover:text-[#FFFFFF]'
                   }`}
                 >
