@@ -938,17 +938,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       state: spaceData.city === 'Abuja' ? 'FCT' : `${spaceData.city} State`,
       rules: ['No loud calls in quiet focus zones', 'Keep desks neat and sanitized'],
       tags: ['Verified Power', 'High Speed', spaceData.city],
-      isActive: false,
-      isVerified: false,
-      verificationStatus: 'pending',
+      isActive: spaceData.isActive ?? true,
+      isVerified: spaceData.isVerified ?? true,
+      verificationStatus: spaceData.verificationStatus ?? 'verified',
       submittedAt: new Date().toISOString(),
       ...spaceData,
     };
     await spacesService.addSpace(newSpace);
     await refreshSpaces();
     addNotification({
-      title: 'Space Submitted for Admin Verification',
-      message: `"${newSpace.title}" has been submitted for review. The OFIS Admin Agent will audit photos and power specs before public activation.`,
+      title: 'Workspace Published & Live 🎉',
+      message: `"${newSpace.title}" has been published and is now live on Explore for bookings!`,
       type: 'system',
       read: false,
     });

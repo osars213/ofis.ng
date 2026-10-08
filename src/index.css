@@ -286,3 +286,25 @@ html {
   animation-play-state: paused;
 }
 
+/* iOS Safari Dynamic Viewport & Mobile Chrome URL bar tolerance */
+@supports (min-height: 100dvh) {
+  .min-h-screen {
+    min-height: 100dvh;
+  }
+}
+
+/* iOS WebKit date/time input rendering normalization */
+input[type="date"],
+input[type="time"] {
+  -webkit-appearance: none;
+  min-height: 42px;
+}
+
+/* Safe-area inset variables & padding helpers */
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+

@@ -359,7 +359,7 @@ export const CheckoutModal: React.FC = () => {
                   value={date}
                   min={todayStr}
                   onChange={(e) => setDate(e.target.value)}
-                  className="flex-1 p-2 rounded-xl bg-white dark:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#006B70] font-mono cursor-pointer"
+                  className="flex-1 p-2 min-h-[42px] rounded-xl bg-white dark:bg-[#105A60] border border-[#E5E7EB] dark:border-[#166D74] text-xs text-[#111827] dark:text-[#F2F2F2] focus:outline-none focus:border-[#006B70] font-mono cursor-pointer"
                 />
                 <button
                   type="button"
