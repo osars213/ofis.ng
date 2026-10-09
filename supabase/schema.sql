@@ -310,7 +310,7 @@ BEGIN
 
     RETURN FALSE;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER STABLE;
+$$ LANGUAGE plpgsql SECURITY DEFINER STABLE SET search_path = public;
 
 -- Trigger function: Strictly prevent clients from changing their own profile role
 CREATE OR REPLACE FUNCTION public.protect_profile_role()
@@ -326,7 +326,7 @@ BEGIN
 
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 DROP TRIGGER IF EXISTS trg_protect_profile_role ON public.profiles;
 CREATE TRIGGER trg_protect_profile_role
@@ -470,10 +470,16 @@ CREATE POLICY "Only service role can modify wallets" ON public.wallets
     FOR ALL USING (auth.jwt() ->> 'role' = 'service_role')
     WITH CHECK (auth.jwt() ->> 'role' = 'service_role');
 
--- 3. Spaces (Insert requires host_id = auth.uid())
+-- 3. Spaces
 DROP POLICY IF EXISTS "Spaces are viewable by everyone" ON public.spaces;
-CREATE POLICY "Spaces are viewable by everyone" ON public.spaces
-    FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Public can view active verified spaces" ON public.spaces;
+CREATE POLICY "Public can view active verified spaces" ON public.spaces
+    FOR SELECT USING (
+        (is_active = true AND is_verified = true)
+        OR (auth.role() = 'authenticated' AND host_id = auth.uid())
+        OR public.is_admin()
+        OR auth.jwt() ->> 'role' = 'service_role'
+    );
 
 DROP POLICY IF EXISTS "Hosts can insert spaces" ON public.spaces;
 CREATE POLICY "Hosts can insert spaces" ON public.spaces

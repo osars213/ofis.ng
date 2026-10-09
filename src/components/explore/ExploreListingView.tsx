@@ -260,7 +260,7 @@ export const ExploreListingView: React.FC = () => {
           {/* ========================================================================= */}
           {/* LEFT SIDEBAR: FILTERS DESKTOP PANEL (3 cols on lg)                        */}
           {/* ========================================================================= */}
-          <aside className="hidden lg:block lg:col-span-3 sticky top-36 space-y-6 max-h-[calc(100vh-10rem)] overflow-y-auto pr-2">
+          <aside className="hidden lg:block lg:col-span-3 sticky top-36 space-y-6 max-h-[calc(100dvh-10rem)] overflow-y-auto pr-2">
             
             <div className="p-5 rounded-3xl bg-white dark:bg-[#0B4A50] border border-[#E5E7EB] dark:border-[#166D74] shadow-sm space-y-6">
               
@@ -519,7 +519,7 @@ export const ExploreListingView: React.FC = () => {
           {/* RIGHT SIDEBAR: INTERACTIVE SPLIT MAP (4 cols on lg when viewMode === 'split') */}
           {/* ========================================================================= */}
           {viewMode === 'split' && (
-            <div className="hidden lg:block lg:col-span-4 sticky top-36 h-[calc(100vh-10rem)] rounded-3xl overflow-hidden border border-[#E5E7EB] dark:border-[#166D74] bg-[#F1F5F9] dark:bg-[#07383D] relative shadow-lg">
+            <div className="hidden lg:block lg:col-span-4 sticky top-36 h-[calc(100dvh-10rem)] rounded-3xl overflow-hidden border border-[#E5E7EB] dark:border-[#166D74] bg-[#F1F5F9] dark:bg-[#07383D] relative shadow-lg">
               
               {/* Stylized Nigeria Map Background Grid */}
               <div className="absolute inset-0 bg-[radial-gradient(#94A3B8_1px,transparent_1px)] dark:bg-[radial-gradient(#374151_1px,transparent_1px)] [background-size:20px_20px] opacity-20" />

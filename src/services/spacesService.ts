@@ -20,10 +20,13 @@ export const spacesService = {
         const { data, error } = await client
           .from('spaces')
           .select('*')
+          .eq('is_active', true)
+          .eq('is_verified', true)
           .order('created_at', { ascending: false });
 
         if (!error && data) {
-          const mappedSpaces: Space[] = data.map(mapDbSpaceToSpace);
+          const verifiedActiveOnly = data.filter((s: any) => s.is_active === true && s.is_verified === true);
+          const mappedSpaces: Space[] = verifiedActiveOnly.map(mapDbSpaceToSpace);
           storage.set(SPACES_KEY, mappedSpaces);
           return { spaces: mappedSpaces, source: 'supabase' };
         }
@@ -34,12 +37,13 @@ export const spacesService = {
 
     // Default to stored local cache without injecting mock spaces
     const cached = storage.get<Space[]>(SPACES_KEY, []);
-    return { spaces: cached, source: 'cache' };
+    const filteredCached = cached.filter(s => s.isActive !== false && s.isVerified !== false);
+    return { spaces: filteredCached, source: 'cache' };
   },
 
   getSpaceById: (id: string): Space | undefined => {
     const spaces = spacesService.getSpaces();
-    return spaces.find(s => s.id === id);
+    return spaces.find(s => s.id === id && s.isActive !== false && s.isVerified !== false);
   },
 
   getSpaceByIdAsync: async (id: string): Promise<Space | undefined> => {
@@ -50,6 +54,8 @@ export const spacesService = {
           .from('spaces')
           .select('*')
           .eq('id', id)
+          .eq('is_active', true)
+          .eq('is_verified', true)
           .single();
 
         if (!error && data) {
@@ -59,7 +65,11 @@ export const spacesService = {
         console.warn('[spacesService] Error fetching single space from Supabase:', err);
       }
     }
-    return spacesService.getSpaceById(id);
+    const local = spacesService.getSpaceById(id);
+    if (local && (local.isActive === false || local.isVerified === false)) {
+      return undefined;
+    }
+    return local;
   },
 
   addSpace: async (newSpace: Space): Promise<void> => {
@@ -67,13 +77,26 @@ export const spacesService = {
     spaces.unshift(newSpace);
     storage.set(SPACES_KEY, spaces);
 
-    const client = getSupabaseClient();
-    if (client) {
-      try {
-        const dbPayload = mapSpaceToDbSpace(newSpace);
-        await client.from('spaces').upsert(dbPayload);
-      } catch (err) {
-        console.warn('[spacesService] Error syncing space to Supabase:', err);
+    const dbPayload = mapSpaceToDbSpace(newSpace);
+
+    try {
+      const res = await fetch('/api/spaces', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dbPayload),
+      });
+      if (!res.ok) {
+        console.warn('[spacesService] /api/spaces failed, status:', res.status);
+      }
+    } catch (apiErr) {
+      console.warn('[spacesService] /api/spaces error, trying direct client:', apiErr);
+      const client = getSupabaseClient();
+      if (client) {
+        try {
+          await client.from('spaces').upsert(dbPayload);
+        } catch (err) {
+          console.warn('[spacesService] Error syncing space to Supabase:', err);
+        }
       }
     }
   },
@@ -86,13 +109,26 @@ export const spacesService = {
       storage.set(SPACES_KEY, spaces);
     }
 
-    const client = getSupabaseClient();
-    if (client) {
-      try {
-        const dbPayload = mapSpaceToDbSpace(updatedSpace);
-        await client.from('spaces').update(dbPayload).eq('id', updatedSpace.id);
-      } catch (err) {
-        console.warn('[spacesService] Error updating space in Supabase:', err);
+    const dbPayload = mapSpaceToDbSpace(updatedSpace);
+
+    try {
+      const res = await fetch(`/api/spaces/${encodeURIComponent(updatedSpace.id)}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dbPayload),
+      });
+      if (!res.ok) {
+        console.warn('[spacesService] /api/spaces/:id failed, status:', res.status);
+      }
+    } catch (apiErr) {
+      console.warn('[spacesService] /api/spaces/:id error, trying direct client:', apiErr);
+      const client = getSupabaseClient();
+      if (client) {
+        try {
+          await client.from('spaces').update(dbPayload).eq('id', updatedSpace.id);
+        } catch (err) {
+          console.warn('[spacesService] Error updating space in Supabase:', err);
+        }
       }
     }
   },
@@ -102,12 +138,22 @@ export const spacesService = {
     const filtered = spaces.filter(s => s.id !== spaceId);
     storage.set(SPACES_KEY, filtered);
 
-    const client = getSupabaseClient();
-    if (client) {
-      try {
-        await client.from('spaces').delete().eq('id', spaceId);
-      } catch (err) {
-        console.warn('[spacesService] Error deleting space from Supabase:', err);
+    try {
+      const res = await fetch(`/api/spaces/${encodeURIComponent(spaceId)}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) {
+        console.warn('[spacesService] /api/spaces/:id delete failed, status:', res.status);
+      }
+    } catch (apiErr) {
+      console.warn('[spacesService] /api/spaces/:id delete error:', apiErr);
+      const client = getSupabaseClient();
+      if (client) {
+        try {
+          await client.from('spaces').delete().eq('id', spaceId);
+        } catch (err) {
+          console.warn('[spacesService] Error deleting space from Supabase:', err);
+        }
       }
     }
   },

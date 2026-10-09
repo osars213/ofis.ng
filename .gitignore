@@ -25,3 +25,9 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Database Backups
+backup-*
+/backup-*
+*.backup.json
+

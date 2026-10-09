@@ -190,9 +190,9 @@ export const ListSpaceModal: React.FC = () => {
       noiseLevel: 'Quiet Focus & Collaboration',
       operatingHours: { open: '08:00', close: '21:00', days: 'Mon - Sat' },
       isSuperhost: false,
-      isVerified: true,
-      isActive: true,
-      verificationStatus: 'verified',
+      isVerified: false,
+      isActive: false,
+      verificationStatus: 'pending',
       submittedAt: new Date().toISOString(),
       host: {
         id: currentUser.id || 'host-001',

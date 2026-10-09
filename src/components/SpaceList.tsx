@@ -363,7 +363,7 @@ export const SpaceList: React.FC = () => {
   const hasMessages = messages.length > 0;
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-[#FFF9F4] dark:bg-[#07383D] text-[#12383B] dark:text-[#FFFFFF] flex flex-col transition-colors duration-150 relative">
+    <div className="min-h-[calc(100dvh-64px)] bg-[#FFF9F4] dark:bg-[#07383D] text-[#12383B] dark:text-[#FFFFFF] flex flex-col transition-colors duration-150 relative">
       
       {/* Subtle Background Radial Glow */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[340px] h-[340px] sm:w-[540px] sm:h-[540px] bg-[#14BEB8]/5 dark:bg-[#14BEB8]/10 rounded-full blur-3xl pointer-events-none -z-0" />

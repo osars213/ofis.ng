@@ -26,6 +26,14 @@ async function startServer() {
     })
   );
 
+  // Security: Block any requests attempting to access backup directories or files
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/backup-') || req.path.includes('/backup-') || req.path.includes('backup.json')) {
+      return res.status(403).send('Forbidden: Backup files cannot be accessed via the web server.');
+    }
+    next();
+  });
+
   // Initialize Supabase Server Admin Client strictly using SUPABASE_SERVICE_ROLE_KEY (no fallback to anon/public keys)
   const rawSupabaseUrl = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '').trim();
   let supabaseUrl = rawSupabaseUrl;
@@ -476,6 +484,135 @@ async function startServer() {
     }
   });
 
+  // Space Creation Endpoint (Server-Side Supabase Admin Persistence)
+  app.post('/api/spaces', async (req, res) => {
+    try {
+      if (!supabaseAdmin) {
+        return res.status(503).json({ error: 'Supabase admin client is not available' });
+      }
+
+      const raw = req.body;
+      if (!raw || !raw.id || !raw.title) {
+        return res.status(400).json({ error: 'Space id and title are required' });
+      }
+
+      // Normalize category to allowed enum in database
+      const categoryMap: Record<string, string> = {
+        'meeting-room': 'meeting',
+        'training-room': 'meeting',
+        'private-office': 'private_office',
+        'photo-studio': 'photography',
+        'podcast-studio': 'podcast',
+        'event-space': 'event',
+      };
+      const cat = categoryMap[raw.category] || raw.category || 'coworking';
+      const validCategories = ['coworking', 'private_office', 'meeting', 'podcast', 'photography', 'event'];
+      const normalizedCat = validCategories.includes(cat) ? cat : 'coworking';
+
+      // Check host_id UUID format
+      const isValidUuid = typeof raw.host_id === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(raw.host_id);
+
+      const dbPayload = {
+        ...raw,
+        category: normalizedCat,
+        host_id: isValidUuid ? raw.host_id : null,
+        power_uptime_guarantee_percent: Math.round(Number(raw.power_uptime_guarantee_percent) || 99),
+        is_active: false, // New listings ALWAYS start inactive until verified & approved by an admin
+        is_verified: false, // New listings ALWAYS start pending verification by admin
+        updated_at: new Date().toISOString(),
+      };
+
+      const { data, error } = await supabaseAdmin.from('spaces').upsert([dbPayload]).select().single();
+      if (error) {
+        console.error('Error upserting space in Supabase:', error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      return res.status(201).json({ success: true, space: data });
+    } catch (err: any) {
+      console.error('Error in POST /api/spaces:', err);
+      return res.status(500).json({ error: err.message || 'Failed to save space' });
+    }
+  });
+
+  // Space Update Endpoint
+  app.put('/api/spaces/:id', async (req, res) => {
+    try {
+      if (!supabaseAdmin) {
+        return res.status(503).json({ error: 'Supabase admin client is not available' });
+      }
+
+      const { id } = req.params;
+      const raw = req.body;
+
+      const categoryMap: Record<string, string> = {
+        'meeting-room': 'meeting',
+        'training-room': 'meeting',
+        'private-office': 'private_office',
+        'photo-studio': 'photography',
+        'podcast-studio': 'podcast',
+        'event-space': 'event',
+      };
+      const cat = raw.category ? (categoryMap[raw.category] || raw.category) : undefined;
+      const validCategories = ['coworking', 'private_office', 'meeting', 'podcast', 'photography', 'event'];
+      const normalizedCat = cat && validCategories.includes(cat) ? cat : (cat ? 'coworking' : undefined);
+
+      const isValidUuid = typeof raw.host_id === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(raw.host_id);
+
+      // Check current space verification status in database
+      const { data: existingSpace } = await supabaseAdmin.from('spaces').select('is_verified, is_active').eq('id', id).single();
+
+      const updatePayload: Record<string, any> = {
+        ...raw,
+        updated_at: new Date().toISOString(),
+      };
+
+      // Security: Non-admin updates cannot mark space verified or activate an unverified space
+      delete updatePayload.is_verified;
+      if (!existingSpace?.is_verified) {
+        updatePayload.is_active = false;
+      }
+
+      if (normalizedCat) updatePayload.category = normalizedCat;
+      if (raw.host_id !== undefined) updatePayload.host_id = isValidUuid ? raw.host_id : null;
+      if (raw.power_uptime_guarantee_percent !== undefined) {
+        updatePayload.power_uptime_guarantee_percent = Math.round(Number(raw.power_uptime_guarantee_percent) || 99);
+      }
+
+      const { data, error } = await supabaseAdmin.from('spaces').update(updatePayload).eq('id', id).select().single();
+      if (error) {
+        console.error('Error updating space in Supabase:', error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      return res.json({ success: true, space: data });
+    } catch (err: any) {
+      console.error('Error in PUT /api/spaces/:id:', err);
+      return res.status(500).json({ error: err.message || 'Failed to update space' });
+    }
+  });
+
+  // Space Delete Endpoint
+  app.delete('/api/spaces/:id', async (req, res) => {
+    try {
+      if (!supabaseAdmin) {
+        return res.status(503).json({ error: 'Supabase admin client is not available' });
+      }
+
+      const { id } = req.params;
+      const { error } = await supabaseAdmin.from('spaces').delete().eq('id', id);
+      if (error) {
+        console.error('Error deleting space in Supabase:', error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      return res.json({ success: true, message: `Space ${id} deleted` });
+    } catch (err: any) {
+      console.error('Error in DELETE /api/spaces/:id:', err);
+      return res.status(500).json({ error: err.message || 'Failed to delete space' });
+    }
+  });
+
   // ============================================================================
   // AUTHORITATIVE SERVER-SIDE PAYMENT INITIATION & VERIFICATION (SZND)
   // ============================================================================
@@ -695,7 +832,11 @@ async function startServer() {
         quantity: Math.max(1, Number(quantity || 1)),
       });
 
-      const totalAmountNGN = Number(calculatedPrice.totalAmount) || Number(booking?.total_amount) || 0;
+      // Authoritative server-side calculation: completely ignore any amount sent by browser or old booking total
+      const serverCalculatedAmount = Number(calculatedPrice.totalAmount);
+      const totalAmountNGN = serverCalculatedAmount > 0 
+        ? serverCalculatedAmount 
+        : (Number(space.price_per_hour || space.pricePerHour || 2500) * effectiveDuration);
       if (totalAmountNGN <= 0) {
         return res.status(400).json({ error: 'Calculated booking total amount must be greater than zero' });
       }
@@ -1076,12 +1217,24 @@ async function startServer() {
         }
       }
 
+      // Look up associated space to authoritatively calculate required price
+      const associatedSpace = Array.isArray(booking.spaces) ? booking.spaces[0] : booking.spaces;
+      const recalculatedExpected = calculateBookingPrice(associatedSpace as any, {
+        durationHours: Number(booking.duration_hours || 1),
+        guests: Math.max(1, Number(booking.guest_count || 1)),
+        quantity: 1,
+      });
+      const expectedAmountNGN = Number(recalculatedExpected.totalAmount) || Number(booking.total_amount) || 0;
+
       let verifiedAmount = 0;
       if (sandbox) {
-        const clientAmount = req.body.amount !== undefined ? Number(req.body.amount) : Number(booking.total_amount);
-        if (isNaN(clientAmount) || clientAmount <= 0) {
+        // Check if incoming client amount is lower than server-calculated expected price
+        const clientAmount = req.body.amount !== undefined ? Number(req.body.amount) : expectedAmountNGN;
+        if (clientAmount < expectedAmountNGN) {
           return res.status(400).json({
-            error: 'Invalid amount: payment amount must be greater than zero',
+            error: `Payment rejected: Attempted payment amount (₦${clientAmount}) is lower than the authoritative space price (₦${expectedAmountNGN}).`,
+            attemptedAmount: clientAmount,
+            expectedAmount: expectedAmountNGN,
           });
         }
         verifiedAmount = clientAmount;
@@ -1130,6 +1283,15 @@ async function startServer() {
 
         verifiedAmount = Number(szndVerify.amount);
 
+        // Reject if gateway collected less than the recalculated required price
+        if (verifiedAmount < expectedAmountNGN) {
+          return res.status(400).json({
+            error: `Underpayment violation: Gateway collected ₦${verifiedAmount}, but the recalculated booking price is ₦${expectedAmountNGN}. Confirmation rejected.`,
+            collectedAmount: verifiedAmount,
+            expectedAmount: expectedAmountNGN,
+          });
+        }
+
         // Authoritative Gateway Metadata / Reference Binding Check:
         // If gateway returned metadata.booking_id, verify it matches booking.id
         const gatewayBookingId = szndVerify.metadata?.booking_id;
@@ -1150,7 +1312,6 @@ async function startServer() {
       }
 
       // Authoritative Concurrency Collision Check before executing confirmation
-      const associatedSpace = Array.isArray(booking.spaces) ? booking.spaces[0] : booking.spaces;
       const conflictCheck = await checkBookingConflict({
         spaceId: booking.space_id,
         date: booking.date,
@@ -1247,13 +1408,25 @@ async function startServer() {
           });
         }
 
-        // Direct update strictly keeping authoritativePaymentRef
+        // Direct update strictly keeping authoritativePaymentRef and recording verifiedAmount
         await supabaseAdmin.from('bookings').update({
           status: 'confirmed',
           payment_status: 'paid',
           payment_reference: authoritativePaymentRef,
+          total_amount: verifiedAmount,
           updated_at: new Date().toISOString(),
         }).eq('id', bookingId);
+
+        // Also record in payments table
+        await supabaseAdmin.from('payments').upsert({
+          booking_id: bookingId,
+          user_id: booking.user_id,
+          amount: verifiedAmount,
+          provider: 'sznd',
+          reference: authoritativePaymentRef,
+          status: 'success',
+          created_at: new Date().toISOString(),
+        }, { onConflict: 'reference' });
       }
 
       // Record in local active registry for instant memory caching and real-time reflection

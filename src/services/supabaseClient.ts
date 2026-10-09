@@ -117,12 +117,23 @@ export async function checkSupabaseConnection(): Promise<{
 // ============================================================================
 
 export function mapDbSpaceToSpace(row: any): Space {
+  const fromDbCategory = (cat: string): SpaceCategory => {
+    switch (cat) {
+      case 'meeting': return 'meeting-room';
+      case 'private_office': return 'private-office';
+      case 'photography': return 'photo-studio';
+      case 'podcast': return 'podcast-studio';
+      case 'event': return 'event-space';
+      default: return 'coworking';
+    }
+  };
+
   return {
     id: row.id,
     title: row.title || row.name || 'Workspace',
     tagline: row.tagline || '',
     description: row.description || '',
-    category: row.category || 'coworking',
+    category: fromDbCategory(row.category || 'coworking'),
     city: row.city || 'Lagos',
     state: row.state || 'Lagos State',
     neighborhood: row.neighborhood || '',
@@ -137,7 +148,7 @@ export function mapDbSpaceToSpace(row: any): Space {
     capacity: Number(row.capacity) || 1,
     hasBackupPower: row.has_backup_power ?? row.hasBackupPower ?? true,
     powerType: row.power_type || row.powerType || 'Solar + Inverter',
-    powerUptimeGuaranteePercent: Number(row.power_uptime_guarantee_percent || row.powerUptimeGuaranteePercent || 99),
+    powerUptimeGuaranteePercent: Math.round(Number(row.power_uptime_guarantee_percent || row.powerUptimeGuaranteePercent || 99)),
     internetSpeedMbps: Number(row.internet_speed_mbps || row.internetSpeedMbps || 200),
     internetIsp: row.internet_isp || row.internetIsp || 'Starlink + Fiber',
     noiseLevel: row.noise_level || row.noiseLevel || 'Moderate / Focus Buzz',
@@ -145,7 +156,7 @@ export function mapDbSpaceToSpace(row: any): Space {
     featuredImage: row.featured_image || row.featuredImage || (Array.isArray(row.images) && row.images[0]) || '',
     amenities: Array.isArray(row.amenities) ? row.amenities : [],
     rating: Number(row.rating) || 4.8,
-    reviewsCount: Number(row.reviews_count || row.reviewsCount || 0),
+    reviews_count: Number(row.reviews_count || row.reviewsCount || 0),
     host: {
       id: row.host_id || 'host-1',
       name: row.host_name || 'Verified Host',
@@ -174,12 +185,32 @@ export function mapDbSpaceToSpace(row: any): Space {
 }
 
 export function mapSpaceToDbSpace(space: Space): Record<string, any> {
+  const toDbCategory = (cat: string): string => {
+    switch (cat) {
+      case 'meeting-room':
+      case 'training-room':
+        return 'meeting';
+      case 'private-office':
+        return 'private_office';
+      case 'photo-studio':
+        return 'photography';
+      case 'podcast-studio':
+        return 'podcast';
+      case 'event-space':
+        return 'event';
+      default:
+        return 'coworking';
+    }
+  };
+
+  const isValidUuid = typeof space.host?.id === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(space.host.id);
+
   return {
     id: space.id,
     title: space.title,
     tagline: space.tagline,
     description: space.description,
-    category: space.category,
+    category: toDbCategory(space.category),
     city: space.city,
     state: space.state,
     neighborhood: space.neighborhood,
@@ -191,7 +222,7 @@ export function mapSpaceToDbSpace(space: Space): Record<string, any> {
     capacity: space.capacity,
     has_backup_power: space.hasBackupPower,
     power_type: space.powerType,
-    power_uptime_guarantee_percent: space.powerUptimeGuaranteePercent,
+    power_uptime_guarantee_percent: Math.round(Number(space.powerUptimeGuaranteePercent) || 99),
     internet_speed_mbps: space.internetSpeedMbps,
     internet_isp: space.internetIsp,
     noise_level: space.noiseLevel,
@@ -200,7 +231,7 @@ export function mapSpaceToDbSpace(space: Space): Record<string, any> {
     amenities: space.amenities,
     rating: space.rating,
     reviews_count: space.reviewsCount,
-    host_id: space.host.id,
+    host_id: isValidUuid ? space.host.id : null,
     host_name: space.host.name,
     host_company: space.host.companyName,
     host_avatar: space.host.avatar,
@@ -213,10 +244,10 @@ export function mapSpaceToDbSpace(space: Space): Record<string, any> {
     days: space.operatingHours?.days || 'Mon - Sat',
     rules: space.rules,
     tags: space.tags,
-    instant_booking: space.instantBooking ?? true,
-    is_verified: space.isVerified ?? true,
+    instant_booking: space.instantBooking ?? false,
+    is_verified: space.isVerified ?? false,
     is_superhost: space.isSuperhost ?? false,
-    is_active: space.isActive ?? true,
+    is_active: space.isActive ?? false,
   };
 }
 

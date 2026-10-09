@@ -1,0 +1,57 @@
+services:
+  # ----------------------------------------------------------------------------
+  # 1. OFIS MAIN APPLICATION (Public Marketplace & Member Portal)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: ofis-web
+    env: node
+    plan: starter
+    region: frankfurt
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      - key: SZND_ENV
+        value: production
+      - key: SZND_API_KEY
+        sync: false
+      - key: SZND_API_SECRET
+        sync: false
+      - key: APP_URL
+        value: https://ofis.ng
+
+  # ----------------------------------------------------------------------------
+  # 2. OFIS DEDICATED ADMIN DASHBOARD (Operational Control at admin.ofis.ng)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: ofis-admin
+    rootDir: admin
+    env: node
+    plan: starter
+    region: frankfurt
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false

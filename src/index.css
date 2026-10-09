@@ -300,6 +300,15 @@ input[type="time"] {
   min-height: 42px;
 }
 
+/* Prevent unwanted automatic zoom on input focus in iOS Safari */
+@media screen and (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 /* Safe-area inset variables & padding helpers */
 :root {
   --sat: env(safe-area-inset-top, 0px);
